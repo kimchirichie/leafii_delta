@@ -15,6 +15,7 @@ pbastowski:angular-babel
 angular:angular-material
 angular:angular-touch
 angularui:angular-ui-router
+angular:angular-route
 
 
 reactive-var            # Reactive variable for tracker
