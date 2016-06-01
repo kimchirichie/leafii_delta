@@ -1,0 +1,13 @@
+.note {
+  text-align: center;
+  color: white;
+  margin-top: 25%; }
+
+#thankyou {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-image: url("../images/values-bg.jpg");
+  background-size: cover; }

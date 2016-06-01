@@ -1,0 +1,30 @@
+template(name="signin")
+
+	#header
+		.container
+			.row
+				h1 Sign In
+
+	.container
+		.form(class="animated fadeIn")
+			form(action="/auth/signin" method="post")
+				.field-wrap
+					label Email Address
+						span.req *
+					input(name="email" type='email', placeholder="example@xyz.com" required)
+
+				.field-wrap
+					label Password
+						span.req *
+					input(name="password" type='password', placeholder="password" required)
+
+				if error
+					.field-wrap
+						div(id="error" class="animated fadeIn")
+							p= error
+
+				.field-wrap
+					input(type='submit' value="Sign In")
+
+				.field-wrap
+					a(class="signUpTag" href="/auth/signup") Don't have an account? Register

@@ -1,0 +1,23 @@
+.profileSideMenu {
+  position: absolute;
+  width: 170px !important; }
+
+.profilePanel {
+  margin-left: 170px;
+  padding: 5%;
+  border-left: thin solid; }
+
+.userProfile {
+  padding: 20px; }
+
+.profile-menu-title {
+  padding: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  text-transform: uppercase;
+  border-bottom: thin solid; }
+  .profile-menu-title:hover {
+    background-color: rgba(0, 0, 0, 0.2); }
+  .profile-menu-title.active {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.7); }

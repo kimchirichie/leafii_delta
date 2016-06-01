@@ -1,0 +1,60 @@
+body {
+  font: 14px "Raleway", Helvetica, Arial, sans-serif;
+}
+
+#header {
+  padding-top: 50px;
+  color: #f8f8f8;
+  text-align: center;
+  background-image: url('/images/values-bg.jpg');
+  background-size: cover;
+}
+
+.form {
+	padding: 30px;
+	margin: 50px auto;
+	border: solid thin black;
+    border-radius: 6px;
+    background: rgba(220, 220, 220, 0.19);
+    border-color: grey;
+    max-width: 60%;
+}
+
+label {
+
+	text-align: left;
+}
+
+.emailMsg {
+	max-width: 605px;
+	height: 300px;
+}
+
+input {
+	width: 100%;
+}
+
+span.req {
+	color: red;
+}
+
+#error {
+	color: black;
+	font-size: 15px;
+	background-color: #DC4141;
+	height: 40px;
+	line-height: 40px;
+	margin-bottom: 20px;
+	border-radius: 4px;
+	text-align: center;
+}
+
+
+.signUpTag {
+	text-decoration: none;
+	color: grey;
+}
+
+textarea {
+	width:100%;
+}
