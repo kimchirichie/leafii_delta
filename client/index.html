@@ -2,7 +2,32 @@
   <title>Leafii</title>
 </head>
 <body ng-app="leafii">
-	<div ui-view></div>
+	
+	<md-toolbar>
+		<div class="topNavBar md-toolbar-tools">
+			<a class="logo" href="/"><img class="logo" src="/images/leafii.svg"/></a>
+			
+			<div class="pages">
+				<span>Jobs</span>
+				<span>Designers</span>
+				<span>Engineers</span>
+				
+			</div>
+
+			<!-- fill up the space between left and right area -->
+			<span flex></span>
+			<div class="pages">
+				<span>Login</span>
+				<span>Register</span>
+			</div>
+			
+		</div>
+	</md-toolbar>
+
+	<md-content class="content" layout="column" layout-align="center center">
+		<div ui-view></div>
+	</md-content>
+
 </body>
 
 

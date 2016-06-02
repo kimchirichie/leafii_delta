@@ -10,7 +10,7 @@ if (Meteor.isClient){
 
 				$locationProvider.html5Mode({'enabled': true, 'requireBase': false});
 
-				$stateProvider
+				$stateProvider 
 					.state('landing', {
 						url: '/',
 						templateUrl: 'client/views/landingPage.html',
@@ -18,7 +18,23 @@ if (Meteor.isClient){
 					.state('signin',{
 						url: '/signin',
 						templateUrl: 'client/views/signin.html',
-					});
+					})
+					.state('signup',{
+						url: '/signup',
+						templateUrl: 'client/views/signup.html',
+					})
+					.state('thankyou', {
+						url: '/thankyou',
+						templateUrl: 'client/views/thankyou.html',
+					})
+					.state('contact', {
+						url: '/contact',
+						templateUrl: 'client/views/emailer.html',
+					})
+					.state('feedback', {
+						url: '/feedback',
+						templateUrl: 'client/views/feedback.html',
+					})
 
 				$urlRouterProvider.otherwise('/');
 
