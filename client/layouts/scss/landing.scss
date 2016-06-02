@@ -1,5 +1,27 @@
 #landing {
-  	text-align: center;
+	img {
+		max-width: 100%;
+	}
+}
+
+.intro {
+	text-align: center;
+	background: #27272b;
+	color: white;
+	padding: 60px;
+
+	.submitPort {
+		color: black;
+		font-weight: bold;
+		background: #3edeaa;
+	}
+
+	.postJob {
+		font-weight: bold;
+		color: black;
+		background: #ec3838;
+	}
+	
 }
 
 .content {

@@ -10,12 +10,12 @@
 .topNavBar {
 	border-bottom: thin solid #d3d3d3;
 	position: fixed;
-	
+	background: white !important;
 }
 
 .pages{
 	
-	span {
+	a {
 		margin: 10px;
 		font-size: 15px;
 		cursor: pointer;

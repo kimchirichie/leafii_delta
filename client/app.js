@@ -1,9 +1,10 @@
 import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
+import ngMaterial from 'angular-material';
 
 if (Meteor.isClient){
 
-	var leafiiApp = angular.module('leafii', [angularMeteor, uiRouter, 'ngRoute']);
+	var leafiiApp = angular.module('leafii', [angularMeteor, uiRouter, ngMaterial]);
 
 	leafiiApp.config(['$urlRouterProvider', '$stateProvider', '$locationProvider', 
 			function($urlRouterProvider, $stateProvider, $locationProvider){
@@ -35,6 +36,18 @@ if (Meteor.isClient){
 						url: '/feedback',
 						templateUrl: 'client/views/feedback.html',
 					})
+					.state('engineer', {
+						url: '/engineer',
+						templateUrl: 'client/views/engineerPort.html',
+					})
+					.state('designer', {
+						url: '/designer',
+						templateUrl: 'client/views/designerPort.html',
+					})
+					.state('jobs', {
+						url: '/jobs',
+						templateUrl: 'client/views/jobs.html',
+					});
 
 				$urlRouterProvider.otherwise('/');
 
