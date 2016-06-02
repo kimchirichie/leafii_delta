@@ -2,5 +2,9 @@
   padding-top: 15%;
   text-align: center; }
 
-.signUpbtn {
+.browseBtn {
   color: black; }
+
+.signInBtn {
+	color: black;
+}
