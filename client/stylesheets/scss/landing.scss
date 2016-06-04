@@ -4,6 +4,10 @@
 	}
 }
 
+.favBtn {
+	width: 50%;
+}
+
 //For mobile view
 @media (max-width: 1280px){
 	
@@ -13,10 +17,18 @@
 		padding: 25px;
 	}
 
+	.favBtn {
+		width: 100%;
+	}
+
 }
 
 @media (max-width: 960px){
 	md-card {
+		width: 100%;
+	}
+
+	.favBtn {
 		width: 100%;
 	}
 }
@@ -26,6 +38,7 @@
 	md-card {
 		width: 48%;
 	}
+
 }
 
 
@@ -89,6 +102,6 @@ md-card-title {
 }
 
 .UIview {
-	margin-bottom: 6%;
+	margin-bottom: 6vh;
 }
 
