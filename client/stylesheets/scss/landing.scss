@@ -56,11 +56,12 @@ md-card-title {
 
 .footer {
   width: 100%;
-  border-top: solid thin #1a1a1a;
-  position: absolute;
+  margin-top: 30px;
+  height: 100px;
   text-align: center;
   background: #27272b;
   color: white;
+
 }
 
 .intro {
@@ -85,7 +86,6 @@ md-card-title {
 }
 
 .content {
-	height: 90vh;
 	background: rgba(0,0,0,0.05);
 }
 
