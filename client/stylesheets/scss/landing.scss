@@ -4,6 +4,65 @@
 	}
 }
 
+//For mobile view
+@media (max-width: 1280px){
+	
+	md-card {
+		min-width: 300px;
+		align-items: center;
+		padding: 25px;
+	}
+
+}
+
+@media (max-width: 960px){
+	md-card {
+		width: 100%;
+	}
+}
+
+
+@media (min-width: 960px){
+	md-card {
+		width: 48%;
+	}
+}
+
+
+.cardInfo {
+	width: 100%;
+	text-align: center;
+	align-items: center;
+}
+
+.featuredCan {
+	padding: 20px 20px 0px 20px;
+	font-weight: bold;
+
+}
+
+.board {
+	padding: 0px 10%;
+}
+
+md-card-title {
+	padding: 0;
+}
+
+.profilePic {
+	width: 200px;
+	height: 200px;
+}
+
+.footer {
+  width: 100%;
+  border-top: solid thin #1a1a1a;
+  position: absolute;
+  text-align: center;
+  background: #27272b;
+  color: white;
+}
+
 .intro {
 	text-align: center;
 	background: #27272b;
