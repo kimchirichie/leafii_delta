@@ -1,3 +1,5 @@
+@import "variables";
+
 #landing {
 
 	margin-bottom: 50px;
@@ -49,6 +51,21 @@
 	width: 100%;
 	text-align: center;
 	align-items: center;
+
+	a {
+		text-decoration: none;
+		font-size: 15px;
+		cursor: pointer;
+		font-weight: bold;
+		color: black;
+
+		&:hover {
+			color: #069e7e;
+			text-decoration: underline;
+		}
+
+	}
+
 }
 
 .featuredCan {
@@ -88,7 +105,7 @@ md-card-title {
 	.submitPort {
 		color: black;
 		font-weight: bold;
-		background: #3edeaa;
+		background: $leafii-theme;
 	}
 
 	.postJob {
@@ -107,5 +124,12 @@ md-card-title {
 .UIview {
 	position: absolute;
 	height: auto;
+}
+
+.viewAll {
+	color: black;
+	background: $leafii-theme;
+	width: 98%;
+
 }
 
