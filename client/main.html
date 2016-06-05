@@ -6,12 +6,12 @@
 	<meta property="og:image" content="http://www.leafii.com/images/finite_logo_leaf.png">
 	<meta property="og:description" content="Digital portfolio search engine. Submit your URL &amp; get discovered by recruiters today!">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="shortcut icon" href="/images/favicon.ico?v=2" type="image/x-icon">
-	<link rel="icon" href="/images/favicon.ico?v=2" type="image/x-icon">
+	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
 </head>
 <body ng-app="leafii">
 
-	<md-content class="content" layout="column" layout-align="center center">
+	<div class="content" layout="column">
 		<md-toolbar>
 			<div class="topNavBar md-toolbar-tools">
 				<a class="logo" href="/"><img class="logo" src="/images/leafii.svg"/></a>
@@ -32,11 +32,8 @@
 			</div>
 		</md-toolbar>
 		<div ui-view class="UIview" layout-fill></div>
-	</md-content>
-
-	<div class="footer">
-		<h6><b>powered by Leafii</b></h6>
-		<h6>Waterloo, ON &copy; 2016</h6>
 	</div>
+
+	
 
 </body>
