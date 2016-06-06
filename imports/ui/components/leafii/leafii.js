@@ -1,6 +1,7 @@
 import angular from "angular"
 import angularMeteor from "angular-meteor"
 import uiRouter from 'angular-ui-router';
+import ngMaterial from 'ngMaterial';
 
 import template from "./leafii.html"
 
@@ -18,7 +19,8 @@ export default angular.module(name,[
 	uiRouter,
 	Landing,
 	Signup,
-	Navigation
+	Navigation,
+	ngMaterial
 ])
 .component(name, {
 	template,
