@@ -1,0 +1,11 @@
+
+//Variables
+$leafii-theme: #3edeaa !important;
+
+//Import all css files
+@import '../imports/ui/components/landing/landing.scss';
+@import '../imports/ui/components/admin/admin.scss';
+@import '../imports/ui/components/auth/auth.scss';
+@import '../imports/ui/components/navigation/navBar.scss';
+@import '../imports/ui/components/profile/profile.scss';
+@import '../imports/ui/components/thankyou/thankyou.scss';
