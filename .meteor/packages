@@ -7,29 +7,38 @@
 meteor-base             # Packages every Meteor app needs to have
 mobile-experience       # Packages for a great mobile UX
 mongo                   # The database Meteor supports right now
-
-#Angular stuff
-angular:angular
-angular-templates
-pbastowski:angular-babel
-angular:angular-material
-angular:angular-touch
-angularui:angular-ui-router
-angular:angular-route
-
-
 reactive-var            # Reactive variable for tracker
 jquery                  # Helpful client-side library
 tracker                 # Meteor's client-side reactive programming library
 
-#standard-minifier-css CSS minifier run for production mode
-
-seba:minifiers-autoprefixer
-fourseven:scss
+#standard-minifier-css  # CSS minifier run for production mode
 standard-minifier-js    # JS minifier run for production mode
 es5-shim                # ECMAScript 5 compatibility for older browsers.
 
 autopublish             # Publish all data to the clients (for prototyping)
 insecure                # Allow all DB writes from clients (for prototyping)
 
-ixdi:material-design-iconic-font
+### User specified packages ###
+
+pbastowski:angular-babel # Advanced javascript 
+urigo:static-templates # Helps import files as string
+ixdi:material-design-iconic-font # Font
+seba:minifiers-autoprefixer #Minifier
+fourseven:scss # SCSS compiler
+
+#Angular stuff
+angular:angular
+angular-templates
+angular:angular-material
+angular:angular-touch
+angularui:angular-ui-router
+angular:angular-route
+
+
+### Comment out for production
+autopublish             # Publish all data to the clients (for prototyping)
+insecure                # Allow all DB writes from clients (for prototyping)
+
+
+
+
