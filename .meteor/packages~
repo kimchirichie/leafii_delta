@@ -25,6 +25,7 @@ fourseven:scss # SCSS compiler
 
 #Angular stuff
 angular:angular
+angular-templates
 angular:angular-material
 angular:angular-touch
 angularui:angular-ui-router
