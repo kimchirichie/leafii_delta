@@ -29,6 +29,6 @@ export default angular.module(name,[
 
 function config($locationProvider, $urlRouterProvider) {
 	'ngInject';
-	$locationProvider.html5Mode(true);
+	$locationProvider.html5Mode({'enabled': true, 'requireBase': false});
 	$urlRouterProvider.otherwise('/');
 }
