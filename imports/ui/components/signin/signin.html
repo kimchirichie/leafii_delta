@@ -1,0 +1,38 @@
+<div id="header">
+	<div class="container">
+		<div class="row">
+			<h1>Sign In</h1>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="form animated fadeIn">
+		<form action="signin" method="post">
+
+			<div class="field-wrap">
+				<label>Email Address<span class="req">*</span></label>
+				<input name="email" type="email" placeholder="example@xyz.com" required="required"/>
+			</div>
+
+			<div class="field-wrap">
+				<label>Password<span class="req">*</span></label>
+				<input name="password" type="password" placeholder="password" required="required"/>
+			</div>
+
+<!-- 			<div class="field-wrap">
+				<div id="error" class="animated fadeIn">
+					<p>error</p>
+				</div>
+			</div> -->
+
+			<div class="field-wrap">
+				<input type="submit" value="Sign In"/>
+			</div>
+
+			<div class="field-wrap">Don't have an account?<a href="/signup" class="signUpTag"> Register</a>
+			</div>
+		</form>
+	</div>
+</div>
+

@@ -1,0 +1,135 @@
+@import "variables";
+
+#landing {
+
+	margin-bottom: 50px;
+
+	img {
+		max-width: 100%;
+	}
+}
+
+.favBtn {
+	width: 50%;
+}
+
+//For mobile view
+@media (max-width: 1280px){
+	
+	md-card {
+		min-width: 300px;
+		align-items: center;
+		padding: 25px;
+	}
+
+	.favBtn {
+		width: 100%;
+	}
+
+}
+
+@media (max-width: 960px){
+	md-card {
+		width: 100%;
+	}
+
+	.favBtn {
+		width: 100%;
+	}
+}
+
+
+@media (min-width: 960px){
+	md-card {
+		width: 48%;
+	}
+
+}
+
+
+.cardInfo {
+	width: 100%;
+	text-align: center;
+	align-items: center;
+
+	a {
+		text-decoration: none;
+		font-size: 15px;
+		cursor: pointer;
+		font-weight: bold;
+		color: black;
+
+		&:hover {
+			color: #069e7e;
+			text-decoration: underline;
+		}
+
+	}
+
+}
+
+.featuredCan {
+	padding: 20px 20px 0px 20px;
+	font-weight: bold;
+
+}
+
+.board {
+	padding: 0px 10%;
+}
+
+md-card-title {
+	padding: 0;
+}
+
+.profilePic {
+	width: 200px;
+	height: 200px;
+}
+
+.footer {
+  width: 100%;
+  height: 100px;
+  text-align: center;
+  background: #27272b;
+  color: white;
+
+}
+
+.intro {
+	text-align: center;
+	background: #27272b;
+	color: white;
+	padding: 60px;
+
+	.submitPort {
+		color: black;
+		font-weight: bold;
+		background: $leafii-theme;
+	}
+
+	.postJob {
+		font-weight: bold;
+		color: black;
+		background: #ec3838;
+		width: 210px;
+	}
+	
+}
+
+.content {
+	background: rgba(0,0,0,0.05);
+}
+
+.UIview {
+	position: absolute;
+	height: auto;
+}
+
+.viewAll {
+	color: black;
+	background: $leafii-theme;
+	width: 98%;
+
+}
+
