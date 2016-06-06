@@ -8,34 +8,34 @@
 
 <div class="container">
   <div class="form animated fadeIn">
-    <form action="/auth/signup" method="post">
+    <form ng-submit="signup.submit(signup.user)">
       <div class="field-wrap">
         <label>First Name<span class="req">*</span></label>
-        <input type="text" name="firstName" placeholder="Bobby" required="required"/>
+        <input type="text" ng-model="signup.user.firstName" name="firstName" placeholder="Bobby" required="required"/>
       </div>
       <div class="field-wrap">
         <label>Last Name<span class="req">*</span></label>
-        <input type="text" name="lastName" placeholder="Lee" required="required"/>
+        <input type="text" ng-model="signup.user.lastName" name="lastName" placeholder="Lee" required="required"/>
       </div>
       <div class="field-wrap">
         <label>City<span class="req">*</span></label>
-        <input type="text" name="location" placeholder="Waterloo" required="required"/>
+        <input type="text" ng-model="signup.user.location" name="location" placeholder="Waterloo" required="required"/>
       </div>
       <div class="field-wrap">
         <label>Email Address<span class="req">*</span></label>
-        <input type="email" name="email" placeholder="example@uwaterloo.ca" required="required"/>
+        <input type="email" ng-model="signup.user.email" name="email" placeholder="example@uwaterloo.ca" required="required"/>
       </div>
       <div class="field-wrap">
         <label>Password<span class="req">*</span></label>
-        <input type="password" name="password" placeholder="password" required="required"/>
+        <input type="password" ng-model="signup.user.password" name="password" placeholder="password" required="required"/>
       </div>
       <div class="field-wrap">
         <label>Confirm password<span class="req">*</span></label>
-        <input type="password" name="confirm" placeholder="confirm" required="required"/>
+        <input type="password" ng-model="signup.user.confirm" name="confirm" placeholder="confirm" required="required"/>
       </div>
       <div class="field-wrap">
         <label>Portfolio URL<span class="req">*</span></label>
-        <input type="text" name="url" placeholder="www.myportfolio.com" required="required"/>
+        <input type="text" ng-model="signup.user.url" name="url" placeholder="www.myportfolio.com" required="required"/>
       </div>
       <div class="field-wrap">
         <input type="submit" value="Submit"/>

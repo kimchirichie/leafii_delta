@@ -4,7 +4,15 @@ import uiRouter from 'angular-ui-router';
  
 import template from './signup.html';
 
-class Signup {}
+class Signup {
+  constructor(){
+    this.user = {};
+  }
+
+  submit(user){
+    console.log(user);
+  }
+}
 
 const name = 'signup';
 
