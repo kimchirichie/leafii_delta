@@ -1,7 +1,8 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
- 
+
+import { Profile } from '/imports/api/auth.js'; 
 import template from './signup.html';
 
 class Signup {
@@ -10,8 +11,19 @@ class Signup {
   }
 
   submit(user){
+
     console.log(user);
+
+    Profile.insert({
+       firstName: user.firstName,
+       lastName: user.lastName,
+       Location: user.location,
+       email: user.email,
+       password: user.password,
+       portUrl: user.url
+    });
   }
+
 }
 
 const name = 'signup';
