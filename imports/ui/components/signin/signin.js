@@ -5,38 +5,36 @@ import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
 
 import { Accounts } from 'meteor/accounts-base'; 
-import template from './signup.html';
+import template from './signin.html';
 
-class Signup {
+class Signin {
   constructor($scope, $reactive, $state){
     'ngInject';
 
     $reactive(this).attach($scope);
     this.state = $state;
-
-    this.user = {};
   }
 
-  submit(user){
+  login(user){
+    Meteor.loginWithPassword(user.email, user.pass, function (err) {
+      if (err){
+        user.error = err;
+        console.log('error@@');
+        return;
+      }
+      console.log('success: ' + Meteor.user());
+    });
+    // this.state.go('landing');
+  }
+  
+  check(){
+    console.log(this.error);
 
-    console.log(user);
-
-    if (this.confirm !== user.password){
-      alert('Your password does not match');
-      user.password = '';
-      this.confirm = '';
-      return;
-    }
-
-    Accounts.createUser(user);
-    user = {};
-    this.state.go('welcome');
-    return;
   }
 
 }
 
-const name = 'signup';
+const name = 'signin';
 
 export default angular.module(name, [
   angularMeteor,
@@ -44,14 +42,14 @@ export default angular.module(name, [
 ]).component(name, {
   template,
   controllerAs: name,
-  controller: Signup
+  controller: Signin
 }).config(config);
  
 function config($stateProvider) {
   'ngInject';
   $stateProvider
-    .state('signup', {
-      url: '/signup',
-      template: '<signup></signup>'
+    .state('signin', {
+      url: '/signin',
+      template: '<signin></signin>'
     });
 }

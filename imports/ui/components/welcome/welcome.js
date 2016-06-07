@@ -1,15 +1,12 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
- 
-import template from './signin.html';
 
-//Functions & Controller
-class Signin {}
+import template from './welcome.html';
 
+class Welcome {}
 
-//Export controller and html
-const name = 'signin';
+const name = 'welcome';
 
 export default angular.module(name, [
   angularMeteor,
@@ -17,15 +14,14 @@ export default angular.module(name, [
 ]).component(name, {
   template,
   controllerAs: name,
-  controller: Signin
+  controller: Welcome
 }).config(config);
  
-//Make html into a directive
 function config($stateProvider) {
   'ngInject';
   $stateProvider
-    .state('signin', {
-      url: '/signin',
-      template: '<signin></signin>'
+    .state('welcome', {
+      url: '/welcome',
+      template: '<welcome></welcome>'
     });
 }

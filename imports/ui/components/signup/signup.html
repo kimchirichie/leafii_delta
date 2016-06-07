@@ -11,15 +11,15 @@
     <form ng-submit="signup.submit(signup.user)">
       <div class="field-wrap">
         <label>First Name<span class="req">*</span></label>
-        <input type="text" ng-model="signup.user.firstName" name="firstName" placeholder="Bobby" required="required"/>
+        <input type="text" ng-model="signup.user.profile.firstName" name="firstName" placeholder="Bobby" required="required"/>
       </div>
       <div class="field-wrap">
         <label>Last Name<span class="req">*</span></label>
-        <input type="text" ng-model="signup.user.lastName" name="lastName" placeholder="Lee" required="required"/>
+        <input type="text" ng-model="signup.user.profile.lastName" name="lastName" placeholder="Lee" required="required"/>
       </div>
       <div class="field-wrap">
         <label>City<span class="req">*</span></label>
-        <input type="text" ng-model="signup.user.location" name="location" placeholder="Waterloo" required="required"/>
+        <input type="text" ng-model="signup.user.profile.location" name="location" placeholder="Waterloo" required="required"/>
       </div>
       <div class="field-wrap">
         <label>Email Address<span class="req">*</span></label>
@@ -31,11 +31,11 @@
       </div>
       <div class="field-wrap">
         <label>Confirm password<span class="req">*</span></label>
-        <input type="password" ng-model="signup.user.confirm" name="confirm" placeholder="confirm" required="required"/>
+        <input type="password" ng-model="signup.confirm" name="confirm" placeholder="confirm" required="required"/>
       </div>
       <div class="field-wrap">
         <label>Portfolio URL<span class="req">*</span></label>
-        <input type="text" ng-model="signup.user.url" name="url" placeholder="www.myportfolio.com" required="required"/>
+        <input type="text" ng-model="signup.user.profile.url" name="url" placeholder="www.myportfolio.com" required="required"/>
       </div>
       <div class="field-wrap">
         <input type="submit" value="Submit"/>

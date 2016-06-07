@@ -30,10 +30,13 @@ angular:angular-touch
 angularui:angular-ui-router
 angular:angular-route
 
+accounts-password
+accounts-base
+
 
 ### Comment out for production
 autopublish             # Publish all data to the clients (for prototyping)
-insecure                # Allow all DB writes from clients (for prototyping)
+#insecure                # Allow all DB writes from clients (for prototyping)
 
 
 
