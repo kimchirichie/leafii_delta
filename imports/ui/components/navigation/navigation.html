@@ -12,9 +12,9 @@
 			<!-- fill up the space between left and right area -->
 			<span flex></span>
 			<div class="pages">
-				<a href="/signin">Login</a>
-				<a ng-click="navigation.logout()">Logout</a>
-				<a href="/signup">Register</a>
+				<a ng-show="!navigation.loggedIn" href="/signin">Login</a>
+				<a ng-show="navigation.loggedIn" ng-click="navigation.logout()">Logout</a>
+				<a ng-show="!navigation.loggedIn" href="/signup">Register</a>
 			</div>
 			
 		</div>

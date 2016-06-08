@@ -38,12 +38,13 @@ span.req {
 }
 
 #error {
-	color: black;
+	color: white;
 	font-size: 15px;
 	background-color: #DC4141;
 	height: 40px;
 	line-height: 40px;
 	margin-bottom: 20px;
+	font-weight: bold;
 	border-radius: 4px;
 	text-align: center;
 }

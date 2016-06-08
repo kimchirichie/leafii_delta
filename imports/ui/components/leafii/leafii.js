@@ -14,7 +14,16 @@ import { name as Welcome } from '../welcome/welcome';
 
 
 
-class Leafii{}
+class Leafii{
+
+	constructor($scope, $reactive, $state){
+    'ngInject';
+
+    	$reactive(this).attach($scope);
+
+  	}
+
+}
 
 const name = "leafii";
 

@@ -8,11 +8,12 @@ import { Accounts } from 'meteor/accounts-base';
 import template from './signin.html';
 
 class Signin {
-  constructor($scope, $reactive, $state){
+  constructor($scope, $reactive, $state, $rootScope){
     'ngInject';
 
     $reactive(this).attach($scope);
     this.state = $state;
+    this.rootScope = $rootScope;
     this.hasError = false
     this.errorMsg = '';
   }
@@ -26,10 +27,11 @@ class Signin {
         return;
       }
       else {
-        console.log('you are currently logged in');
         this.hasError = false;
         this.errorMsg = '';
+        this.rootScope.$broadcast('signin');
         this.state.go('landing');
+        
         return;
       }
       
