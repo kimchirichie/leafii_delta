@@ -13,23 +13,27 @@ class Signin {
 
     $reactive(this).attach($scope);
     this.state = $state;
+    this.hasError = false
+    this.errorMsg = '';
   }
 
-  login(user){
-    Meteor.loginWithPassword(user.email, user.pass, function (err) {
-      if (err){
-        user.error = err;
-        console.log('error@@');
+  login(email, pass){
+
+    Meteor.loginWithPassword(email, pass, function(error){
+      if (error){
+        this.hasError = true;
+        this.errorMsg = error.reason;
         return;
       }
-      console.log('success: ' + Meteor.user());
-    });
-    // this.state.go('landing');
-  }
-  
-  check(){
-    console.log(this.error);
-
+      else {
+        console.log('you are currently logged in');
+        this.hasError = false;
+        this.errorMsg = '';
+        this.state.go('landing');
+        return;
+      }
+      
+    }.bind(this));
   }
 
 }
