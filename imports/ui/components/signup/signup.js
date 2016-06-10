@@ -19,7 +19,7 @@ class Signup {
 
   submit(user){
 
-    console.log(user);
+    // console.log("submit: " + JSON.stringify(user));
 
     if (this.confirm !== user.password){
       alert('Your password does not match');
@@ -28,7 +28,30 @@ class Signup {
       return;
     }
 
-    Accounts.createUser(user);
+    Accounts.createUser(user, ( error ) => {
+      if(error) {
+        console.log( error.reason);
+      } else {
+        Meteor.call('sendVerificationLink', ( error, response ) =>{
+          if(error){
+            console.log(error.reason);
+          } else {
+            console.log('Verification email sent!', 'success');
+            console.log(response);
+          }
+        });
+      }
+    });
+
+    // Accounts.onEmailVerificationLink((error)=>{
+    //   if(error){
+    //     console.log(error.reason);
+    //   } else {
+    //     console.log("We are verified");
+    //   }
+    // });
+
+
     user = {};
     this.state.go('welcome');
     return;
