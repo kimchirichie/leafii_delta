@@ -33,6 +33,7 @@ angular:angular-route
 accounts-password
 accounts-base
 session
+meteorhacks:fast-render
 
 
 ### Comment out for production

@@ -1,8 +1,8 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 
-import template from './navigation.html';
 import { Accounts } from 'meteor/accounts-base';
+import template from './navigation.html';
 
 class Navigation {
 
@@ -10,28 +10,26 @@ class Navigation {
 		'ngInject';
 
 		$reactive(this).attach($scope);
-		var user = Meteor.user()
-		console.log(user)
-		if (user){
-			console.log('in');
-			this.rootScope.$broadcast('signin');
-		} else { 
-			console.log('out');
-		}
 
-		$scope.$on('signin', function(event, args){
+		this.isLoggedIn();
+
+		$scope.$on('signin', function(event, arg){
+			this.isLoggedIn();
+		}.bind(this));
+
+	}
+
+	isLoggedIn() {
+		if (Meteor.user()){
 			this.loggedIn = true;
-		}.bind(this));
-
-		$scope.$on('signout', function(event, args){
+		} else { 
 			this.loggedIn = false;
-		}.bind(this));
+		}
 	}
 
 	logout() {
-		console.log('logout' + Meteor.user());
 		Meteor.logout();
-		this.rootScope.$broadcast('signout');
+		this.loggedIn = false;
 	}
 
 }
