@@ -11,6 +11,7 @@ import { name as Landing } from '../landing/landing';
 import { name as Signin } from '../signin/signin';
 import { name as Signup } from '../signup/signup';
 import { name as Welcome } from '../welcome/welcome';
+import { name as userBrowse } from '../userBrowse/userBrowse';
 
 
 
@@ -35,6 +36,7 @@ export default angular.module(name,[
 	Signin,
 	Signup,
 	Navigation,
+	userBrowse,
 	Welcome
 ])
 .component(name, {

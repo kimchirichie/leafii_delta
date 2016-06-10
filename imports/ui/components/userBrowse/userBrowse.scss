@@ -1,6 +1,9 @@
-#landing {
+//CSS
+
+#profiles {
 
 	margin-bottom: 50px;
+	padding: 5%;
 
 	img {
 		max-width: 100%;
@@ -11,18 +14,16 @@
 	width: 50%;
 }
 
-.hot-candidates {
+.candidates {
 	align-items: center;
 }
 
 //For mobile view
 @media (max-width: 1280px){
 	
-	.hot-candidates{
+	.candidates{
 		md-card {
-			min-width: 300px;
 			align-items: center;
-			padding: 25px;
 		}
 
 		.favBtn {
@@ -34,18 +35,15 @@
 }
 
 @media (max-width: 960px){
-
-	.hot-candidates {
-
+	
+	.candidates{
 		md-card {
 			width: 100%;
-			align-items: center;
 		}
 
 		.favBtn {
 			width: 100%;
 		}
-
 	}
 	
 }
@@ -53,7 +51,7 @@
 
 @media (min-width: 960px){
 	
-	.hot-candidates{
+	.candidates{
 		md-card {
 			width: 50%;
 			align-items: center;
@@ -62,7 +60,6 @@
 	
 
 }
-
 
 .cardInfo {
 	width: 100%;
