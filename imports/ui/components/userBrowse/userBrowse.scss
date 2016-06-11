@@ -61,7 +61,7 @@
 
 }
 
-.half-row {
+.full-width {
 	width: 100%;
 }
 
@@ -99,6 +99,10 @@
 
 md-card-title {
 	padding: 0;
+	
+	p {
+		margin: 0;
+	}
 }
 
 .profilePic {

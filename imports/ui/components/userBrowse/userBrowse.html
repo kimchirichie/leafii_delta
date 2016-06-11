@@ -1,110 +1,21 @@
-<div id="profiles">
+<div id="profiles" ng-init="userbrowse.getUsers()">
 
+	<div layout="row" layout-xs="column" ng-repeat="users in userbrowse.usersInPairs">
 
-	<div layout="row" layout-xs="column">
-
-		<div class="candidates" layout="column" flex="50" flex-xs="100">
-			<div class="half-row" layout="row" layout-sm="column" layout-xs="column" layout-align="space-between center">
-				<md-card class="md-default-theme" layout="column">
-					<a href="http://www.richardsin.com" target="_blank"><img class="profilePic" src="/images/richardsin.png" alt="Richard Sin"></a>
+		<div class="candidates" layout="column" flex="100" flex-xs="50">
+			<div class="full-width" layout="row" layout-sm="column" layout-xs="column" layout-align="space-between center">
+				<md-card class="md-default-theme" layout="column" ng-repeat="user in users">
+					<a href="{{user.profile.url}}" target="_blank"><img class="profilePic" src="/images/richardsin.png" alt="{{user.profile.firstName + ' ' + user.profile.lastName}}"></a>
 					<md-card-title>
 						<div class="cardInfo" layout="column">
-							<a href="http://www.richardsin.com" target="_blank"><h3 class="md-headline">Web Developer</h3></a>
-							<span>Richard Sin</span>
-							<span><i class="zmdi zmdi-pin"></i> Waterloo</span>
-							<!-- <md-button class="md-primary md-raised favBtn">Favourite</md-button> -->
-						</div>
-					</md-card-title>
-				</md-card>
-				<md-card class="md-default-theme" layout="column">
-					<a href="http://www.artistkaylee.wix.com/kloc" target="_blank"><img class="profilePic" src="/images/kaylee.png" alt="Kaylee Lock-O'Connor"></a>
-					<md-card-title>
-						<div class="cardInfo" layout="column">
-							<a href="http://www.artistkaylee.wix.com/kloc" target="_blank"><h3 class="md-headline">Marketing & Design</h3></a>
-							<span>Kaylee Lock-O'Connor</span>
-							<span><i class="zmdi zmdi-pin"></i> Waterloo</span>
+							<a href="{{user.profile.url}}" target="_blank"><h3 class="md-headline">Web Developer</h3></a>
+							<p>{{user.profile.firstName + ' ' + user.profile.lastName}}<p>
+							<p><i class="zmdi zmdi-pin"></i> {{user.profile.location}}</p>
 							<!-- <md-button class="md-primary md-raised favBtn">Favourite</md-button> -->
 						</div>
 					</md-card-title>
 				</md-card>
 			</div>
-		</div>
-
-		<div class="candidates" layout="column" flex="50" flex-xs="100">
-			<div class="half-row" layout="row" layout-sm="column" layout-xs="column" layout-align="space-between center">
-				<md-card class="md-default-theme" layout="column">
-					<a href="http://www.richardsin.com" target="_blank"><img class="profilePic" src="/images/richardsin.png" alt="Richard Sin"></a>
-					<md-card-title>
-						<div class="cardInfo" layout="column">
-							<a href="http://www.richardsin.com" target="_blank"><h3 class="md-headline">Web Developer</h3></a>
-							<span>Jonathan fuck</span>
-							<span><i class="zmdi zmdi-pin"></i> Waterloo</span>
-							<!-- <md-button class="md-primary md-raised favBtn">Favourite</md-button> -->
-						</div>
-					</md-card-title>
-				</md-card>
-				<md-card class="md-default-theme" layout="column">
-					<a href="http://www.artistkaylee.wix.com/kloc" target="_blank"><img class="profilePic" src="/images/kaylee.png" alt="Kaylee Lock-O'Connor"></a>
-					<md-card-title>
-						<div class="cardInfo" layout="column">
-							<a href="http://www.artistkaylee.wix.com/kloc" target="_blank"><h3 class="md-headline">Marketing & Design</h3></a>
-							<span>Kaylee Locker-O'Connor</span>
-							<span><i class="zmdi zmdi-pin"></i> Waterloo</span>
-							<!-- <md-button class="md-primary md-raised favBtn">Favourite</md-button> -->
-						</div>
-					</md-card-title>
-				</md-card>
-			</div>
-		</div>
-	</div>
-
-	<div layout="row">
-		<div class="candidates" layout="column" layout-sm="column" layout-xs="column">
-			<md-card class="md-default-theme" layout="column">
-				<a href="http://www.richardsin.com" target="_blank"><img class="profilePic" src="/images/richardsin.png" alt="Richard Sin"></a>
-				<md-card-title>
-					<div class="cardInfo" layout="column">
-						<a href="http://www.richardsin.com" target="_blank"><h3 class="md-headline">Web Developer</h3></a>
-						<span>Richard Sin</span>
-						<span><i class="zmdi zmdi-pin"></i> Waterloo</span>
-						<!-- <md-button class="md-primary md-raised favBtn">Favourite</md-button> -->
-					</div>
-				</md-card-title>
-			</md-card>
-			<md-card class="md-default-theme" layout="column">
-				<a href="http://www.artistkaylee.wix.com/kloc" target="_blank"><img class="profilePic" src="/images/kaylee.png" alt="Kaylee Lock-O'Connor"></a>
-				<md-card-title>
-					<div class="cardInfo" layout="column">
-						<a href="http://www.artistkaylee.wix.com/kloc" target="_blank"><h3 class="md-headline">Marketing & Design</h3></a>
-						<span>Kaylee Lock-O'Connor</span>
-						<span><i class="zmdi zmdi-pin"></i> Waterloo</span>
-						<!-- <md-button class="md-primary md-raised favBtn">Favourite</md-button> -->
-					</div>
-				</md-card-title>
-			</md-card>
-
-			<md-card class="md-default-theme" layout="column">
-				<a href="http://www.richardsin.com" target="_blank"><img class="profilePic" src="/images/richardsin.png" alt="Richard Sin"></a>
-				<md-card-title>
-					<div class="cardInfo" layout="column">
-						<a href="http://www.richardsin.com" target="_blank"><h3 class="md-headline">Web Developer</h3></a>
-						<span>Richard Sin</span>
-						<span><i class="zmdi zmdi-pin"></i> Waterloo</span>
-						<!-- <md-button class="md-primary md-raised favBtn">Favourite</md-button> -->
-					</div>
-				</md-card-title>
-			</md-card>
-			<md-card class="md-default-theme" layout="column">
-				<a href="http://www.artistkaylee.wix.com/kloc" target="_blank"><img class="profilePic" src="/images/kaylee.png" alt="Kaylee Lock-O'Connor"></a>
-				<md-card-title>
-					<div class="cardInfo" layout="column">
-						<a href="http://www.artistkaylee.wix.com/kloc" target="_blank"><h3 class="md-headline">Marketing & Design</h3></a>
-						<span>Kaylee Lock-O'Connor</span>
-						<span><i class="zmdi zmdi-pin"></i> Waterloo</span>
-						<!-- <md-button class="md-primary md-raised favBtn">Favourite</md-button> -->
-					</div>
-				</md-card-title>
-			</md-card>
 		</div>
 	</div>
 </div>

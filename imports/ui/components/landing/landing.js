@@ -10,11 +10,6 @@ class Landing {
 
         $reactive(this).attach($scope);
     }
-    getUsers(){
-        console.log("users loaded");
-        this.users = Meteor.users.find().fetch();
-        console.log(this.users);
-    }
 }
 
 const name = 'landing';
