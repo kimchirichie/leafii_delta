@@ -1,3 +1,8 @@
+<button ng-click="landing.getUsers()">click to load users</button>
+<div ng-repeat="user in landing.users">
+	<p>{{user._id}}</p>
+</div>
+
 <div id="landing">
 	<div class="intro">
 		<img src="/images/leafii.svg" class="animated bounceInDown"/>
