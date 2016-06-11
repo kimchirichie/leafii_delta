@@ -13,6 +13,7 @@ class Landing {
     getUsers(){
         console.log("users loaded");
         this.users = Meteor.users.find().fetch();
+        console.log(this.users);
     }
 }
 
