@@ -3,7 +3,7 @@
 	<div layout="row" layout-xs="column" ng-repeat="users in userbrowse.usersInPairs">
 
 		<div class="candidates" layout="column" flex="100" flex-xs="50">
-			<div class="full-width" layout="row" layout-sm="column" layout-xs="column" layout-align="space-between center">
+			<div class="full-width" layout="row" layout-sm="column" layout-xs="column">
 				<md-card class="md-default-theme" layout="column" ng-repeat="user in users">
 					<a href="{{user.profile.url}}" target="_blank"><img class="profilePic" src="/images/richardsin.png" alt="{{user.profile.firstName + ' ' + user.profile.lastName}}"></a>
 					<md-card-title>

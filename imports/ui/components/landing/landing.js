@@ -7,9 +7,11 @@ import template from './landing.html';
 class Landing {
     constuctor($scope, $reactive){
         'ngInject';
-
         $reactive(this).attach($scope);
+        console.log(Meteor.users.find().fetch());
     }
+
+
 }
 
 const name = 'landing';

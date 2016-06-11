@@ -2,8 +2,9 @@
 
 #profiles {
 
-	margin-bottom: 50px;
+	padding-bottom: 50px;
 	padding: 5%;
+	background: #dcdcdc;
 
 	img {
 		max-width: 100%;
@@ -16,6 +17,16 @@
 
 .candidates {
 	align-items: center;
+
+	md-card {
+
+		box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+
+		&:hover {
+			box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+		}
+	}
+
 }
 
 //For mobile view
@@ -63,6 +74,7 @@
 
 .full-width {
 	width: 100%;
+	align-items: center;
 }
 
 .cardInfo {
@@ -112,49 +124,10 @@ md-card-title {
 	padding: 10px;
 }
 
-.footer {
-  width: 100%;
-  height: 100px;
-  text-align: center;
-  background: #27272b;
-  color: white;
 
-}
 
-.intro {
-	text-align: center;
-	background: #27272b;
-	color: white;
-	padding: 60px;
 
-	.submitPort {
-		color: black;
-		font-weight: bold;
-		background: $leafii-theme;
-	}
 
-	.postJob {
-		font-weight: bold;
-		color: black;
-		background: #ec3838;
-		width: 210px;
-	}
-	
-}
 
-.content {
-	background: rgba(0,0,0,0.05);
-}
 
-.UIview {
-	position: absolute;
-	height: auto;
-}
-
-.viewAll {
-	color: black;
-	background: $leafii-theme;
-	width: 98%;
-
-}
 
