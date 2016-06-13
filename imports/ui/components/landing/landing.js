@@ -11,6 +11,10 @@ class Landing {
         console.log(Meteor.users.find().fetch());
     }
 
+    userLink(link){
+        window.open("http://" + link);
+    }
+
 
 }
 

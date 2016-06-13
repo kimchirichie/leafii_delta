@@ -22,6 +22,11 @@ class userBrowse {
     
   }
 
+  userLink(link){
+    var parseLink = link.replace("http://", "");
+    window.open("http://" + parseLink);
+  }
+
 }
 
 const name = 'userbrowse';
