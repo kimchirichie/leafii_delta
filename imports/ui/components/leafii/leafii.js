@@ -12,6 +12,7 @@ import { name as Signin } from '../signin/signin';
 import { name as Signup } from '../signup/signup';
 import { name as Welcome } from '../welcome/welcome';
 import { name as userBrowse } from '../userBrowse/userBrowse';
+import { name as Profile } from '../profile/profile';
 
 
 
@@ -37,6 +38,7 @@ export default angular.module(name,[
 	Signup,
 	Navigation,
 	userBrowse,
+	Profile,
 	Welcome
 ])
 .component(name, {
