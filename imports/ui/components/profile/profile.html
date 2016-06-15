@@ -18,16 +18,21 @@
 		
 		<div class="six columns field-wrap">
 			<label>First Name<span class="req">*</span></label>
-			<input type=text name="fullname" ng-model="profile.user.profile.firstName" required="required"/>
+			<input type=text name="firstName" ng-model="profile.user.profile.firstName" required="required"/>
 		</div>
 		<div class="six columns field-wrap">
 			<label>Last Name:</label>
-			<input type=text name="fullname" ng-model="profile.user.profile.lastName"/>
+			<input type=text name="lastName" ng-model="profile.user.profile.lastName"/>
 		</div>
 
 		<div class="field-wrap">
 			<label>Profession:</label>
 			<input type="text" name="occupation" ng-model="profile.user.profile.occupation"/>
+		</div>
+
+		<div layout="row" layout-align="start start" layout-xs="column">
+			<md-switch ng-model="profile.user.profile.available">Available for Hire?</md-switch>
+			<!-- <i>If off, your portfolio will no longer be searchable.</i> -->
 		</div>
 
 		<div class="field-wrap">
@@ -49,6 +54,10 @@
 			<label>Keywords/Tags:</label>
 			<textarea type="text" name="keywords" ng-model=""></textarea>
 		</div> -->
+
+		<div id="updated" class="animated fadeIn field-wrap" ng-show="profile.updated">
+			<p>Profile Updated</p>
+		</div>
 
 		<div class="field-wrap">
 			<!-- <label>Last Modified: </label> -->

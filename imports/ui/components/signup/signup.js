@@ -17,6 +17,8 @@ class Signup {
 
   submit(user){
 
+    user.profile.available = true;
+
     if (this.confirm !== user.password){
       alert('Your password does not match');
       user.password = '';

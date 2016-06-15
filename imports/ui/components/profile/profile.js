@@ -2,11 +2,15 @@ import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
  
+import { Accounts } from 'meteor/accounts-base';
 import template from './profile.html';
 
 class Profile {
-  constuctor($scope, $reactive){
+  constructor($scope, $reactive, $timeout){
+    "ngInject";
     $reactive(this).attach($scope);
+    this.updated = false;
+    this.timeout = $timeout;
   }
 
   getUser(){
@@ -15,6 +19,11 @@ class Profile {
 
   update(user){
     Meteor.users.update(Meteor.userId(), {$set: {profile: user.profile}}, true, false);
+    this.updated = true;
+    this.timeout(function(){
+      this.updated=false;
+      angular.element('#updated').addClass("fadeOut");
+    }.bind(this), 1800);
   }
 
 }

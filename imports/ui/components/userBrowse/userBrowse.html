@@ -4,17 +4,19 @@
 
 		<div class="candidates" layout="column" flex="100" flex-xs="50">
 			<div class="full-width" layout="row" layout-sm="column" layout-xs="column">
-				<md-card ng-click="userbrowse.userLink(user.profile.url)" class="md-default-theme clickable" layout="column" ng-repeat="user in users">
-					<img class="profilePic" src="/images/finite_logo_leaf.png" alt="{{user.profile.firstName + ' ' + user.profile.lastName}}">
-					<md-card-title>
-						<div class="cardInfo" layout="column">
-							<h3 class="md-headline">Web Developer</h3></a>
-							<p>{{user.profile.firstName + ' ' + user.profile.lastName}}<p>
-							<p><i class="zmdi zmdi-pin"></i> {{user.profile.location}}</p>
-							<!-- <md-button class="md-primary md-raised favBtn">Favourite</md-button> -->
-						</div>
-					</md-card-title>
-				</md-card>
+				<a ng-href="{{user.profile.url}}" target="_blank" ng-repeat="user in users">
+					<md-card  class="md-default-theme clickable" layout="column" >
+						<img class="profilePic" src="/images/finite_logo_leaf.png" alt="{{user.profile.firstName + ' ' + user.profile.lastName}}">
+						<md-card-title>
+							<div class="cardInfo" layout="column">
+								<h3 class="md-headline">{{user.profile.occupation}}</h3>
+								<p>{{user.profile.firstName + ' ' + user.profile.lastName}}<p>
+								<p><i class="zmdi zmdi-pin"></i> {{user.profile.location}}</p>
+								<!-- <md-button class="md-primary md-raised favBtn">Favourite</md-button> -->
+							</div>
+						</md-card-title>
+					</md-card>
+				</a>
 			</div>
 		</div>
 	</div>

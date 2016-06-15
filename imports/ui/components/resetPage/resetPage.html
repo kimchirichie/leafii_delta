@@ -1,0 +1,27 @@
+<div id="header">
+	<div class="container">
+		<div class="row">
+			<h1>Reset Pasword</h1>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="form animated fadeIn">
+		<form ng-submit="resetPage.forgotPass(resetPage.email)">
+
+			<div class="field-wrap">
+				<label>Email Address<span class="req">*</span></label>
+				<input ng-model="resetPage.email" type="email" placeholder="example@xyz.com" required="required"/>
+			</div>
+
+			<div id="updated" class="animated fadeIn field-wrap" ng-show="false">
+				<p></p>
+			</div>
+
+			<div class="field-wrap">
+				<input type="submit" value="Reset"/>
+			</div>
+		</form>
+	</div>
+</div>
