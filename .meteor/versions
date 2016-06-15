@@ -62,6 +62,7 @@ modules@0.6.1
 modules-runtime@0.6.3
 mongo@1.1.7
 mongo-id@1.0.4
+natestrauser:animate-css@3.5.1
 npm-bcrypt@0.8.5
 npm-mongo@1.4.43
 observe-sequence@1.0.11
@@ -79,6 +80,7 @@ seba:minifiers-autoprefixer@1.0.1
 service-configuration@1.0.9
 session@1.1.5
 sha@1.0.7
+skeleton:skeleton@2.0.4
 spacebars@1.0.11
 spacebars-compiler@1.0.11
 srp@1.0.8

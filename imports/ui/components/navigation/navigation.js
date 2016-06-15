@@ -12,6 +12,7 @@ class Navigation {
 		$reactive(this).attach($scope);
 
 		this.isLoggedIn();
+		this.state = $state;
 
 		$scope.$on('signin', function(event, arg){
 			this.isLoggedIn();
@@ -30,6 +31,7 @@ class Navigation {
 	logout() {
 		Meteor.logout();
 		this.loggedIn = false;
+		this.state.go('landing');
 	}
 
 }

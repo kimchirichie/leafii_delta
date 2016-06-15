@@ -35,6 +35,10 @@ accounts-base
 session
 meteorhacks:fast-render
 
+#Css
+natestrauser:animate-css
+skeleton:skeleton
+
 
 ### Comment out for production
 autopublish             # Publish all data to the clients (for prototyping)

@@ -13,13 +13,9 @@ class Signup {
 
     $reactive(this).attach($scope);
     this.state = $state;
-
-    this.user = {};
   }
 
   submit(user){
-
-    console.log(user);
 
     if (this.confirm !== user.password){
       alert('Your password does not match');

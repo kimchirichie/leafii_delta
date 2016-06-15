@@ -9,6 +9,14 @@ class Profile {
     $reactive(this).attach($scope);
   }
 
+  getUser(){
+    this.user = Meteor.user();
+  }
+
+  update(user){
+    Meteor.users.update(Meteor.userId(), {$set: {profile: user.profile}}, true, false);
+  }
+
 }
 
 const name = 'profile';
