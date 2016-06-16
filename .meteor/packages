@@ -33,6 +33,8 @@ angular:angular-route
 accounts-password
 accounts-base
 session
+email
+themeteorchef:bert
 meteorhacks:fast-render
 
 #Css

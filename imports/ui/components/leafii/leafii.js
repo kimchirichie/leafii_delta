@@ -15,6 +15,7 @@ import { name as userBrowse } from '../userBrowse/userBrowse';
 import { name as Profile } from '../profile/profile';
 import { name as changePassword } from '../changePassword/changePassword';
 import { name as resetPage } from '../resetPage/resetPage';
+import { name as verifyEmail } from '../../../api/verifyEmail';
 
 class Leafii{
 
@@ -41,6 +42,7 @@ export default angular.module(name,[
 	Profile,
 	resetPage,
 	changePassword,
+	verifyEmail,
 	Welcome
 ])
 .component(name, {

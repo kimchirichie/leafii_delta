@@ -1,10 +1,8 @@
-'use strict';
-
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
 
-import { Accounts } from 'meteor/accounts-base'; 
+import { Accounts } from 'meteor/accounts-base';
 import template from './signup.html';
 
 class Signup {
@@ -26,10 +24,26 @@ class Signup {
       return;
     }
 
-    Accounts.createUser(user);
-    user = {};
-    this.state.go('welcome');
-    return;
+    Accounts.createUser(user, function(error){
+      if(error) {
+        Bert.alert(error.reason, 'danger');
+      } 
+      else {
+        Meteor.call('sendVerificationLink', function(error, response){
+          
+          if(error){
+            Bert.alert(error.reason, 'danger');
+            
+          } else {
+            user = {};
+            this.state.go('welcome');
+            Bert.alert('Verification email sent!', 'success');
+            Meteor.logout();
+          }
+        }.bind(this));
+      }
+    }.bind(this));
+
   }
 
 }
@@ -52,4 +66,4 @@ function config($stateProvider) {
       url: '/signup',
       template: '<signup></signup>'
     });
-}
+};
