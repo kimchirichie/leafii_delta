@@ -6,6 +6,7 @@ import template from './userBrowse.html';
 
 class userBrowse {
   constructor($scope, $reactive){
+    "ngInject";
     $reactive(this).attach($scope);
   }
 
