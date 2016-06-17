@@ -47,7 +47,7 @@ function config($stateProvider) {
   'ngInject';
   $stateProvider
     .state('resetpage', {
-      url: '/resetPass',
+      url: '/reset-password',
       template: '<resetpage></resetpage>'
     });
 }
