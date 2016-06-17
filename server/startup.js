@@ -4,6 +4,7 @@ import { Users } from '../imports/api/auth';
 Meteor.startup(()=>{
 
 	var domain = 'support@leafii.com';
+	process.env.ROOT_URL = 'http://leafii.com';
 	process.env.MAIL_URL = 'smtp://' + domain + ':deathology@smtp.gmail.com:465/';
 
 	Meteor.methods({
