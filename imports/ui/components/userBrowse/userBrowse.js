@@ -13,18 +13,24 @@ class userBrowse {
   getUsers(){
     this.users = Meteor.users.find({"profile.available":true}).fetch();
     var usersInPairs = [];
+    var usersInFours = [];
 
     //Parse out any extra strings
     for(var j = 0; j < this.users.length; j++){
       this.users[j].profile.url = 'http://' +this.users[j].profile.url.replace(/https:|http:|\/\//gi, "");
     }
 
-    //Cuts data in columns of 4
-    for (var i = 0; i < this.users.length; i += 4) {
-        usersInPairs.push(this.users.slice(i, i + 4));
+    //Cuts data in columns of 2
+    for (var i = 0; i < this.users.length; i += 2) {
+        usersInPairs.push(this.users.slice(i, i + 2));
     }
 
-    this.usersInPairs = usersInPairs;
+    //Cuts data in columns of 4
+    for (var k = 0; k < usersInPairs.length; k += 2){
+        usersInFours.push(usersInPairs.slice(k, k + 2));
+    }
+
+    this.usersInFours = usersInFours;
     
   }
 
