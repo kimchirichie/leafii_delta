@@ -1,0 +1,23 @@
+<div id="profiles" ng-init="userbrowse.getUsers()">
+
+	<div layout="row" layout-xs="column" ng-repeat="usersInPairs in userbrowse.usersInFours">
+
+		<div class="candidates" layout="row" layout-sm="column" layout-xs="column" ng-repeat="users in usersInPairs" flex>
+			<div class="full-width" layout="row" layout-md="column" layout-sm="column" layout-xs="column" >
+				<a href="{{user.profile.url}}" target="_blank" ng-repeat="user in users">
+					<md-card  class="md-default-theme clickable" layout="column" >
+						<img class="profilePic" src="/images/finite_logo_leaf.png" alt="{{user.profile.firstName + ' ' + user.profile.lastName}}">
+						<md-card-title>
+							<div class="cardInfo" layout="column">
+								<h3 class="md-headline">{{user.profile.occupation}}</h3>
+								<p>{{user.profile.firstName + ' ' + user.profile.lastName}}<p>
+								<p><i class="zmdi zmdi-pin"></i> {{user.profile.location}}</p>
+								<!-- <md-button class="md-primary md-raised favBtn">Favourite</md-button> -->
+							</div>
+						</md-card-title>
+					</md-card>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>

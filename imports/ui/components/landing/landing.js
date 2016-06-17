@@ -5,34 +5,35 @@ import uiRouter from 'angular-ui-router';
 import template from './landing.html';
 
 class Landing {
-  constuctor($scope, $reactive){
-    $reactive(this).attach($scope);
-    this.helpers({
-      somefunction() {
-        console.log('loaded');
-      }
-    });
+    constuctor($scope, $reactive){
+        'ngInject';
+        $reactive(this).attach($scope);
+        console.log(Meteor.users.find().fetch());
+    }
 
-  }
+    userLink(link){
+        window.open("http://" + link);
+    }
+
+
 }
 
 const name = 'landing';
 
 export default angular.module(name, [
-  angularMeteor,
-  uiRouter,
+    angularMeteor,
+    uiRouter,
 ]).component(name, {
-  template,
-  controllerAs: name,
-  controller: Landing
+    template,
+    controllerAs: name,
+    controller: Landing
 })
-  .config(config);
+.config(config);
  
 function config($stateProvider) {
-  'ngInject';
-  $stateProvider
-    .state('landing', {
-      url: '/',
-      template: '<landing></landing>'
+    'ngInject';
+    $stateProvider.state('landing', {
+        url: '/',
+        template: '<landing></landing>'
     });
 }

@@ -1,10 +1,8 @@
-'use strict';
-
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
 
-import { Accounts } from 'meteor/accounts-base'; 
+import { Accounts } from 'meteor/accounts-base';
 import template from './signup.html';
 
 class Signup {
@@ -13,13 +11,12 @@ class Signup {
 
     $reactive(this).attach($scope);
     this.state = $state;
-
-    this.user = {};
   }
 
   submit(user){
 
-    // console.log("submit: " + JSON.stringify(user));
+
+    user.profile.available = true;
 
     if (this.confirm !== user.password){
       alert('Your password does not match');
@@ -28,33 +25,26 @@ class Signup {
       return;
     }
 
-    Accounts.createUser(user, ( error ) => {
+    Accounts.createUser(user, function(error){
       if(error) {
-        console.log( error.reason);
-      } else {
-        Meteor.call('sendVerificationLink', ( error, response ) =>{
+        Bert.alert(error.reason, 'danger');
+      } 
+      else {
+        Meteor.call('sendVerificationLink', function(error, response){
+          
           if(error){
-            console.log(error.reason);
+            Bert.alert(error.reason, 'danger');
+            
           } else {
-            console.log('Verification email sent!', 'success');
-            console.log(response);
+            user = {};
+            this.state.go('welcome');
+            Bert.alert('Verification email sent!', 'success');
+            Meteor.logout();
           }
-        });
+        }.bind(this));
       }
-    });
+    }.bind(this));
 
-    // Accounts.onEmailVerificationLink((error)=>{
-    //   if(error){
-    //     console.log(error.reason);
-    //   } else {
-    //     console.log("We are verified");
-    //   }
-    // });
-
-
-    user = {};
-    this.state.go('welcome');
-    return;
   }
 
 }
@@ -77,4 +67,4 @@ function config($stateProvider) {
       url: '/signup',
       template: '<signup></signup>'
     });
-}
+};

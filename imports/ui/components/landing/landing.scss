@@ -1,6 +1,7 @@
 #landing {
 
-	margin-bottom: 50px;
+	padding-bottom: 50px;
+	background: #dcdcdc;
 
 	img {
 		max-width: 100%;
@@ -11,40 +12,66 @@
 	width: 50%;
 }
 
-.candidates {
+.hot-candidates {
 	align-items: center;
+	
+	md-card {
+
+		box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+
+		&:hover {
+			box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+			background: $leafii-theme;
+		}
+	}
+
 }
 
 //For mobile view
 @media (max-width: 1280px){
 	
-	md-card {
-		min-width: 300px;
-		align-items: center;
-		padding: 25px;
-	}
+	.hot-candidates{
+		md-card {
+			min-width: 300px;
+			align-items: center;
+			padding: 25px;
+		}
 
-	.favBtn {
-		width: 100%;
+		.favBtn {
+			width: 100%;
+		}
 	}
+	
 
 }
 
 @media (max-width: 960px){
-	md-card {
-		width: 100%;
-	}
 
-	.favBtn {
-		width: 100%;
+	.hot-candidates {
+
+		md-card {
+			width: 100%;
+			align-items: center;
+		}
+
+		.favBtn {
+			width: 100%;
+		}
+
 	}
+	
 }
 
 
 @media (min-width: 960px){
-	md-card {
-		width: 50%;
+	
+	.hot-candidates{
+		md-card {
+			width: 50%;
+			align-items: center;
+		}
 	}
+	
 
 }
 
@@ -53,31 +80,22 @@
 	width: 100%;
 	text-align: center;
 	align-items: center;
+}
 
-	a {
-		text-decoration: none;
-		font-size: 15px;
-		cursor: pointer;
-		font-weight: bold;
-		color: black;
-
-		&:hover {
-			color: #069e7e;
-			text-decoration: underline;
-		}
-
-	}
-
+.clickable {
+	cursor: pointer;
 }
 
 .featuredCan {
 	padding: 20px 20px 20px 20px;
 	font-weight: bold;
+	text-align: center;
 
 }
 
 .board {
 	padding: 0px 10%;
+	background: #dcdcdc;
 }
 
 md-card-title {
@@ -87,6 +105,8 @@ md-card-title {
 .profilePic {
 	width: 200px;
 	height: 200px;
+	border-radius: 50% !important;
+	padding: 10px;
 }
 
 .footer {
@@ -130,8 +150,8 @@ md-card-title {
 
 .viewAll {
 	color: black;
+	font-weight: bold;
+	width: 99%;
 	background: $leafii-theme;
-	width: 98%;
-
 }
 

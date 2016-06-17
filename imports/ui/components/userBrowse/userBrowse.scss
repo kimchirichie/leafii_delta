@@ -1,0 +1,92 @@
+//CSS
+
+#profiles {
+
+	padding-bottom: 50px;
+	padding: 5%;
+	background: #dcdcdc;
+
+	img {
+		max-width: 100%;
+	}
+}
+
+.favBtn {
+	width: 50%;
+}
+
+.candidates {
+	align-items: center;
+
+	a {
+		width: 100%;
+		margin: 20px;
+		text-decoration: none;
+		color: black;
+		box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+	}
+
+	md-card {
+		
+		width: auto;
+		align-items: center;
+		margin: 0;
+
+		&:hover {
+			box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+			background: $leafii-theme;
+		}
+	}
+
+}
+
+@media(max-width: 1280px){
+	.candidates{
+		margin: 20px;
+	}
+}
+
+.full-width {
+	width: 100%;
+	align-items: center;
+}
+
+.cardInfo {
+	width: 100%;
+	text-align: center;
+	align-items: center;
+}
+
+.featuredCan {
+	padding: 20px 20px 20px 20px;
+	font-weight: bold;
+	text-align: center;
+
+}
+
+.board {
+	padding: 0px 10%;
+}
+
+md-card-title {
+	padding: 0;
+	
+	p {
+		margin: 0;
+	}
+}
+
+.profilePic {
+	width: 200px;
+	height: 200px;
+	border-radius: 50% !important;
+	padding: 10px;
+}
+
+
+
+
+
+
+
+

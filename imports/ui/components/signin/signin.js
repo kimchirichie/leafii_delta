@@ -14,21 +14,17 @@ class Signin {
     $reactive(this).attach($scope);
     this.state = $state;
     this.rootScope = $rootScope;
-    this.hasError = false
-    this.errorMsg = '';
+
   }
 
   login(email, pass){
 
     Meteor.loginWithPassword(email, pass, function(error){
       if (error){
-        this.hasError = true;
-        this.errorMsg = error.reason;
+        Bert.alert(error.reason, 'danger');
         return;
       }
       else {
-        this.hasError = false;
-        this.errorMsg = '';
         this.rootScope.$broadcast('signin');
         this.state.go('landing');
         

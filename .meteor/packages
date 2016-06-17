@@ -29,10 +29,18 @@ angular:angular-material
 angular:angular-touch
 angularui:angular-ui-router
 angular:angular-route
+vinaynb:angular-loading-bar
 
 accounts-password
 accounts-base
 session
+email
+themeteorchef:bert
+meteorhacks:fast-render
+
+#Css
+natestrauser:animate-css
+skeleton:skeleton
 
 
 ### Comment out for production
