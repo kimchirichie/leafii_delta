@@ -15,17 +15,20 @@ class resetPage {
 
   forgotPass(email){
 
-    Accounts.forgotPassword(email, function(error){
-        if(error){
-          this.hasError = true;
-          this.errorMsg = error.reason;
-        }
-        else {
-          this.hasError = false;
-          this.errorMsg = '';
-          this.state.go('checkpassword');
-        }
-    });
+    if(email == ''){
+      Bert.alert('Please enter your email');
+    }
+    else {
+      Accounts.forgotPassword(email, function(error){
+          if(error){
+            Bert.alert(error.reason, 'danger');
+          }
+          else {
+            Bert.alert('Email Sent! Please check your email to reset password', 'success');
+            this.state.go('checkpassword');
+          }
+      });
+    }
   }
 
 }

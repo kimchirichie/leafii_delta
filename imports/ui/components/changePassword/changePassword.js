@@ -11,8 +11,23 @@ class changePassword {
     $reactive(this).attach($scope);
   }
 
-  updatePass(user){
-    
+  updatePass(){
+
+      if(this.password){
+        if(this.password != this.confirm){
+          Bert.alert('Passwords does not match, please try again', 'danger');
+        }
+        else {
+          
+        }
+      }
+      else {
+          Bert.alert('Please enter a password', 'danger');
+      }
+      
+      
+
+
   }
 
 }
