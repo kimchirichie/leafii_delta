@@ -96,5 +96,6 @@ underscore@1.0.9
 urigo:static-html-compiler@0.0.5
 urigo:static-templates@0.0.5
 url@1.0.10
+vinaynb:angular-loading-bar@0.8.0
 webapp@1.2.9
 webapp-hashing@1.0.9
