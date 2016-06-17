@@ -16,6 +16,7 @@ class Verification {
     Accounts.verifyEmail(this.state.params.token, function(error){
       if(error){
         Bert.alert(error.reason, 'danger');
+        this.state.go('signin');
       }
       else{
         Bert.alert('Your email has been verified!', 'success');
