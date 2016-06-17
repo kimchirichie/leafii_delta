@@ -4,7 +4,7 @@
 
 		<div class="candidates" layout="column" flex="100" flex-xs="50">
 			<div class="full-width" layout="row" layout-sm="column" layout-xs="column">
-				<a ng-href="{{user.profile.url}}" target="_blank" ng-repeat="user in users">
+				<a href="{{user.profile.url}}" target="_blank" ng-repeat="user in users">
 					<md-card  class="md-default-theme clickable" layout="column" >
 						<img class="profilePic" src="/images/finite_logo_leaf.png" alt="{{user.profile.firstName + ' ' + user.profile.lastName}}">
 						<md-card-title>

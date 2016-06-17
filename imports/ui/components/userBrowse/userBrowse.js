@@ -14,6 +14,11 @@ class userBrowse {
     this.users = Meteor.users.find({"profile.available":true}).fetch();
     var usersInPairs = [];
 
+    //Parse out any extra strings
+    for(var j = 0; j < this.users.length; j++){
+      this.users[j].profile.url = 'http://' +this.users[j].profile.url.replace(/https:|http:|\/\//gi, "");
+    }
+
     //Cuts data in columns of 4
     for (var i = 0; i < this.users.length; i += 4) {
         usersInPairs.push(this.users.slice(i, i + 4));
