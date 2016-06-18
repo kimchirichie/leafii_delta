@@ -14,7 +14,6 @@ class resetPage {
   }
 
   forgotPass(email){
-    console.log(email);
     if(email === ''){
       Bert.alert('Please enter your email');
     }
