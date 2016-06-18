@@ -11,7 +11,8 @@ class userBrowse {
   }
 
   getUsers(){
-    this.users = Meteor.users.find({"profile.available":true}).fetch();
+//    this.users = Meteor.users.find({"profile.available":true}).fetch();
+    this.users = Meteor.users.find().fetch();
     var usersInPairs = [];
     var usersInFours = [];
 
