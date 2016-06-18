@@ -20,8 +20,9 @@
 				<input ng-model="signin.user.password" type="password" placeholder="password" required="required"/>
 			</div>
 
-			<div class="field-wrap">
-				<input type="submit" value="Sign In"/>
+			<div class="field-wrap" layout="column" layout-align="center center">
+				<input ng-show="!signin.wait" type="submit" value="sign in"/>
+				<md-progress-circular ng-show="signin.wait" md-mode='indeterminate' md-diameter="40px"></md-progress-circular>
 			</div>
 			
 			<div class="field-wrap">Forgot your password?<a  href="/reset-password" class="tag"> Reset</a></div>

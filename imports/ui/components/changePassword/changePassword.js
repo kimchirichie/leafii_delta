@@ -6,32 +6,40 @@ import { Accounts } from 'meteor/accounts-base';
 import template from './changePassword.html';
 
 class changePassword {
-  constructor($scope, $reactive, $state){
+  constructor($scope, $reactive, $state, $timeout){
     "ngInject";
     $reactive(this).attach($scope);
     this.state = $state;
+    this.timeout = $timeout;
+    this.wait = false;
   }
 
   updatePass(){
 
-      if(this.password){
-        if(this.password != this.confirm){
-          Bert.alert('Passwords does not match, please try again', 'danger');
+    this.wait = true;
+
+    if(this.password != this.confirm){
+      Bert.alert('Passwords does not match, please try again', 'danger');
+      this.password = '';
+      this.confirm = '';
+      this.timeout(function(){this.wait = false;}.bind(this), 1300);
+    }
+    else {
+
+      Accounts.resetPassword(this.state.params.token, this.password, function(error){
+        if(error){
+          Bert.alert(error.reason, 'danger');
+          this.password = '';
+          this.confirm = '';
+          this.timeout(function(){this.wait = false;}.bind(this), 1300);
+        }else{
+          Bert.alert("You're password has been updated", 'success');
+          this.wait = false;
+          this.password = '';
+          this.confirm = '';
         }
-        else {
-          Accounts.resetPassword(this.state.params.token, this.password, function(error){
-            if(error){
-              Bert.alert(error.reason, 'danger');
-            }else{
-              Bert.alert("You're password has been updated");
-            }
-          })
-          
-        }
-      }
-      else {
-          Bert.alert('Please enter a password', 'danger');
-      }
+      }.bind(this));
+    }
   }
 }
 

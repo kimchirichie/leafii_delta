@@ -35,7 +35,6 @@ accounts-password
 accounts-base
 session
 email
-random
 themeteorchef:bert
 meteorhacks:fast-render
 
@@ -45,9 +44,5 @@ skeleton:skeleton
 
 
 ### Comment out for production
-autopublish             # Publish all data to the clients (for prototyping)
+#autopublish             # Publish all data to the clients (for prototyping)
 #insecure                # Allow all DB writes from clients (for prototyping)
-
-
-
-

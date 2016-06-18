@@ -15,9 +15,10 @@
 				<input ng-model="resetpage.email" type="email" placeholder="example@xyz.com" required="required"/>
 			</div>
 
-			<div class="field-wrap">
-				<input type="submit" value="Reset"/>
-			</div>
+			<div class="field-wrap" layout="column" layout-align="center center">
+	        	<input ng-show="!resetpage.wait" type="submit" value="Reset"/>
+	        <md-progress-circular ng-show="resetpage.wait" md-mode='indeterminate' md-diameter="40px"></md-progress-circular>
+      </div>
 		</form>
 	</div>
 </div>

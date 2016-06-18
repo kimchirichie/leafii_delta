@@ -6,29 +6,33 @@ import template from './resetPage.html';
 
 class resetPage {
 
-  constructor($scope, $reactive, $state){
+  constructor($scope, $reactive, $state, $timeout){
     'ngInject';
 
     $reactive(this).attach($scope);
     this.state = $state;
+    this.wait = false;
+    this.timeout = $timeout;
   }
 
   forgotPass(email){
-    if(email === ''){
-      Bert.alert('Please enter your email');
-    }
-    else {
-      Accounts.forgotPassword({email: email}, function(error){
-          if(error){
-            Bert.alert(error.reason, 'danger');
-          }
-          else {
-            Bert.alert('Email Sent! Please check your email to reset password', 'success');
-          }
-      });
-    }
-  }
 
+    this.wait = true;
+
+    Accounts.forgotPassword({email: email}, function(error){
+
+      if(error){
+        Bert.alert(error.reason, 'danger');
+        this.timeout(function(){this.wait = false;}.bind(this), 1300);
+      }
+      else {
+        Bert.alert('Email Sent! Please check your email to reset password', 'success');
+        this.wait = false;
+        this.email = '';
+      }
+
+    }.bind(this));
+  }
 }
 
 const name = 'resetpage';

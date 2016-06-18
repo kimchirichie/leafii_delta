@@ -41,8 +41,9 @@
         <label>Portfolio URL<span class="req">*</span></label>
         <input type="text" ng-model="signup.user.profile.url" name="url" placeholder="www.myportfolio.com" required="required"/>
       </div>
-      <div class="field-wrap">
-        <input type="submit" value="Submit"/>
+      <div class="field-wrap" layout="column" layout-align="center center">
+        <input ng-show="!signup.wait" type="submit" value="sign up"/>
+        <md-progress-circular ng-show="signup.wait" md-mode='indeterminate' md-diameter="40px"></md-progress-circular>
       </div>
     </form>
   </div>

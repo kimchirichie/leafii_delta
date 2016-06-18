@@ -8,27 +8,30 @@ import { Accounts } from 'meteor/accounts-base';
 import template from './signin.html';
 
 class Signin {
-  constructor($scope, $reactive, $state, $rootScope){
+  constructor($scope, $reactive, $state, $rootScope, $timeout){
     'ngInject';
 
     $reactive(this).attach($scope);
     this.state = $state;
     this.rootScope = $rootScope;
+    this.wait = false;
+    this.timeout = $timeout;
 
   }
 
   login(email, pass){
 
+    this.wait = true;
+
     Meteor.loginWithPassword(email, pass, function(error){
       if (error){
         Bert.alert(error.reason, 'danger');
-        return;
+        this.timeout(function(){this.wait = false;}.bind(this), 1300);
       }
       else {
         this.rootScope.$broadcast('signin');
         this.state.go('landing');
-        
-        return;
+        this.wait = false;
       }
       
     }.bind(this));

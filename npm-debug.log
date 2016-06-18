@@ -1,0 +1,104 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node',
+1 verbose cli   '/home/tzeng/.meteor/packages/meteor-tool/.1.3.2_4.10vjklo++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   '--save',
+1 verbose cli   'Crypto' ]
+2 info using npm@2.14.22
+3 info using node@v0.10.43
+4 verbose install initial load of /home/tzeng/Documents/leafii_delta/package.json
+5 verbose installManyTop reading scoped package data from /home/tzeng/Documents/leafii_delta/node_modules/angular/package.json
+6 verbose installManyTop reading scoped package data from /home/tzeng/Documents/leafii_delta/node_modules/angular-animate/package.json
+7 verbose installManyTop reading scoped package data from /home/tzeng/Documents/leafii_delta/node_modules/angular-aria/package.json
+8 verbose installManyTop reading scoped package data from /home/tzeng/Documents/leafii_delta/node_modules/angular-loading-bar/package.json
+9 verbose installManyTop reading scoped package data from /home/tzeng/Documents/leafii_delta/node_modules/angular-material/package.json
+10 verbose installManyTop reading scoped package data from /home/tzeng/Documents/leafii_delta/node_modules/angular-meteor/package.json
+11 verbose installManyTop reading scoped package data from /home/tzeng/Documents/leafii_delta/node_modules/angular-ui-router/package.json
+12 verbose installManyTop reading scoped package data from /home/tzeng/Documents/leafii_delta/node_modules/crypto/package.json
+13 verbose installManyTop reading scoped package data from /home/tzeng/Documents/leafii_delta/node_modules/dist/package.json
+14 verbose installManyTop reading scoped package data from /home/tzeng/Documents/leafii_delta/node_modules/meteor-node-stubs/package.json
+15 verbose installManyTop reading scoped package data from /home/tzeng/Documents/leafii_delta/node_modules/meteor-random/package.json
+16 verbose installManyTop reading scoped package data from /home/tzeng/Documents/leafii_delta/node_modules/mobile-angular-ui/package.json
+17 info package.json crypto@0.0.3 crypto is also the name of a node core module.
+18 info package.json angular-meteor@1.3.11 No repository field.
+19 verbose readDependencies loading dependencies from /home/tzeng/Documents/leafii_delta/package.json
+20 silly cache add args [ 'Crypto', null ]
+21 verbose cache add spec Crypto
+22 silly cache add parsed spec { raw: 'Crypto',
+22 silly cache add   scope: null,
+22 silly cache add   name: 'Crypto',
+22 silly cache add   rawSpec: '',
+22 silly cache add   spec: 'latest',
+22 silly cache add   type: 'tag' }
+23 silly addNamed Crypto@latest
+24 verbose addNamed "latest" is being treated as a dist-tag for Crypto
+25 info addNameTag [ 'Crypto', 'latest' ]
+26 silly mapToRegistry name Crypto
+27 silly mapToRegistry using default registry
+28 silly mapToRegistry registry https://registry.npmjs.org/
+29 silly mapToRegistry uri https://registry.npmjs.org/Crypto
+30 verbose addNameTag registry:https://registry.npmjs.org/Crypto not in flight; fetching
+31 verbose request uri https://registry.npmjs.org/Crypto
+32 verbose request no auth needed
+33 info attempt registry request try #1 at 22:20:10
+34 verbose request id 196473a3377cb5e2
+35 http request GET https://registry.npmjs.org/Crypto
+36 http 404 https://registry.npmjs.org/Crypto
+37 verbose headers { 'content-type': 'application/json',
+37 verbose headers   'cache-control': 'max-age=0',
+37 verbose headers   'content-length': '2',
+37 verbose headers   'accept-ranges': 'bytes',
+37 verbose headers   date: 'Sat, 18 Jun 2016 02:20:11 GMT',
+37 verbose headers   via: '1.1 varnish',
+37 verbose headers   age: '0',
+37 verbose headers   connection: 'keep-alive',
+37 verbose headers   'x-served-by': 'cache-ord1727-ORD',
+37 verbose headers   'x-cache': 'MISS',
+37 verbose headers   'x-cache-hits': '0',
+37 verbose headers   'x-timer': 'S1466216411.029086,VS0,VE38',
+37 verbose headers   vary: 'Accept-Encoding' }
+38 silly get cb [ 404,
+38 silly get   { 'content-type': 'application/json',
+38 silly get     'cache-control': 'max-age=0',
+38 silly get     'content-length': '2',
+38 silly get     'accept-ranges': 'bytes',
+38 silly get     date: 'Sat, 18 Jun 2016 02:20:11 GMT',
+38 silly get     via: '1.1 varnish',
+38 silly get     age: '0',
+38 silly get     connection: 'keep-alive',
+38 silly get     'x-served-by': 'cache-ord1727-ORD',
+38 silly get     'x-cache': 'MISS',
+38 silly get     'x-cache-hits': '0',
+38 silly get     'x-timer': 'S1466216411.029086,VS0,VE38',
+38 silly get     vary: 'Accept-Encoding' } ]
+39 verbose stack Error: Registry returned 404 for GET on https://registry.npmjs.org/Crypto
+39 verbose stack     at makeError (/home/tzeng/.meteor/packages/meteor-tool/.1.3.2_4.10vjklo++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+39 verbose stack     at CachingRegistryClient.<anonymous> (/home/tzeng/.meteor/packages/meteor-tool/.1.3.2_4.10vjklo++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:242:14)
+39 verbose stack     at Request._callback (/home/tzeng/.meteor/packages/meteor-tool/.1.3.2_4.10vjklo++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+39 verbose stack     at Request.self.callback (/home/tzeng/.meteor/packages/meteor-tool/.1.3.2_4.10vjklo++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/lib/node_modules/npm/node_modules/request/request.js:199:22)
+39 verbose stack     at Request.emit (events.js:98:17)
+39 verbose stack     at Request.<anonymous> (/home/tzeng/.meteor/packages/meteor-tool/.1.3.2_4.10vjklo++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/lib/node_modules/npm/node_modules/request/request.js:1036:10)
+39 verbose stack     at Request.emit (events.js:117:20)
+39 verbose stack     at IncomingMessage.<anonymous> (/home/tzeng/.meteor/packages/meteor-tool/.1.3.2_4.10vjklo++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/lib/node_modules/npm/node_modules/request/request.js:963:12)
+39 verbose stack     at IncomingMessage.emit (events.js:117:20)
+39 verbose stack     at _stream_readable.js:944:16
+40 verbose statusCode 404
+41 verbose pkgid Crypto
+42 verbose cwd /home/tzeng/Documents/leafii_delta
+43 error Linux 3.19.0-61-generic
+44 error argv "node" "/home/tzeng/.meteor/packages/meteor-tool/.1.3.2_4.10vjklo++os.linux.x86_64+web.browser+web.cordova/mt-os.linux.x86_64/dev_bundle/bin/npm" "install" "--save" "Crypto"
+45 error node v0.10.43
+46 error npm  v2.14.22
+47 error code E404
+48 error 404 Registry returned 404 for GET on https://registry.npmjs.org/Crypto
+48 error 404
+48 error 404 'Crypto' is not in the npm registry.
+48 error 404 Your package name is not valid, because
+48 error 404
+48 error 404  1. crypto is a core module name
+48 error 404  2. name can no longer contain capital letters
+48 error 404 It was specified as a dependency of 'socially'
+48 error 404
+48 error 404 Note that you can also install from a
+48 error 404 tarball, folder, http url, or git url.
+49 verbose exit [ 1, true ]
