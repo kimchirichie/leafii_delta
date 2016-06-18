@@ -1,0 +1,42 @@
+//Footer css
+
+#footer {
+	
+	background: #27272b;
+	padding: 30px;
+	color: white;
+
+	.footer-content {
+		width: 85%;
+	}
+
+	.contact {
+		margin-bottom: 20px;
+		
+		a {
+			margin-bottom: 10px;
+		}
+
+	}
+	
+	a {
+		color: white;
+		text-decoration: none;
+		cursor: pointer;
+
+		&:hover {
+			color: $leafii-theme;
+		}
+
+	}
+
+
+	.media {
+
+		a {
+			margin-left: 10px;
+		}
+		
+	}
+	
+}

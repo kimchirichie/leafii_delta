@@ -9,6 +9,7 @@ import template from "./leafii.html"
 
 // COMPONENTS
 import { name as Navigation } from '../navigation/navigation';
+import { name as Footer } from '../footer/footer';
 import { name as Landing } from '../landing/landing';
 import { name as Signin } from '../signin/signin';
 import { name as Signup } from '../signup/signup';
@@ -38,6 +39,7 @@ export default angular.module(name,[
 	uiRouter,
 	loadingBar,
 	ngMaterial,
+	Footer,
 	Landing,
 	Signin,
 	Signup,

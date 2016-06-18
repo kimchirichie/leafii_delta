@@ -8,14 +8,14 @@
 
 <div class="container">
   <div class="form animated fadeIn">
-    <form action="/auth/signin" method="post">
+    <form ng-submit="">
       <div class="field-wrap">
         <label>Name</label>
         <input name="name" type="text" placeholder="Bobby"/>
       </div>
       <div class="field-wrap">
         <label>Email Address<span class="req">*</span></label>
-        <input name="email" type="email" placeholder="ecample@xyz.com" required="required"/>
+        <input name="email" type="email" placeholder="example@xyz.com" required="required"/>
         <div class="field-wrap">
           <label>Feedback</label>
           <textarea name="feedback" type="text" placeholder="Need more features"></textarea>
