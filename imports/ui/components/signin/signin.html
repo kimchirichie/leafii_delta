@@ -1,35 +1,37 @@
-<div id="header">
-	<div class="container">
-		<div class="row">
-			<h1>Sign In</h1>
+<div id="signin">
+	<div id="header">
+		<div class="container">
+			<div class="row">
+				<h1>Sign In</h1>
+			</div>
 		</div>
 	</div>
-</div>
 
-<div class="container">
-	<div class="form animated fadeIn">
-		<form ng-submit="signin.login(signin.user.email, signin.user.password)">
+	<div class="container">
+		<div class="form animated fadeIn">
+			<form ng-submit="signin.login(signin.user.email, signin.user.password)">
 
-			<div class="field-wrap">
-				<label>Email Address<span class="req">*</span></label>
-				<input ng-model="signin.user.email" type="email" placeholder="example@xyz.com" required="required"/>
-			</div>
+				<div class="field-wrap">
+					<label>Email Address<span class="req">*</span></label>
+					<input ng-model="signin.user.email" type="email" placeholder="example@xyz.com" required="required"/>
+				</div>
 
-			<div class="field-wrap">
-				<label>Password<span class="req">*</span></label>
-				<input ng-model="signin.user.password" type="password" placeholder="password" required="required"/>
-			</div>
+				<div class="field-wrap">
+					<label>Password<span class="req">*</span></label>
+					<input ng-model="signin.user.password" type="password" placeholder="password" required="required"/>
+				</div>
 
-			<div class="field-wrap" layout="column" layout-align="center center">
-				<input ng-show="!signin.wait" type="submit" value="sign in"/>
-				<md-progress-circular ng-show="signin.wait" md-mode='indeterminate' md-diameter="40px"></md-progress-circular>
-			</div>
-			
-			<div class="field-wrap">Forgot your password?<a  href="/reset-password" class="tag"> Reset</a></div>
-			<div class="field-wrap">Don't have an account?<a href="/signup" class="tag"> Register</a></div>
-			
-			</div>
-		</form>
+				<div class="field-wrap" layout="column" layout-align="center center">
+					<input ng-show="!signin.wait" type="submit" value="sign in"/>
+					<md-progress-circular ng-show="signin.wait" md-mode='indeterminate' md-diameter="40px"></md-progress-circular>
+				</div>
+				
+				<div class="field-wrap">Forgot your password?<a  href="/reset-password" class="tag"> Reset</a></div>
+				<div class="field-wrap">Don't have an account?<a href="/signup" class="tag"> Register</a></div>
+				
+				</div>
+			</form>
+		</div>
 	</div>
 </div>
 
