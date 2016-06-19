@@ -1,24 +1,26 @@
-<div id="header">
-	<div class="container">
-		<div class="row">
-			<h1>Reset Pasword</h1>
+<div id="resetPage">
+	<div id="header">
+		<div class="container">
+			<div class="row">
+				<h1>Reset Pasword</h1>
+			</div>
 		</div>
 	</div>
-</div>
 
-<div class="container">
-	<div class="form animated fadeIn">
-		<form ng-submit="resetpage.forgotPass(resetpage.email)">
+	<div class="container">
+		<div class="form animated fadeIn">
+			<form ng-submit="resetpage.forgotPass(resetpage.email)">
 
-			<div class="field-wrap">
-				<label>Email Address<span class="req">*</span></label>
-				<input ng-model="resetpage.email" type="email" placeholder="example@xyz.com" required="required"/>
-			</div>
+				<div class="field-wrap">
+					<label>Email Address<span class="req">*</span></label>
+					<input ng-model="resetpage.email" type="email" placeholder="example@xyz.com" required="required"/>
+				</div>
 
-			<div class="field-wrap" layout="column" layout-align="center center">
-	        	<input ng-show="!resetpage.wait" type="submit" value="Reset"/>
-	        <md-progress-circular ng-show="resetpage.wait" md-mode='indeterminate' md-diameter="40px"></md-progress-circular>
-      </div>
-		</form>
+				<div class="field-wrap" layout="column" layout-align="center center">
+		        	<input ng-show="!resetpage.wait" type="submit" value="Reset"/>
+		        <md-progress-circular ng-show="resetpage.wait" md-mode='indeterminate' md-diameter="40px"></md-progress-circular>
+	      </div>
+			</form>
+		</div>
 	</div>
 </div>
