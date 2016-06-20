@@ -1,66 +1,69 @@
-<div id="header">
-	<div class="container">
-		<div class="row">
-			<h1>Profile</h1>
+<div id="profile">
+	<div id="header">
+		<div class="container">
+			<div class="row">
+				<h1>Profile</h1>
+			</div>
 		</div>
 	</div>
-</div>
 
-<!-- <div class="profileSideMenu">
-	<nav class="profile-menu-title">DashBoard</nav>
-	<nav class="profile-menu-title">Edit Profile</nav>
-	<nav class="profile-menu-title">Analytics</nav>
-	<nav class="profile-menu-title">Log Out</nav>
-</div> -->
+	<!-- <div class="profileSideMenu">
+		<nav class="profile-menu-title">DashBoard</nav>
+		<nav class="profile-menu-title">Edit Profile</nav>
+		<nav class="profile-menu-title">Analytics</nav>
+		<nav class="profile-menu-title">Log Out</nav>
+	</div> -->
 
-<div class="profilePanel" ng-init="profile.getUser()">
-	<form class="row userProfile" ng-submit="profile.update(profile.user)">
-		
-		<div class="six columns field-wrap">
+	<div class="profilePanel" layout="row" layout-sm="column" layout-xs="column">
+
+		<div class="profileImg" layout="column" layout-align="center center" flex="40" flex-sm="100" flex-xs="100">
+			<img src="/images/finite_logo_leaf.png"/>
+			<button>Upload</button>
+		</div>
+
+		<form class="userProfile" layout="column" layout-align="start start" ng-submit="profile.update(profile.user)" flex="60" flex-sm="100" flex-xs="100">
+
+
 			<label>First Name<span class="req">*</span></label>
 			<input type=text name="firstName" ng-model="profile.user.profile.firstName" required="required"/>
-		</div>
-		<div class="six columns field-wrap">
+
+		
 			<label>Last Name:</label>
 			<input type=text name="lastName" ng-model="profile.user.profile.lastName"/>
-		</div>
-
-		<div class="field-wrap">
+			
+			
+			
 			<label>Profession:</label>
 			<input type="text" name="occupation" ng-model="profile.user.profile.occupation"/>
-		</div>
+			
 
-		<div layout="row" layout-align="start start" layout-xs="column">
+			
 			<md-switch ng-model="profile.user.profile.available">Available for Hire?</md-switch>
 			<!-- <i>If off, your portfolio will no longer be searchable.</i> -->
-		</div>
+		
 
-		<div class="field-wrap">
 			<label>Portfolio URL:<span class="req">*</span></label>
 			<input type="text" name="url" ng-model="profile.user.profile.url" required="required"/>
-		</div>
-		
-		<!-- <div class="field-wrap">
-			<label>Profile Pic:</label>
-			<md-button class="md-primary">Upload</md-button>
-		</div> -->
+			
+			<!-- <div class="field-wrap">
+				<label>Profile Pic:</label>
+				<md-button class="md-primary">Upload</md-button>
+			</div> -->
 
-		<div class="field-wrap">
 			<label>Location:</label>
 			<input type="text" name="location" ng-model="profile.user.profile.location"/>
-		</div>
+		
 
-		<!-- <div class="field-wrap">
-			<label>Keywords/Tags:</label>
-			<textarea type="text" name="keywords" ng-model=""></textarea>
-		</div> -->
+			<!-- <div class="field-wrap">
+				<label>Keywords/Tags:</label>
+				<textarea type="text" name="keywords" ng-model=""></textarea>
+			</div> -->
 
-		<div class="field-wrap">
-			<!-- <label>Last Modified: </label> -->
-			<input type="submit" value="update"/>
-		</div>
+				<!-- <label>Last Modified: </label> -->
+			<button type="submit">Update</button>
 
-	</form>
+		</form>
+	</div>
 </div>
 
 

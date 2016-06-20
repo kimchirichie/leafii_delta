@@ -4,6 +4,7 @@ import uiRouter from 'angular-ui-router';
 import ngMaterial from 'angular-material';
 import ngAnimate from 'angular-animate';
 import loadingBar from 'angular-loading-bar';
+import ngFileUpload from 'ng-file-upload';
 
 import template from "./leafii.html"
 
@@ -46,6 +47,7 @@ export default angular.module(name,[
 	Navigation,
 	userBrowse,
 	Profile,
+	ngFileUpload,
 	resetPage,
 	changePassword,
 	verifyEmail,

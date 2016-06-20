@@ -1,3 +1,4 @@
+
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
@@ -9,6 +10,7 @@ class Profile {
   constructor($scope, $reactive, $timeout){
     "ngInject";
     $reactive(this).attach($scope);
+    this.getUser();
   }
 
   getUser(){
