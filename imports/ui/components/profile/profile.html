@@ -18,7 +18,7 @@
 
 		<div class="profileImg" layout="column" layout-align="center center" flex="40" flex-sm="100" flex-xs="100">
 			<img src="/images/finite_logo_leaf.png"/>
-			<button>Upload</button>
+			<button ngf-select="profile.uploadPic($file)">Upload</button>
 		</div>
 
 		<form class="userProfile" layout="column" layout-align="start start" ng-submit="profile.update(profile.user)" flex="60" flex-sm="100" flex-xs="100">
