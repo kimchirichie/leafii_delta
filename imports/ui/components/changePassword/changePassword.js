@@ -37,6 +37,9 @@ class changePassword {
           this.wait = false;
           this.password = '';
           this.confirm = '';
+
+          this.state.go('signin');
+
         }
       }.bind(this));
     }
