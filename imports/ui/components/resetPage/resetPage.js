@@ -27,7 +27,7 @@ class resetPage {
       }
       else {
         Bert.alert('Email Sent! Please check your email to reset password', 'success');
-        this.wait = false;
+        this.timeout(function(){this.wait = false;}.bind(this), 1300);
         this.email = '';
       }
 

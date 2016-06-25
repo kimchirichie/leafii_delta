@@ -31,14 +31,23 @@ angularui:angular-ui-router
 angular:angular-route
 vinaynb:angular-loading-bar
 
+#Accounts
 accounts-password
 accounts-base
-session
 email
+
+#Utilities
 themeteorchef:bert
 meteorhacks:fast-render
 
-#Css
+#Uploads and files
+danialfarid:ng-file-upload
+jalik:ufs
+jalik:ufs-gridfs
+
+
+
+#CSS
 natestrauser:animate-css
 skeleton:skeleton
 
