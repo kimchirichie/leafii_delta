@@ -2,10 +2,11 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
-import ngFileUpload from 'ng-file-upload';
  
 import { Accounts } from 'meteor/accounts-base';
 import template from './profile.html';
+
+import { name as ImageUploader } from '../imageUploader/imageUploader';
 
 class Profile {
   constructor($scope, $reactive, $timeout, Upload){
@@ -20,6 +21,7 @@ class Profile {
 
   uploadPic(file) {
     console.log('hehaha');
+    console.log(Upload);
     Upload.upload({
       url: 'upload/url',
       data: {file:file, '_id': Meteor.userId()}
@@ -44,7 +46,7 @@ const name = 'profile';
 export default angular.module(name, [
   angularMeteor,
   uiRouter,
-  ngFileUpload
+  ImageUploader
 ]).component(name, {
   template,
   controllerAs: name,
