@@ -2,30 +2,16 @@ import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 
 // import { Accounts } from 'meteor/accounts-base';
-import template from './navigation.html';
+import template from './header.html';
 
-class Navigation {
+class Header {
 
-	constructor($scope, $reactive, $state){
+	constructor($scope, $reactive, $state, $rootScope){
 		'ngInject';
 
 		$reactive(this).attach($scope);
-
-		this.isLoggedIn();
 		this.state = $state;
-
-		$scope.$on('signin', function(event, arg){
-			this.isLoggedIn();
-		}.bind(this));
-
-	}
-
-	isLoggedIn() {
-		if (Meteor.user()){
-			this.loggedIn = true;
-		} else { 
-			this.loggedIn = false;
-		}
+		this.rootScope = $rootScope;
 	}
 
 	logout() {
@@ -38,7 +24,7 @@ class Navigation {
 
 
 
-const name = 'navigation';
+const name = 'header';
 
 // create a module
 export default angular.module(name, [
@@ -46,5 +32,5 @@ export default angular.module(name, [
 ]).component(name, {
 	template,
 	controllerAs: name,
-	controller: Navigation
+	controller: Header
 });
