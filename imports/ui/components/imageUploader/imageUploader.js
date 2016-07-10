@@ -22,11 +22,11 @@ class ImageUploader {
 
 	addImages(files) {
 
-		this.editing = true;
-		this.rootScope.$broadcast('editImg');
-
 		if (files.length) {
 			this.currentFile = files[0];
+
+			this.editing = true;
+			this.rootScope.$broadcast('editImg');
 
 			const reader = new FileReader;
 
