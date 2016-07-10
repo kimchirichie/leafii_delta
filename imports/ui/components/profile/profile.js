@@ -13,6 +13,21 @@ class Profile {
     "ngInject";
     $reactive(this).attach($scope);
     this.rootScope = $rootScope;
+    this.timeout = $timeout;
+    this.imgHide = false;
+    this.progress = false;
+
+    //Hide profile pic while editing
+    $scope.$on('editImg', function(event, arg){
+      this.progress = true;
+      this.imgHide = true;
+      this.timeout(function(){this.progress = false;}.bind(this), 1200);
+    }.bind(this));
+
+    //Show profile pic when editing is done
+    $scope.$on('editDone', function(event, arg){
+      this.imgHide = false;
+    }.bind(this));
   }
 
   update(user){

@@ -10,27 +10,22 @@
 	<div class="profilePanel" layout="row" layout-sm="column" layout-xs="column">
 
 		<div class="profileImg" layout="column" layout-align="center center" flex="40" flex-sm="100" flex-xs="100">
-			<img ng-src="{{profile.rootScope.currentUser.profile.image}}"/>
+			<img ng-show="!profile.imgHide" ng-src="{{profile.rootScope.currentUser.profile.image}}"/>
 			<image-uploader files="profile.user.images"></image-uploader>
+			<md-progress-circular ng-if="profile.progress" md-mode='indeterminate' md-diameter="100px"></md-progress-circular>
 		</div>
 
 		<form class="userProfile" layout="column" layout-align="start start" ng-submit="profile.update(profile.rootScope.currentUser)" flex="60" flex-sm="100" flex-xs="100">
 
-
 			<label>First Name<span class="req">*</span></label>
 			<input type=text name="firstName" ng-model="profile.rootScope.currentUser.profile.firstName" required="required"/>
-
 		
 			<label>Last Name:</label>
 			<input type=text name="lastName" ng-model="profile.rootScope.currentUser.profile.lastName"/>
-			
-			
-			
+
 			<label>Profession:</label>
 			<input type="text" name="occupation" ng-model="profile.rootScope.currentUser.profile.occupation"/>
-			
 
-			
 			<md-switch ng-model="profile.rootScope.currentUser.profile.available">Available for Hire?</md-switch>
 
 			<label>Portfolio URL:<span class="req">*</span></label>

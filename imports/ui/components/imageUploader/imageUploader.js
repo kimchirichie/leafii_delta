@@ -10,15 +10,21 @@ import template from './imageUploader.html';
 import { upload } from '../../../api/images';
 
 class ImageUploader {
-	constructor($scope, $reactive) {
+	constructor($scope, $reactive, $rootScope) {
 		'ngInject';
 
 		$reactive(this).attach($scope);
+		this.rootScope = $rootScope;
+		this.editing = false;
 
 		this.uploaded = [];
 	}
 
 	addImages(files) {
+
+		this.editing = true;
+		this.rootScope.$broadcast('editImg');
+
 		if (files.length) {
 			this.currentFile = files[0];
 
@@ -36,13 +42,16 @@ class ImageUploader {
 
 
 	save() {
+
 		upload(this.myCroppedImage, this.currentFile.name, this.$bindToContext((file) => {
 				console.log(file);
 				Meteor.users.update(Meteor.userId(), {$set: {"profile.image": file.url}}, false, false);
 				this.uploaded.push(file);
 				this.reset();
+				this.rootScope.$broadcast('editDone');
+				this.editing = false;
 			}), (e) => {
-				console.log('Oops, something went wrong', e);
+				Bert.alert('Image failed to upload', e);
 			}
 		);
 	}
@@ -50,6 +59,8 @@ class ImageUploader {
 	reset() {
 		this.cropImgSrc = undefined;
 		this.myCroppedImage = '';
+		this.rootScope.$broadcast('editDone');
+		this.editing = false;
 	}
 }
  

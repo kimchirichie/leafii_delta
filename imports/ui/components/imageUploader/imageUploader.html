@@ -3,30 +3,28 @@
     ngf-select
     ngf-change="imageUploader.addImages($files)"
     ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}"
-    class="drop-box"
+    class="button upload"
     ngf-multiple="false"
     ngf-allow-dir="false"
     ngf-accept="'image/*'"
     ngf-drop-available="true"
-    ng-hide="imageUploader.cropImgSrc">
-    <div>Click here to select image</div>
-    <div>
-      <strong>OR</strong>
-    </div>
-    <div>You can also drop image to here</div>
+    ng-hide="imageUploader.cropImgSrc; imageUploader.editing">
+    <div>Upload image</div>
   </div>
   <div ng-show="imageUploader.cropImgSrc" layout="column" class="ng-crop">
     <div>
       <h3>Edit &amp; crop</h3>
-      <md-button ng-click="imageUploader.save()" class="md-primary">
-        Save Image
-      </md-button>
-      <md-button ng-click="imageUploader.reset()">
-        Cancel
-      </md-button>
     </div>
     <div class="ng-crop-container">
       <img-crop image="imageUploader.cropImgSrc" result-image="imageUploader.myCroppedImage" area-type="square"></img-crop>
+    </div>
+    <div>
+      <button ng-click="imageUploader.save()" class="md-primary md-raised">
+        Save Image
+      </button>
+      <button ng-click="imageUploader.reset()" class="md-raised">
+        Cancel
+      </button>
     </div>
   </div>
 </div>
