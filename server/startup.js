@@ -3,8 +3,10 @@ import { Meteor } from 'meteor/meteor';
 Meteor.startup(()=>{
 
 
-	var domain = 'support@leafii.com';
-	process.env.MAIL_URL = 'smtp://' + domain + ':deathology@smtp.gmail.com:465/';
+	// var domain = 'support@leafii.com';
+	var email = process.env.EMAIL;
+	var password = process.env.PASSWORD;
+	process.env.MAIL_URL = 'smtp://' + email + ':' + password + '@smtp.gmail.com:465/';
 
 	Meteor.methods({
 		sendVerificationLink(){
@@ -13,7 +15,5 @@ Meteor.startup(()=>{
 				return Accounts.sendVerificationEmail(userId);
 			}
 		}
-
 	});
-
 });
