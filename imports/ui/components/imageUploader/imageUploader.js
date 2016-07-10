@@ -37,6 +37,8 @@ class ImageUploader {
 
 	save() {
 		upload(this.myCroppedImage, this.currentFile.name, this.$bindToContext((file) => {
+				console.log(file);
+				Meteor.users.update(Meteor.userId(), {$set: {"profile.image": file.url}}, false, false);
 				this.uploaded.push(file);
 				this.reset();
 			}), (e) => {

@@ -1,7 +1,6 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 
-import { Accounts } from 'meteor/accounts-base';
 import template from './footer.html';
 
 class Footer {
