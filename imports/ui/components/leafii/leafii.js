@@ -9,7 +9,7 @@ import ngFileUpload from 'ng-file-upload';
 import template from "./leafii.html"
 
 // COMPONENTS
-import { name as Navigation } from '../navigation/navigation';
+import { name as Header } from '../header/header';
 import { name as Footer } from '../footer/footer';
 import { name as Landing } from '../landing/landing';
 import { name as Signin } from '../signin/signin';
@@ -44,7 +44,7 @@ export default angular.module(name,[
 	Landing,
 	Signin,
 	Signup,
-	Navigation,
+	Header,
 	userBrowse,
 	Profile,
 	ngFileUpload,
