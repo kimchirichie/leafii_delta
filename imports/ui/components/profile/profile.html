@@ -7,59 +7,38 @@
 		</div>
 	</div>
 
-	<!-- <div class="profileSideMenu">
-		<nav class="profile-menu-title">DashBoard</nav>
-		<nav class="profile-menu-title">Edit Profile</nav>
-		<nav class="profile-menu-title">Analytics</nav>
-		<nav class="profile-menu-title">Log Out</nav>
-	</div> -->
-
 	<div class="profilePanel" layout="row" layout-sm="column" layout-xs="column">
 
 		<div class="profileImg" layout="column" layout-align="center center" flex="40" flex-sm="100" flex-xs="100">
-			<img src="/images/finite_logo_leaf.png"/>
-			<button ngf-select="profile.uploadPic($file)">Upload</button>
+			<img ng-src="{{profile.rootScope.currentUser.profile.image}}"/>
+			<image-uploader files="profile.user.images"></image-uploader>
 		</div>
 
-		<form class="userProfile" layout="column" layout-align="start start" ng-submit="profile.update(profile.user)" flex="60" flex-sm="100" flex-xs="100">
+		<form class="userProfile" layout="column" layout-align="start start" ng-submit="profile.update(profile.rootScope.currentUser)" flex="60" flex-sm="100" flex-xs="100">
 
 
 			<label>First Name<span class="req">*</span></label>
-			<input type=text name="firstName" ng-model="profile.user.profile.firstName" required="required"/>
+			<input type=text name="firstName" ng-model="profile.rootScope.currentUser.profile.firstName" required="required"/>
 
 		
 			<label>Last Name:</label>
-			<input type=text name="lastName" ng-model="profile.user.profile.lastName"/>
+			<input type=text name="lastName" ng-model="profile.rootScope.currentUser.profile.lastName"/>
 			
 			
 			
 			<label>Profession:</label>
-			<input type="text" name="occupation" ng-model="profile.user.profile.occupation"/>
+			<input type="text" name="occupation" ng-model="profile.rootScope.currentUser.profile.occupation"/>
 			
 
 			
-			<md-switch ng-model="profile.user.profile.available">Available for Hire?</md-switch>
-			<!-- <i>If off, your portfolio will no longer be searchable.</i> -->
-		
+			<md-switch ng-model="profile.rootScope.currentUser.profile.available">Available for Hire?</md-switch>
 
 			<label>Portfolio URL:<span class="req">*</span></label>
-			<input type="text" name="url" ng-model="profile.user.profile.url" required="required"/>
+			<input type="text" name="url" ng-model="profile.rootScope.currentUser.profile.url" required="required"/>
 			
-			<!-- <div class="field-wrap">
-				<label>Profile Pic:</label>
-				<md-button class="md-primary">Upload</md-button>
-			</div> -->
-
 			<label>Location:</label>
-			<input type="text" name="location" ng-model="profile.user.profile.location"/>
+			<input type="text" name="location" ng-model="profile.rootScope.currentUser.profile.location"/>
 		
-
-			<!-- <div class="field-wrap">
-				<label>Keywords/Tags:</label>
-				<textarea type="text" name="keywords" ng-model=""></textarea>
-			</div> -->
-
-				<!-- <label>Last Modified: </label> -->
 			<button type="submit">Update</button>
 
 		</form>
