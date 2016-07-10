@@ -8,11 +8,22 @@ class userBrowse {
   constructor($scope, $reactive){
     "ngInject";
     $reactive(this).attach($scope);
+    const handle = Meteor.subscribe("allUsers");
+    Tracker.autorun(() => {
+      if(handle.ready()){
+        this.getUsers();
+        $scope.$apply(); // wow thought id never have to use this guy
+      }
+    });
   }
 
   getUsers(){
 //    this.users = Meteor.users.find({"profile.available":true}).fetch();
     this.users = Meteor.users.find().fetch();
+    this.sortUsers();
+  }
+
+  sortUsers(){
     var usersInPairs = [];
     var usersInFours = [];
 
@@ -30,11 +41,8 @@ class userBrowse {
     for (var k = 0; k < usersInPairs.length; k += 2){
         usersInFours.push(usersInPairs.slice(k, k + 2));
     }
-
     this.usersInFours = usersInFours;
-    
   }
-
 }
 
 const name = 'userbrowse';

@@ -1,7 +1,6 @@
-<div id="profiles" ng-init="userbrowse.getUsers()">
+<div id="profiles">
 
 	<div layout="row" layout-xs="column" ng-repeat="usersInPairs in userbrowse.usersInFours">
-
 		<div class="candidates" layout="row" layout-sm="column" layout-xs="column" ng-repeat="users in usersInPairs" flex>
 			<div class="full-width" layout="row" layout-md="column" layout-sm="column" layout-xs="column">
 				<a class="animated flipInY" href="{{user.profile.url}}" target="_blank" ng-repeat="user in users">
@@ -21,3 +20,5 @@
 		</div>
 	</div>
 </div>
+<button ng-click="userbrowse.getUsers()">test</button>
+<button ng-click="userbrowse.barf()">barf</button>
