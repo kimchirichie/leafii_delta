@@ -12,7 +12,7 @@ export const ThumbsStore = new UploadFS.store.GridFS({
       .resize(32, 32)
       .gravity('Center')
       .extent(32, 32)
-      .quality(75)
+      .quality(100)
       .stream()
       .pipe(to);
   }
