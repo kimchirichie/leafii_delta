@@ -1,11 +1,11 @@
 <div id="landing">
 	<div class="intro">
 		<img src="/images/leafii.svg" class="animated bounceInDown"/>
-		<h5 class="animated fadeIn">Online Portfolio Search Engine</h5>
+		<h5 class="animated fadeIn">Personal Website Search Engine</h5>
 		<!-- <h4>Browse through the best engineers</h4> -->
 
 		<div layout="column" layout-align="center center" class="animated fadeInUp">
-			<a href="/signup"><md-button class="md-raised submitPort">Submit an online profile</md-button></a>
+			<!-- <a href="/signup"><md-button class="md-raised submitPort">Submit an online profile</md-button></a> -->
 			<!-- <a href="/jobs"><md-button class="md-raised postJob">Post A Job</md-button></a> -->
 		</div>
 	</div>
@@ -13,133 +13,27 @@
 	<div class="board" layout="column">
 
 		<h1 class="featuredCan">Latest Portfolios</h1>
-
-		<div class="hot-candidates" layout="row" layout-sm="column" layout-xs="column">
-			<md-card ng-click="landing.userLink('richardsin.com')" class="md-default-theme clickable" layout="row" layout-md="column" layout-sm="column" layout-xs="column">
-				<img class="profilePic md-card-image" src="/images/richardsin.png" alt="Richard Sin">
-				<md-card-title>
-					<div class="cardInfo" layout="column">
-						<h3 class="md-headline">Web Developer</h3>
-						<span>Richard Sin</span>
-						<span><i class="zmdi zmdi-pin"></i> Waterloo</span>
-						<!-- <md-button class="md-primary md-raised favBtn">Favourite</md-button> -->
-					</div>
-				</md-card-title>
-			</md-card>
-			<md-card ng-click="landing.userLink('www.artistkaylee.wix.com/kloc')" class="md-default-theme clickable" layout="row" layout-md="column" layout-sm="column" layout-xs="column">
-				<img class="profilePic md-card-image" src="/images/kaylee.png" alt="Kaylee Lock-O'Connor">
-				<md-card-title>
-					<div class="cardInfo" layout="column">
-						<h3 class="md-headline">Marketing & Design</h3>
-						<span>Kaylee Lock-O'Connor</span>
-						<span><i class="zmdi zmdi-pin"></i> Waterloo</span>
-						<!-- <md-button class="md-primary md-raised favBtn">Favourite</md-button> -->
-					</div>
-				</md-card-title>
-			</md-card>
+		<div layout="row" layout-xs="column" ng-repeat="usersInPairs in landing.usersInFours | limitTo: 2">
+			<div class="candidates" layout="row" layout-sm="column" layout-xs="column" ng-repeat="users in usersInPairs" flex>
+				<div class="full-width" layout="row" layout-md="column" layout-sm="column" layout-xs="column">
+					<a href="{{user.profile.url}}" target="_blank" ng-repeat="user in users">
+						<md-card  class="md-default-theme clickable" layout="column">
+							<img class="profilePic" ng-src="{{user.profile.image ? user.profile.image : 'images/defaultProfilePic.png'}}"/>
+							<md-card-title>
+								<div class="cardInfo" layout="column">
+									<h3 class="md-headline">{{user.profile.occupation}}</h3>
+									<p>{{user.profile.firstName + ' ' + user.profile.lastName}}<p>
+									<p><i class="zmdi zmdi-pin mapColor"></i> {{user.profile.location}}</p>
+									<!-- <md-button class="md-primary md-raised favBtn">Favourite</md-button> -->
+								</div>
+							</md-card-title>
+						</md-card>
+					</a>
+				</div>
+			</div>
 		</div>
-
-		<div class="hot-candidates" layout="row" layout-sm="column" layout-xs="column">
-			<md-card ng-click="landing.userLink('www.danielque.me')" class="md-default-theme clickable" layout="row" layout-md="column" layout-sm="column" layout-xs="column">
-				<img class="profilePic md-card-image" src="/images/danielque.jpg" alt="Daniel Que">
-				<md-card-title>
-					<div class="cardInfo" layout="column">
-						<h3 class="md-headline">Software Engineer</h3>
-						<span>Daniel Que</span>
-						<span><i class="zmdi zmdi-pin"></i> Waterloo</span>
-						<!-- <md-button class="md-primary md-raised favBtn">Favourite</md-button> -->
-					</div>
-				</md-card-title>
-			</md-card>
-			<md-card ng-click="landing.userLink('www.tcfraser.com')" class="md-default-theme clickable" layout="row" layout-md="column" layout-sm="column" layout-xs="column">
-				<img class="profilePic md-card-image" src="/images/tcfraser.jpg" alt="TC Fraser">
-				<md-card-title>
-					<div class="cardInfo" layout="column">
-						<h3 class="md-headline">Mathematical Physicist</h3>
-						<span>TC Fraser</span>
-						<span><i class="zmdi zmdi-pin"></i> Waterloo</span>
-						<!-- <md-button class="md-primary md-raised favBtn">Favourite</md-button> -->
-					</div>
-				</md-card-title>
-			</md-card>
-		</div>
-
-		<div class="hot-candidates" layout="row" layout-sm="column" layout-xs="column">
-			<md-card ng-click="landing.userLink('www.talentzeng.com')" class="md-default-theme clickable" layout="row" layout-md="column" layout-sm="column" layout-xs="column">
-				<img class="profilePic md-card-image" src="/images/talentzeng.png" alt="Talent Zeng">
-				<md-card-title>
-					<div class="cardInfo" layout="column">
-						<h3 class="md-headline">Web Developer</h3>
-						<span>Talent Zeng</span>
-						<span><i class="zmdi zmdi-pin"></i> Waterloo</span>
-						<!-- <md-button class="md-primary md-raised favBtn">Favourite</md-button> -->
-					</div>
-				</md-card-title>
-			</md-card>
-			<md-card ng-click="landing.userLink('www.tonyqu.com')" class="md-default-theme clickable" layout="row" layout-md="column" layout-sm="column" layout-xs="column">
-				<img class="profilePic md-card-image" src="/images/tonyqu.png" alt="Tony Qu">
-				<md-card-title>
-					<div class="cardInfo" layout="column">
-						<h3 class="md-headline">Mechatronics Engineer</h3>
-						<span>Tony Qu</span>
-						<span><i class="zmdi zmdi-pin"></i> Waterloo</span>
-						<!-- <md-button class="md-primary md-raised favBtn">Favourite</md-button> -->
-					</div>
-				</md-card-title>
-			</md-card>
-		</div>
-
-		<div class="hot-candidates" layout="row" layout-sm="column" layout-xs="column">
-			<md-card ng-click="landing.userLink('www.abhijith.info')" class="md-default-theme clickable" layout="row" layout-md="column" layout-sm="column" layout-xs="column">
-				<img class="profilePic md-card-image" src="/images/abhijith.png" alt="Abhijith Ramalingam">
-				<md-card-title>
-					<div class="cardInfo" layout="column">
-						<h3 class="md-headline">Systems Engineer</h3>
-						<span>Abhijith Ramalingam</span>
-						<span><i class="zmdi zmdi-pin"></i> Waterloo</span>
-						<!-- <md-button class="md-primary md-raised favBtn">Favourite</md-button> -->
-					</div>
-				</md-card-title>
-			</md-card>
-			<md-card ng-click="landing.userLink('www.myabsley.com')" class="md-default-theme clickable" layout="row" layout-md="column" layout-sm="column" layout-xs="column">
-				<img class="profilePic md-card-image" src="/images/meghan.png" alt="Meghan Yabsley">
-				<md-card-title>
-					<div class="cardInfo" layout="column">
-						<h3 class="md-headline">Designer & Engineer</h3>
-						<span>Meghan Yabsley</span>
-						<span><i class="zmdi zmdi-pin"></i> Toronto/Waterloo</span>
-						<!-- <md-button class="md-primary md-raised favBtn">Favourite</md-button> -->
-					</div>
-				</md-card-title>
-			</md-card>
-		</div>
-
-		<div class="hot-candidates" layout="row" layout-sm="column" layout-xs="column">
-			<md-card ng-click="landing.userLink('www.craigloewen.com')" class="md-default-theme clickable" layout="row" layout-md="column" layout-sm="column" layout-xs="column">
-				<img class="profilePic md-card-image" src="/images/craigloewen.png" alt="Craig Loewen">
-				<md-card-title>
-					<div class="cardInfo" layout="column">
-						<h3 class="md-headline">Designer & Engineer</h3>
-						<span>Craig Loewen</span>
-						<span><i class="zmdi zmdi-pin"></i> Waterloo</span>
-						<!-- <md-button class="md-primary md-raised favBtn">Favourite</md-button> -->
-					</div>
-				</md-card-title>
-			</md-card>
-			<md-card ng-click="landing.userLink('Bevzabawskyj.wix.com/portfolio')" class="md-default-theme clickable" layout="row" layout-md="column" layout-sm="column" layout-xs="column">
-				<img class="profilePic md-card-image" src="/images/beverly.png" alt="Beverly Zabawskyj">
-				<md-card-title>
-					<div class="cardInfo" layout="column">
-						<h3 class="md-headline">Management Engineer</h3>
-						<span>Beverly Zabawskyj</span>
-						<span><i class="zmdi zmdi-pin"></i> Waterloo</span>
-						<!-- <md-button class="md-primary md-raised favBtn">Favourite</md-button> -->
-					</div>
-				</md-card-title>
-			</md-card>
-		</div>
-
-		<a href="/profiles"><md-button class="viewAll">View All 44 Portfolios</md-button></a>
+	
+		<a href="/profiles"><md-button class="viewAll">View All 55 Portfolios</md-button></a>
 
 	</div>
 
