@@ -13,17 +13,17 @@
   </div>
   <div ng-show="imageUploader.cropImgSrc" layout="column" class="ng-crop">
     <div>
-      <h3>Edit &amp; crop</h3>
+      <h3 layout="row" layout-align="center center">Edit &amp; crop</h3>
     </div>
     <div class="ng-crop-container">
       <img-crop image="imageUploader.cropImgSrc" result-image="imageUploader.myCroppedImage" area-type="square"></img-crop>
     </div>
-    <div>
-      <button ng-click="imageUploader.save()" class="md-primary md-raised">
-        Save Image
-      </button>
-      <button ng-click="imageUploader.reset()" class="md-raised">
+    <div layout="row" layout-align="space-around center">
+      <button ng-click="imageUploader.reset()">
         Cancel
+      </button>
+      <button ng-click="imageUploader.save()" class="button-primary">
+        Save Image
       </button>
     </div>
   </div>
