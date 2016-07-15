@@ -18,7 +18,7 @@ class userBrowse {
   }
 
   getUsers(){
-//    this.users = Meteor.users.find({"profile.available":true}).fetch();
+  //this.users = Meteor.users.find({"profile.available":true}).fetch();
     this.users = Meteor.users.find().fetch();
     this.sortUsers();
   }

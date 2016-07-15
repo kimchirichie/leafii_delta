@@ -22,6 +22,7 @@
 							<md-card-title>
 								<div class="cardInfo" layout="column">
 									<h3 class="md-headline">{{user.profile.occupation}}</h3>
+									<span ng-show="{{user.profile.available}}" class="status">Hire Me</span>
 									<p>{{user.profile.firstName + ' ' + user.profile.lastName}}<p>
 									<p><i class="zmdi zmdi-pin mapColor"></i> {{user.profile.location}}</p>
 									<!-- <md-button class="md-primary md-raised favBtn">Favourite</md-button> -->
