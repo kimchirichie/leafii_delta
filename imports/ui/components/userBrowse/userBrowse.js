@@ -12,7 +12,7 @@ class userBrowse {
     Tracker.autorun(() => {
       if(handle.ready()){
         this.getUsers();
-        $scope.$apply(); // wow thought id never have to use this guy
+        $scope.$apply();
       }
     });
   }

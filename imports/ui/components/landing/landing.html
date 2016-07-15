@@ -13,6 +13,9 @@
 	<div class="board" layout="column">
 
 		<h1 class="featuredCan">Latest Portfolios</h1>
+		<div ng-show="!landing.usersInFours" layout="column" layout-align="center center">
+			<md-progress-circular class="loadingData" md-mode='indeterminate' md-diameter="100px"></md-progress-circular>
+		</div>
 		<div layout="row" layout-xs="column" ng-repeat="usersInPairs in landing.usersInFours | limitTo: 2">
 			<div class="candidates" layout="row" layout-sm="column" layout-xs="column" ng-repeat="users in usersInPairs" flex>
 				<div class="full-width" layout="row" layout-md="column" layout-sm="column" layout-xs="column">

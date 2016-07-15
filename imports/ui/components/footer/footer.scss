@@ -7,16 +7,13 @@
 	color: white;
 
 	.footer-content {
-		width: 85%;
+		margin: 0 2% 0 2%;
 	}
 
-	.contact {
-		margin-bottom: 20px;
-		
-		a {
-			margin-bottom: 10px;
+	@media(max-width: 600px){
+		.footer-content {
+			text-align: center;
 		}
-
 	}
 
 	ul {
@@ -34,13 +31,4 @@
 
 	}
 
-
-	.media {
-
-		a {
-			margin-left: 10px;
-		}
-		
-	}
-	
 }

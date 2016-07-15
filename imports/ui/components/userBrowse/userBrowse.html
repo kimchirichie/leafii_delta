@@ -1,5 +1,12 @@
 <div id="profiles">
 
+	<div ng-show="!userbrowse.usersInFours">
+		<div class="loadingData" layout="row" layout-xs="column" layout-align="center center">
+			<h1>Loading Users.....</h1>
+			<md-progress-circular md-mode='indeterminate' md-diameter="150px"></md-progress-circular>
+		</div>
+	</div>
+
 	<div layout="row" layout-xs="column" ng-repeat="usersInPairs in userbrowse.usersInFours">
 		<div class="candidates" layout="row" layout-sm="column" layout-xs="column" ng-repeat="users in usersInPairs" flex>
 			<div class="full-width" layout="row" layout-md="column" layout-sm="column" layout-xs="column">
