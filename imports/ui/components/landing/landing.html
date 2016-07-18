@@ -24,7 +24,7 @@
 							<img class="profilePic" ng-src="{{user.profile.image ? user.profile.image : 'images/defaultProfilePic.png'}}"/>
 							<md-card-title>
 								<div class="cardInfo" layout="column">
-									<h3 class="md-headline">{{user.profile.occupation > 15 ? '...' : ''}}</h3>
+									<h3 class="md-headline">{{user.profile.occupation ? user.profile.occupation: 'Not specified' | limitTo: 17 }}{{user.profile.occupation.length > 17 ? '...' : ''}}</h3>
 									<span ng-show="{{user.profile.available}}" class="hire">Hire Me</span>
 									<span ng-show="{{!user.profile.available}}" class="noHire">Not Available</span>
 									<p>{{user.profile.firstName + ' ' + user.profile.lastName}}<p>
