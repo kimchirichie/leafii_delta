@@ -20,6 +20,7 @@ class Landing {
   getUsers(){
     //this.users = Meteor.users.find({"profile.available":true}).fetch();
     this.users = Meteor.users.find().fetch();
+    this.numOfUsers = this.users.length;
     this.sortUsers();
   }
 
