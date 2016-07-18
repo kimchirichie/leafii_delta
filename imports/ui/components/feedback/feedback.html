@@ -8,20 +8,13 @@
 
 <div class="container">
   <div class="form animated fadeIn">
-    <form ng-submit="">
-      <div class="field-wrap">
-        <label>Name</label>
-        <input name="name" type="text" placeholder="Bobby"/>
-      </div>
-      <div class="field-wrap">
-        <label>Email Address<span class="req">*</span></label>
-        <input name="email" type="email" placeholder="example@xyz.com" required="required"/>
+    <form ng-submit="feedback.subFeedback(comment)">
         <div class="field-wrap">
-          <label>Feedback</label>
-          <textarea name="feedback" type="text" placeholder="Need more features"></textarea>
+          <textarea ng-model="comment" type="text" placeholder="Need more features"></textarea>
         </div>
-        <div class="field-wrap">
-          <input type="submit" value="Submit"/>
+        <div class="field-wrap" layout="column" layout-align="center center">
+          <input ng-show="!feedback.wait" type="submit" value="Submit"/>
+          <md-progress-circular ng-show="feedback.wait" md-mode='indeterminate' md-diameter="40px"></md-progress-circular>
         </div>
       </div>
     </form>
