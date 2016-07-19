@@ -6,6 +6,11 @@
 .search-icon {
 	padding: 0 15px 0 15px;
 	color: white;
+	cursor: pointer;
+
+	&:hover {
+		background: red;
+	}
 }
 
 .search-field {
