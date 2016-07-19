@@ -4,12 +4,21 @@
 }
 
 .search-icon {
-	padding: 5px;
+	padding: 0 15px 0 15px;
+	color: white;
 }
 
 .search-field {
 	background: $leafii-theme;
 	width: 30%;
+	color: black;
+
+	input {
+		padding: 5px;
+		font-size: 18px;
+		font-family: raleway;
+	}
+
 }
 
 .logo-link {
