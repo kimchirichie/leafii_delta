@@ -3,6 +3,29 @@
 	padding: 5px;
 }
 
+.search-icon {
+	padding: 0 15px 0 15px;
+	color: white;
+	cursor: pointer;
+
+	&:hover {
+		background: red;
+	}
+}
+
+.search-field {
+	background: $leafii-theme;
+	width: 30%;
+	color: black;
+
+	input {
+		padding: 5px;
+		font-size: 18px;
+		font-family: raleway;
+	}
+
+}
+
 .logo-link {
 	height: 100%;
 }
@@ -10,7 +33,7 @@
 .header {
 	border-bottom: thin solid #d3d3d3;
 	position: absolute;
-	background: white !important;
+	background: #dcdcdc !important;
 }
 
 .pages{

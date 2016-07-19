@@ -8,6 +8,31 @@
 	}
 }
 
+@media (max-width: 600px){
+	.search{
+		display: none;
+	}
+}
+
+.search-bar {
+	font-size: 20px;
+	font-weight: bold;
+	margin: 0;
+	width: 100%;
+	margin-left: 10px;
+
+	input {
+		color: white;
+	}
+}
+
+.search {
+	width: 25%;
+
+	i {
+		line-height: 35px;
+	}
+}
 
 .loadingData {
 	margin: 15%;

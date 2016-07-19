@@ -10,7 +10,7 @@
 	<div layout="row" layout-xs="column" ng-repeat="usersInPairs in userbrowse.usersInFours">
 		<div class="candidates" layout="row" layout-sm="column" layout-xs="column" ng-repeat="users in usersInPairs" flex>
 			<div class="full-width" layout="row" layout-md="column" layout-sm="column" layout-xs="column">
-				<a class="animated flipInY" href="{{user.profile.url}}" target="_blank" ng-repeat="user in users">
+				<a class="animated fadeIn" href="{{user.profile.url}}" target="_blank" ng-repeat="user in users">
 					<md-card  class="md-default-theme clickable" layout="column">
 						<img class="profilePic" ng-src="{{user.profile.image ? user.profile.image : 'images/defaultProfilePic.png'}}"/>
 						<md-card-title>
