@@ -7,16 +7,16 @@
 	padding: 0 15px 0 15px;
 	color: white;
 	cursor: pointer;
-
-	&:hover {
-		background: red;
-	}
 }
 
 .search-field {
-	background: $leafii-theme;
+	background: rgba(62,222,170, 0.8);
 	width: 30%;
 	color: black;
+
+	&:hover {
+		background: rgba(62,222,170, 1);
+	}
 
 	input {
 		padding: 5px;
@@ -24,6 +24,7 @@
 		font-family: raleway;
 	}
 
+	
 }
 
 .logo-link {
