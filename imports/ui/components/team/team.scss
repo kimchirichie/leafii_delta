@@ -1,0 +1,32 @@
+#teamPage {
+	padding: 5%;
+	background: #dcdcdc;
+
+	.teamTitle {
+		font-family: raleway;
+		font-weight: bold;
+	}
+
+	.star {
+		color: $leafii-theme;
+	}
+
+	.teamMembers {
+		align-items: center;
+		margin: 10px;
+
+		img {
+			object-fit: cover;
+		}
+
+		md-card {
+			
+			width: 100%;
+			align-items: center;
+			margin: 10px;
+			padding: 30px;
+
+		}
+
+	}
+}
