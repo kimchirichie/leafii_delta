@@ -16,25 +16,37 @@
 		</div>
 
 		<form class="userProfile" layout="column" layout-align="start start" ng-submit="profile.update(profile.rootScope.currentUser)" flex="60" flex-sm="100" flex-xs="100">
+			
+			<div class="name full-width" layout="row">
+				<md-input-container class="md-block" flex-gt-sm>
+		          <label>First Name</label>
+		          <input required name="name" ng-model="profile.rootScope.currentUser.profile.firstName" />
+		        </md-input-container>
 
-			<label>First Name<span class="req">*</span></label>
-			<input type=text name="firstName" ng-model="profile.rootScope.currentUser.profile.firstName" required="required"/>
-		
-			<label>Last Name:</label>
-			<input type=text name="lastName" ng-model="profile.rootScope.currentUser.profile.lastName"/>
+		        <md-input-container class="md-block" flex-gt-sm>
+		          <label>Last Name</label>
+		          <input required name="name" ng-model="profile.rootScope.currentUser.profile.lastName" />
+		        </md-input-container>
+		    </div>
 
-			<label>Profession:</label>
-			<input type="text" name="occupation" ng-model="profile.rootScope.currentUser.profile.occupation"/>
+	        <md-input-container class="md-block" flex-gt-sm>
+	          <label>Profession/Occupation</label>
+	          <input required name="name" ng-model="profile.rootScope.currentUser.profile.occupation" />
+	        </md-input-container>
 
 			<md-switch ng-model="profile.rootScope.currentUser.profile.available">Available for Hire?</md-switch>
-
-			<label>Portfolio URL:<span class="req">*</span></label>
-			<input type="text" name="url" ng-model="profile.rootScope.currentUser.profile.url" required="required"/>
 			
-			<label>Location:</label>
-			<input type="text" name="location" ng-model="profile.rootScope.currentUser.profile.location"/>
+			<md-input-container class="md-block" flex-gt-sm>
+	          <label>Portfolio URL</label>
+	          <input required name="url" ng-model="profile.rootScope.currentUser.profile.url" />
+	        </md-input-container>
+
+	        <md-input-container class="md-block" flex-gt-sm>
+	          <label>Location</label>
+	          <input required name="name" ng-model="profile.rootScope.currentUser.profile.location" />
+	        </md-input-container>
 		
-			<button type="submit">Update</button>
+			<md-button class="md-raised md-primary" type="submit">Update</md-button>
 
 		</form>
 	</div>

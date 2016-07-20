@@ -13,12 +13,6 @@
 	line-height: 30px;
 	padding: 60px;
 
-	button {
-
-		margin-top: 20px;
-
-	}
-
 }
 
 .profileImg {
@@ -36,9 +30,10 @@
 .userProfile {
 	padding: 20px;
 
-	button {
-		margin-top: 20px;
+	md-input-container {
+		width: 100%;
 	}
+
 }
 
 .profile-menu-title {
