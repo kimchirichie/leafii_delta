@@ -9,13 +9,8 @@
 
 	<div layout="row" layout-xs="column" ng-repeat="usersInPairs in userbrowse.usersInFours">
 		<div class="candidates" layout="row" layout-sm="column" layout-xs="column" ng-repeat="users in usersInPairs" flex>
-<<<<<<< HEAD
-			<div class="full-width spacing" layout="row" layout-md="column" layout-sm="column" layout-xs="column">
-				<a class="animated fadeIn" href="{{user.profile.url}}" target="_blank" ng-repeat="user in users">
-=======
 			<div class="full-width" layout="row" layout-md="column" layout-sm="column" layout-xs="column">
 				<a class="animated flipInY" href="{{user.profile.url}}" target="_blank" ng-repeat="user in users">
->>>>>>> 8aec159919aed9d80cac7eca7f5d20c0b4d93301
 					<md-card  class="md-default-theme clickable" layout="column">
 						<p class="forHire" ng-show="{{user.profile.available}}"><i class="zmdi zmdi-circle"></i> Available</p>
 						<p class="noHire" ng-show="{{!user.profile.available}}"><i class="zmdi zmdi-circle"></i> Unavailable</p>
