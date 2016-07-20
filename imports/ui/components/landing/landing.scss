@@ -9,28 +9,31 @@
 }
 
 @media (max-width: 600px){
-	.search{
+	.search-field{
 		display: none;
 	}
 }
 
-.search-bar {
-	font-size: 20px;
-	font-weight: bold;
-	margin: 0;
-	width: 100%;
-	margin-left: 10px;
+.search-icon {
+	padding: 10px;
+	color: white;
+	cursor: pointer;
+	background: rgba(62,222,170, 0.8);
 
-	input {
-		color: white;
+	&:hover {
+		background: rgba(62,222,170, 1);
 	}
 }
 
-.search {
-	width: 25%;
+.search-field {
+	
+	width: 30%;
+	color: black;
 
-	i {
-		line-height: 35px;
+	input {
+		padding: 5px;
+		font-size: 17px;
+		font-family: raleway;
 	}
 }
 

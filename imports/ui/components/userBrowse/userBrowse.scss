@@ -66,8 +66,14 @@
 }
 
 @media(max-width: 1280px){
-	.candidates{
-		margin: 20px;
+	.candidates:first-child{
+		margin: 0 20px 0 0;
+	}
+}
+
+@media(max-width: 600px){
+	.candidates:first-child {
+		margin: 0;
 	}
 }
 

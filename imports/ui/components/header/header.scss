@@ -3,24 +3,25 @@
 	padding: 5px;
 }
 
-.search-icon {
-	padding: 0 15px 0 15px;
+.search-top-icon {
+	padding: 8px;
 	color: white;
 	cursor: pointer;
-}
-
-.search-field {
 	background: rgba(62,222,170, 0.8);
-	width: 30%;
-	color: black;
 
 	&:hover {
 		background: rgba(62,222,170, 1);
 	}
+}
+
+.search-top-field {
+	
+	width: 30%;
+	color: black;
 
 	input {
 		padding: 5px;
-		font-size: 18px;
+		font-size: 17px;
 		font-family: raleway;
 	}
 
