@@ -1,3 +1,10 @@
+<input type="search" ng-model="landing.searchText" placeholder="Search" />
+<button ng-click="landing.search()">search</button>
+
+<ul>
+	<li ng-repeat="result in landing.websites">{{result._id}}: {{result.profile.url}}</li>
+</ul>
+
 <div id="landing">
 	<div class="intro">
 		<img src="/images/leafii.svg" class="animated bounceInDown"/>
@@ -49,4 +56,3 @@
 	</div>
 
 </div>
-
