@@ -22,6 +22,7 @@ import { name as resetPage } from '../resetPage/resetPage';
 import { name as verifyEmail } from '../verifyEmail/verifyEmail';
 import { name as Feedback } from '../feedback/feedback';
 import { name as Team } from '../team/team';
+import { name as About } from '../about/about';
 
 class Leafii{
 
@@ -39,6 +40,7 @@ const name = "leafii";
 export default angular.module(name,[
 	angularMeteor,
 	ngAnimate,
+	About,
 	uiRouter,
 	loadingBar,
 	ngMaterial,
