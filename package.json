@@ -15,7 +15,7 @@
     "angular-ui-router": "^0.3.1",
     "crypto": "0.0.3",
     "gm": "^1.22.0",
-    "meteor-node-stubs": "~0.2.0",
+    "meteor-node-stubs": "^0.2.3",
     "meteor-random": "0.0.3",
     "ng-img-crop": "^0.2.0"
   }
