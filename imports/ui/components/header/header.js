@@ -12,8 +12,10 @@ class Header {
 		$reactive(this).attach($scope);
 		this.state = $state;
 		this.rootScope = $rootScope;
+		this.searched = false;
 
 		$scope.$on('searching', function(event, arg){
+			this.searched = true;
 			$timeout(function(){angular.element('#searchbar').trigger('focus');}, 0);
 		}.bind(this));
 
@@ -26,6 +28,7 @@ class Header {
 	}
 
 	gohome(){
+		this.searched = false;
 		this.rootScope.search = "";
 		this.state.go('landing');
 	}

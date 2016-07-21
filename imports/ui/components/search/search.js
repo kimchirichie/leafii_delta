@@ -13,14 +13,6 @@ class Search {
 		this.results = [];
 		this.state = $state;
 		this.rootScope = $rootScope;
-		this.rootScope.$watch('search',function(){
-			if(!this.rootScope.search){
-				this.state.go('landing');
-			} else {
-				this.rootScope.$broadcast('searching');
-			}
-
-		}.bind(this));
 		this.subscribe('keywords', () => [this.getReactively('rootScope.search')]);
 		this.helpers({
 			results(){

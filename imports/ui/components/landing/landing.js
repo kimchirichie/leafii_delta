@@ -13,7 +13,10 @@ class Landing {
 		this.rootScope = $rootScope;
 		angular.element('#searchbar').trigger('focus');
 		this.rootScope.$watch('search',function(){
-			if(this.rootScope.search) this.state.go('search');
+			if(this.rootScope.search){
+				this.state.go('search');
+				this.rootScope.$broadcast('searching');
+			}
 		}.bind(this));
 		const handle = Meteor.subscribe("allUsers");
 		// // needs to wait until the subscription is ready.
