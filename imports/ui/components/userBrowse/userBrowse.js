@@ -8,6 +8,7 @@ class userBrowse {
   constructor($scope, $reactive){
     "ngInject";
     $reactive(this).attach($scope);
+    this.viewMode = 'grid';
     const handle = Meteor.subscribe("allUsers");
     Tracker.autorun(() => {
       if(handle.ready()){
