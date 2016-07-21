@@ -30,8 +30,8 @@ class Profile {
     }.bind(this));
   }
 
-  update(user){
-    Meteor.users.update(Meteor.userId(), {$set: {profile: user.profile}}, false, false);
+  update(user)
+ {   Meteor.users.update(Meteor.userId(), {$set: {profile: user.profile}}, false, false);
     Bert.alert('Profile Updated', 'success');
   }
 };
@@ -52,7 +52,7 @@ function config($stateProvider) {
   'ngInject';
   $stateProvider
     .state('profile', {
-      url: '/userprofile',
+      url: '/profile',
       template: '<profile></profile>'
     });
 }

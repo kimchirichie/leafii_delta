@@ -1,16 +1,23 @@
 <div class="content" layout="column">
 	<md-toolbar>
 		<div class="header md-toolbar-tools">
+
 			<a class="logo" href="/"><img class="logo" src="/images/leafii.svg"/></a>
 			<!-- <div layout="row" layout-align="center center" class="search-top-field">
 		        <input placeholder="Search">
 		        <i class="zmdi zmdi-search zmdi-hc-1x search-top-icon"></i>
 		    </div> -->
+			<a class="logo" href="#" ng-click="header.gohome()"><img class="logo" src="/images/leafii.svg"/></a>
+			<div layout="row" layout-align="center center" class="search-field" ng-show="header.rootScope.search">
+		        <input id="searchbar" placeholder="Search" class="search-top" ng-model="header.rootScope.search">
+		        <i class="zmdi zmdi-search zmdi-hc-1x search-icon"></i>
+		    </div>
+
 			<span flex></span>
 			<div class="pages">
-				<a ng-hide="header.rootScope.currentUser" href="/signin">Login</a>
-				<a ng-hide="header.rootScope.currentUser" href="/signup">Sign Up</a>
-				<a ng-show="header.rootScope.currentUser" href="/userprofile">Settings</a>
+				<a ng-hide="header.rootScope.currentUser" ui-sref="signin">Login</a>
+				<a ng-hide="header.rootScope.currentUser" ui-sref="signup">Sign Up</a>
+				<a ng-show="header.rootScope.currentUser" ui-sref="profile">Settings</a>
 				<a ng-show="header.rootScope.currentUser" ng-click="header.logout()">Logout</a>
 			</div>
 		</div>

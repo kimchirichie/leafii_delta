@@ -23,16 +23,14 @@ import { name as verifyEmail } from '../verifyEmail/verifyEmail';
 import { name as Feedback } from '../feedback/feedback';
 import { name as Team } from '../team/team';
 import { name as About } from '../about/about';
+import { name as Search } from '../search/search';
+
 
 class Leafii{
-
 	constructor($scope, $reactive, $state){
     'ngInject';
-
     	$reactive(this).attach($scope);
-
   	}
-
 }
 
 const name = "leafii";
@@ -44,20 +42,26 @@ export default angular.module(name,[
 	uiRouter,
 	loadingBar,
 	ngMaterial,
+	ngFileUpload,
+	
+	Header,
 	Footer,
 	Landing,
 	Signin,
 	Signup,
-	Header,
+	Welcome,
 	userBrowse,
 	Profile,
-	ngFileUpload,
-	resetPage,
 	changePassword,
+	resetPage,
 	verifyEmail,
 	Feedback,
+<<<<<<< HEAD
 	Team,
 	Welcome
+=======
+	Search
+>>>>>>> 410632ee5fb2fc27c764fe8a79b303b64252bd4a
 ])
 .component(name, {
 	template,

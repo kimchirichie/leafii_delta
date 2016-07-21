@@ -20,6 +20,10 @@ class Header {
 		this.state.go('landing');
 	}
 
+	gohome(){
+		this.rootScope.search = "";
+		this.state.go('landing');
+	}
 }
 
 

@@ -1,0 +1,5 @@
+<p>search page</p>
+<ul ng-show="search.websites">
+	<li ng-repeat="result in search.websites">{{result._id}}: {{result.profile.url}}</li>
+</ul>
+<p ng-show="search.websites">No search results</p>
