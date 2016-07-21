@@ -52,7 +52,7 @@ function config($stateProvider) {
   'ngInject';
   $stateProvider
     .state('profile', {
-      url: '/userprofile',
+      url: '/profile',
       template: '<profile></profile>'
     });
 }

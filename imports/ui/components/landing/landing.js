@@ -2,47 +2,26 @@ import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
 import utilsPagination from 'angular-utils-pagination';
-import { Counts } from 'meteor/tmeasday:publish-counts';
 
 import template from './landing.html';
-import { Keywords } from '../../../api/keywords/index';
 
 class Landing {
-	constructor($scope, $reactive){
+	constructor($scope, $reactive, $rootScope, $state){
 		'ngInject';
 		$reactive(this).attach($scope);
-		this.results = [];
-
-		this.subscribe('keywords', () => [this.getReactively('searchText')]);
-		this.helpers({
-			results(){
-				return Keywords.find({}, {
-					sort : this.getReactively('sort')
-				}).map(function(keyword){
-					return keyword.user_id;
-				}).filter(function(item, pos, self) {
-					return self.indexOf(item) == pos;
-				});
-			},
-			keywordsCount() {
-				return Counts.get('numberOfKeywords');
-			},
-			websites(){
-				return Meteor.users.find({
-					_id: { $in: this.getReactively('results')}
-				})
-
-			}
-		});
-
+		this.state = $state;
+		this.rootScope = $rootScope;
+		this.rootScope.$watch('search',function(){
+			if(this.rootScope.search) this.state.go('search');
+		}.bind(this));
 		const handle = Meteor.subscribe("allUsers");
-		// needs to wait until the subscription is ready.
+		// // needs to wait until the subscription is ready.
 		Tracker.autorun(() => {
 			if(handle.ready()){
 				this.getUsers();
 				$scope.$apply();
 			}
-		});        
+		});
 	}
 
 	getUsers(){
@@ -78,13 +57,6 @@ class Landing {
 		}
 		this.usersInFours = usersInFours;
 	}
-
-	search(){
-		console.log(this.searchText);
-		console.log(this.results);
-		console.log(this.results.length);
-	}
-
 }
 
 const name = 'landing';
