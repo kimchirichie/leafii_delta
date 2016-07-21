@@ -56,12 +56,9 @@ export default angular.module(name,[
 	resetPage,
 	verifyEmail,
 	Feedback,
-<<<<<<< HEAD
 	Team,
-	Welcome
-=======
+	Welcome,
 	Search
->>>>>>> 410632ee5fb2fc27c764fe8a79b303b64252bd4a
 ])
 .component(name, {
 	template,

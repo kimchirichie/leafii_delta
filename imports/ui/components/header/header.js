@@ -6,12 +6,17 @@ import template from './header.html';
 
 class Header {
 
-	constructor($scope, $reactive, $state, $rootScope){
+	constructor($scope, $reactive, $state, $rootScope, $timeout){
 		'ngInject';
 
 		$reactive(this).attach($scope);
 		this.state = $state;
 		this.rootScope = $rootScope;
+
+		$scope.$on('searching', function(event, arg){
+			$timeout(function(){angular.element('#searchbar').trigger('focus');}, 0);
+		}.bind(this));
+
 	}
 
 	logout() {

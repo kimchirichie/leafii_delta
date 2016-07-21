@@ -17,7 +17,7 @@ class Search {
 			if(!this.rootScope.search){
 				this.state.go('landing');
 			} else {
-				document.getElementById("searchbar").focus();
+				this.rootScope.$broadcast('searching');
 			}
 
 		}.bind(this));
