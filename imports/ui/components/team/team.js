@@ -5,10 +5,11 @@ import template from './team.html';
 
 class Team {
 
-	constructor($scope, $reactive, $state){
+	constructor($scope, $reactive, $state, $rootScope){
 		'ngInject';
 
 		$reactive(this).attach($scope);
+		$rootScope.$broadcast('backLogo');
 	}
 }
 
