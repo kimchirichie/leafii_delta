@@ -37,7 +37,7 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://leafii.com/signin</loc>
+    <loc>http://leafii.com/search</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
