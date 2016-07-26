@@ -34,6 +34,10 @@
 	          <input required ng-model="profile.rootScope.currentUser.profile.occupation" />
 	        </md-input-container>
 
+	        <ul>
+	        	<li ng-repeat="keyword in profile.keywords">{{keyword.keyword}} <a href="#" ng-click="profile.remove(keyword)">delete</a></li>
+	        </ul>
+
 			<md-switch ng-model="profile.rootScope.currentUser.profile.available">Available for Hire?</md-switch>
 			
 			<md-input-container class="md-block" flex-gt-sm>
@@ -51,5 +55,3 @@
 		</form>
 	</div>
 </div>
-
-

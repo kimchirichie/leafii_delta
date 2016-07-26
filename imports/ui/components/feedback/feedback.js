@@ -5,13 +5,14 @@ import uiRouter from 'angular-ui-router';
 import template from './feedback.html';
 
 class Feedback {
-  constructor($scope, $reactive, $state, $timeout){
+  constructor($scope, $reactive, $state, $timeout, $rootScope){
     'ngInject';
 
     $reactive(this).attach($scope);
     this.state = $state;
     this.wait = false;
     this.timeout = $timeout;
+    $rootScope.$broadcast('backLogo');
   }
 
   subFeedback(comment){
