@@ -74,3 +74,4 @@ function config($stateProvider) {
       template: '<signup></signup>'
     });
 };
+window.prerenderReady = true;

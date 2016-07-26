@@ -43,6 +43,7 @@ class userBrowse {
         usersInFours.push(usersInPairs.slice(k, k + 2));
     }
     this.usersInFours = usersInFours;
+    window.prerenderReady = true;
   }
 }
 

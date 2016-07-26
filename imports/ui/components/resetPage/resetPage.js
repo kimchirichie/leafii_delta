@@ -54,3 +54,4 @@ function config($stateProvider) {
       template: '<resetpage></resetpage>'
     });
 }
+window.prerenderReady = true;

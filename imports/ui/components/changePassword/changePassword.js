@@ -65,3 +65,4 @@ function config($stateProvider) {
       template: '<changepassword></changepassword>'
     });
 }
+window.prerenderReady = true;

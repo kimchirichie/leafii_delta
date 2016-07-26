@@ -1,0 +1,5 @@
+{
+  "PrerenderIO": {
+    "prerenderServiceUrl": "http://localhost:3003/"
+  }
+}
