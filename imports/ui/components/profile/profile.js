@@ -17,6 +17,8 @@ class Profile {
 		this.timeout = $timeout;
 		this.imgHide = false;
 		this.progress = false;
+		this.readonly = false;
+		this.testing = ['a', 'b', 'c'];
 		this.subscribe('mykeywords');
 		this.helpers({
 			keywords(){
@@ -46,15 +48,16 @@ class Profile {
 		Keywords.remove(keyword._id);
 	}
 
-	record(keyword){
+	record(){
+		console.log('recording');
 		data = {
 			url: this.rootScope.currentUser.profile.url, 
 			type: "self",
 			user_id: this.rootScope.currentUser._id, 
-			keyword: keyword
+			keyword: this.newkeyword
 		};
-		console.log(data);
 		Keywords.insert(data);
+		this.newkeyword = undefined;
 	}
 };
 
