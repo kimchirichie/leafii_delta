@@ -19,6 +19,10 @@ class Header {
 			$timeout(function(){angular.element('#searchbar').trigger('focus');}, 0);
 		}.bind(this));
 
+		$scope.$on('viewAll', function(event, arg){
+			this.searched = true;
+		}.bind(this));
+
 	}
 
 	logout() {

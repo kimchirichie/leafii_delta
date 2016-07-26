@@ -12,6 +12,7 @@ class Search {
 		$reactive(this).attach($scope);
 		this.results = [];
 		this.state = $state;
+		this.viewMode = 'line';
 		this.rootScope = $rootScope;
 		this.subscribe('keywords', () => [this.getReactively('rootScope.search')]);
 		this.helpers({
@@ -35,6 +36,24 @@ class Search {
 		});
 		Meteor.subscribe("allUsers");
 	}
+
+	sortUsers(result){
+
+	    var usersInPairs = [];
+	    var usersInFours = [];
+
+	    //Cuts data in columns of 2
+	    for (var i = 0; i < result.length; i += 2) {
+	        usersInPairs.push(result.slice(i, i + 2));
+	    }
+
+	    //Cuts data in columns of 4
+	    for (var k = 0; k < usersInPairs.length; k += 2){
+	        usersInFours.push(usersInPairs.slice(k, k + 2));
+	    }
+	    
+	    this.usersInFours = usersInFours;
+  	}
 }
 
 const name = 'search';

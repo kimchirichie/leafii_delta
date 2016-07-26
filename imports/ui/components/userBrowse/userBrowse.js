@@ -5,10 +5,11 @@ import uiRouter from 'angular-ui-router';
 import template from './userBrowse.html';
 
 class userBrowse {
-  constructor($scope, $reactive){
+  constructor($scope, $reactive, $rootScope){
     "ngInject";
     $reactive(this).attach($scope);
     this.viewMode = 'grid';
+    this.rootScope = $rootScope;
     const handle = Meteor.subscribe("allUsers");
     Tracker.autorun(() => {
       if(handle.ready()){
@@ -22,6 +23,7 @@ class userBrowse {
   //this.users = Meteor.users.find({"profile.available":true}).fetch();
     this.users = Meteor.users.find().fetch();
     this.sortUsers();
+    this.rootScope.$broadcast('viewAll');
   }
 
   sortUsers(){
