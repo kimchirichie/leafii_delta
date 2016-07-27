@@ -3,9 +3,9 @@ import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
  
 import { Accounts } from 'meteor/accounts-base';
-import template from './changePassword.html';
+import template from './reset.html';
 
-class changePassword {
+class Reset {
   constructor($scope, $reactive, $state, $timeout){
     "ngInject";
     $reactive(this).attach($scope);
@@ -46,7 +46,7 @@ class changePassword {
   }
 }
 
-const name = 'changepassword';
+const name = 'reset';
 
 export default angular.module(name, [
   angularMeteor,
@@ -54,14 +54,14 @@ export default angular.module(name, [
 ]).component(name, {
   template,
   controllerAs: name,
-  controller: changePassword
+  controller: Reset
 }).config(config);
  
 function config($stateProvider) {
   'ngInject';
   $stateProvider
-    .state('changepassword', {
-      url: '/reset-password/:token',
-      template: '<changepassword></changepassword>'
+    .state('reset', {
+      url: '/reset/:token',
+      template: '<reset></reset>'
     });
 }

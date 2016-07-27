@@ -15,11 +15,11 @@ import { name as Landing } from '../landing/landing';
 import { name as Signin } from '../signin/signin';
 import { name as Signup } from '../signup/signup';
 import { name as Welcome } from '../welcome/welcome';
-import { name as userBrowse } from '../userBrowse/userBrowse';
+import { name as Browse } from '../browse/browse';
 import { name as Profile } from '../profile/profile';
-import { name as changePassword } from '../changePassword/changePassword';
-import { name as resetPage } from '../resetPage/resetPage';
-import { name as verifyEmail } from '../verifyEmail/verifyEmail';
+import { name as Reset } from '../reset/reset';
+import { name as Forgot } from '../forgot/forgot';
+import { name as Verify } from '../verify/verify';
 import { name as Feedback } from '../feedback/feedback';
 import { name as Team } from '../team/team';
 import { name as About } from '../about/about';
@@ -43,18 +43,17 @@ export default angular.module(name,[
 	loadingBar,
 	ngMaterial,
 	ngFileUpload,
-	
 	Header,
 	Footer,
 	Landing,
 	Signin,
 	Signup,
 	Welcome,
-	userBrowse,
+	Browse,
 	Profile,
-	changePassword,
-	resetPage,
-	verifyEmail,
+	Reset,
+	Forgot,
+	Verify,
 	Feedback,
 	Team,
 	Welcome,

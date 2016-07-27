@@ -7,7 +7,7 @@ import template from './profile.html';
 import { Accounts } from 'meteor/accounts-base';
 import { Keywords } from '../../../api/profile/index';
 
-import { name as ImageUploader } from '../imageUploader/imageUploader';
+import { name as Image } from '../image/image';
 
 class Profile {
 	constructor($scope, $reactive, $timeout, Upload, $rootScope){
@@ -18,7 +18,6 @@ class Profile {
 		this.imgHide = false;
 		this.progress = false;
 		this.readonly = true;
-		this.testing = ['a', 'b', 'c'];
 		this.subscribe('mykeywords');
 		this.helpers({
 			keywords(){
@@ -66,7 +65,7 @@ const name = 'profile';
 export default angular.module(name, [
 	angularMeteor,
 	uiRouter,
-	ImageUploader
+	Image
 ]).component(name, {
 	template,
 	controllerAs: name,
