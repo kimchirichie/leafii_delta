@@ -11,7 +11,7 @@
 	//padding: 5%;
 	//border-left: thin solid;
 	line-height: 30px;
-	padding: 60px;
+	padding: 60px 0px;
 
 }
 
@@ -64,4 +64,10 @@
 	font-weight: bold;
 	border-radius: 4px;
 	text-align: center;
+}
+
+@media (min-width: 750px) {
+	.profilePanel {
+		padding: 60px;
+	}
 }

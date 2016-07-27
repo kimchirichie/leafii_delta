@@ -17,6 +17,8 @@ class Profile {
 		this.timeout = $timeout;
 		this.imgHide = false;
 		this.progress = false;
+		this.readonly = true;
+		this.testing = ['a', 'b', 'c'];
 		this.subscribe('mykeywords');
 		this.helpers({
 			keywords(){
@@ -38,23 +40,24 @@ class Profile {
 	}
 
 	update(user){
+		console.log('update');
 		Meteor.users.update(Meteor.userId(), {$set: {profile: user.profile}}, false, false);
 		Bert.alert('Profile Updated', 'success');
 	}
 
-	remove(keyword) {
+	delete(keyword) {
 		Keywords.remove(keyword._id);
 	}
 
-	record(keyword){
+	insert(){
 		data = {
 			url: this.rootScope.currentUser.profile.url, 
 			type: "self",
 			user_id: this.rootScope.currentUser._id, 
-			keyword: keyword
+			keyword: this.newkeyword
 		};
-		console.log(data);
 		Keywords.insert(data);
+		this.newkeyword = undefined;
 	}
 };
 

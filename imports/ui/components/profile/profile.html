@@ -15,43 +15,57 @@
 			<md-progress-circular ng-if="profile.progress" md-mode='indeterminate' md-diameter="100px"></md-progress-circular>
 		</div>
 
-		<form class="userProfile" layout="column" layout-align="start start" ng-submit="profile.update(profile.rootScope.currentUser)" flex="60" flex-sm="100" flex-xs="100">
+		<ng-form class="userProfile" layout="column" layout-align="start start" flex="60" flex-sm="100" flex-xs="100">
 			
 			<div class="name full-width" layout="row">
 				<md-input-container class="md-block" flex-gt-sm>
-		          <label>First Name</label>
-		          <input required ng-model="profile.rootScope.currentUser.profile.firstName" />
-		        </md-input-container>
+					<label>First Name</label>
+					<input required ng-model="profile.rootScope.currentUser.profile.firstName" />
+				</md-input-container>
 
-		        <md-input-container class="md-block" flex-gt-sm>
-		          <label>Last Name</label>
-		          <input required ng-model="profile.rootScope.currentUser.profile.lastName" />
-		        </md-input-container>
-		    </div>
+				<md-input-container class="md-block" flex-gt-sm>
+					<label>Last Name</label>
+					<input required ng-model="profile.rootScope.currentUser.profile.lastName" />
+				</md-input-container>
+			</div>
 
-	        <md-input-container class="md-block" flex-gt-sm>
-	          <label>Profession/Occupation</label>
-	          <input required ng-model="profile.rootScope.currentUser.profile.occupation" />
-	        </md-input-container>
+			<md-input-container class="md-block" flex-gt-sm>
+				<label>Profession/Occupation</label>
+				<input required ng-model="profile.rootScope.currentUser.profile.occupation" />
+			</md-input-container>
 
-	        <ul>
-	        	<li ng-repeat="keyword in profile.keywords">{{keyword.keyword}} <a href="#" ng-click="profile.remove(keyword)">delete</a></li>
-	        </ul>
+			<md-input-container class="md-block" flex-gt-sm>
+				<form ng-submit="profile.insert()">
+					<label>Keywords</label>
+					<input ng-model="profile.newkeyword" placeholder="Enter a keyword">
+				</form>
+			</md-input-container>
+
+
+			<md-chips ng-model="profile.keywords" readonly="profile.readonly" md-on-add="profile.record()" md-transform-chip="null">
+				<md-chip-template>
+					<span>{{$chip.keyword}}</span>
+					<button class="md-chip-remove" type="button" ng-click="profile.delete($chip)">
+						<md-icon md-svg-icon="md-close"></md-icon>
+					</button>
+				</md-chip-template>
+			</md-chips>
+
 
 			<md-switch ng-model="profile.rootScope.currentUser.profile.available">Available for Hire?</md-switch>
 			
 			<md-input-container class="md-block" flex-gt-sm>
-	          <label>Portfolio URL</label>
-	          <input required ng-model="profile.rootScope.currentUser.profile.url" />
-	        </md-input-container>
+				<label>Portfolio URL</label>
+				<input required ng-model="profile.rootScope.currentUser.profile.url" />
+			</md-input-container>
 
-	        <md-input-container class="md-block" flex-gt-sm>
-	          <label>Location</label>
-	          <input required ng-model="profile.rootScope.currentUser.profile.location" />
-	        </md-input-container>
+			<md-input-container class="md-block" flex-gt-sm>
+				<label>Location</label>
+				<input required ng-model="profile.rootScope.currentUser.profile.location" />
+			</md-input-container>
 		
-			<md-button class="md-raised md-primary" type="submit">Update</md-button>
 
-		</form>
+			<md-button class="md-raised md-primary" ng-click="profile.update(profile.rootScope.currentUser)">Update</md-button>
+		</ng-form>
 	</div>
 </div>
