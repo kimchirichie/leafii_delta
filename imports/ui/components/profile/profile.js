@@ -17,7 +17,7 @@ class Profile {
 		this.timeout = $timeout;
 		this.imgHide = false;
 		this.progress = false;
-		this.readonly = false;
+		this.readonly = true;
 		this.testing = ['a', 'b', 'c'];
 		this.subscribe('mykeywords');
 		this.helpers({
@@ -40,16 +40,16 @@ class Profile {
 	}
 
 	update(user){
+		console.log('update');
 		Meteor.users.update(Meteor.userId(), {$set: {profile: user.profile}}, false, false);
 		Bert.alert('Profile Updated', 'success');
 	}
 
-	remove(keyword) {
+	delete(keyword) {
 		Keywords.remove(keyword._id);
 	}
 
-	record(){
-		console.log('recording');
+	insert(){
 		data = {
 			url: this.rootScope.currentUser.profile.url, 
 			type: "self",

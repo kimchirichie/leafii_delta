@@ -15,7 +15,7 @@
 			<md-progress-circular ng-if="profile.progress" md-mode='indeterminate' md-diameter="100px"></md-progress-circular>
 		</div>
 
-		<form class="userProfile" layout="column" layout-align="start start" ng-submit="profile.update(profile.rootScope.currentUser)" flex="60" flex-sm="100" flex-xs="100">
+		<ng-form class="userProfile" layout="column" layout-align="start start" flex="60" flex-sm="100" flex-xs="100">
 			
 			<div class="name full-width" layout="row">
 				<md-input-container class="md-block" flex-gt-sm>
@@ -34,14 +34,23 @@
 				<input required ng-model="profile.rootScope.currentUser.profile.occupation" />
 			</md-input-container>
 
-			<label>Keywords</label>
+			<md-input-container class="md-block" flex-gt-sm>
+				<form ng-submit="profile.insert()">
+					<label>Keywords</label>
+					<input ng-model="profile.newkeyword" placeholder="Enter a keyword">
+				</form>
+			</md-input-container>
+
+
 			<md-chips ng-model="profile.keywords" readonly="profile.readonly" md-on-add="profile.record()" md-transform-chip="null">
-				<md-chip-template>{{$chip.keyword}}</md-chip-template>			
-				<button class="md-chip-remove" type="button" ng-click="profile.remove($chip)">
-					<md-icon md-svg-icon="md-close"></md-icon>
-				</button>
-				<input type="text" ng-model="profile.newkeyword" placeholder="Enter a keyword">
+				<md-chip-template>
+					<span>{{$chip.keyword}}</span>
+					<button class="md-chip-remove" type="button" ng-click="profile.delete($chip)">
+						<md-icon md-svg-icon="md-close"></md-icon>
+					</button>
+				</md-chip-template>
 			</md-chips>
+
 
 			<md-switch ng-model="profile.rootScope.currentUser.profile.available">Available for Hire?</md-switch>
 			
@@ -55,8 +64,8 @@
 				<input required ng-model="profile.rootScope.currentUser.profile.location" />
 			</md-input-container>
 		
-			<md-button class="md-raised md-primary" type="submit">Update</md-button>
 
-		</form>
+			<md-button class="md-raised md-primary" ng-click="profile.update(profile.rootScope.currentUser)">Update</md-button>
+		</ng-form>
 	</div>
 </div>
