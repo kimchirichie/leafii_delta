@@ -13,10 +13,21 @@ class Header {
 		this.state = $state;
 		this.rootScope = $rootScope;
 		this.searched = false;
+		this.searching = false;
 
 		$scope.$on('searching', function(event, arg){
 			this.searched = true;
+			this.searching = true;
 			$timeout(function(){angular.element('#searchbar').trigger('focus');}, 0);
+		}.bind(this));
+
+		$scope.$on('viewAll', function(event, arg){
+			this.searched = true;
+			this.searching = true;
+		}.bind(this));
+
+		$scope.$on('backLogo', function(event, arg){
+			this.searched = true;
 		}.bind(this));
 
 	}
@@ -29,6 +40,7 @@ class Header {
 
 	gohome(){
 		this.searched = false;
+		this.searching = false;
 		this.rootScope.search = "";
 		this.state.go('landing');
 	}
