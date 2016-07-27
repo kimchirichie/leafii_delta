@@ -44,10 +44,13 @@
 
 			<md-chips ng-model="profile.keywords" readonly="profile.readonly" md-on-add="profile.record()" md-transform-chip="null">
 				<md-chip-template>
-					<span>{{$chip.keyword}}</span>
-					<button class="md-chip-remove" type="button" ng-click="profile.delete($chip)">
-						<md-icon md-svg-icon="md-close"></md-icon>
-					</button>
+					<!-- <span>{{$chip.keyword}}</span> -->
+					<div class="md-chip-content">{{$chip.keyword}}</div>
+					<md-icon class="md-chip-remove" md-svg-icon="md-close" ng-click="profile.delete($chip)">
+					<!-- 	<button class="md-chip-remove" type="button" >
+						</button> -->
+					</md-icon>
+	
 				</md-chip-template>
 			</md-chips>
 
