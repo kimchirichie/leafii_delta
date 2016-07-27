@@ -7,7 +7,7 @@ import template from './profile.html';
 import { Accounts } from 'meteor/accounts-base';
 import { Keywords } from '../../../api/profile/index';
 
-import { name as ImageUploader } from '../imageUploader/imageUploader';
+import { name as Image } from '../image/image';
 
 class Profile {
 	constructor($scope, $reactive, $timeout, Upload, $rootScope){
@@ -17,6 +17,7 @@ class Profile {
 		this.timeout = $timeout;
 		this.imgHide = false;
 		this.progress = false;
+		this.readonly = true;
 		this.subscribe('mykeywords');
 		this.helpers({
 			keywords(){
@@ -38,23 +39,24 @@ class Profile {
 	}
 
 	update(user){
+		console.log('update');
 		Meteor.users.update(Meteor.userId(), {$set: {profile: user.profile}}, false, false);
 		Bert.alert('Profile Updated', 'success');
 	}
 
-	remove(keyword) {
+	delete(keyword) {
 		Keywords.remove(keyword._id);
 	}
 
-	record(keyword){
+	insert(){
 		data = {
 			url: this.rootScope.currentUser.profile.url, 
 			type: "self",
 			user_id: this.rootScope.currentUser._id, 
-			keyword: keyword
+			keyword: this.newkeyword
 		};
-		console.log(data);
 		Keywords.insert(data);
+		this.newkeyword = undefined;
 	}
 };
 
@@ -63,7 +65,7 @@ const name = 'profile';
 export default angular.module(name, [
 	angularMeteor,
 	uiRouter,
-	ImageUploader
+	Image
 ]).component(name, {
 	template,
 	controllerAs: name,

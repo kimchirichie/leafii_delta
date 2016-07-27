@@ -6,10 +6,10 @@ import 'ng-img-crop/compile/minified/ng-img-crop.css';
  
 import { Meteor } from 'meteor/meteor';
  
-import template from './imageUploader.html';
+import template from './image.html';
 import { upload } from '../../../api/images';
 
-class ImageUploader {
+class Image {
 	constructor($scope, $reactive, $rootScope) {
 		'ngInject';
 
@@ -64,7 +64,7 @@ class ImageUploader {
 	}
 }
  
-const name = 'imageUploader';
+const name = 'image';
  
 // create a module
 export default angular.module(name, [
@@ -74,5 +74,5 @@ export default angular.module(name, [
 ]).component(name, {
 	template,
 	controllerAs: name,
-	controller: ImageUploader
+	controller: Image
 });
