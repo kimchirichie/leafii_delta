@@ -44,4 +44,4 @@ function config($stateProvider) {
       template: '<feedback></feedback>'
     });
 }
-window.prerenderReady = true;
+//window.prerenderReady = true;

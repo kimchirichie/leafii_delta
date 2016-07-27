@@ -58,4 +58,4 @@ function config($stateProvider) {
       template: '<signin></signin>'
     });
 }
-window.prerenderReady = true;
+//window.prerenderReady = true;

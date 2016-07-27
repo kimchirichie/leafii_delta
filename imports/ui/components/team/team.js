@@ -31,4 +31,4 @@ function config($stateProvider) {
       template: '<team></team>'
     });
 }
-window.prerenderReady = true;
+//window.prerenderReady = true;

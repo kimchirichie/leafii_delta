@@ -75,4 +75,4 @@ function config($stateProvider){
 		template: '<search></search>'
 	});
 }
-window.prerenderReady = true;
+//window.prerenderReady = true;

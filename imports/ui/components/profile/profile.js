@@ -56,4 +56,4 @@ function config($stateProvider) {
       template: '<profile></profile>'
     });
 }
-window.prerenderReady = true;
+//window.prerenderReady = true;

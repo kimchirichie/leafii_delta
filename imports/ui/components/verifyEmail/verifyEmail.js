@@ -45,4 +45,3 @@ function config($stateProvider) {
       template: '<verification></verification>'
     });
 }
-window.prerenderReady = true;
