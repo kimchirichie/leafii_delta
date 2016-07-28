@@ -47,8 +47,7 @@
 					<!-- <span>{{$chip.keyword}}</span> -->
 					<div class="md-chip-content">{{$chip.keyword}}</div>
 					<md-icon class="md-chip-remove" md-svg-icon="md-close" ng-click="profile.delete($chip)">
-					<!-- 	<button class="md-chip-remove" type="button" >
-						</button> -->
+
 					</md-icon>
 	
 				</md-chip-template>
@@ -69,6 +68,16 @@
 		
 
 			<md-button class="md-raised md-primary" ng-click="profile.update(profile.rootScope.currentUser)">Update</md-button>
+
+			<div> 
+				<label for="oldPass" >Old Password</label>
+				<input type="password" name="oldPass" ng-model="profile.oldPass">
+				<label for="newPass"> New Password</label>
+				<input type="password" name="newPass" ng-model="profile.newPass">
+				<label for="confirmPass">Retype New Password</label>
+				<input type="password" name="confirmNewPass" ng-model="profile.confirmNewPass">
+				<button ng-click="profile.changePassword(profile.oldPass, profile.newPass, profile.confirmNewPass)">Change Password</button>
+			</div>
 		</ng-form>
 	</div>
 </div>
