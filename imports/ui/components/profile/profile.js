@@ -59,25 +59,26 @@ class Profile {
 		Keywords.insert(data);
 		this.newkeyword = undefined;
 	}
-	changePassword(oldPass, newPass, confirmNewPass){
-		console.log("changing password" + oldPass + " " + newPass);
-		if(newPass != confirmNewPass){
-	        Bert.alert('Password does not match!');
+
+	changePassword(){
+		if(this.newPass != this.confirm){
+	        Bert.alert('Password does not match!', 'danger');
 	        return;
 		}
-		Accounts.changePassword(oldPass, newPass, function(error){
 
-		if(error){
-			Bert.alert(error.reason, 'danger');
-			this.timeout(function(){this.wait = false;}.bind(this), 1300);
-		}
-		else {
-			Bert.alert('Password has been updated!', 'success');
-			this.timeout(function(){this.wait = false;}.bind(this), 1300);
-			this.email = '';
-      	}
-
-    }.bind(this));
+		Accounts.changePassword(this.oldPass, this.newPass, function(error){
+			if(error){
+				Bert.alert(error.reason, 'danger');
+				this.timeout(function(){this.wait = false;}.bind(this), 1300);
+			} else {
+				Bert.alert('Password has been updated!', 'success');
+				this.oldPass = undefined;
+				this.newPass = undefined;
+				this.confirm = undefined;
+				this.timeout(function(){this.wait = false;}.bind(this), 1300);
+				this.email = '';
+			}
+	    }.bind(this));
 	}
 };
 

@@ -54,6 +54,11 @@ class Search {
 	    
 	    this.usersInFours = usersInFours;
   	}
+
+	absolutify(url){
+		return 'http://' + url.replace(/https:|http:|\/\//gi, "");
+	}
+
 }
 
 const name = 'search';

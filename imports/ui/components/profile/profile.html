@@ -69,15 +69,22 @@
 
 			<md-button class="md-raised md-primary" ng-click="profile.update(profile.rootScope.currentUser)">Update</md-button>
 
-			<div> 
-				<label for="oldPass" >Old Password</label>
-				<input type="password" name="oldPass" ng-model="profile.oldPass">
-				<label for="newPass"> New Password</label>
-				<input type="password" name="newPass" ng-model="profile.newPass">
-				<label for="confirmPass">Retype New Password</label>
-				<input type="password" name="confirmNewPass" ng-model="profile.confirmNewPass">
-				<button ng-click="profile.changePassword(profile.oldPass, profile.newPass, profile.confirmNewPass)">Change Password</button>
-			</div>
+			<form ng-submit="profile.changePassword()"> 
+				<md-input-container class="md-block" flex-gt-sm>
+					<label>Old Password</label>
+					<input required ng-model="profile.oldPass" />
+				</md-input-container>
+				<md-input-container class="md-block" flex-gt-sm>
+					<label>New Password</label>
+					<input required ng-model="profile.newPass" />
+				</md-input-container>
+				<md-input-container>
+					<label>Confirm Password</label>
+					<input required ng-model="profile.confirm" />
+				</md-input-container>
+
+				<md-button class="md-raised md-primary" type="submit">Change Password</md-button>
+			</form>
 		</ng-form>
 	</div>
 </div>
