@@ -20,6 +20,7 @@
     "meteor-random": "0.0.3",
     "ng-file-upload": "^12.0.4",
     "ng-img-crop": "^0.2.0",
-    "prerender-node": "^2.3.0"
+    "prerender-node": "^2.3.0",
+    "python-shell": "^0.4.0"
   }
 }

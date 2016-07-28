@@ -58,6 +58,17 @@ class Profile {
 		Keywords.insert(data);
 		this.newkeyword = undefined;
 	}
+
+	crawl(){
+		Meteor.call('startCrawl', {}, (err, res) => {
+		  if (err) {
+		    alert(err);
+		  } else {
+		    console.log();
+		    this.message = res;
+		  }
+		});
+	}
 };
 
 const name = 'profile';
