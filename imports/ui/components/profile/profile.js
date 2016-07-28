@@ -7,7 +7,7 @@ import template from './profile.html';
 import { Accounts } from 'meteor/accounts-base';
 import { Keywords } from '../../../api/profile/index';
 
-import { name as Image } from '../image/image';
+import { name as Uploader } from '../uploader/uploader';
 
 class Profile {
 
@@ -88,7 +88,7 @@ const name = 'profile';
 export default angular.module(name, [
 	angularMeteor,
 	uiRouter,
-	Image
+	Uploader
 ]).component(name, {
 	template,
 	controllerAs: name,
