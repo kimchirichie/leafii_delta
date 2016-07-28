@@ -1,4 +1,4 @@
-<div id="changePassword">
+<div id="reset">
   <title>Change Password - Leafii</title>
   <div id="header">
     <div class="container">
@@ -10,21 +10,21 @@
 
   <div class="container">
     <div class="form animated fadeIn">
-      <form ng-submit="changepassword.updatePass()">
+      <form ng-submit="reset.updatePass()">
 
         <div class="field-wrap">
           <label>Password:<span class="req">*</span></label>
-          <input ng-model="changepassword.password" type="password" required="required"/>
+          <input ng-model="reset.password" type="password" required="required"/>
         </div>
 
         <div class="field-wrap">
           <label>Confirm Password:<span class="req">*</span></label>
-          <input ng-model="changepassword.confirm" type="password" required="required"/>
+          <input ng-model="reset.confirm" type="password" required="required"/>
         </div>
 
         <div class="field-wrap" layout="column" layout-align="center center">
-          <input ng-show="!changepassword.wait" type="submit" value="Update"/>
-        <md-progress-circular ng-show="changepassword.wait" md-mode='indeterminate' md-diameter="40px"></md-progress-circular>
+          <input ng-show="!reset.wait" type="submit" value="Update"/>
+        <md-progress-circular ng-show="reset.wait" md-mode='indeterminate' md-diameter="40px"></md-progress-circular>
         
       </form>
     </div>

@@ -3,20 +3,20 @@
 $leafii-theme: #3edeaa;
 
 //Import all css files
-@import '../imports/ui/components/landing/landing.scss';
-@import '../imports/ui/components/header/header.scss';
-@import '../imports/ui/components/profile/profile.scss';
-@import '../imports/ui/components/welcome/welcome.scss';
-@import '../imports/ui/components/userBrowse/userBrowse.scss';
-@import '../imports/ui/components/signin/signin.scss';
-@import '../imports/ui/components/resetPage/resetPage.scss';
-@import '../imports/ui/components/footer/footer.scss';
-@import '../imports/ui/components/changePassword/changePassword.scss';
-@import '../imports/ui/components/imageUploader/imageUploader.scss';
-@import '../imports/ui/components/feedback/feedback.scss';
-@import '../imports/ui/components/team/team.scss';
 @import '../imports/ui/components/about/about.scss';
+@import '../imports/ui/components/browse/browse.scss';
+@import '../imports/ui/components/feedback/feedback.scss';
+@import '../imports/ui/components/footer/footer.scss';
+@import '../imports/ui/components/forgot/forgot.scss';
+@import '../imports/ui/components/header/header.scss';
+@import '../imports/ui/components/image/image.scss';
+@import '../imports/ui/components/landing/landing.scss';
+@import '../imports/ui/components/profile/profile.scss';
+@import '../imports/ui/components/reset/reset.scss';
 @import '../imports/ui/components/search/search.scss';
+@import '../imports/ui/components/signin/signin.scss';
+@import '../imports/ui/components/team/team.scss';
+@import '../imports/ui/components/welcome/welcome.scss';
 
 
 

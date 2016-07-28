@@ -1,4 +1,4 @@
-<div id="resetPage">
+<div id="forgot">
 	<title>Forgot Password - Leafii</title>
 	<div id="header">
 		<div class="container">
@@ -10,16 +10,16 @@
 
 	<div class="container">
 		<div class="form animated fadeIn">
-			<form ng-submit="resetpage.forgotPass(resetpage.email)">
+			<form ng-submit="forgot.forgotPass(forgot.email)">
 
 				<div class="field-wrap">
 					<label>Email Address<span class="req">*</span></label>
-					<input ng-model="resetpage.email" type="email" placeholder="example@xyz.com" required="required"/>
+					<input ng-model="forgot.email" type="email" placeholder="example@xyz.com" required="required"/>
 				</div>
 
 				<div class="field-wrap" layout="column" layout-align="center center">
-		        	<input ng-show="!resetpage.wait" type="submit" value="Reset"/>
-			        <md-progress-circular ng-show="resetpage.wait" md-mode='indeterminate' md-diameter="40px"></md-progress-circular>
+		        	<input ng-show="!forgot.wait" type="submit" value="Reset"/>
+			        <md-progress-circular ng-show="forgot.wait" md-mode='indeterminate' md-diameter="40px"></md-progress-circular>
 		      </div>
 			</form>
 		</div>
