@@ -1,22 +1,22 @@
 <div id="profiles">
-
-	<div ng-show="!userbrowse.usersInFours">
+    <title>Profiles - Leafii</title>
+	<div ng-show="!browse.usersInFours">
 		<div class="loadingData" layout="row" layout-xs="column" layout-align="center center">
 			<h1>Loading Users.....</h1>
 			<md-progress-circular md-mode='indeterminate' md-diameter="150px"></md-progress-circular>
 		</div>
 	</div>
 	
-	<div ng-show="userbrowse.usersInFours" layout="row" layout-align="end center">
-		<md-button class="md-raised" ng-click="userbrowse.viewMode = 'grid'" aria-label="Grid"><i class="zmdi zmdi-view-module"></i></md-button>
-		<md-button class="md-raised" ng-click="userbrowse.viewMode = 'line'" aria-label="Horizontal"><i class="zmdi zmdi-menu"></i></md-button>
+	<div ng-show="browse.usersInFours" layout="row" layout-align="end center">
+		<md-button class="md-raised" ng-click="browse.viewMode = 'grid'" aria-label="Grid"><i class="zmdi zmdi-view-module"></i></md-button>
+		<md-button class="md-raised" ng-click="browse.viewMode = 'line'" aria-label="Horizontal"><i class="zmdi zmdi-menu"></i></md-button>
 	</div>
 	
 	<!-- Grid View Mode -->
-	<div ng-show="userbrowse.viewMode == 'grid'" layout="row" layout-xs="column" ng-repeat="usersInPairs in userbrowse.usersInFours">
+	<div ng-show="browse.viewMode == 'grid'" layout="row" layout-xs="column" ng-repeat="usersInPairs in browse.usersInFours">
 		<div class="candidates" layout="row" layout-sm="column" layout-xs="column" ng-repeat="users in usersInPairs" flex>
 			<div class="full-width" layout="row" layout-md="column" layout-sm="column" layout-xs="column">
-				<a class="animated flipInY" href="{{user.profile.url}}" target="_blank" ng-repeat="user in users">
+				<a class="animated fadeIn" href="{{user.profile.url}}" target="_blank" ng-repeat="user in users">
 					<md-card  class="md-default-theme clickable" layout="column">
 						<p class="forHire" ng-show="{{user.profile.available}}"><i class="zmdi zmdi-circle"></i> Available</p>
 						<p class="noHire" ng-show="{{!user.profile.available}}"><i class="zmdi zmdi-circle"></i> Unavailable</p>
@@ -36,8 +36,8 @@
 	</div>
 	
 	<!-- Horizaontal View Mode -->
-	<div ng-show="userbrowse.viewMode == 'line'" class="candidates" layout="column">
-		<a class="animated slideInDown" href="{{user.profile.url}}" target="_blank" ng-repeat="user in userbrowse.users">
+	<div ng-show="browse.viewMode == 'line'" class="candidates" layout="column">
+		<a class="animated fadeIn" href="{{user.profile.url}}" target="_blank" ng-repeat="user in browse.users">
 			<md-card class="md-default-theme clickable" layout="row">
 				<div class="info" layout="column" layout-align="center center">
 					<img class="profilePicSmall" ng-src="{{user.profile.image ? user.profile.image : 'images/defaultProfilePic.png'}}"/>

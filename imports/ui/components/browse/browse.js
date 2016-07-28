@@ -2,9 +2,9 @@ import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
  
-import template from './userBrowse.html';
+import template from './browse.html';
 
-class userBrowse {
+class Browse {
   constructor($scope, $reactive, $rootScope){
     "ngInject";
     $reactive(this).attach($scope);
@@ -48,7 +48,7 @@ class userBrowse {
   }
 }
 
-const name = 'userbrowse';
+const name = 'browse';
 
 export default angular.module(name, [
   angularMeteor,
@@ -56,14 +56,14 @@ export default angular.module(name, [
 ]).component(name, {
   template,
   controllerAs: name,
-  controller: userBrowse
+  controller: Browse
 }).config(config);
  
 function config($stateProvider) {
   'ngInject';
   $stateProvider
-    .state('userbrowse', {
+    .state('browse', {
       url: '/profiles',
-      template: '<userbrowse></userbrowse>'
+      template: '<browse></browse>'
     });
 }
