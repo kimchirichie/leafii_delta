@@ -93,10 +93,11 @@ export default angular.module(name, [
 }).config(config);
  
 function config($stateProvider) {
-	'ngInject';
-	$stateProvider
-		.state('profile', {
-			url: '/profile',
-			template: '<profile></profile>'
-		});
+  'ngInject';
+  $stateProvider
+    .state('profile', {
+      url: '/profile',
+      template: '<profile></profile>'
+    });
 }
+//window.prerenderReady = true;

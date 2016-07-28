@@ -30,6 +30,9 @@ class Leafii{
 	constructor($scope, $reactive, $state){
     'ngInject';
     	$reactive(this).attach($scope);
+    	 $scope.$on('$viewContentLoaded', function(){
+    	 	//window.prerenderReady = true;
+  		});
   	}
 }
 

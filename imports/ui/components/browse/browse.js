@@ -67,3 +67,4 @@ function config($stateProvider) {
       template: '<browse></browse>'
     });
 }
+//window.prerenderReady = true;

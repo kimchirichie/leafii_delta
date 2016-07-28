@@ -25,3 +25,4 @@ function config($stateProvider) {
       template: '<welcome></welcome>'
     });
 }
+//window.prerenderReady = true;
