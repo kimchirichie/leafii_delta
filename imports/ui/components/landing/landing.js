@@ -11,7 +11,6 @@ class Landing {
 		$reactive(this).attach($scope);
 		this.state = $state;
 		this.rootScope = $rootScope;
-		angular.element('#searchbar').trigger('focus');
 		this.rootScope.$watch('search',function(){
 			if(this.rootScope.search){
 				this.state.go('search');

@@ -4,15 +4,7 @@ import uiRouter from 'angular-ui-router';
 
 import template from './about.html';
 
-class About {
-  
-    constructor($scope, $reactive, $state, $rootScope){
-    'ngInject';
-
-    $reactive(this).attach($scope);
-    $rootScope.$broadcast('backLogo');
-  }
-}
+class About {}
 
 const name = 'about';
 

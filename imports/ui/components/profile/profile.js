@@ -10,6 +10,7 @@ import { Keywords } from '../../../api/profile/index';
 import { name as Image } from '../image/image';
 
 class Profile {
+
 	constructor($scope, $reactive, $timeout, Upload, $rootScope){
 		"ngInject";
 		$reactive(this).attach($scope);
