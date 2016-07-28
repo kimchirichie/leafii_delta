@@ -14,6 +14,10 @@ tracker                 # Meteor's client-side reactive programming library
 standard-minifier-js    # JS minifier run for production mode
 es5-shim                # ECMAScript 5 compatibility for older browsers.
 
+### Comment out for production
+#autopublish             # Publish all data to the clients (for prototyping)
+#insecure                # Allow all DB writes from clients (for prototyping)
+
 ### User specified packages ###
 
 pbastowski:angular-babel # Advanced javascript 
@@ -38,6 +42,7 @@ email
 #Utilities
 themeteorchef:bert
 meteorhacks:fast-render
+tmeasday:publish-counts
 
 #Uploads and files
 danialfarid:ng-file-upload
@@ -48,9 +53,5 @@ jalik:ufs-gridfs
 natestrauser:animate-css
 skeleton:skeleton
 
-
-### Comment out for production
-#autopublish             # Publish all data to the clients (for prototyping)
-#insecure                # Allow all DB writes from clients (for prototyping)
-tmeasday:publish-counts
+## Prerenderer for static page SEO
 dfischer:prerenderio
