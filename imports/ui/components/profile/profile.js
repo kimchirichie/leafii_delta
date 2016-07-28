@@ -28,6 +28,7 @@ class Profile {
     $scope.$on('editDone', function(event, arg){
       this.imgHide = false;
     }.bind(this));
+
   }
 
   update(user)

@@ -9,7 +9,6 @@ class Team {
 		'ngInject';
 
 		$reactive(this).attach($scope);
-		$rootScope.$broadcast('backLogo');
 	}
 }
 

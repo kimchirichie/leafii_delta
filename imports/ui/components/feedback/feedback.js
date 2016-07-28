@@ -12,7 +12,6 @@ class Feedback {
     this.state = $state;
     this.wait = false;
     this.timeout = $timeout;
-    $rootScope.$broadcast('backLogo');
   }
 
   subFeedback(comment){
