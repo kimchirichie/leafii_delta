@@ -22,11 +22,11 @@ class Forgot {
     Accounts.forgotPassword({email: email}, function(error){
 
       if(error){
-        Bert.alert(error.reason, 'danger');
+        Bert.alert(error.reason, 'danger', 'growl-top-right');
         this.timeout(function(){this.wait = false;}.bind(this), 1300);
       }
       else {
-        Bert.alert('Email Sent! Please check your email to reset password', 'success');
+        Bert.alert('Email Sent! Please check your email to reset password', 'success', 'growl-top-right');
         this.timeout(function(){this.wait = false;}.bind(this), 1300);
         this.email = '';
       }

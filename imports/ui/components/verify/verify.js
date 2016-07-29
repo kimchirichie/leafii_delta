@@ -15,11 +15,11 @@ class Verify {
   verify(){
     Accounts.verifyEmail(this.state.params.token, function(error){
       if(error){
-        Bert.alert(error.reason, 'danger');
+        Bert.alert(error.reason, 'danger', 'growl-top-right');
         this.state.go('signin');
       }
       else{
-        Bert.alert('Your email has been verified!', 'success');
+        Bert.alert('Your email has been verified!', 'success', 'growl-top-right');
         this.state.go('signin');
       }
     }.bind(this));

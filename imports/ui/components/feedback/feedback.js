@@ -16,7 +16,7 @@ class Feedback {
 
   subFeedback(comment){
     this.wait = true;
-    Bert.alert('Feedback Sent', 'success');
+    Bert.alert('Feedback Sent', 'success', 'growl-top-right');
     Meteor.call('sendFeedback', 'support@leafii.com', 'User', 'User Feedback', comment);
     comment = '';
     this.timeout(function(){ this.wait=false;}.bind(this), 1000);

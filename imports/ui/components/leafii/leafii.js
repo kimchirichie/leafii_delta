@@ -24,6 +24,7 @@ import { name as Feedback } from '../feedback/feedback';
 import { name as Team } from '../team/team';
 import { name as About } from '../about/about';
 import { name as Search } from '../search/search';
+import { name as Term } from '../term/term';
 
 
 class Leafii{
@@ -60,7 +61,8 @@ export default angular.module(name,[
 	Feedback,
 	Team,
 	Welcome,
-	Search
+	Search,
+	Term
 ])
 .component(name, {
 	template,
