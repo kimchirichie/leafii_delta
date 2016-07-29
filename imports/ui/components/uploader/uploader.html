@@ -3,13 +3,13 @@
     ngf-select
     ngf-change="imageUploader.addImages($files)"
     ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}"
-    class="button upload"
+    class="upload"
     ngf-multiple="false"
     ngf-allow-dir="false"
     ngf-accept="'image/*'"
     ngf-drop-available="false"
     ng-hide="imageUploader.cropImgSrc; imageUploader.editing">
-    <div>Upload image</div>
+    <md-button class="md-raised">Upload image</md-button>
   </div>
   <div ng-show="imageUploader.cropImgSrc" layout="column" class="ng-crop">
     <div>
@@ -19,12 +19,12 @@
       <img-crop image="imageUploader.cropImgSrc" result-image="imageUploader.myCroppedImage" area-type="square"></img-crop>
     </div>
     <div layout="row" layout-align="space-around center">
-      <button ng-click="imageUploader.reset()">
+      <md-button class="md-raised" ng-click="imageUploader.reset()">
         Cancel
-      </button>
-      <button ng-click="imageUploader.save()" class="button-primary">
+      </md-button>
+      <md-button ng-click="imageUploader.save()" class="md-raised md-primary">
         Save Image
-      </button>
+      </md-button>
     </div>
   </div>
 </div>

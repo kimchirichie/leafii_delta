@@ -19,6 +19,7 @@ class Profile {
 		this.imgHide = false;
 		this.progress = false;
 		this.readonly = true;
+    this.showPass = false;
 		this.subscribe('mykeywords');
 		this.helpers({
 			keywords(){
