@@ -8,4 +8,4 @@ for i in db.users.find():
 	data = data + [i]
 data_temp = data[0]
 id_temp = (data_temp.get("profile").get("firstName")+" "+data_temp.get("profile").get("lastName"))
-print id_temp
+# print id_temp

@@ -49,10 +49,13 @@ Meteor.startup(()=>{
 			//   if (err) throw err;
 			//   console.log('finished');
 			// });
+			mesg = "a";
 			shell.on('message', function (message) {
 				// handle message (a line of text from stdout)
-				console.log(message)
+				console.log(message);
+				mesg = message;
 			});
+			return mesg;
 		}
 	});
 

@@ -64,7 +64,7 @@ class Profile {
 		  if (err) {
 		    alert(err);
 		  } else {
-		    console.log();
+		    console.log(res);
 		    this.message = res;
 		  }
 		});
