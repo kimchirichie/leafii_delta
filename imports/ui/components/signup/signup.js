@@ -5,14 +5,15 @@ import uiRouter from 'angular-ui-router';
 import { Accounts } from 'meteor/accounts-base';
 import template from './signup.html';
 
-class Signup {
-	constructor($scope, $reactive, $state, $timeout){
+class Signup { 
+	constructor($scope, $reactive, $state, $timeout, $rootScope){
 		'ngInject';
 
 		$reactive(this).attach($scope);
 		this.state = $state;
 		this.wait = false;
 		this.timeout = $timeout;
+		this.rootScope = $rootScope;
 		this.rootScope.$watch('currentUser',function(){
 			this.boot();
 		}.bind(this));
