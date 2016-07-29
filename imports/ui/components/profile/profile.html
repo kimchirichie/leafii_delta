@@ -8,9 +8,7 @@
 	</div>
 
 	<div class="profilePanel" layout="row" layout-sm="column" layout-xs="column">
-
-		<button ng-hide="profile.rootScope.currentUser.emails[0].verified" ng-click="profile.verify()">verify email</button>
-
+	
 		<div ng-show="!profile.showPass" class="profileImg" layout="column" layout-align="start center" flex="40" flex-sm="100" flex-xs="100">
 			<img ng-show="!profile.imgHide" ng-src="{{profile.rootScope.currentUser.profile.image}}"/>
 			<image-uploader files="profile.user.images"></image-uploader>
@@ -19,6 +17,8 @@
 
 		<ng-form ng-show="!profile.showPass" class="userProfile" layout="column" layout-align="start start" flex="60" flex-sm="100" flex-xs="100">
 			
+			<md-button class="verifyBtn md-raised full-width" ng-hide="profile.rootScope.currentUser.emails[0].verified" ng-click="profile.verify()">verify email</md-button>
+
 			<div class="name full-width" layout="row">
 				<md-input-container class="md-block" flex-gt-sm>
 					<label>First Name</label>
