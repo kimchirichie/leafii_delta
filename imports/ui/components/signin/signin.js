@@ -30,7 +30,7 @@ class Signin {
       }
       else {
         this.rootScope.$broadcast('signin');
-        this.state.go('landing');
+        this.state.go('profile');
         this.wait = false;
       }
       
@@ -58,3 +58,4 @@ function config($stateProvider) {
       template: '<signin></signin>'
     });
 }
+//window.prerenderReady = true;

@@ -2,9 +2,9 @@ import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
 
-import template from './verifyEmail.html';
+import template from './verify.html';
 
-class Verification {
+class Verify {
   constructor($scope, $reactive, $state){
     'ngInject';
     $reactive(this).attach($scope);
@@ -26,7 +26,7 @@ class Verification {
   }
 }
 
-const name = 'verification';
+const name = 'verify';
 
 export default angular.module(name, [
   angularMeteor,
@@ -34,14 +34,14 @@ export default angular.module(name, [
 ]).component(name, {
   template,
   controllerAs: name,
-  controller: Verification
+  controller: Verify
 }).config(config);
  
 function config($stateProvider) {
   'ngInject';
   $stateProvider
-    .state('verification', {
-      url: '/verify-email/:token',
-      template: '<verification></verification>'
+    .state('verify', {
+      url: '/verify/:token',
+      template: '<verify></verify>'
     });
 }

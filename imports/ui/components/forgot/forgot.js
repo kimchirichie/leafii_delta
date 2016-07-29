@@ -2,9 +2,9 @@ import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
 
-import template from './resetPage.html';
+import template from './forgot.html';
 
-class resetPage {
+class Forgot {
 
   constructor($scope, $reactive, $state, $timeout){
     'ngInject';
@@ -43,7 +43,7 @@ export default angular.module(name, [
 ]).component(name, {
   template,
   controllerAs: name,
-  controller: resetPage
+  controller: Forgot
 }).config(config);
  
 function config($stateProvider) {

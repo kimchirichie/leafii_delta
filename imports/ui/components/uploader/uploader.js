@@ -6,7 +6,7 @@ import 'ng-img-crop/compile/minified/ng-img-crop.css';
  
 import { Meteor } from 'meteor/meteor';
  
-import template from './imageUploader.html';
+import template from './uploader.html';
 import { upload } from '../../../api/images';
 
 class ImageUploader {

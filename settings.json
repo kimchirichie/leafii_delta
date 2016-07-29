@@ -1,0 +1,5 @@
+{
+  "PrerenderIO": {
+    "prerenderServiceUrl": "http://dev.leafii.com:3005/"
+  }
+}

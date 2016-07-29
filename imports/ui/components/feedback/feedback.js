@@ -5,7 +5,7 @@ import uiRouter from 'angular-ui-router';
 import template from './feedback.html';
 
 class Feedback {
-  constructor($scope, $reactive, $state, $timeout){
+  constructor($scope, $reactive, $state, $timeout, $rootScope){
     'ngInject';
 
     $reactive(this).attach($scope);
@@ -44,3 +44,4 @@ function config($stateProvider) {
       template: '<feedback></feedback>'
     });
 }
+//window.prerenderReady = true;

@@ -1,9 +1,8 @@
 //CSS
 
 #profiles {
-
-	padding-bottom: 50px;
-	padding: 5%;
+	
+	padding: 5% 5% 15% 5%;
 	background: #dcdcdc;
 
 	img {
@@ -82,10 +81,21 @@
 	align-items: center;
 }
 
+.info {
+	padding: 10px;
+}
+
 .cardInfo {
 	width: 100%;
 	text-align: center;
-	align-items: center;
+}
+
+.noMargin {
+	margin: 0;
+}
+
+.cardInfoSmall {
+	text-align: center;
 }
 
 .featuredCan {
@@ -110,6 +120,13 @@ md-card-title {
 .profilePic {
 	width: 200px;
 	height: 200px;
+	border-radius: 50% !important;
+	padding: 10px;
+}
+
+.profilePicSmall {
+	width: 100px;
+	height: 100px;
 	border-radius: 50% !important;
 	padding: 10px;
 }
