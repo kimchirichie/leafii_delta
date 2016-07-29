@@ -9,6 +9,8 @@
 
 	<div class="profilePanel" layout="row" layout-sm="column" layout-xs="column">
 
+		<button ng-hide="profile.rootScope.currentUser.emails[0].verified" ng-click="profile.verify()">verify email</button>
+
 		<div ng-show="!profile.showPass" class="profileImg" layout="column" layout-align="start center" flex="40" flex-sm="100" flex-xs="100">
 			<img ng-show="!profile.imgHide" ng-src="{{profile.rootScope.currentUser.profile.image}}"/>
 			<image-uploader files="profile.user.images"></image-uploader>

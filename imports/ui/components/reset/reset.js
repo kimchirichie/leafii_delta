@@ -19,7 +19,7 @@ class Reset {
     this.wait = true;
 
     if(this.password != this.confirm){
-      Bert.alert('Passwords does not match, please try again', 'danger');
+      Bert.alert('Passwords does not match, please try again', 'danger', 'growl-top-right');
       this.password = '';
       this.confirm = '';
       this.timeout(function(){this.wait = false;}.bind(this), 1300);
@@ -28,12 +28,12 @@ class Reset {
 
       Accounts.resetPassword(this.state.params.token, this.password, function(error){
         if(error){
-          Bert.alert(error.reason, 'danger');
+          Bert.alert(error.reason, 'danger', 'growl-top-right');
           this.password = '';
           this.confirm = '';
           this.timeout(function(){this.wait = false;}.bind(this), 1300);
         }else{
-          Bert.alert("You're password has been updated", 'success');
+          Bert.alert("You're password has been updated", 'success', 'growl-top-right');
           this.wait = false;
           this.password = '';
           this.confirm = '';

@@ -49,9 +49,9 @@ class ImageUploader {
 				this.reset();
 				this.rootScope.$broadcast('editDone');
 				this.editing = false;
-				Bert.alert('Image successfully uploaded', 'success');
-			}), (e) => {
-				Bert.alert('Image failed to upload', e);
+				Bert.alert('Image successfully uploaded', 'success', 'growl-top-right');
+			}), (err) => {
+				Bert.alert('Image failed to upload', 'danger', 'growl-top-right');
 			}
 		);
 	}
