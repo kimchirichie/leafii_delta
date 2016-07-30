@@ -26,11 +26,11 @@ $leafii-theme: #3edeaa;
 }
 
 body {
-  font: 14px "Raleway", Helvetica, Arial, sans-serif;
+  font: 14px "Raleway";
 }
 
 #header {
-  padding-top: 50px;
+  padding: 30px;
   color: #f8f8f8;
   text-align: center;
   background-image: url('/images/values-bg.jpg');
@@ -46,9 +46,15 @@ body {
     max-width: 60%;
 }
 
-label {
+@media(max-width: 600px){
+	.form {
+		border: none;
+		max-width: 100%;
+	}
+}
 
-	text-align: left;
+label {
+	color: black !important;
 }
 
 .emailMsg {

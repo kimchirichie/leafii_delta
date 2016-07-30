@@ -73,15 +73,15 @@
 		<form layout="column" class="changePass" ng-show="profile.showPass" ng-submit="profile.changePassword()"> 
 			<md-input-container class="md-block" flex-gt-sm>
 				<label>Old Password</label>
-				<input required ng-model="profile.oldPass" />
+				<input required ng-model="profile.oldPass" type="password" name="password"/>
 			</md-input-container>
 			<md-input-container class="md-block" flex-gt-sm>
 				<label>New Password</label>
-				<input required ng-model="profile.newPass" />
+				<input required ng-model="profile.newPass" type="password" name="password"/>
 			</md-input-container>
 			<md-input-container>
 				<label>Confirm Password</label>
-				<input required ng-model="profile.confirm" />
+				<input required ng-model="profile.confirm" type="password" name="password"/>
 			</md-input-container>
 			
 			<div layout="row">
