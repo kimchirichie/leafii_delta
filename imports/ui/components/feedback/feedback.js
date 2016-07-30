@@ -16,9 +16,9 @@ class Feedback {
 
   subFeedback(email, comment){
     this.wait = true;
-    
+
     if(email){
-      Meteor.call('sendFeedback', email, 'User', 'User Feedback', comment);
+      Meteor.call('sendFeedback', 'support@leafii.com', email, 'User Feedback', comment);
     }
     else{
       Meteor.call('sendFeedback', 'support@leafii.com', 'User', 'User Feedback', comment);

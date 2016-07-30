@@ -5,14 +5,14 @@
 </div>
 
 <div class="form animated fadeIn">
-  <form ng-submit="feedback.subFeedback(email, comment)">
+  <form ng-submit="feedback.subFeedback(feedback.email, feedback.comment)">
 
       <md-input-container class="md-block" flex-gt-sm>
         <label>Email (Optional)</label>
-        <input required ng-model="email" type="email" name="email"/>
+        <input required ng-model="feedback.email" type="email" name="email"/>
       </md-input-container>
 
-      <textarea ng-model="comment" type="text" placeholder="Need more features"></textarea>
+      <textarea ng-model="feedback.comment" type="text" placeholder="Need more features"></textarea>
       
       <div class="feedbackBtn" layout="column" layout-align="center center">
         <md-button class="md-raised md-primary full-width" ng-show="!feedback.wait" type="submit">Submit</md-button>
