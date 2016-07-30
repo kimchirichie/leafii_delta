@@ -1,27 +1,23 @@
 <div id="forgot">
+
 	<title>Forgot Password - Leafii</title>
 	<div id="header">
-		<div class="container">
-			<div class="row">
-				<h1>Reset Pasword</h1>
-			</div>
-		</div>
+		<h1>Reset Pasword</h1>
 	</div>
+	
+	<div class="form animated fadeIn">
+		<form ng-submit="forgot.forgotPass(forgot.email)">
 
-	<div class="container">
-		<div class="form animated fadeIn">
-			<form ng-submit="forgot.forgotPass(forgot.email)">
+			<md-input-container class="md-block" flex-gt-sm>
+		      <label>Email Address</label>
+		      <input required ng-model="forgot.email" type="email" name="email"/>
+		    </md-input-container>
 
-				<div class="field-wrap">
-					<label>Email Address<span class="req">*</span></label>
-					<input ng-model="forgot.email" type="email" placeholder="example@xyz.com" required="required"/>
-				</div>
-
-				<div class="field-wrap" layout="column" layout-align="center center">
-		        	<input ng-show="!forgot.wait" type="submit" value="Reset"/>
-			        <md-progress-circular ng-show="forgot.wait" md-mode='indeterminate' md-diameter="40px"></md-progress-circular>
-		      </div>
-			</form>
-		</div>
+			<div class="field-wrap" layout="column" layout-align="center center">
+	        	<md-button class="md-raised md-primary full-width" ng-show="!forgot.wait" type="submit">Reset</md-button>
+		        <md-progress-circular ng-show="forgot.wait" md-mode='indeterminate' md-diameter="40px"></md-progress-circular>
+	      </div>
+		</form>
 	</div>
+	
 </div>

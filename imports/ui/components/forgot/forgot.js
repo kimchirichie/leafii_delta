@@ -35,7 +35,7 @@ class Forgot {
   }
 }
 
-const name = 'resetpage';
+const name = 'forgot';
 
 export default angular.module(name, [
   angularMeteor,
@@ -49,8 +49,8 @@ export default angular.module(name, [
 function config($stateProvider) {
   'ngInject';
   $stateProvider
-    .state('resetpage', {
-      url: '/reset-password',
-      template: '<resetpage></resetpage>'
+    .state('forgot', {
+      url: '/forgot',
+      template: '<forgot></forgot>'
     });
 }

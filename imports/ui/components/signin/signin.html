@@ -4,32 +4,30 @@
 		<h1>Sign In</h1>
 	</div>
 
-	<div class="container">
-		<div class="form animated fadeIn">
-			<form ng-submit="signin.login(signin.user.email, signin.user.password)">
+	<div class="form animated fadeIn">
+		<form ng-submit="signin.login(signin.user.email, signin.user.password)">
 
-				<md-input-container class="md-block" flex-gt-sm>
-					<label>Email Address</label>
-					<input required ng-model="signin.user.email" type="email" name="email"/>
-				</md-input-container>
+			<md-input-container class="md-block" flex-gt-sm>
+				<label>Email Address</label>
+				<input required ng-model="signin.user.email" type="email" name="email"/>
+			</md-input-container>
 
-				<md-input-container class="md-block" flex-gt-sm>
-					<label>Password</label>
-					<input required ng-model="signin.user.password" type="password" name="password"/>
-				</md-input-container>
+			<md-input-container class="md-block" flex-gt-sm>
+				<label>Password</label>
+				<input required ng-model="signin.user.password" type="password" name="password"/>
+			</md-input-container>
 
-				<div layout="column" layout-align="center center">
-					<md-button class="md-raised md-primary full-width" ng-show="!signin.wait" type="submit">Sign In</md-button>
-					<md-progress-circular ng-show="signin.wait" md-mode='indeterminate' md-diameter="40px"></md-progress-circular>
-				</div>
-				
-				<div class="signInOpt" layout="column">
-					<span>Forgot your password?<a ui-sref="reset" class="tag"> Reset</a></span>
-					<span>Don't have an account?<a ui-sref="signup" class="tag"> Register</a></span>
-				</div>
-				
-			</form>
-		</div>
+			<div layout="column" layout-align="center center">
+				<md-button class="md-raised md-primary full-width" ng-show="!signin.wait" type="submit">Sign In</md-button>
+				<md-progress-circular ng-show="signin.wait" md-mode='indeterminate' md-diameter="40px"></md-progress-circular>
+			</div>
+			
+			<div class="signInOpt" layout="column">
+				<span>Forgot your password?<a ui-sref="forgot" class="tag"> Reset</a></span>
+				<span>Don't have an account?<a ui-sref="signup" class="tag"> Register</a></span>
+			</div>
+			
+		</form>
 	</div>
 </div>
 
