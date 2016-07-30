@@ -1,23 +1,23 @@
 <div id="header">
   <title>Feedback - Leafii</title>
-  <div class="container">
-    <div class="row">
-      <h1>Feedback</h1>
-    </div>
+    <h1>Feedback</h1>
   </div>
 </div>
 
-<div class="container">
-  <div class="form animated fadeIn">
-    <form ng-submit="feedback.subFeedback(comment)">
-        <div class="field-wrap">
-          <textarea ng-model="comment" type="text" placeholder="Need more features"></textarea>
-        </div>
-        <div class="field-wrap" layout="column" layout-align="center center">
-          <input ng-show="!feedback.wait" type="submit" value="Submit"/>
-          <md-progress-circular ng-show="feedback.wait" md-mode='indeterminate' md-diameter="40px"></md-progress-circular>
-        </div>
+<div class="form animated fadeIn">
+  <form ng-submit="feedback.subFeedback(email, comment)">
+
+      <md-input-container class="md-block" flex-gt-sm>
+        <label>Email (Optional)</label>
+        <input required ng-model="email" type="email" name="email"/>
+      </md-input-container>
+
+      <textarea ng-model="comment" type="text" placeholder="Need more features"></textarea>
+      
+      <div class="feedbackBtn" layout="column" layout-align="center center">
+        <md-button class="md-raised md-primary full-width" ng-show="!feedback.wait" type="submit">Submit</md-button>
+        <md-progress-circular ng-show="feedback.wait" md-mode='indeterminate' md-diameter="40px"></md-progress-circular>
       </div>
-    </form>
-  </div>
+    </div>
+  </form>
 </div>

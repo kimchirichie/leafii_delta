@@ -14,10 +14,19 @@ class Feedback {
     this.timeout = $timeout;
   }
 
-  subFeedback(comment){
+  subFeedback(email, comment){
     this.wait = true;
+    
+    if(email){
+      Meteor.call('sendFeedback', email, 'User', 'User Feedback', comment);
+    }
+    else{
+      Meteor.call('sendFeedback', 'support@leafii.com', 'User', 'User Feedback', comment);
+    }
+
     Bert.alert('Feedback Sent', 'success', 'growl-top-right');
-    Meteor.call('sendFeedback', 'support@leafii.com', 'User', 'User Feedback', comment);
+    
+    email = '';
     comment = '';
     this.timeout(function(){ this.wait=false;}.bind(this), 1000);
     this.timeout(function(){this.state.go('landing');}.bind(this), 1100);
