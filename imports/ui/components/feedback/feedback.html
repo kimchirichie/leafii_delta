@@ -11,8 +11,11 @@
         <input required ng-model="feedback.email" type="email" name="email"/>
       </md-input-container>
 
-      <textarea ng-model="feedback.comment" type="text" placeholder="Need more features"></textarea>
-      
+      <md-input-container class="md-block" flex-gtsm>
+        <label>Feedback</label>
+        <textarea ng-model="feedback.comment" type="text" placeholder="Need more features"></textarea>
+      </md-input-container>
+
       <div class="feedbackBtn" layout="column" layout-align="center center">
         <md-button class="md-raised md-primary full-width" ng-show="!feedback.wait" type="submit">Submit</md-button>
         <md-progress-circular ng-show="feedback.wait" md-mode='indeterminate' md-diameter="40px"></md-progress-circular>
