@@ -30,7 +30,7 @@ class Header {
 		Meteor.logout();
 		this.loggedIn = false;
 		this.searching = false;
-		this.state.go('landing');
+		this.state.go('signin');
 	}
 
 	gohome(){
