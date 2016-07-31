@@ -1,5 +1,4 @@
 #about {
-	padding: 5%;
 	background: #dcdcdc;
 
 	.context {
@@ -11,16 +10,80 @@
 		}
 
 		p {
-			margin-right: 40px;
+			font-size: 16px;
 		}
 	}
 
+	.companyLogos {
+		padding-bottom: 30px;
+		width: 25%;
+	}
+
+	@media (max-width: 1280px){
+		.companyLogos {
+			width: 80%;
+		}
+	}
+
+	.story {
+		background: white;
+		padding: 5%;
+
+		hr {
+			width: 250px;
+		    height: 1px;
+		    background: #333;
+		    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+		}
+	}
+
+
 }
 
-@media(max-width: 1280px){
-	.context {
-		p {
-			margin-right:0;
+
+#teamPage {
+	padding: 0 5% 5% 5%;
+	background: white;
+
+	.teamTitle {
+		font-family: raleway;
+		font-weight: bold;
+	}
+
+	.star {
+		color: $leafii-theme;
+	}
+
+	.members {
+		align-items: center;
+		width: 100%;
+	}
+
+	@media(max-width: 1279px){
+		.teamMembers:nth-child(2){
+			margin: 0 0 0 20px;
 		}
+	}
+
+
+	.teamMembers {
+		align-items: center;
+
+		img {
+			object-fit: cover;
+		}
+
+		md-card {
+			
+			width: 100%;
+			align-items: center;
+			margin: 10px;
+			padding: 30px;
+			-webkit-box-shadow: 0px 3px 9px 2px rgba(0,0,0,0.4);
+			moz-box-shadow: 0px 3px 9px 2px rgba(0,0,0,0.4);
+			box-shadow: 0px 3px 9px 2px rgba(0,0,0,0.4);
+
+		}
+
 	}
 }
