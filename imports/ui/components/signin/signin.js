@@ -16,10 +16,6 @@ class Signin {
 		this.rootScope = $rootScope;
 		this.wait = false;
 		this.timeout = $timeout;
-		this.rootScope.$watch('currentUser',function(){
-			this.boot();
-		}.bind(this));
-
 	}
 
 	login(email, pass){
@@ -32,7 +28,7 @@ class Signin {
 				this.timeout(function(){this.wait = false;}.bind(this), 1300);
 			}
 			else {
-				this.rootScope.$broadcast('signin');
+				// this.rootScope.$broadcast('signin');
 				this.wait = false;
 				this.state.go('profile');
 			}
