@@ -3,17 +3,6 @@
 	padding: 5px;
 }
 
-// .search-top-icon {
-// 	padding: 8px;
-// 	color: white;
-// 	cursor: pointer;
-// 	background: rgba(62,222,170, 0.8);
-
-// 	&:hover {
-// 		background: rgba(62,222,170, 1);
-// 	}
-// }
-
 .search-top-field {
 	
 	width: 30%;
@@ -23,14 +12,12 @@
 		padding: 5px;
 		font-size: 17px;
 		font-family: raleway;
+		width: 100%;
 	}
 
 	
 }
 
-.logo-link {
-	height: 100%;
-}
 
 .header {
 	border-bottom: thin solid #d3d3d3;
