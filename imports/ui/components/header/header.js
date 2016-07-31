@@ -27,10 +27,9 @@ class Header {
 	}
 
 	logout() {
-		Meteor.logout();
 		this.loggedIn = false;
 		this.searching = false;
-		this.state.go('signin');
+		Meteor.logout();
 	}
 
 	gohome(){

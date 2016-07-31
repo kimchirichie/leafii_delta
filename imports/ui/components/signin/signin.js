@@ -33,8 +33,8 @@ class Signin {
 			}
 			else {
 				this.rootScope.$broadcast('signin');
-				this.state.go('profile');
 				this.wait = false;
+				this.state.go('profile');
 			}
 			
 		}.bind(this));
