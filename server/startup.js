@@ -12,11 +12,7 @@ Meteor.startup(()=>{
     const settings = Meteor.settings.PrerenderIO;
 	var PythonShell = require('python-shell');
 	var options = {
-	  mode: 'text',
-	  //pythonPath: 'path/to/python',
-	  //pythonOptions: ['-u'],
-	  scriptPath: '/root/Leafii/leafii_delta/scripts/',
-	  //args: ['value1', 'value2', 'value3']
+	  mode: 'text'
 	};
 
     if (settings && settings.host) {
@@ -58,8 +54,6 @@ Meteor.startup(()=>{
 			  		myFuture.return(results);
 				}
 			});
-			console.log("User: "+userId);
-			console.log(": ");
 			// var msg = shell.on('message', function (message) {
 			// 	// handle message (a line of text from stdout)
 			// 	myFuture.return(message);
