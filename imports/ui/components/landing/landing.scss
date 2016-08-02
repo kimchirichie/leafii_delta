@@ -6,6 +6,15 @@
 	img {
 		max-width: 100%;
 	}
+
+	h3 {
+		font-size: 1.6em;
+	}
+}
+
+.All {
+	text-align: center;
+	margin-top: 30px;
 }
 
 @media (max-width: 600px){
@@ -27,13 +36,13 @@
 
 .search-field {
 	
-	width: 30%;
 	color: black;
 
 	input {
 		padding: 5px;
 		font-size: 17px;
 		font-family: raleway;
+		width: 300px;
 	}
 }
 
@@ -115,6 +124,11 @@
 	width: 100%;
 	text-align: center;
 	align-items: center;
+
+	h3 {
+		white-space: nowrap;
+	}
+
 }
 
 .clickable {
@@ -187,7 +201,8 @@ md-card-title {
 .viewAll {
 	color: black;
 	font-weight: bold;
-	width: 99%;
 	background: $leafii-theme;
+	border-radius: 20px;
+	padding: 0 20px 0 20px;
 }
 

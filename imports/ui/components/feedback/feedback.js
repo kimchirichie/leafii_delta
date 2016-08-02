@@ -10,15 +10,25 @@ class Feedback {
 
     $reactive(this).attach($scope);
     this.state = $state;
+    this.rootScope = $rootScope;
     this.wait = false;
     this.timeout = $timeout;
-    $rootScope.$broadcast('backLogo');
+    this.rootScope.$broadcast('disableSearch');
   }
 
-  subFeedback(comment){
+  subFeedback(email, comment){
     this.wait = true;
-    Bert.alert('Feedback Sent', 'success');
-    Meteor.call('sendFeedback', 'support@leafii.com', 'User', 'User Feedback', comment);
+
+    if(email){
+      Meteor.call('sendFeedback', 'support@leafii.com', email, 'User Feedback', comment);
+    }
+    else{
+      Meteor.call('sendFeedback', 'support@leafii.com', 'User', 'User Feedback', comment);
+    }
+
+    Bert.alert('Feedback Sent', 'success', 'growl-top-right');
+    
+    email = '';
     comment = '';
     this.timeout(function(){ this.wait=false;}.bind(this), 1000);
     this.timeout(function(){this.state.go('landing');}.bind(this), 1100);

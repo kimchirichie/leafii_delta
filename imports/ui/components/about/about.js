@@ -5,12 +5,12 @@ import uiRouter from 'angular-ui-router';
 import template from './about.html';
 
 class About {
-  
-    constructor($scope, $reactive, $state, $rootScope){
+    constructor($scope, $reactive, $state, $timeout, $rootScope){
     'ngInject';
 
     $reactive(this).attach($scope);
-    $rootScope.$broadcast('backLogo');
+    this.rootScope = $rootScope;
+    this.rootScope.$broadcast('disableSearch');
   }
 }
 

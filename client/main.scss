@@ -9,27 +9,22 @@ $leafii-theme: #3edeaa;
 @import '../imports/ui/components/footer/footer.scss';
 @import '../imports/ui/components/forgot/forgot.scss';
 @import '../imports/ui/components/header/header.scss';
-@import '../imports/ui/components/image/image.scss';
+@import '../imports/ui/components/uploader/uploader.scss';
 @import '../imports/ui/components/landing/landing.scss';
 @import '../imports/ui/components/profile/profile.scss';
 @import '../imports/ui/components/reset/reset.scss';
 @import '../imports/ui/components/search/search.scss';
 @import '../imports/ui/components/signin/signin.scss';
-@import '../imports/ui/components/team/team.scss';
+@import '../imports/ui/components/term/term.scss';
 @import '../imports/ui/components/welcome/welcome.scss';
 
 
-
-.field-wrap {
-	margin-bottom: 10px;
-}
-
 body {
-  font: 14px "Raleway", Helvetica, Arial, sans-serif;
+  font:14px Raleway, Helvetica, Arial, sans-serif;
 }
 
 #header {
-  padding-top: 50px;
+  padding: 30px;
   color: #f8f8f8;
   text-align: center;
   background-image: url('/images/values-bg.jpg');
@@ -45,18 +40,20 @@ body {
     max-width: 60%;
 }
 
-label {
+@media(max-width: 600px){
+	.form {
+		border: none;
+		max-width: 100%;
+	}
+}
 
-	text-align: left;
+label {
+	color: black !important;
 }
 
 .emailMsg {
 	max-width: 605px;
 	height: 300px;
-}
-
-input {
-	width: 100%;
 }
 
 span.req {
@@ -75,12 +72,7 @@ span.req {
 	text-align: center;
 }
 
-
 .signUpTag {
 	text-decoration: none;
 	color: grey;
-}
-
-textarea {
-	width:100%;
 }

@@ -5,6 +5,26 @@
 	width: 170px !important;
 }
 
+.changePass {
+	width: 100%;
+	padding: 5%
+}
+
+.verifyBtn {
+	background: #ff0000 !important;
+	margin-bottom: 50px !important;
+}
+
+.delChip {
+	width: 25px !important;
+	height: 25px !important;
+	border-radius: 25px !important;
+	cursor: pointer;
+
+	&:hover {
+		color: #ea4b4b !important;
+	}
+}
 
 .profilePanel {
 	//margin-left: 170px;

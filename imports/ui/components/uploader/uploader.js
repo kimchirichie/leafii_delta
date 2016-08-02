@@ -6,10 +6,10 @@ import 'ng-img-crop/compile/minified/ng-img-crop.css';
  
 import { Meteor } from 'meteor/meteor';
  
-import template from './image.html';
+import template from './uploader.html';
 import { upload } from '../../../api/images';
 
-class Image {
+class ImageUploader {
 	constructor($scope, $reactive, $rootScope) {
 		'ngInject';
 
@@ -49,9 +49,9 @@ class Image {
 				this.reset();
 				this.rootScope.$broadcast('editDone');
 				this.editing = false;
-				Bert.alert('Image successfully uploaded', 'success');
-			}), (e) => {
-				Bert.alert('Image failed to upload', e);
+				Bert.alert('Image successfully uploaded', 'success', 'growl-top-right');
+			}), (err) => {
+				Bert.alert('Image failed to upload', 'danger', 'growl-top-right');
 			}
 		);
 	}
@@ -64,7 +64,7 @@ class Image {
 	}
 }
  
-const name = 'image';
+const name = 'imageUploader';
  
 // create a module
 export default angular.module(name, [
@@ -74,5 +74,5 @@ export default angular.module(name, [
 ]).component(name, {
 	template,
 	controllerAs: name,
-	controller: Image
+	controller: ImageUploader
 });

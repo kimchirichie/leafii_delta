@@ -11,7 +11,6 @@ class Landing {
 		$reactive(this).attach($scope);
 		this.state = $state;
 		this.rootScope = $rootScope;
-		angular.element('#searchbar').trigger('focus');
 		this.rootScope.$watch('search',function(){
 			if(this.rootScope.search){
 				this.state.go('search');
@@ -32,6 +31,10 @@ class Landing {
 		this.users = Meteor.users.find().fetch();
 		this.numOfUsers = this.users.length;
 		this.sortUsers();
+	}
+
+	toTop(){
+		angular.element('html, body').scrollTop(0);
 	}
 
 	sortUsers(){

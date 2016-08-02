@@ -6,13 +6,15 @@ import template from './forgot.html';
 
 class Forgot {
 
-  constructor($scope, $reactive, $state, $timeout){
+  constructor($scope, $reactive, $state, $timeout, $rootScope){
     'ngInject';
 
     $reactive(this).attach($scope);
     this.state = $state;
+    this.rootScope = $rootScope;
     this.wait = false;
     this.timeout = $timeout;
+    this.rootScope.$broadcast('disableSearch');
   }
 
   forgotPass(email){
@@ -22,11 +24,11 @@ class Forgot {
     Accounts.forgotPassword({email: email}, function(error){
 
       if(error){
-        Bert.alert(error.reason, 'danger');
+        Bert.alert(error.reason, 'danger', 'growl-top-right');
         this.timeout(function(){this.wait = false;}.bind(this), 1300);
       }
       else {
-        Bert.alert('Email Sent! Please check your email to reset password', 'success');
+        Bert.alert('Email Sent! Please check your email to reset password', 'success', 'growl-top-right');
         this.timeout(function(){this.wait = false;}.bind(this), 1300);
         this.email = '';
       }
@@ -35,7 +37,7 @@ class Forgot {
   }
 }
 
-const name = 'resetpage';
+const name = 'forgot';
 
 export default angular.module(name, [
   angularMeteor,
@@ -49,8 +51,8 @@ export default angular.module(name, [
 function config($stateProvider) {
   'ngInject';
   $stateProvider
-    .state('resetpage', {
-      url: '/reset-password',
-      template: '<resetpage></resetpage>'
+    .state('forgot', {
+      url: '/forgot',
+      template: '<forgot></forgot>'
     });
 }

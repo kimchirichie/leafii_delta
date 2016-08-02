@@ -2,29 +2,28 @@
 	<div class="footer-content">
 		<div layout="row" layout-xs="column" layout-align-xs="center center" layout-align="space-between start">
 			<div layout="column">
-				<h3>Company</h3>
+				<h1>Company</h1>
 				<ul>
-					<li><a ui-sref="about">About</a></li>
-					<li><a ui-sref="team">Our Team</a></li>
-					<li><a href="#">Terms</a></li>
+					<li><a ui-sref="about" ng-click="footer.toTop()">About Us</a></li>
+					<li><a ui-sref="terms" ng-click="footer.toTop()">Terms</a></li>
 				</ul>
 			</div>
 			<div layout="column">
-				<h3>Social</h3>
+				<h1>Social</h1>
 				<ul>
 					<li><a href="https://fb.com/getleafii" target="_blank">Facebook</a></li>
 					<li><a href="https://instagram.com/getleafii/" target="_blank">Instagram</a></li>
 				</ul>
 			</div>
 			<div layout="column">
-				<h3>Misc.</h3>
+				<h1>Misc.</h1>
 				<ul>
-					<li><a ui-sref="feedback">Feedback</a></li>
+					<li><a ui-sref="feedback" ng-click="footer.toTop()">Feedback</a></li>
 					<li><a href="https://github.com/sinr0202/leafii_delta" target="_blank">Github</a></li>
 				</ul>
 			</div>
 			<div layout="column">
-				<h3>Contact</h3>
+				<h1>Contact</h1>
 				<ul>
 					<li>151 Charles St W #100,</li>
 					<li>Kitchener, ON N2G 1H6</li>
@@ -32,14 +31,19 @@
 					<li><a id="email" href="mailto:support@leafii.com">support@leafii.com</a></li>
 				</ul>
 			</div>
-		</div>
-		<div layout="column">
-			<ul>
-				<li>&copy; 2016 Leafii. All rights reserved</li>
-				<li>Our project is open source. Please dont harm us.</li>
-			</ul>
+			
 		</div>
 
+	</div>
+</div>
+
+<div layout="column" id="lowestFooter">
+
+	<div layout="column" layout-align="center center">
+		<ul>
+			<li>&copy; 2016 Leafii. All rights reserved</li>
+			<li>Our project is open source. Please dont harm us.</li>
+		</ul>
 	</div>
 	
 </div>

@@ -1,22 +1,20 @@
 <div id="profile">
 	<div id="header">
-		<div class="container">
-			<div class="row">
-				<h1>Profile</h1>
-			</div>
-		</div>
+		<h1>Profile</h1>
 	</div>
 
 	<div class="profilePanel" layout="row" layout-sm="column" layout-xs="column">
-
-		<div class="profileImg" layout="column" layout-align="center center" flex="40" flex-sm="100" flex-xs="100">
+	
+		<div ng-show="!profile.showPass" class="profileImg" layout="column" layout-align="start center" flex="40" flex-sm="100" flex-xs="100">
 			<img ng-show="!profile.imgHide" ng-src="{{profile.rootScope.currentUser.profile.image}}"/>
 			<image-uploader files="profile.user.images"></image-uploader>
 			<md-progress-circular ng-if="profile.progress" md-mode='indeterminate' md-diameter="100px"></md-progress-circular>
 		</div>
 
-		<ng-form class="userProfile" layout="column" layout-align="start start" flex="60" flex-sm="100" flex-xs="100">
+		<ng-form ng-show="!profile.showPass" class="userProfile" layout="column" layout-align="start start" flex="60" flex-sm="100" flex-xs="100">
 			
+			<md-button class="verifyBtn md-raised full-width" ng-hide="profile.rootScope.currentUser.emails[0].verified" ng-click="profile.verify()">verify email</md-button>
+
 			<div class="name full-width" layout="row">
 				<md-input-container class="md-block" flex-gt-sm>
 					<label>First Name</label>
@@ -40,20 +38,14 @@
 					<input ng-model="profile.newkeyword" placeholder="Enter a keyword">
 				</form>
 			</md-input-container>
-
-
+			
+			<strong ng-show="!profile.keywords">No keywords</strong>
 			<md-chips ng-model="profile.keywords" readonly="profile.readonly" md-on-add="profile.record()" md-transform-chip="null">
 				<md-chip-template>
-					<!-- <span>{{$chip.keyword}}</span> -->
 					<div class="md-chip-content">{{$chip.keyword}}</div>
-					<md-icon class="md-chip-remove" md-svg-icon="md-close" ng-click="profile.delete($chip)">
-					<!-- 	<button class="md-chip-remove" type="button" >
-						</button> -->
-					</md-icon>
-	
+					<md-icon class="md-chip-remove delChip" md-svg-icon="md-close" ng-click="profile.delete($chip)"></md-icon>
 				</md-chip-template>
 			</md-chips>
-
 
 			<md-switch ng-model="profile.rootScope.currentUser.profile.available">Available for Hire?</md-switch>
 			
@@ -66,11 +58,33 @@
 				<label>Location</label>
 				<input required ng-model="profile.rootScope.currentUser.profile.location" />
 			</md-input-container>
-		
+			
+			<div layout="row">
+				<md-button class="md-raised" ng-click="profile.showPass=true">Change password</md-button>
+				<md-button class="md-raised md-primary" ng-click="profile.crawl()">Collect Keywords</md-button>
+				<md-button class="md-raised md-primary" ng-click="profile.update(profile.rootScope.currentUser)">Update</md-button>
+			</div>
 
-			<md-button class="md-raised md-primary" ng-click="profile.update(profile.rootScope.currentUser)">Update</md-button>
-			<md-button class="md-raised md-primary" ng-click="profile.crawl()">Collect Keywords</md-button>
-			<p>{{profile.message}}</p>
 		</ng-form>
+
+		<form layout="column" class="changePass" ng-show="profile.showPass" ng-submit="profile.changePassword()"> 
+			<md-input-container class="md-block" flex-gt-sm>
+				<label>Old Password</label>
+				<input required ng-model="profile.oldPass" type="password" name="password"/>
+			</md-input-container>
+			<md-input-container class="md-block" flex-gt-sm>
+				<label>New Password</label>
+				<input required ng-model="profile.newPass" type="password" name="password"/>
+			</md-input-container>
+			<md-input-container>
+				<label>Confirm Password</label>
+				<input required ng-model="profile.confirm" type="password" name="password"/>
+			</md-input-container>
+			
+			<div layout="row">
+				<md-button class="md-raised" ng-click="profile.passBack()">Back</md-button>
+				<md-button class="md-raised md-primary" type="submit">Change Password</md-button>
+			</div>
+		</form>
 	</div>
 </div>

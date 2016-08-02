@@ -5,10 +5,13 @@ import template from './footer.html';
 
 class Footer {
 
-	constructor($scope, $reactive, $state){
-		'ngInject';
+	constructor($scope, $reactive){
+	    'ngInject';
+	    $reactive(this).attach($scope);
+	}
 
-		$reactive(this).attach($scope);
+	toTop(){
+	    angular.element('html, body').scrollTop(0);
 	}
 }
 

@@ -1,0 +1,30 @@
+<div layout="column">
+  <div ngf-drop
+    ngf-select
+    ngf-change="imageUploader.addImages($files)"
+    ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}"
+    class="upload"
+    ngf-multiple="false"
+    ngf-allow-dir="false"
+    ngf-accept="'image/*'"
+    ngf-drop-available="false"
+    ng-hide="imageUploader.cropImgSrc; imageUploader.editing">
+    <md-button class="md-raised">Upload image</md-button>
+  </div>
+  <div ng-show="imageUploader.cropImgSrc" layout="column" class="ng-crop">
+    <div>
+      <h3 layout="row" layout-align="center center">Edit &amp; crop</h3>
+    </div>
+    <div class="ng-crop-container">
+      <img-crop image="imageUploader.cropImgSrc" result-image="imageUploader.myCroppedImage" area-type="square"></img-crop>
+    </div>
+    <div layout="row" layout-align="space-around center">
+      <md-button class="md-raised" ng-click="imageUploader.reset()">
+        Cancel
+      </md-button>
+      <md-button ng-click="imageUploader.save()" class="md-raised md-primary">
+        Save Image
+      </md-button>
+    </div>
+  </div>
+</div>

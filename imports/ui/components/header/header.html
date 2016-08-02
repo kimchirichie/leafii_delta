@@ -1,14 +1,13 @@
 <div class="content" layout="column">
 	<md-toolbar>
 		<div class="header md-toolbar-tools">
-			<a ng-show="header.searched" class="logo clickable" ng-click="header.gohome()"><img class="logo" src="/images/leafii.svg" alt="Leafii"/></a>
-			<div layout="row" layout-align="center center" class="search-top-field" ng-show="header.searching">
-		        <input id="searchbar" placeholder="Search" class="search-top" ng-model="header.rootScope.search">
-		        <!-- <i class="zmdi zmdi-search zmdi-hc-1x search-top-icon"></i>
- -->		    </div>
+			<a class="logo clickable" ng-click="header.gohome()"><img class="logo" src="/images/leafii.svg" alt="Leafii"/></a>
+			<div layout="row" layout-align="start center" class="search-top-field" ng-show="header.searching">
+		    	<input id="searchbar" placeholder="Search" class="search-top" ng-model="header.rootScope.search">
+			</div>
 
 			<span flex></span>
-			<div class="pages">
+			<div class="pages" layout="row">
 				<a ng-hide="header.rootScope.currentUser" ui-sref="signin">Login</a>
 				<a ng-hide="header.rootScope.currentUser" ui-sref="signup">Sign Up</a>
 				<a ng-show="header.rootScope.currentUser" ui-sref="profile">Settings</a>

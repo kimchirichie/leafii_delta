@@ -7,17 +7,20 @@ import template from './profile.html';
 import { Accounts } from 'meteor/accounts-base';
 import { Keywords } from '../../../api/profile/index';
 
-import { name as Image } from '../image/image';
+import { name as Uploader } from '../uploader/uploader';
 
 class Profile {
-	constructor($scope, $reactive, $timeout, Upload, $rootScope){
+
+	constructor($scope, $reactive, $state, $timeout, Upload, $rootScope){
 		"ngInject";
 		$reactive(this).attach($scope);
 		this.rootScope = $rootScope;
+		this.state = $state;
 		this.timeout = $timeout;
 		this.imgHide = false;
 		this.progress = false;
 		this.readonly = true;
+	    this.showPass = false;
 		this.subscribe('mykeywords');
 		this.helpers({
 			keywords(){
@@ -36,12 +39,24 @@ class Profile {
 		$scope.$on('editDone', function(event, arg){
 			this.imgHide = false;
 		}.bind(this));
+
+		//Kick people not signed in
+		this.rootScope.$watch('currentUser',function(){
+			this.boot();
+		}.bind(this));
+	}
+
+	passBack() {
+		this.showPass = false;
+		this.oldPass = undefined;
+		this.confirm = undefined;
+		this.newPass = undefined;
 	}
 
 	update(user){
 		console.log('update');
 		Meteor.users.update(Meteor.userId(), {$set: {profile: user.profile}}, false, false);
-		Bert.alert('Profile Updated', 'success');
+		Bert.alert('Profile Updated', 'success', 'growl-top-right');
 	}
 
 	delete(keyword) {
@@ -68,6 +83,45 @@ class Profile {
 		  }
 		});
 	}
+
+	changePassword(){
+		if(this.newPass != this.confirm){
+	        Bert.alert('Password does not match!', 'danger', 'growl-top-right');
+	        return;
+		}
+
+		Accounts.changePassword(this.oldPass, this.newPass, function(error){
+			if(error){
+				Bert.alert(error.reason, 'danger', 'growl-top-right');
+				this.timeout(function(){this.wait = false;}.bind(this), 1300);
+			} else {
+				Bert.alert('Password has been updated!', 'success', 'growl-top-right');
+				this.oldPass = undefined;
+				this.newPass = undefined;
+				this.confirm = undefined;
+				this.timeout(function(){this.wait = false;}.bind(this), 1300);
+				this.email = '';
+			}
+	    }.bind(this));
+	}
+
+	boot(){
+		if(!this.rootScope.currentUser){
+			this.state.go('signin');
+		} else if (!this.rootScope.currentUser.emails[0].verified){
+			Bert.alert('Please verify your email!','warning', 'growl-top-right')
+		}
+ 	}
+
+	verify(){
+		Meteor.call('sendVerificationLink', function(error, response){				
+			if(error){
+				Bert.alert(error.reason, 'danger', 'growl-top-right');
+			} else {
+				Bert.alert('Verification email sent!', 'success', 'growl-top-right');
+			}
+		}.bind(this));
+	}
 };
 
 const name = 'profile';
@@ -75,7 +129,7 @@ const name = 'profile';
 export default angular.module(name, [
 	angularMeteor,
 	uiRouter,
-	Image
+	Uploader
 ]).component(name, {
 	template,
 	controllerAs: name,

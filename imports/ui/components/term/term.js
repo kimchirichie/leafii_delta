@@ -1,19 +1,18 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 
-import template from './team.html';
+import template from './term.html';
 
-class Team {
+class Term {
 
 	constructor($scope, $reactive, $state, $rootScope){
 		'ngInject';
 
 		$reactive(this).attach($scope);
-		$rootScope.$broadcast('backLogo');
 	}
 }
 
-const name = 'team';
+const name = 'term';
 
 // create a module
 export default angular.module(name, [
@@ -21,15 +20,15 @@ export default angular.module(name, [
 ]).component(name, {
 	template,
 	controllerAs: name,
-	controller: Team
+	controller: Term
 }).config(config);
  
 function config($stateProvider) {
   'ngInject';
   $stateProvider
-    .state('team', {
-      url: '/team',
-      template: '<team></team>'
+    .state('term', {
+      url: '/term',
+      template: '<term></term>'
     });
 }
 //window.prerenderReady = true;
