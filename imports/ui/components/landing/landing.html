@@ -5,12 +5,8 @@
 		<h3 class="animated fadeIn">Personal Website Search Engine</h3>
 
 		<div layout="column" layout-align="center center" class="animated fadeInUp">
-			<!-- <a href="/signup"><md-button class="md-raised submitPort">Submit an online profile</md-button></a> -->
-			<!-- <a href="/jobs"><md-button class="md-raised postJob">Post A Job</md-button></a> -->
-
 			<div layout="row" layout-align="center center" class="search-field">
 		        <input placeholder="Search" class="search-top" ng-model="landing.rootScope.search" autofocus>
-		       <!--  <i class="zmdi zmdi-search zmdi-hc-1x search-icon"></i> -->
 		    </div>
 		</div>
 	</div>
@@ -43,7 +39,7 @@
 			</div>
 		</div>
 	
-		<a class="All" ui-sref="browse"><md-button class="viewAll">View All {{landing.numOfUsers}} Portfolios</md-button></a>
+		<a class="All" ui-sref="browse"><md-button ng-click="landing.toTop" class="viewAll">View All {{landing.numOfUsers}} Portfolios</md-button></a>
 
 	</div>
 

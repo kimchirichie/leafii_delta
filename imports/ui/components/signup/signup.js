@@ -14,6 +14,7 @@ class Signup {
 		this.wait = false;
 		this.timeout = $timeout;
 		this.rootScope = $rootScope;
+		this.rootScope.$broadcast('disableSearch');
 		this.rootScope.$watch('currentUser',function(){
 			this.boot();
 		}.bind(this));

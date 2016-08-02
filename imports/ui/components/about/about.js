@@ -4,7 +4,15 @@ import uiRouter from 'angular-ui-router';
 
 import template from './about.html';
 
-class About {}
+class About {
+    constructor($scope, $reactive, $state, $timeout, $rootScope){
+    'ngInject';
+
+    $reactive(this).attach($scope);
+    this.rootScope = $rootScope;
+    this.rootScope.$broadcast('disableSearch');
+  }
+}
 
 const name = 'about';
 

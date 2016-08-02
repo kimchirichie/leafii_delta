@@ -24,6 +24,11 @@ class Header {
 			this.searching = true;
 		}.bind(this));
 
+		$scope.$on('disableSearch', function(event, arg){
+			this.searching = false;
+			this.rootScope.search = "";
+		}.bind(this));
+
 	}
 
 	logout() {

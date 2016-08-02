@@ -46,6 +46,13 @@ class Profile {
 		}.bind(this));
 	}
 
+	passBack() {
+		this.showPass = false;
+		this.oldPass = undefined;
+		this.confirm = undefined;
+		this.newPass = undefined;
+	}
+
 	update(user){
 		console.log('update');
 		Meteor.users.update(Meteor.userId(), {$set: {profile: user.profile}}, false, false);

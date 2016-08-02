@@ -6,13 +6,15 @@ import template from './forgot.html';
 
 class Forgot {
 
-  constructor($scope, $reactive, $state, $timeout){
+  constructor($scope, $reactive, $state, $timeout, $rootScope){
     'ngInject';
 
     $reactive(this).attach($scope);
     this.state = $state;
+    this.rootScope = $rootScope;
     this.wait = false;
     this.timeout = $timeout;
+    this.rootScope.$broadcast('disableSearch');
   }
 
   forgotPass(email){

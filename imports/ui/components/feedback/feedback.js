@@ -10,8 +10,10 @@ class Feedback {
 
     $reactive(this).attach($scope);
     this.state = $state;
+    this.rootScope = $rootScope;
     this.wait = false;
     this.timeout = $timeout;
+    this.rootScope.$broadcast('disableSearch');
   }
 
   subFeedback(email, comment){

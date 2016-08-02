@@ -16,6 +16,7 @@ class Signin {
 		this.rootScope = $rootScope;
 		this.wait = false;
 		this.timeout = $timeout;
+		this.rootScope.$broadcast('disableSearch');
 	}
 
 	login(email, pass){

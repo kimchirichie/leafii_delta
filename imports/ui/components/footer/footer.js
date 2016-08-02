@@ -3,7 +3,17 @@ import angularMeteor from 'angular-meteor';
 
 import template from './footer.html';
 
-class Footer {}
+class Footer {
+
+	constructor($scope, $reactive){
+	    'ngInject';
+	    $reactive(this).attach($scope);
+	}
+
+	toTop(){
+	    angular.element('html, body').scrollTop(0);
+	}
+}
 
 const name = 'footer';
 
