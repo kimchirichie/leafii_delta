@@ -21,7 +21,7 @@ class Browse {
 
 	getUsers(){
 	//this.users = Meteor.users.find({"profile.available":true}).fetch();
-		this.users = Meteor.users.find().fetch();
+		this.users = Meteor.users.find({}, {sort: {"profile.available": -1}}).fetch();
 		this.sortUsers();
 		this.rootScope.$broadcast('viewAll');
 	}
@@ -32,12 +32,12 @@ class Browse {
 
 		//Cuts data in columns of 2
 		for (var i = 0; i < this.users.length; i += 2) {
-				usersInPairs.push(this.users.slice(i, i + 2));
+			usersInPairs.push(this.users.slice(i, i + 2));
 		}
 
 		//Cuts data in columns of 4
 		for (var k = 0; k < usersInPairs.length; k += 2){
-				usersInFours.push(usersInPairs.slice(k, k + 2));
+			usersInFours.push(usersInPairs.slice(k, k + 2));
 		}
 		this.usersInFours = usersInFours;
 	}
