@@ -43,19 +43,29 @@ Meteor.startup(()=>{
 			});
 		},
 
-		startCrawl(){
-			var shell = new PythonShell('start_crawl.py', { scriptPath: '/root/Leafii/leafii_delta/scripts/' });
-			// PythonShell.run('start_crawl.py', { scriptPath: '/root/Leafii/leafii_delta/scripts/' }, function (err) {
-			//   if (err) throw err;
-			//   console.log('finished');
-			// });
-			mesg = "a";
-			shell.on('message', function (message) {
-				// handle message (a line of text from stdout)
-				console.log(message);
-				mesg = message;
+		startCrawl(err, res){
+			let userId = Meteor.userId();
+			//var shell = new PythonShell('update_user_kws.py', { scriptPath: '/root/Leafii/leafii_crawler/crawler/', args: [userId] });
+
+      		Future = Npm.require('fibers/future');
+			var myFuture = new Future();	
+			PythonShell.run('update_user_kws.py', { scriptPath: '/root/Leafii/leafii_crawler/crawler/', args: [userId] }, function (err, results) {
+				if (err) {
+			  		myFuture.throw(err);
+				}
+				else {
+			  		console.log('Results: '+results);
+			  		myFuture.return(results);
+				}
 			});
-			return mesg;
+			console.log("User: "+userId);
+			console.log(": ");
+			// var msg = shell.on('message', function (message) {
+			// 	// handle message (a line of text from stdout)
+			// 	myFuture.return(message);
+			// 	console.log(message);
+			// });
+			return myFuture.wait();
 		}
 	});
 

@@ -60,12 +60,11 @@ class Profile {
 	}
 
 	crawl(){
-		Meteor.call('startCrawl', {}, (err, res) => {
+		Meteor.call('startCrawl', function (err, res) {
 		  if (err) {
-		    alert(err);
+		    Bert.alert('Keywords Update Failed', 'danger');
 		  } else {
-		    console.log(res);
-		    this.message = res;
+		    Bert.alert('Keywords Updated','success')
 		  }
 		});
 	}
