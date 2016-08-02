@@ -32,14 +32,15 @@
 				<input required ng-model="profile.rootScope.currentUser.profile.occupation" />
 			</md-input-container>
 
+
 			<md-input-container class="md-block" flex-gt-sm>
 				<form ng-submit="profile.insert()">
 					<label>Keywords</label>
 					<input ng-model="profile.newkeyword" placeholder="Enter a keyword">
 				</form>
+				<md-button class="md-raised md-primary parse" ng-click="profile.crawl()">Parse Keywords</md-button>
 			</md-input-container>
-			
-			<strong ng-show="!profile.keywords">No keywords</strong>
+
 			<md-chips ng-model="profile.keywords" readonly="profile.readonly" md-on-add="profile.record()" md-transform-chip="null">
 				<md-chip-template>
 					<div class="md-chip-content">{{$chip.keyword}}</div>
@@ -61,7 +62,6 @@
 			
 			<div layout="row">
 				<md-button class="md-raised" ng-click="profile.showPass=true">Change password</md-button>
-				<md-button class="md-raised md-primary" ng-click="profile.crawl()">Collect Keywords</md-button>
 				<md-button class="md-raised md-primary" ng-click="profile.update(profile.rootScope.currentUser)">Update</md-button>
 			</div>
 
