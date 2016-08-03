@@ -15,10 +15,6 @@ class Signup {
 		this.timeout = $timeout;
 		this.rootScope = $rootScope;
 		this.rootScope.$broadcast('disableSearch');
-		this.rootScope.$watch('currentUser',function(){
-			this.boot();
-		}.bind(this));
-
 	}
 
 	submit(user){
@@ -59,9 +55,6 @@ class Signup {
 
 	}
 
-	boot(){
-		if(this.rootScope.currentUser){this.state.go('landing');}
-	}
 }
 
 const name = 'signup';

@@ -45,7 +45,7 @@ Meteor.startup(()=>{
 
       		Future = Npm.require('fibers/future');
 			var myFuture = new Future();	
-			PythonShell.run('update_user_kws.py', { scriptPath: '/root/Leafii/leafii_crawler/crawler/', args: [userId] }, function (err, results) {
+			PythonShell.run('update_user_kws.py', { scriptPath: '/Users/TZENG/Desktop/programming/leafii_crawler/crawler', args: [userId] }, function (err, results) {
 				if (err) {
 			  		myFuture.throw(err);
 				}
