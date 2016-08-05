@@ -9,10 +9,6 @@ class Footer {
 	    'ngInject';
 	    $reactive(this).attach($scope);
 	}
-
-	toTop(){
-	    angular.element('html, body').scrollTop(0);
-	}
 }
 
 const name = 'footer';
