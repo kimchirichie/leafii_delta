@@ -133,6 +133,7 @@ const name = 'profile';
 export default angular.module(name, [
 	angularMeteor,
 	uiRouter,
+	'google.places',
 	Uploader
 ]).component(name, {
 	template,

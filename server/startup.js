@@ -2,7 +2,6 @@ import { Meteor } from 'meteor/meteor';
  
 Meteor.startup(()=>{
 
-
 	// var domain = 'support@leafii.com';
 	var email = process.env.EMAIL;
 	var password = process.env.PASSWORD;	
