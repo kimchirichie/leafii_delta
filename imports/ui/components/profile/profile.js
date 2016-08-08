@@ -40,6 +40,11 @@ class Profile {
 			this.imgHide = false;
 		}.bind(this));
 
+		//Update the user's profile when they leave the page
+		$scope.$on("$destroy", function(){
+			this.update(this.rootScope.currentUser);
+		}.bind(this));
+
 		//Kick people not signed in
 		this.rootScope.$watch('currentUser',function(){
 			this.boot();
@@ -54,7 +59,6 @@ class Profile {
 	}
 
 	update(user){
-		console.log('update');
 		Meteor.users.update(Meteor.userId(), {$set: {profile: user.profile}}, false, false);
 		Bert.alert('Profile Updated', 'success', 'growl-top-right');
 	}
@@ -129,6 +133,7 @@ const name = 'profile';
 export default angular.module(name, [
 	angularMeteor,
 	uiRouter,
+	'google.places',
 	Uploader
 ]).component(name, {
 	template,

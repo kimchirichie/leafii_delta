@@ -33,9 +33,6 @@ class Landing {
 		this.sortUsers();
 	}
 
-	toTop(){
-		angular.element('html, body').scrollTop(0);
-	}
 
 	sortUsers(){
 		var usersInPairs = [];

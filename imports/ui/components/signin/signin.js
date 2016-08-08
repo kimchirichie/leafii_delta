@@ -29,16 +29,11 @@ class Signin {
 				this.timeout(function(){this.wait = false;}.bind(this), 1300);
 			}
 			else {
-				// this.rootScope.$broadcast('signin');
 				this.wait = false;
 				this.state.go('profile');
 			}
 			
 		}.bind(this));
-	}
-
-	boot(){
-		if(this.rootScope.currentUser){this.state.go('landing');}
 	}
 }
 

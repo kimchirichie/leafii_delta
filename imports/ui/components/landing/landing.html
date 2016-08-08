@@ -1,8 +1,8 @@
 <div id="landing">
-	<title>Personal Website Search Engine - Leafii</title>
+	<title>Leafii - Showcase & Discover Personal Websites</title>
 	<div class="intro">
 		<img src="/images/leafii.svg" class="animated bounceInDown" alt="Leafii"/>
-		<h3 class="animated fadeIn">Personal Website Search Engine</h3>
+		<h3 class="animated fadeIn">Showcase & Discover Personal Websites</h3>
 
 		<div layout="column" layout-align="center center" class="animated fadeInUp">
 			<div layout="row" layout-align="center center" class="search-field">
@@ -29,7 +29,7 @@
 								<div class="cardInfo" layout="column">
 									<h3 class="md-headline">{{user.profile.occupation ? user.profile.occupation: 'Not specified' | limitTo: 17 }}{{user.profile.occupation.length > 17 ? '...' : ''}}</h3>
 									<p>{{user.profile.firstName + ' ' + user.profile.lastName}}<p>
-									<p><i class="zmdi zmdi-pin mapColor"></i> {{user.profile.location}}</p>
+									<p><i class="zmdi zmdi-pin mapColor"></i> {{user.profile.location.formatted_address ? user.profile.location.formatted_address : user.profile.location | limitTo:25}}{{user.profile.location.formatted_address.length > 25 ? '...' : ''}}</p>
 									<!-- <md-button class="md-primary md-raised favBtn">Favourite</md-button> -->
 								</div>
 							</md-card-title>
@@ -39,7 +39,7 @@
 			</div>
 		</div>
 	
-		<a class="All" ui-sref="browse"><md-button ng-click="landing.toTop" class="viewAll">View All {{landing.numOfUsers}} Portfolios</md-button></a>
+		<a class="All" ui-sref="browse"><md-button class="viewAll">View All {{landing.numOfUsers}} Portfolios</md-button></a>
 
 	</div>
 
