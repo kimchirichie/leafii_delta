@@ -63,6 +63,7 @@ const name = 'signup';
 export default angular.module(name, [
 	angularMeteor,
 	uiRouter,
+	'google.places'
 ]).component(name, {
 	template,
 	controllerAs: name,

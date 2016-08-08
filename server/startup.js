@@ -2,7 +2,6 @@ import { Meteor } from 'meteor/meteor';
  
 Meteor.startup(()=>{
 
-
 	// var domain = 'support@leafii.com';
 	var email = process.env.EMAIL;
 	var password = process.env.PASSWORD;	
@@ -12,11 +11,7 @@ Meteor.startup(()=>{
     const settings = Meteor.settings.PrerenderIO;
 	var PythonShell = require('python-shell');
 	var options = {
-	  mode: 'text',
-	  //pythonPath: 'path/to/python',
-	  //pythonOptions: ['-u'],
-	  scriptPath: '/root/Leafii/leafii_delta/scripts/',
-	  //args: ['value1', 'value2', 'value3']
+	  mode: 'text'
 	};
 
     if (settings && settings.host) {
@@ -49,17 +44,22 @@ Meteor.startup(()=>{
 
       		Future = Npm.require('fibers/future');
 			var myFuture = new Future();	
-			PythonShell.run('update_user_kws.py', { scriptPath: '/Users/TZENG/Desktop/programming/leafii_crawler/crawler', args: [userId] }, function (err, results) {
+   			var crawler_src = process.env.CRAWLERSRC;
+			PythonShell.run('update_user_kws.py', { scriptPath: crawler_src+'crawler/', args: [userId] }, function (err, results) {
 				if (err) {
 			  		myFuture.throw(err);
 				}
 				else {
-			  		console.log('Results: '+results);
+					for (i = 0; i < results.length; i++)
+					{
+						if(results[i].indexOf("Error") > -1) {
+			  				console.log('Results: '+results);
+			  				break;
+			  			}
+			  		}
 			  		myFuture.return(results);
 				}
 			});
-			console.log("User: "+userId);
-			console.log(": ");
 			// var msg = shell.on('message', function (message) {
 			// 	// handle message (a line of text from stdout)
 			// 	myFuture.return(message);
