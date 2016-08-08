@@ -22,7 +22,6 @@ class Browse {
 	getUsers(){
 	//this.users = Meteor.users.find({"profile.available":true}).fetch();
 		this.users = Meteor.users.find({}, {sort: {"profile.available": -1}}).fetch();
-		console.log(this.users);
 		this.sortUsers();
 		this.rootScope.$broadcast('viewAll');
 	}
