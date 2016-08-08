@@ -15,6 +15,7 @@ class Signup {
 		this.timeout = $timeout;
 		this.rootScope = $rootScope;
 		this.rootScope.$broadcast('disableSearch');
+		
 	}
 
 	submit(user){
