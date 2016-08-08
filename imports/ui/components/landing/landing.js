@@ -10,6 +10,7 @@ class Landing {
 		'ngInject';
 		$reactive(this).attach($scope);
 		this.state = $state;
+		this.viewMode = 'grid';
 		this.rootScope = $rootScope;
 		this.rootScope.$watch('search',function(){
 			if(this.rootScope.search){
@@ -28,7 +29,7 @@ class Landing {
 	}
 
 	getUsers(){
-		this.users = Meteor.users.find().fetch();
+		this.users = Meteor.users.find({}, {sort: {"profile.available": -1, "profile.image": -1}}).fetch();
 		this.numOfUsers = this.users.length;
 		this.sortUsers();
 	}
@@ -37,22 +38,15 @@ class Landing {
 	sortUsers(){
 		var usersInPairs = [];
 		var usersInFours = [];
-		var userHasImages = [];
 
 		//Parse out any extra strings
 		for(var j = 0; j < this.users.length; j++){
 			this.users[j].profile.url = 'http://' +this.users[j].profile.url.replace(/https:|http:|\/\//gi, "");
 		}
 
-		for(var z = 0; z < this.users.length; z++){
-			if(this.users[z].profile.image){
-				userHasImages.push(this.users[z]);
-			}
-		}
-
 		//Cuts data in columns of 2
-		for (var i = 0; i < userHasImages.length; i += 2) {
-			usersInPairs.push(userHasImages.slice(i, i + 2));
+		for (var i = 0; i < this.users.length; i += 2) {
+			usersInPairs.push(this.users.slice(i, i + 2));
 		}
 
 		//Cuts data in columns of 4
@@ -61,6 +55,10 @@ class Landing {
 		}
 		this.usersInFours = usersInFours;
 		window.prerenderReady = true;
+	}
+
+	absolutify(url){
+		return 'http://' + url.replace(/https:|http:|\/\//gi, "");
 	}
 }
 
