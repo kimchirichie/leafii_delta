@@ -52,6 +52,7 @@ jalik:ufs-gridfs
 
 #CSS
 natestrauser:animate-css
+kevohagan:sweetalert
 
 ## Prerenderer for static page SEO
 dfischer:prerenderio

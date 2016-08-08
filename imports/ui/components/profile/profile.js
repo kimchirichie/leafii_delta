@@ -79,13 +79,24 @@ class Profile {
 	}
 
 	crawl(){
-		Meteor.call('startCrawl', function (err, res) {
-		  if (err) {
-		    Bert.alert('Keywords Update Failed', 'danger');
-		  } else {
-		    Bert.alert('Keywords Updated','success')
-		  }
-		});
+		confirmed = swal({
+  			title: "Are you sure?",
+  			text: "It will delete all the previous keywords & re-parse your website.",
+  			type: "warning",
+  			// #DD6B55
+  			showCancelButton: true,
+  			confirmButtonColor: "#3edeaa",
+ 			confirmButtonText: "Yes, re-parse it!",
+  			closeOnConfirm: true
+			},function(){
+				Meteor.call('startCrawl', function (err, res) {
+				  if (err) {
+				    Bert.alert('Keywords Update Failed', 'danger');
+				  } else {
+				    Bert.alert('Keywords Updated','success')
+				  }
+				});
+			})
 	}
 
 	changePassword(){
