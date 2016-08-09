@@ -6,6 +6,7 @@ import uiRouter from 'angular-ui-router';
 import template from './profile.html';
 import { Accounts } from 'meteor/accounts-base';
 import { Keywords } from '../../../api/profile/index';
+import { Views } from '../../../api/views/index';
 
 import { name as Uploader } from '../uploader/uploader';
 
@@ -21,8 +22,7 @@ class Profile {
 		this.progress = false;
 		this.readonly = true;
 	    this.showPass = false;
-
-
+	    //this.subscribe('views');
 		this.subscribe('mykeywords');
 		this.helpers({
 			keywords(){
