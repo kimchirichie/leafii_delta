@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { Views } from '../imports/api/views/index';
  
 Meteor.startup(()=>{
 
@@ -66,6 +67,21 @@ Meteor.startup(()=>{
 			// 	console.log(message);
 			// });
 			return myFuture.wait();
+		},
+
+		addToViews(target_userId, search_keys){
+ 			user = "guest";
+			if(Meteor.userId()){
+				user = Meteor.userId();
+			}
+			date = Math.floor(Date.now() / 60000);
+			data = {
+				user_id: this.user, 
+				target_user_id: this.target_userId,
+				search_keys: this.search_keys, 
+				date: this.date
+			};
+			Views.insert(data);
 		}
 	});
 
