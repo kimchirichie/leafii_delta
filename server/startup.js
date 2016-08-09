@@ -69,7 +69,7 @@ Meteor.startup(()=>{
 			return myFuture.wait();
 		},
 
-		addToViews(target_userId, search_Keys){
+		addToViews(target_userId, search_Keys, url){
  			user = "guest";
 			if(Meteor.userId()){
 				user = Meteor.userId();
@@ -79,7 +79,8 @@ Meteor.startup(()=>{
 				user_id: user, 
 				target_user_id: target_userId,
 				search_keys: search_Keys, 
-				date: date
+				date: date,
+				url: url
 			};
 			Views.insert(data);
 			Meteor.users.update(target_userId, {$inc: {"profile.views": 1}}, false, false);
