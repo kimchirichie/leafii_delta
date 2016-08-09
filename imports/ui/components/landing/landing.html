@@ -27,7 +27,7 @@
 		<div ng-show="landing.viewMode == 'grid'" layout="row" layout-xs="column" ng-repeat="usersInPairs in landing.usersInFours">
 			<div class="candidates" layout="row" layout-sm="column" layout-xs="column" ng-repeat="users in usersInPairs" flex>
 				<div class="full-width" layout="row" layout-md="column" layout-sm="column" layout-xs="column">
-					<a class="animated fadeIn" ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank" ng-repeat="user in users">
+					<a ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank" ng-repeat="user in users">
 						<md-card  class="md-default-theme clickable" layout="column">
 							<p class="forHire" ng-show="{{user.profile.available}}"><i class="zmdi zmdi-circle"></i> Available</p>
 							<p class="noHire" ng-show="{{!user.profile.available}}"><i class="zmdi zmdi-circle"></i> Unavailable</p>
@@ -55,7 +55,7 @@
 		
 		<!-- Horizaontal View Mode -->
 		<div ng-show="landing.viewMode == 'line'" class="candidates" layout="column">
-			<a class="animated fadeIn" ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank" ng-repeat="user in landing.users">
+			<a ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank" ng-repeat="user in landing.users">
 				<md-card class="md-default-theme clickable" layout="row">
 					<div class="info" layout="column" layout-align="center center">
 						<img class="profilePicSmall" ng-src="{{user.profile.image ? user.profile.image : 'images/defaultProfilePic.png'}}"/>
