@@ -36,7 +36,7 @@
 								<div class="cardInfo" layout="column">
 									<h3 class="md-headline">{{user.profile.occupation ? user.profile.occupation: 'Not specified' | limitTo: 17 }}{{user.profile.occupation.length > 17 ? '...' : ''}}</h3>
 									<div class="status" layout="row" layout-align="space-around center">
-										<span><i class="zmdi zmdi-eye"></i> 0</span>
+										<span><i class="zmdi zmdi-eye"></i> {{user.profile.views}}</span>
 										 <md-button ng-show="landing.fav" class="md-fab md-mini fav" aria-label="like">
 								            <i class="zmdi zmdi-star zmdi-hc-lg"></i>
 								        </md-button>
@@ -68,7 +68,7 @@
 							<p class="forHire" ng-show="{{user.profile.available}}"><i class="zmdi zmdi-circle"></i> Available</p>
 							<p class="noHire" ng-show="{{!user.profile.available}}"><i class="zmdi zmdi-circle"></i> Unavailable</p>
 							<div class="status" layout="row" layout-align="space-around center">
-								<span><i class="zmdi zmdi-eye"></i> 0</span>
+								<span><i class="zmdi zmdi-eye"></i> {{user.profile.views}}</span>
 								<span><i class="zmdi zmdi-star"></i> 0</span>
 							</div>
 							<!-- <md-button class="md-primary md-raised favBtn">Favourite</md-button> -->

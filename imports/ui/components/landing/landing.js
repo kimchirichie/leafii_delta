@@ -15,14 +15,6 @@ class Landing {
 		this.viewMode = 'grid';
 		this.rootScope = $rootScope;
 
-		this.subscribe('views',() => [this.getReactively('target_user')]);
-		this.target_user = undefined;
-		this.helpers({
-			views: () => Views.find({target_user_id: this.getReactively('target_user')})
-		});
-
-		console.log(Counts.get('numberOfViews'));
-
 		//if user is not logged in
 		if(this.rootScope.currentUser){
 			this.fav = true;
