@@ -4,17 +4,28 @@ import uiRouter from 'angular-ui-router';
 import utilsPagination from 'angular-utils-pagination';
 
 import template from './landing.html';
+import { Views } from '../../../api/views/index';
+
 
 class Landing {
 	constructor($scope, $reactive, $rootScope, $state){
 		'ngInject';
 		$reactive(this).attach($scope);
 		this.state = $state;
+		this.viewMode = 'grid';
 		this.rootScope = $rootScope;
+
+		//if user is not logged in
+		if(this.rootScope.currentUser){
+			this.fav = true;
+		}
+		else {
+			this.fav = false;
+		}
+
 		this.rootScope.$watch('search',function(){
 			if(this.rootScope.search){
 				this.state.go('search');
-				this.rootScope.$broadcast('searching');
 			}
 		}.bind(this));
 		const handle = Meteor.subscribe("allUsers");
@@ -28,31 +39,29 @@ class Landing {
 	}
 
 	getUsers(){
-		this.users = Meteor.users.find().fetch();
+		this.users = Meteor.users.find({}, {sort: {"profile.available": -1, "profile.image": -1}}).fetch();
 		this.numOfUsers = this.users.length;
 		this.sortUsers();
+	}
+
+	viewLog(user){
+		var searchKey = 'Browse';
+		Meteor.call('addToViews', user._id, searchKey, user.profile.url);
 	}
 
 
 	sortUsers(){
 		var usersInPairs = [];
 		var usersInFours = [];
-		var userHasImages = [];
 
 		//Parse out any extra strings
 		for(var j = 0; j < this.users.length; j++){
 			this.users[j].profile.url = 'http://' +this.users[j].profile.url.replace(/https:|http:|\/\//gi, "");
 		}
 
-		for(var z = 0; z < this.users.length; z++){
-			if(this.users[z].profile.image){
-				userHasImages.push(this.users[z]);
-			}
-		}
-
 		//Cuts data in columns of 2
-		for (var i = 0; i < userHasImages.length; i += 2) {
-			usersInPairs.push(userHasImages.slice(i, i + 2));
+		for (var i = 0; i < this.users.length; i += 2) {
+			usersInPairs.push(this.users.slice(i, i + 2));
 		}
 
 		//Cuts data in columns of 4
@@ -61,6 +70,10 @@ class Landing {
 		}
 		this.usersInFours = usersInFours;
 		window.prerenderReady = true;
+	}
+
+	absolutify(url){
+		return 'http://' + url.replace(/https:|http:|\/\//gi, "");
 	}
 }
 

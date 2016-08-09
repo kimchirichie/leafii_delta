@@ -6,6 +6,7 @@ import uiRouter from 'angular-ui-router';
 import template from './profile.html';
 import { Accounts } from 'meteor/accounts-base';
 import { Keywords } from '../../../api/profile/index';
+import { Views } from '../../../api/views/index';
 
 import { name as Uploader } from '../uploader/uploader';
 
@@ -21,6 +22,7 @@ class Profile {
 		this.progress = false;
 		this.readonly = true;
 	    this.showPass = false;
+	    //this.subscribe('views');
 		this.subscribe('mykeywords');
 		this.helpers({
 			keywords(){
@@ -75,13 +77,24 @@ class Profile {
 	}
 
 	crawl(){
-		Meteor.call('startCrawl', function (err, res) {
-		  if (err) {
-		    Bert.alert('Keywords Update Failed', 'danger');
-		  } else {
-		    Bert.alert('Keywords Updated','success')
-		  }
-		});
+		confirmed = swal({
+  			title: "Are you sure?",
+  			text: "It will delete all the previous keywords & re-parse your website.",
+  			type: "warning",
+  			// #DD6B55
+  			showCancelButton: true,
+  			confirmButtonColor: "#3edeaa",
+ 			confirmButtonText: "Yes, re-parse it!",
+  			closeOnConfirm: true
+			},function(){
+				Meteor.call('startCrawl', function (err, res) {
+				  if (err) {
+				    Bert.alert('Keywords Update Failed', 'danger');
+				  } else {
+				    Bert.alert('Keywords Updated','success')
+				  }
+				});
+			})
 	}
 
 	changePassword(){
