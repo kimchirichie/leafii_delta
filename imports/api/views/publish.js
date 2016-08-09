@@ -7,7 +7,7 @@ if (Meteor.isServer) {
 	Meteor.publish('views', function(user){
 		const selector = {target_userId:user};
 		Counts.publish(this, 'numberOfViews', Views.find(selector),{noReady:true});
-		return Views.find(selector);
+		// return Views.find(selector);
 	});
 }
 
