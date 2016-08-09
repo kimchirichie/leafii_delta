@@ -12,10 +12,10 @@ if (Meteor.isServer) {
 }
 
 Views.allow({
-	insert(userId, targetUserId, searchKeys, date) {
+	insert(userId, targetUserId, searchKeys, date, url) {
 		return true;
 	},
-	remove(userId, targetUserId, searchKeys, date) {
+	remove(userId, targetUserId, searchKeys, date, url) {
 		return true;		
 	}
 })
