@@ -15,7 +15,7 @@
 		
 		<!-- Horizaontal View Mode -->
 		<div ng-show="search.viewMode == 'line'" class="candidates" layout="column">
-			<a ng-click="search.viewLog(user)" href="{{search.absolutify(result.profile.url)}}" target="_blank" ng-init="search.sortUsers(search.websites)" ng-repeat="result in search.websites">
+			<a ng-click="search.viewLog(result)" href="{{search.absolutify(result.profile.url)}}" target="_blank" ng-init="search.sortUsers(search.websites)" ng-repeat="result in search.websites">
 				<md-card class="md-default-theme clickable" layout="row">
 					<div class="info" layout="column" layout-align="center center">
 						<img class="profilePicSmall" ng-src="{{result.profile.image ? result.profile.image : 'images/defaultProfilePic.png'}}"/>

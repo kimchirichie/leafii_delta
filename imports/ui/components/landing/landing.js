@@ -4,6 +4,8 @@ import uiRouter from 'angular-ui-router';
 import utilsPagination from 'angular-utils-pagination';
 
 import template from './landing.html';
+import { Views } from '../../../api/views/index';
+
 
 class Landing {
 	constructor($scope, $reactive, $rootScope, $state){
@@ -12,6 +14,14 @@ class Landing {
 		this.state = $state;
 		this.viewMode = 'grid';
 		this.rootScope = $rootScope;
+
+		this.subscribe('views',() => [this.getReactively('target_user')]);
+		this.target_user = undefined;
+		this.helpers({
+			views: () => Views.find({target_user_id: this.getReactively('target_user')})
+		});
+
+		console.log(Counts.get('numberOfViews'));
 
 		//if user is not logged in
 		if(this.rootScope.currentUser){
