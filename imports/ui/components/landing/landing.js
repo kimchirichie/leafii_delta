@@ -12,10 +12,18 @@ class Landing {
 		this.state = $state;
 		this.viewMode = 'grid';
 		this.rootScope = $rootScope;
+
+		//if user is not logged in
+		if(this.rootScope.currentUser){
+			this.fav = true;
+		}
+		else {
+			this.fav = false;
+		}
+
 		this.rootScope.$watch('search',function(){
 			if(this.rootScope.search){
 				this.state.go('search');
-				this.rootScope.$broadcast('searching');
 			}
 		}.bind(this));
 		const handle = Meteor.subscribe("allUsers");
@@ -26,6 +34,10 @@ class Landing {
 				$scope.$apply();
 			}
 		});
+	}
+
+	viewUp(user){
+		console.log(user._id);
 	}
 
 	getUsers(){

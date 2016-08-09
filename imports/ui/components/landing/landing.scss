@@ -9,6 +9,12 @@
 
 	h3 {
 		font-size: 1.6em;
+		margin: 0;
+	}
+
+	.fav {
+		color: yellow;
+		background: grey !important;
 	}
 
 	.filterBar {
@@ -25,6 +31,11 @@
 				color: $leafii-theme;
 			}
 		}
+	}
+
+	.status {
+		padding: 10px;
+		width: 100%;
 	}
 }
 
