@@ -37,6 +37,11 @@ class Search {
 		Meteor.subscribe("allUsers");
 	}
 
+	viewLog(user){
+		console.log(this.rootScope.search);
+	}
+
+
 	sortUsers(result){
 
 	    var usersInPairs = [];

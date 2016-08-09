@@ -36,14 +36,14 @@ class Landing {
 		});
 	}
 
-	viewUp(user){
-		console.log(user._id);
-	}
-
 	getUsers(){
 		this.users = Meteor.users.find({}, {sort: {"profile.available": -1, "profile.image": -1}}).fetch();
 		this.numOfUsers = this.users.length;
 		this.sortUsers();
+	}
+
+	viewLog(user){
+		var searchKey = 'Browse';
 	}
 
 
