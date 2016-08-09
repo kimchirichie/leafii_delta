@@ -6,6 +6,12 @@
 	<div class="profilePanel" layout="row" layout-sm="column" layout-xs="column">
 	
 		<div ng-show="!profile.showPass" class="profileImg" layout="column" layout-align="start center" flex="40" flex-sm="100" flex-xs="100">
+
+			<div class="status" layout="row" layout-align="space-around center">
+				<span><i class="zmdi zmdi-eye zmdi-hc-2x"></i> 1312321</span>
+				<span><i class="zmdi zmdi-star zmdi-hc-2x"></i> 123123</span>
+			</div>
+
 			<img ng-show="!profile.imgHide" ng-src="{{profile.rootScope.currentUser.profile.image}}"/>
 			<image-uploader files="profile.user.images"></image-uploader>
 			<md-progress-circular ng-if="profile.progress" md-mode='indeterminate' md-diameter="100px"></md-progress-circular>

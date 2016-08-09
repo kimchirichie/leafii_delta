@@ -1,4 +1,3 @@
-
 .profileSideMenu {
 	
 	position: absolute;
@@ -37,6 +36,12 @@
 	//border-left: thin solid;
 	line-height: 30px;
 	padding: 60px 0px;
+
+	.status {
+		width: 60%;
+		border: solid thin grey;
+		margin-bottom: 20px;
+	}
 
 }
 
