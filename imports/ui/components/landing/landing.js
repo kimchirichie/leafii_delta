@@ -44,6 +44,7 @@ class Landing {
 
 	viewLog(user){
 		var searchKey = 'Browse';
+		Meteor.call('addToViews', user._id, searchKey);
 	}
 
 

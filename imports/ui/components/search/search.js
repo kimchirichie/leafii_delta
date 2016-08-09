@@ -38,7 +38,7 @@ class Search {
 	}
 
 	viewLog(user){
-		console.log(this.rootScope.search);
+		Meteor.call('addToViews', user._id, this.rootScope.search);
 	}
 
 

@@ -69,17 +69,17 @@ Meteor.startup(()=>{
 			return myFuture.wait();
 		},
 
-		addToViews(target_userId, search_keys){
+		addToViews(target_userId, search_Keys){
  			user = "guest";
 			if(Meteor.userId()){
 				user = Meteor.userId();
 			}
 			date = Math.floor(Date.now() / 60000);
 			data = {
-				user_id: this.user, 
-				target_user_id: this.target_userId,
-				search_keys: this.search_keys, 
-				date: this.date
+				user_id: user, 
+				target_user_id: target_userId,
+				search_keys: search_Keys, 
+				date: date
 			};
 			Views.insert(data);
 		}
