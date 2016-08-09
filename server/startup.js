@@ -82,6 +82,7 @@ Meteor.startup(()=>{
 				date: date
 			};
 			Views.insert(data);
+			Meteor.users.update(target_userId, {$inc: {"profile.views": 1}}, false, false);
 		}
 	});
 
