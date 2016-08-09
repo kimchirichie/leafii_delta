@@ -27,7 +27,7 @@
 		<div ng-show="landing.viewMode == 'grid'" layout="row" layout-xs="column" ng-repeat="usersInPairs in landing.usersInFours">
 			<div class="candidates" layout="row" layout-sm="column" layout-xs="column" ng-repeat="users in usersInPairs" flex>
 				<div class="full-width" layout="row" layout-md="column" layout-sm="column" layout-xs="column">
-					<a class="animated fadeIn" ng-click="landing.viewUp(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank" ng-repeat="user in users">
+					<a class="animated fadeIn" ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank" ng-repeat="user in users">
 						<md-card  class="md-default-theme clickable" layout="column">
 							<p class="forHire" ng-show="{{user.profile.available}}"><i class="zmdi zmdi-circle"></i> Available</p>
 							<p class="noHire" ng-show="{{!user.profile.available}}"><i class="zmdi zmdi-circle"></i> Unavailable</p>
@@ -36,11 +36,11 @@
 								<div class="cardInfo" layout="column">
 									<h3 class="md-headline">{{user.profile.occupation ? user.profile.occupation: 'Not specified' | limitTo: 17 }}{{user.profile.occupation.length > 17 ? '...' : ''}}</h3>
 									<div class="status" layout="row" layout-align="space-around center">
-										<span><i class="zmdi zmdi-eye"></i> {{user.profile.views}}</span>
+										<span><i class="zmdi zmdi-eye"></i> 0</span>
 										 <md-button ng-show="landing.fav" class="md-fab md-mini fav" aria-label="like">
 								            <i class="zmdi zmdi-star zmdi-hc-lg"></i>
 								        </md-button>
-										<span><i class="zmdi zmdi-star"></i> {{user.profile.likes}}</span>
+										<span><i class="zmdi zmdi-star"></i> 0</span>
 									</div>
 									<p>{{user.profile.firstName + ' ' + user.profile.lastName}}</p>
 									<p><i class="zmdi zmdi-pin mapColor"></i> {{user.profile.location.formatted_address ? user.profile.location.formatted_address : user.profile.location | limitTo:25}}{{user.profile.location.formatted_address.length > 25 ? '...' : ''}}</p>
@@ -55,7 +55,7 @@
 		
 		<!-- Horizaontal View Mode -->
 		<div ng-show="landing.viewMode == 'line'" class="candidates" layout="column">
-			<a class="animated fadeIn" href="{{landing.absolutify(user.profile.url)}}" target="_blank" ng-repeat="user in landing.users">
+			<a class="animated fadeIn" ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank" ng-repeat="user in landing.users">
 				<md-card class="md-default-theme clickable" layout="row">
 					<div class="info" layout="column" layout-align="center center">
 						<img class="profilePicSmall" ng-src="{{user.profile.image ? user.profile.image : 'images/defaultProfilePic.png'}}"/>
@@ -68,8 +68,8 @@
 							<p class="forHire" ng-show="{{user.profile.available}}"><i class="zmdi zmdi-circle"></i> Available</p>
 							<p class="noHire" ng-show="{{!user.profile.available}}"><i class="zmdi zmdi-circle"></i> Unavailable</p>
 							<div class="status" layout="row" layout-align="space-around center">
-								<span><i class="zmdi zmdi-eye"></i> 123</span>
-								<span><i class="zmdi zmdi-star"></i> 234</span>
+								<span><i class="zmdi zmdi-eye"></i> 0</span>
+								<span><i class="zmdi zmdi-star"></i> 0</span>
 							</div>
 							<!-- <md-button class="md-primary md-raised favBtn">Favourite</md-button> -->
 						</div>
