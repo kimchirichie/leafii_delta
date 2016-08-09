@@ -7,11 +7,11 @@
 	
 		<div ng-show="!profile.showPass" class="profileImg" layout="column" layout-align="start center" flex="40" flex-sm="100" flex-xs="100">
 
-			<div class="status" layout="row" layout-align="space-around center">
+			<div class="status" layout="row" layout-align="center center">
 				<i class="zmdi zmdi-eye zmdi-hc-2x grey"></i>
 				<p> {{profile.rootScope.currentUser.profile.views}}</p>
-				<i class="zmdi zmdi-star zmdi-hc-2x yellow"></i>
-				<p>0</p>
+				<!-- <i class="zmdi zmdi-star zmdi-hc-2x yellow"></i>
+				<p>0</p> -->
 			</div>
 
 			<img ng-show="!profile.imgHide" ng-src="{{profile.rootScope.currentUser.profile.image}}"/>
