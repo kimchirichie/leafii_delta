@@ -14,6 +14,7 @@ class Landing {
 		this.state = $state;
 		this.viewMode = 'grid';
 		this.rootScope = $rootScope;
+		this.currentUser = Meteor.userId();
 
 		//if user is not logged in
 		if(this.rootScope.currentUser){
@@ -45,14 +46,11 @@ class Landing {
 	}
 
 	liked(user){
-
-		if(user.profile.likes.includes(Meteor.userId())){
+		if(user.profile.likes.includes(this.currentUser)){
 			Meteor.call("unlikeProfile", user._id, user.profile.url);
-		}
-		else {
+		} else {
 			Meteor.call("likeProfile", user._id, user.profile.url);
-		}
-		
+		}	
 	}
 
 
