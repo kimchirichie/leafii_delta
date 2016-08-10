@@ -23,7 +23,7 @@ class Signup {
 		this.wait = true;
 		user.profile.available = false;
 		user.profile.views = 0;
-		user.profile.likes = 0;
+		user.profile.likes = [];
 
 		if (this.confirm !== user.password){
 			Bert.alert('Your password does not match', 'danger', 'growl-top-right');
