@@ -43,6 +43,7 @@ email
 themeteorchef:bert
 meteorhacks:fast-render
 tmeasday:publish-counts
+jonatan:angular-google-places-autocomplete
 
 #Uploads and files
 danialfarid:ng-file-upload
@@ -51,6 +52,7 @@ jalik:ufs-gridfs
 
 #CSS
 natestrauser:animate-css
+kevohagan:sweetalert
 
 ## Prerenderer for static page SEO
 dfischer:prerenderio

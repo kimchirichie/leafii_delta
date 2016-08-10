@@ -6,6 +6,14 @@
 	<div class="profilePanel" layout="row" layout-sm="column" layout-xs="column">
 	
 		<div ng-show="!profile.showPass" class="profileImg" layout="column" layout-align="start center" flex="40" flex-sm="100" flex-xs="100">
+
+			<div class="status" layout="row" layout-align="space-around center">
+				<i class="zmdi zmdi-eye zmdi-hc-2x grey"></i>
+				<p> {{profile.rootScope.currentUser.profile.views}}</p>
+				<i class="zmdi zmdi-star zmdi-hc-2x yellow"></i>
+				<p> {{profile.rootScope.currentUser.profile.likes.length ? profile.rootScope.currentUser.profile.likes.length : 0}}</p>
+			</div>
+
 			<img ng-show="!profile.imgHide" ng-src="{{profile.rootScope.currentUser.profile.image}}"/>
 			<image-uploader files="profile.user.images"></image-uploader>
 			<md-progress-circular ng-if="profile.progress" md-mode='indeterminate' md-diameter="100px"></md-progress-circular>
@@ -18,18 +26,18 @@
 			<div class="name full-width" layout="row">
 				<md-input-container class="md-block" flex-gt-sm>
 					<label>First Name</label>
-					<input required ng-model="profile.rootScope.currentUser.profile.firstName" />
+					<input required ng-model="profile.rootScope.currentUser.profile.firstName" type="text" name="firstName"/>
 				</md-input-container>
 
 				<md-input-container class="md-block" flex-gt-sm>
 					<label>Last Name</label>
-					<input required ng-model="profile.rootScope.currentUser.profile.lastName" />
+					<input required ng-model="profile.rootScope.currentUser.profile.lastName" type="text" name="lastName"/>
 				</md-input-container>
 			</div>
 
 			<md-input-container class="md-block" flex-gt-sm>
 				<label>Profession/Occupation</label>
-				<input required ng-model="profile.rootScope.currentUser.profile.occupation" />
+				<input required ng-model="profile.rootScope.currentUser.profile.occupation" type="text" name="occupation"/>
 			</md-input-container>
 
 
@@ -52,17 +60,16 @@
 			
 			<md-input-container class="md-block" flex-gt-sm>
 				<label>Portfolio URL</label>
-				<input required ng-model="profile.rootScope.currentUser.profile.url" />
+				<input required ng-model="profile.rootScope.currentUser.profile.url" type="url" name="url"/>
 			</md-input-container>
 
 			<md-input-container class="md-block" flex-gt-sm>
 				<label>Location</label>
-				<input required ng-model="profile.rootScope.currentUser.profile.location" />
+				<input required ng-model="profile.rootScope.currentUser.profile.location" g-places-autocomplete type="text" name="location" />
 			</md-input-container>
 			
 			<div layout="row">
 				<md-button class="md-raised" ng-click="profile.showPass=true">Change password</md-button>
-				<md-button class="md-raised md-primary" ng-click="profile.update(profile.rootScope.currentUser)">Update</md-button>
 			</div>
 
 		</ng-form>

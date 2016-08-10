@@ -15,16 +15,15 @@ class Signup {
 		this.timeout = $timeout;
 		this.rootScope = $rootScope;
 		this.rootScope.$broadcast('disableSearch');
-		this.rootScope.$watch('currentUser',function(){
-			this.boot();
-		}.bind(this));
-
+		
 	}
 
 	submit(user){
 
 		this.wait = true;
-		user.profile.available = true;
+		user.profile.available = false;
+		user.profile.views = 0;
+		user.profile.likes = [];
 
 		if (this.confirm !== user.password){
 			Bert.alert('Your password does not match', 'danger', 'growl-top-right');
@@ -59,9 +58,6 @@ class Signup {
 
 	}
 
-	boot(){
-		if(this.rootScope.currentUser){this.state.go('landing');}
-	}
 }
 
 const name = 'signup';
@@ -69,6 +65,7 @@ const name = 'signup';
 export default angular.module(name, [
 	angularMeteor,
 	uiRouter,
+	'google.places'
 ]).component(name, {
 	template,
 	controllerAs: name,

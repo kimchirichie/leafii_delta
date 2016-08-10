@@ -7,8 +7,43 @@
 		max-width: 100%;
 	}
 
-	h3 {
-		font-size: 1.6em;
+	span {
+		font-size: 20px;
+	}
+
+	.fav {
+		color: grey;
+		cursor: pointer;
+		font-size: 30px;
+
+		&:hover {
+			color: $leafii-theme;
+		}
+	}
+
+	.upvoted {
+		color: $leafii-theme;
+	}
+
+	.filterBar {
+		padding: 2%;
+		background: white;
+
+		span {
+			padding: 10px;
+			font-size: 18px;
+			font-weight: bold;
+			cursor: pointer;
+
+			&:hover {
+				color: $leafii-theme;
+			}
+		}
+	}
+
+	.status {
+		padding: 10px;
+		width: 100%;
 	}
 }
 
@@ -51,10 +86,6 @@
 	text-align: center;
 }
 
-.favBtn {
-	width: 50%;
-}
-
 
 .hot-candidates {
 	align-items: center;
@@ -80,10 +111,6 @@
 			align-items: center;
 			padding: 25px;
 		}
-
-		.favBtn {
-			width: 100%;
-		}
 	}
 	
 
@@ -96,10 +123,6 @@
 		md-card {
 			width: 100%;
 			align-items: center;
-		}
-
-		.favBtn {
-			width: 100%;
 		}
 
 	}
@@ -125,7 +148,7 @@
 	text-align: center;
 	align-items: center;
 
-	h3 {
+	p, h3 {
 		white-space: nowrap;
 	}
 
@@ -143,7 +166,7 @@
 }
 
 .board {
-	padding: 0px 10%;
+	padding: 50px 10%;
 	background: #dcdcdc;
 }
 
@@ -205,4 +228,135 @@ md-card-title {
 	border-radius: 20px;
 	padding: 0 20px 0 20px;
 }
+
+#profiles {
+	
+	padding: 5% 5% 15% 5%;
+	background: #dcdcdc;
+
+	img {
+		max-width: 100%;
+	}
+}
+
+.loadingData {
+	margin: 15%;
+	text-align: center;
+}
+
+.forHire {
+	margin:0;
+	color: #2fa02f;
+	padding: 10px;
+	font-weight: bold;
+	font-family: raleway;
+}
+
+.noHire {
+	margin: 0;
+	color: #808080;
+	padding: 10px;
+	font-weight: bold;
+	font-family: raleway;
+}
+
+.mapColor {
+	color: #f15b5b;
+}
+
+
+.candidates {
+	align-items: center;
+
+	a {
+		text-decoration: none;
+		color: black;
+		font-size: 20px;
+		
+		&:hover {
+			color: $leafii-theme;
+		}
+	}
+
+	md-card {
+		
+		width: 100%;
+		margin: 10px;
+		box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+		align-items: center;
+
+		&:hover {
+			// box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+		}
+	}
+
+}
+
+@media(max-width: 1279px){
+	.candidates:nth-child(2){
+		margin: 0 0 0 20px;
+	}
+}
+
+@media(max-width: 600px){
+	.candidates:nth-child(2) {
+		margin: 0;
+	}
+}
+
+.full-width {
+	width: 100%;
+	align-items: center;
+}
+
+.info {
+	padding: 10px;
+}
+
+.cardInfo {
+	width: 100%;
+	text-align: center;
+}
+
+.noMargin {
+	margin: 0;
+}
+
+.cardInfoSmall {
+	text-align: center;
+}
+
+.featuredCan {
+	padding: 20px 20px 20px 20px;
+	font-weight: bold;
+	text-align: center;
+
+}
+
+.board {
+	padding: 50px 10%;
+}
+
+md-card-title {
+	padding: 0;
+	
+	p {
+		margin: 0;
+	}
+}
+
+.profilePic {
+	width: 200px;
+	height: 200px;
+	border-radius: 50% !important;
+	padding: 10px;
+}
+
+.profilePicSmall {
+	width: 100px;
+	height: 100px;
+	border-radius: 50% !important;
+}
+
+
 

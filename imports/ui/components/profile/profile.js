@@ -6,6 +6,7 @@ import uiRouter from 'angular-ui-router';
 import template from './profile.html';
 import { Accounts } from 'meteor/accounts-base';
 import { Keywords } from '../../../api/profile/index';
+import { Views } from '../../../api/views/index';
 
 import { name as Uploader } from '../uploader/uploader';
 
@@ -21,6 +22,7 @@ class Profile {
 		this.progress = false;
 		this.readonly = true;
 	    this.showPass = false;
+	    //this.subscribe('views');
 		this.subscribe('mykeywords');
 		this.helpers({
 			keywords(){
@@ -40,6 +42,11 @@ class Profile {
 			this.imgHide = false;
 		}.bind(this));
 
+		//Update the user's profile when they leave the page
+		$scope.$on("$destroy", function(){
+			this.update(this.rootScope.currentUser);
+		}.bind(this));
+
 		//Kick people not signed in
 		this.rootScope.$watch('currentUser',function(){
 			this.boot();
@@ -54,7 +61,6 @@ class Profile {
 	}
 
 	update(user){
-		console.log('update');
 		Meteor.users.update(Meteor.userId(), {$set: {profile: user.profile}}, false, false);
 		Bert.alert('Profile Updated', 'success', 'growl-top-right');
 	}
@@ -75,13 +81,24 @@ class Profile {
 	}
 
 	crawl(){
-		Meteor.call('startCrawl', function (err, res) {
-		  if (err) {
-		    Bert.alert('Keywords Update Failed', 'danger');
-		  } else {
-		    Bert.alert('Keywords Updated','success')
-		  }
-		});
+		confirmed = swal({
+  			title: "Are you sure?",
+  			text: "It will delete all the previous keywords & re-parse your website.",
+  			type: "warning",
+  			// #DD6B55
+  			showCancelButton: true,
+  			confirmButtonColor: "#3edeaa",
+ 			confirmButtonText: "Yes, re-parse it!",
+  			closeOnConfirm: true
+			},function(){
+				Meteor.call('startCrawl', function (err, res) {
+				  if (err) {
+				    Bert.alert('Keywords Update Failed', 'danger');
+				  } else {
+				    Bert.alert('Keywords Updated','success')
+				  }
+				});
+			})
 	}
 
 	changePassword(){
@@ -129,6 +146,7 @@ const name = 'profile';
 export default angular.module(name, [
 	angularMeteor,
 	uiRouter,
+	'google.places',
 	Uploader
 ]).component(name, {
 	template,

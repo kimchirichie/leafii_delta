@@ -15,7 +15,6 @@ import { name as Landing } from '../landing/landing';
 import { name as Signin } from '../signin/signin';
 import { name as Signup } from '../signup/signup';
 import { name as Welcome } from '../welcome/welcome';
-import { name as Browse } from '../browse/browse';
 import { name as Profile } from '../profile/profile';
 import { name as Reset } from '../reset/reset';
 import { name as Forgot } from '../forgot/forgot';
@@ -52,7 +51,6 @@ export default angular.module(name,[
 	Signin,
 	Signup,
 	Welcome,
-	Browse,
 	Profile,
 	Reset,
 	Forgot,
