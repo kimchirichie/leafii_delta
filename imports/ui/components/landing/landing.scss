@@ -7,11 +7,6 @@
 		max-width: 100%;
 	}
 
-	h3 {
-		font-size: 1.6em;
-		margin: 0;
-	}
-
 	span {
 		font-size: 20px;
 	}
@@ -41,6 +36,10 @@
 		padding: 10px;
 		width: 100%;
 	}
+}
+
+.liked {
+	color: red;
 }
 
 .All {

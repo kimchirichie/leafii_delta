@@ -48,6 +48,10 @@ class Search {
 		Meteor.call('addToViews', user._id, this.rootScope.search, user.profile.url);
 	}
 
+	liked(user){
+		Meteor.call('likeProfile', user._id, user.profile.url);
+	}
+
 
 	sortUsers(result){
 
