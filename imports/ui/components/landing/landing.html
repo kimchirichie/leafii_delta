@@ -36,7 +36,7 @@
 								<a ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank">{{user.profile.occupation ? user.profile.occupation: 'Not specified' | limitTo: 17 }}{{user.profile.occupation.length > 17 ? '...' : ''}}</a>
 								<div class="status" layout="row" layout-align="space-around center">
 									<span><i class="zmdi zmdi-eye"></i> {{user.profile.views}}</span>
-									 <md-button ng-click="landing.liked(user)" ng-show="landing.fav" class="md-fab md-mini fav" aria-label="like">
+									 <md-button ng-disabled="landing.liked" ng-click="landing.liked(user)" ng-show="landing.fav" class="md-fab md-mini fav" aria-label="like">
 							            <i class="zmdi zmdi-star zmdi-hc-lg"></i>
 							        </md-button>
 									<span><i class="zmdi zmdi-star"></i> {{user.profile.likes.length ? user.profile.likes.length : 0}}</span>

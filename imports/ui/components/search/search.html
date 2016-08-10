@@ -28,7 +28,7 @@
 						<a ng-click="search.viewLog(result)" href="{{search.absolutify(result.profile.url)}}" target="_blank" ng-init="search.sortUsers(search.websites)">{{result.profile.occupation ? result.profile.occupation: 'Not specified'}}</a>
 						<div class="status" layout="row" layout-align="space-around center">
 							<span><i class="zmdi zmdi-eye"></i> {{result.profile.views}}</span>
-							<md-button ng-show="search.fav" class="md-fab md-mini fav" aria-label="like">
+							<md-button ng-click="search.liked(user)" ng-show="search.fav" class="md-fab md-mini fav" aria-label="like">
 					            <i class="zmdi zmdi-star zmdi-hc-lg"></i>
 					        </md-button>
 							<span><i class="zmdi zmdi-star"></i> {{result.profile.likes.length ? user.profile.likes.length: 0}}</span>
@@ -51,7 +51,7 @@
 								<a ng-click="search.viewLog(user)" href="{{search.absolutify(user.profile.url)}}" target="_blank">{{user.profile.occupation ? user.profile.occupation: 'Not specified' | limitTo: 17 }}{{user.profile.occupation.length > 17 ? '...' : ''}}</a>
 								<div class="status" layout="row" layout-align="space-around center">
 									<span><i class="zmdi zmdi-eye"></i> {{user.profile.views}}</span>
-									 <md-button ng-show="search.fav" class="md-fab md-mini fav" aria-label="like">
+									 <md-button ng-click="search.liked(user)" ng-show="search.fav" class="md-fab md-mini fav" aria-label="like">
 							            <i class="zmdi zmdi-star zmdi-hc-lg"></i>
 							        </md-button>
 									<span><i class="zmdi zmdi-star"></i> 0</span>
