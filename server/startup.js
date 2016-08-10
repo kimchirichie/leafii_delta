@@ -115,7 +115,7 @@ Meteor.startup(()=>{
 					//console.log("Add like");
 					Profile_likes.insert(data);
 					//Meteor.users.update({_id:liked_userId}, {$addToSet: {"profile.likes": user}}, false, false);
-					return true;
+					return false;
 				}
 			}
 		}
