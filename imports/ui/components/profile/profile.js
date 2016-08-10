@@ -22,13 +22,18 @@ class Profile {
 		this.progress = false;
 		this.readonly = true;
 	    this.showPass = false;
-	    //this.subscribe('views');
 		this.subscribe('mykeywords');
 		this.helpers({
 			keywords(){
 				return Keywords.find({});
 			}
 		});
+
+		this.rootScope.$watch('search',function(){
+			if(this.rootScope.search){
+				this.state.go('search');
+			}
+		}.bind(this));
 
 		//Hide profile pic while editing
 		$scope.$on('editImg', function(event, arg){
