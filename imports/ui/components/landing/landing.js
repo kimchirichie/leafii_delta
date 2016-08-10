@@ -44,6 +44,10 @@ class Landing {
 		this.sortUsers();
 	}
 
+	liked(user){
+		Meteor.call('likeProfile', user._id, user.profile.url);
+	}
+
 	viewLog(user){
 		var searchKey = 'Browse';
 		Meteor.call('addToViews', user._id, searchKey, user.profile.url);

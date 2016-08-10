@@ -280,22 +280,24 @@ md-card-title {
 	align-items: center;
 
 	a {
-		width: 100%;
-		margin: 10px;
 		text-decoration: none;
 		color: black;
-		box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+		font-size: 20px;
+		
+		&:hover {
+			color: $leafii-theme;
+		}
 	}
 
 	md-card {
 		
-		width: auto;
+		width: 100%;
+		margin: 10px;
+		box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 		align-items: center;
-		margin: 0;
 
 		&:hover {
-			box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-			background: $leafii-theme;
+			// box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 		}
 	}
 
