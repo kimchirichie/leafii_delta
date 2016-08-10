@@ -88,6 +88,8 @@ Meteor.startup(()=>{
 		},
 
 		likeProfile(liked_userId, url){
+			Future = Npm.require('fibers/future');
+			var myFuture = new Future();	
 			if(Meteor.userId()){
 				user = Meteor.userId();
 				//console.log(Profile_likes.find({clicker_user_id: user, liked_user_id: liked_userId}).count());
@@ -100,8 +102,8 @@ Meteor.startup(()=>{
 					};
 					//console.log("Delete like");
 					Profile_likes.remove(data);
-					//Meteor.users.update({_id:liked_userId}, {$pull: {"profile.likes": user}}, false, false);
-					return true;
+					Meteor.users.update({_id:liked_userId}, {$pull: {"profile.likes": user}}, false, false);
+					myFuture.return(true);
 				}
 				else
 				{
@@ -114,9 +116,10 @@ Meteor.startup(()=>{
 					};
 					//console.log("Add like");
 					Profile_likes.insert(data);
-					//Meteor.users.update({_id:liked_userId}, {$addToSet: {"profile.likes": user}}, false, false);
-					return false;
+					Meteor.users.update({_id:liked_userId}, {$addToSet: {"profile.likes": user}}, false, false);
+					myFuture.return(false);
 				}
+				return myFuture.wait();
 			}
 		}
 	});
