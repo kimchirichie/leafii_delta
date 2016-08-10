@@ -104,7 +104,8 @@ Meteor.startup(()=>{
 				Meteor.users.update({_id:liked_userId}, {$addToSet: {"profile.likes": user}}, false, false);
 				
 			}
-		}
+		},
+		
 		unlikeProfile(liked_userId){
 			if(Meteor.userId()){
 				user = Meteor.userId();
