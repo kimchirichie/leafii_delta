@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Views } from '../imports/api/views/index';
+import { Profile_likes } from '../imports/api/profile_likes/index';
  
 Meteor.startup(()=>{
 
@@ -74,6 +75,10 @@ Meteor.startup(()=>{
 			if(Meteor.userId()){
 				user = Meteor.userId();
 			}
+			// if(user == target_userId)
+			// {
+			// 	return;
+			// }
 			date = Math.floor(Date.now() / 60000);
 			data = {
 				user_id: user, 
@@ -84,6 +89,25 @@ Meteor.startup(()=>{
 			};
 			Views.insert(data);
 			Meteor.users.update(target_userId, {$inc: {"profile.views": 1}}, false, false);
+		},
+
+		likeProfile(liked_userId, url){
+			if(Meteor.userId()){
+				user = Meteor.userId();
+				// if(user == target_userId)
+				// {
+				// 	return;
+				// }
+				date = Math.floor(Date.now() / 60000);
+				data = {
+					clicker_user_id: user, 
+					liked_user_id: liked_userId,
+					date: date,
+					url: url
+				};
+				Profile_likes.insert(data);
+				Meteor.users.update(liked_userId, {$inc: {"profile.likes": 1}}, false, false);
+			}
 		}
 	});
 
