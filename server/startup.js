@@ -100,7 +100,8 @@ Meteor.startup(()=>{
 					};
 					//console.log("Delete like");
 					Profile_likes.remove(data);
-					Meteor.users.update({_id:liked_userId}, {$pull: {"profile.likes": user}}, false, false);
+					//Meteor.users.update({_id:liked_userId}, {$pull: {"profile.likes": user}}, false, false);
+					return true;
 				}
 				else
 				{
@@ -113,7 +114,8 @@ Meteor.startup(()=>{
 					};
 					//console.log("Add like");
 					Profile_likes.insert(data);
-					Meteor.users.update({_id:liked_userId}, {$addToSet: {"profile.likes": user}}, false, false);
+					//Meteor.users.update({_id:liked_userId}, {$addToSet: {"profile.likes": user}}, false, false);
+					return true;
 				}
 			}
 		}
