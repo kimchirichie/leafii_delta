@@ -36,7 +36,7 @@
 								<a ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank">{{user.profile.occupation ? user.profile.occupation: 'Not specified' | limitTo: 17 }}{{user.profile.occupation.length > 17 ? '...' : ''}}</a>
 								<div class="status" layout="row" layout-align="space-around center">
 									<span><i class="zmdi zmdi-eye"></i> {{user.profile.views}}</span>
-							        <md-button class="md-fab md-mini fav" ng-click="landing.liked(user)" ng-show="landing.fav"><i ng-class="{upvoted : user.profile.likes.includes(landing.currentUser)}" class="zmdi zmdi-long-arrow-up"></i></md-button>
+							        <md-button class="md-fab md-mini fav" ng-click="landing.liked(user)" ng-show="landing.rootScope.currentUser"><i ng-class="{upvoted : user.profile.likes.includes(landing.currentUser)}" class="zmdi zmdi-long-arrow-up"></i></md-button>
 									<span><i class="zmdi zmdi-star"></i> {{user.profile.likes.length ? user.profile.likes.length : 0}}</span>
 								</div>
 								<p>{{user.profile.firstName + ' ' + user.profile.lastName}}</p>
@@ -63,7 +63,7 @@
 						<a ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank">{{user.profile.occupation ? user.profile.occupation: 'Not specified'}}</a>
 						<div class="status" layout="row" layout-align="space-around center">
 							<span><i class="zmdi zmdi-eye"></i> {{user.profile.views}}</span>
-							<md-button class="md-fab md-mini fav" ng-click="landing.liked(user)" ng-show="landing.fav"><i ng-class="{upvoted : user.profile.likes.includes(landing.currentUser)}" class="zmdi zmdi-long-arrow-up"></i></md-button>
+							<md-button class="md-fab md-mini fav" ng-click="landing.liked(user)" ng-show="landing.rootScope.currentUser"><i ng-class="{upvoted : user.profile.likes.includes(landing.currentUser)}" class="zmdi zmdi-long-arrow-up"></i></md-button>
 							<span><i class="zmdi zmdi-star"></i> {{user.profile.likes.length ? user.profile.likes.length : 0}}</span>
 						</div>
 					</div>

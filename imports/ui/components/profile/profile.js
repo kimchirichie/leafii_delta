@@ -52,10 +52,6 @@ class Profile {
 			this.update(this.rootScope.currentUser);
 		}.bind(this));
 
-		//Kick people not signed in
-		this.rootScope.$watch('currentUser',function(){
-			this.boot();
-		}.bind(this));
 	}
 
 	passBack() {
@@ -127,14 +123,6 @@ class Profile {
 	    }.bind(this));
 	}
 
-	boot(){
-		if(!this.rootScope.currentUser){
-			this.state.go('signin');
-		} else if (!this.rootScope.currentUser.emails[0].verified){
-			Bert.alert('Please verify your email!','warning', 'growl-top-right')
-		}
- 	}
-
 	verify(){
 		Meteor.call('sendVerificationLink', function(error, response){				
 			if(error){
@@ -160,11 +148,9 @@ export default angular.module(name, [
 }).config(config);
  
 function config($stateProvider) {
-  'ngInject';
-  $stateProvider
-    .state('profile', {
-      url: '/profile',
-      template: '<profile></profile>'
-    });
+	'ngInject';
+	$stateProvider.state('profile', {
+        url: '/profile',
+        template: '<profile></profile>'
+	});
 }
-//window.prerenderReady = true;

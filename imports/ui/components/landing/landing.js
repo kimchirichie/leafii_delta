@@ -16,14 +16,6 @@ class Landing {
 		this.rootScope = $rootScope;
 		this.currentUser = Meteor.userId();
 
-		//if user is not logged in
-		if(this.rootScope.currentUser){
-			this.fav = true;
-		}
-		else {
-			this.fav = false;
-		}
-
 		this.rootScope.$watch('search',function(){
 			if(this.rootScope.search){
 				this.state.go('search');
