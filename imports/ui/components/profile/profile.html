@@ -11,7 +11,7 @@
 				<i class="zmdi zmdi-eye zmdi-hc-2x grey"></i>
 				<p> {{profile.rootScope.currentUser.profile.views}}</p>
 				<i class="zmdi zmdi-star zmdi-hc-2x yellow"></i>
-				<p> {{profile.rootScope.currentUser.profile.likes}}</p>
+				<p> {{profile.rootScope.currentUser.profile.likes.length ? profile.rootScope.currentUser.profile.likes.length : 0}}</p>
 			</div>
 
 			<img ng-show="!profile.imgHide" ng-src="{{profile.rootScope.currentUser.profile.image}}"/>
