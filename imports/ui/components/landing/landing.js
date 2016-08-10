@@ -45,9 +45,7 @@ class Landing {
 	}
 
 	liked(user){
-		Meteor.call('likeProfile', user._id, user.profile.url, function(err, res) {
-			//console.log(res);
-		});
+		Meteor.call("likeProfile", user._id, user.profile.url);
 	}
 
 	viewLog(user){
