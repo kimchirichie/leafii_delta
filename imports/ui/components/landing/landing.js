@@ -45,8 +45,16 @@ class Landing {
 	}
 
 	liked(user){
-		Meteor.call("likeProfile", user._id, user.profile.url);
+
+		if(user.profile.likes.includes(Meteor.userId())){
+			Meteor.call("unlikeProfile", user._id, user.profile.url);
+		}
+		else {
+			Meteor.call("likeProfile", user._id, user.profile.url);
+		}
+		
 	}
+
 
 	viewLog(user){
 		var searchKey = 'Browse';
