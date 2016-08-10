@@ -30,7 +30,7 @@
 					<md-card class="md-default-theme" layout="column" ng-repeat="user in users">
 						<p class="forHire" ng-show="{{user.profile.available}}"><i class="zmdi zmdi-circle"></i> Available</p>
 						<p class="noHire" ng-show="{{!user.profile.available}}"><i class="zmdi zmdi-circle"></i> Unavailable</p>
-						<img class="profilePic" ng-src="{{user.profile.image ? user.profile.image : 'images/defaultProfilePic.png'}}"/>
+						<a ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank"><img class="profilePic" ng-src="{{user.profile.image ? user.profile.image : 'images/defaultProfilePic.png'}}"/></a>
 						<md-card-title>
 							<div class="cardInfo" layout="column">
 								<a ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank">{{user.profile.occupation ? user.profile.occupation: 'Not specified' | limitTo: 17 }}{{user.profile.occupation.length > 17 ? '...' : ''}}</a>
@@ -53,29 +53,27 @@
 		
 		<!-- Horizaontal View Mode -->
 		<div ng-show="landing.viewMode == 'line'" class="candidates" layout="column">
-			<a ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank" ng-repeat="user in landing.users">
-				<md-card class="md-default-theme clickable" layout="row">
-					<div class="info" layout="column" layout-align="center center">
-						<img class="profilePicSmall" ng-src="{{user.profile.image ? user.profile.image : 'images/defaultProfilePic.png'}}"/>
-						<p class="noMargin">{{user.profile.firstName + ' ' + user.profile.lastName}}</p>
-						<p class="noMargin"><i class="zmdi zmdi-pin mapColor"></i> {{user.profile.location.formatted_address ? user.profile.location.formatted_address : user.profile.location | limitTo:25}}{{user.profile.location.formatted_address.length > 25 ? '...' : ''}}</p>
-					</div>
-					<md-card-title layout="row" layout="end center">
-						<div class="cardInfoSmall" layout="column">
-							<h3 class="md-headline noMargin">{{user.profile.occupation ? user.profile.occupation: 'Not specified'}}</h3>
-							<p class="forHire" ng-show="{{user.profile.available}}"><i class="zmdi zmdi-circle"></i> Available</p>
-							<p class="noHire" ng-show="{{!user.profile.available}}"><i class="zmdi zmdi-circle"></i> Unavailable</p>
-							<div class="status" layout="row" layout-align="space-around center">
-								<span><i class="zmdi zmdi-eye"></i> {{user.profile.views}}</span>
-								<md-button ng-click="landing.liked(user)" ng-show="landing.fav" class="md-fab md-mini fav" aria-label="like">
-						            <i class="zmdi zmdi-star zmdi-hc-lg"></i>
-						        </md-button>
-								<span><i class="zmdi zmdi-star"></i> 0</span>
-							</div>
+			<md-card class="md-default-theme" layout="row" ng-repeat="user in landing.users">
+				<div class="info" layout="column" layout-align="center center">
+					<p class="forHire" ng-show="{{user.profile.available}}"><i class="zmdi zmdi-circle"></i> Available</p>
+					<p class="noHire" ng-show="{{!user.profile.available}}"><i class="zmdi zmdi-circle"></i> Unavailable</p>
+					<a ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank"><img class="profilePicSmall" ng-src="{{user.profile.image ? user.profile.image : 'images/defaultProfilePic.png'}}"/></a>
+					<p class="noMargin">{{user.profile.firstName + ' ' + user.profile.lastName}}</p>
+					<p class="noMargin"><i class="zmdi zmdi-pin mapColor"></i> {{user.profile.location.formatted_address ? user.profile.location.formatted_address : user.profile.location}}</p>
+				</div>
+				<md-card-title layout="row" layout="end center">
+					<div class="cardInfoSmall" layout="column">
+						<a ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank">{{user.profile.occupation ? user.profile.occupation: 'Not specified'}}</a>
+						<div class="status" layout="row" layout-align="space-around center">
+							<span><i class="zmdi zmdi-eye"></i> {{user.profile.views}}</span>
+							<md-button ng-click="landing.liked(user)" ng-show="landing.fav" class="md-fab md-mini fav" aria-label="like">
+					            <i class="zmdi zmdi-star zmdi-hc-lg"></i>
+					        </md-button>
+							<span><i class="zmdi zmdi-star"></i> {{user.profile.likes}}</span>
 						</div>
-					</md-card-title>
-				</md-card>
-			</a>
+					</div>
+				</md-card-title>
+			</md-card>
 		</div>
 	</div>
 
