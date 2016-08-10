@@ -15,6 +15,7 @@ class Landing {
 		this.viewMode = 'grid';
 		this.rootScope = $rootScope;
 
+		console.log(this.rootScope.currentUser);
 		//if user is not logged in
 		if(this.rootScope.currentUser){
 			this.fav = true;
@@ -42,6 +43,10 @@ class Landing {
 		this.users = Meteor.users.find({}, {sort: {"profile.available": -1, "profile.image": -1}}).fetch();
 		this.numOfUsers = this.users.length;
 		this.sortUsers();
+	}
+
+	liked(user){
+		Meteor.call('likeProfile', user._id, user.profile.url);
 	}
 
 	viewLog(user){
