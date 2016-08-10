@@ -4,7 +4,7 @@ import { Counts } from 'meteor/tmeasday:publish-counts';
 import { Profile_likes } from './collection';
 
 if (Meteor.isServer) {
-	Meteor.publish('likes', function(){
+	Meteor.publish('profile_likes', function(){
 		const selector = {target_userId: this.userId};
 		return Profile_likes.find(selector);
 	});

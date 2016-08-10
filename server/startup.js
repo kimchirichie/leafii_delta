@@ -75,6 +75,10 @@ Meteor.startup(()=>{
 			if(Meteor.userId()){
 				user = Meteor.userId();
 			}
+			// if(user == target_userId)
+			// {
+			// 	return;
+			// }
 			date = Math.floor(Date.now() / 60000);
 			data = {
 				user_id: user, 
@@ -90,6 +94,10 @@ Meteor.startup(()=>{
 		likeProfile(liked_userId, url){
 			if(Meteor.userId()){
 				user = Meteor.userId();
+				// if(user == target_userId)
+				// {
+				// 	return;
+				// }
 				date = Math.floor(Date.now() / 60000);
 				data = {
 					clicker_user_id: user, 
