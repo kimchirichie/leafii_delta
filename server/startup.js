@@ -88,40 +88,39 @@ Meteor.startup(()=>{
 		},
 
 		likeProfile(liked_userId, url){
-			Future = Npm.require('fibers/future');
-			var myFuture = new Future();	
 			if(Meteor.userId()){
 				user = Meteor.userId();
 				//console.log(Profile_likes.find({clicker_user_id: user, liked_user_id: liked_userId}).count());
 				//console.log(user+" ; "+liked_userId);
-				if(Profile_likes.find({clicker_user_id: user, liked_user_id: liked_userId}).count())
-				{
-					data = {
-						clicker_user_id: user, 
-						liked_user_id: liked_userId,
-					};
-					//console.log("Delete like");
-					Profile_likes.remove(data);
-					Meteor.users.update({_id:liked_userId}, {$pull: {"profile.likes": user}}, false, false);
-					myFuture.return(true);
-				}
-				else
-				{
-					date = Math.floor(Date.now() / 60000);
-					data = {
-						clicker_user_id: user, 
-						liked_user_id: liked_userId,
-						date: date,
-						url: url
-					};
-					//console.log("Add like");
-					Profile_likes.insert(data);
-					Meteor.users.update({_id:liked_userId}, {$addToSet: {"profile.likes": user}}, false, false);
-					myFuture.return(false);
-				}
-				return myFuture.wait();
+				date = Math.floor(Date.now() / 60000);
+				data = {
+					clicker_user_id: user, 
+					liked_user_id: liked_userId,
+					date: date,
+					url: url
+				};
+				//console.log("Add like");
+				Profile_likes.insert(data);
+				Meteor.users.update({_id:liked_userId}, {$addToSet: {"profile.likes": user}}, false, false);
+				myFuture.return(false);
+				
+			}
+		}
+		unlikeProfile(liked_userId){
+			if(Meteor.userId()){
+				user = Meteor.userId();
+				//console.log(Profile_likes.find({clicker_user_id: user, liked_user_id: liked_userId}).count());
+				//console.log(user+" ; "+liked_userId);
+				data = {
+					clicker_user_id: user, 
+					liked_user_id: liked_userId,
+				};
+				//console.log("Delete like");
+				Profile_likes.remove(data);
+				Meteor.users.update({_id:liked_userId}, {$pull: {"profile.likes": user}}, false, false);
+				myFuture.return(true);
 			}
 		}
 	});
 
-});
+});``
