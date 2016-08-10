@@ -28,8 +28,8 @@
 						<a ng-click="search.viewLog(result)" href="{{search.absolutify(result.profile.url)}}" target="_blank" ng-init="search.sortUsers(search.websites)">{{result.profile.occupation ? result.profile.occupation: 'Not specified'}}</a>
 						<div class="status" layout="row" layout-align="space-around center">
 							<span><i class="zmdi zmdi-eye"></i> {{result.profile.views}}</span>
-							<md-button class="md-fab md-mini fav" ng-click="search.liked(user)" ng-show="search.rootScope.currentUser" aria-label="like"><i ng-class="{upvoted : user.profile.likes.includes(search.currentUser)}" class="zmdi zmdi-long-arrow-up"></i></md-button>
-							<span><i class="zmdi zmdi-star"></i> {{result.profile.likes.length ? user.profile.likes.length: 0}}</span>
+							<md-button class="md-fab md-mini fav" ng-click="search.liked(result)" ng-show="search.rootScope.currentUser" aria-label="like"><i ng-class="{upvoted : result.profile.likes.includes(search.currentUser)}" class="zmdi zmdi-long-arrow-up"></i></md-button>
+							<span><i class="zmdi zmdi-star"></i> {{result.profile.likes.length ? result.profile.likes.length : 0}}</span>
 						</div>
 					</div>
 				</md-card-title>
@@ -50,7 +50,7 @@
 								<div class="status" layout="row" layout-align="space-around center">
 									<span><i class="zmdi zmdi-eye"></i> {{user.profile.views}}</span>
 									 <md-button class="md-fab md-mini fav" ng-click="search.liked(user)" ng-show="search.rootScope.currentUser" aria-label="like"><i ng-class="{upvoted : user.profile.likes.includes(search.currentUser)}" class="zmdi zmdi-long-arrow-up"></i></md-button>
-									<span><i class="zmdi zmdi-star"></i> 0</span>
+									<span><i class="zmdi zmdi-star"></i> {{user.profile.likes.length}}</span>
 								</div>
 								<p>{{user.profile.firstName + ' ' + user.profile.lastName}}</p>
 								<p><i class="zmdi zmdi-pin mapColor"></i> {{user.profile.location.formatted_address ? user.profile.location.formatted_address : user.profile.location}}</p>

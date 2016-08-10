@@ -37,7 +37,7 @@
 								<div class="status" layout="row" layout-align="space-around center">
 									<span><i class="zmdi zmdi-eye"></i> {{user.profile.views}}</span>
 							        <md-button class="md-fab md-mini fav" ng-click="landing.liked(user)" ng-show="landing.rootScope.currentUser" aria-label="like"><i ng-class="{upvoted : user.profile.likes.includes(landing.currentUser)}" class="zmdi zmdi-long-arrow-up"></i></md-button>
-									<span><i class="zmdi zmdi-star"></i> {{user.profile.likes.length ? user.profile.likes.length : 0}}</span>
+									<span><i class="zmdi zmdi-star"></i> {{user.profile.likes.length}}</span>
 								</div>
 								<p>{{user.profile.firstName + ' ' + user.profile.lastName}}</p>
 								<p><i class="zmdi zmdi-pin mapColor"></i> {{user.profile.location.formatted_address ? user.profile.location.formatted_address : user.profile.location | limitTo:25}}{{user.profile.location.formatted_address.length > 25 ? '...' : ''}}</p>
@@ -64,7 +64,7 @@
 						<div class="status" layout="row" layout-align="space-around center">
 							<span><i class="zmdi zmdi-eye"></i> {{user.profile.views}}</span>
 							<md-button class="md-fab md-mini fav" ng-click="landing.liked(user)" ng-show="landing.rootScope.currentUser" aria-label="like"><i ng-class="{upvoted : user.profile.likes.includes(landing.currentUser)}" class="zmdi zmdi-long-arrow-up"></i></md-button>
-							<span><i class="zmdi zmdi-star"></i> {{user.profile.likes.length ? user.profile.likes.length : 0}}</span>
+							<span><i class="zmdi zmdi-star"></i> {{user.profile.likes.length}}</span>
 						</div>
 					</div>
 				</md-card-title>

@@ -29,12 +29,6 @@ class Profile {
 			}
 		});
 
-		this.rootScope.$watch('search',function(){
-			if(this.rootScope.search){
-				this.state.go('search');
-			}
-		}.bind(this));
-
 		//Hide profile pic while editing
 		$scope.$on('editImg', function(event, arg){
 			this.progress = true;

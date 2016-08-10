@@ -37,7 +37,6 @@
 
 	.status {
 		width: 300px;
-		border: solid thin grey;
 		margin-bottom: 20px;
 
 		p {
@@ -45,15 +44,19 @@
 			font-size: 20px;
 			font-weight: bold;
 		}
-	}
 
+		.space{
+			margin-left: 60px;
+		}
+
+		i {
+			line-height: 70px;
+		}
+
+	}
+	
 	.grey {
 		color: grey;
-	}
-
-	.yellow {
-		color: #ecec10;
-		background: grey;
 	}
 
 }
