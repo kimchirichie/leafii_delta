@@ -15,7 +15,6 @@ class Landing {
 		this.viewMode = 'grid';
 		this.rootScope = $rootScope;
 
-		console.log(this.rootScope.currentUser);
 		//if user is not logged in
 		if(this.rootScope.currentUser){
 			this.fav = true;
