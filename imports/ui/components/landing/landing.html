@@ -37,10 +37,10 @@
 									<h3 class="md-headline">{{user.profile.occupation ? user.profile.occupation: 'Not specified' | limitTo: 17 }}{{user.profile.occupation.length > 17 ? '...' : ''}}</h3>
 									<div class="status" layout="row" layout-align="space-around center">
 										<span><i class="zmdi zmdi-eye"></i> {{user.profile.views}}</span>
-	<!-- 									 <md-button ng-show="landing.fav" class="md-fab md-mini fav" aria-label="like">
+										 <md-button ng-show="landing.fav" class="md-fab md-mini fav" aria-label="like">
 								            <i class="zmdi zmdi-star zmdi-hc-lg"></i>
 								        </md-button>
-										<span><i class="zmdi zmdi-star"></i> 0</span> -->
+										<span><i class="zmdi zmdi-star"></i> 0</span>
 									</div>
 									<p>{{user.profile.firstName + ' ' + user.profile.lastName}}</p>
 									<p><i class="zmdi zmdi-pin mapColor"></i> {{user.profile.location.formatted_address ? user.profile.location.formatted_address : user.profile.location | limitTo:25}}{{user.profile.location.formatted_address.length > 25 ? '...' : ''}}</p>
@@ -69,12 +69,11 @@
 							<p class="noHire" ng-show="{{!user.profile.available}}"><i class="zmdi zmdi-circle"></i> Unavailable</p>
 							<div class="status" layout="row" layout-align="space-around center">
 								<span><i class="zmdi zmdi-eye"></i> {{user.profile.views}}</span>
-<!-- 								<md-button ng-show="landing.fav" class="md-fab md-mini fav" aria-label="like">
+								<md-button ng-show="landing.fav" class="md-fab md-mini fav" aria-label="like">
 						            <i class="zmdi zmdi-star zmdi-hc-lg"></i>
-						        </md-button> -->
-								<!-- <span><i class="zmdi zmdi-star"></i> 0</span> -->
+						        </md-button>
+								<span><i class="zmdi zmdi-star"></i> 0</span>
 							</div>
-							<!-- <md-button class="md-primary md-raised favBtn">Favourite</md-button> -->
 						</div>
 					</md-card-title>
 				</md-card>

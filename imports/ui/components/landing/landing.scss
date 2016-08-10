@@ -237,3 +237,136 @@ md-card-title {
 	padding: 0 20px 0 20px;
 }
 
+#profiles {
+	
+	padding: 5% 5% 15% 5%;
+	background: #dcdcdc;
+
+	img {
+		max-width: 100%;
+	}
+}
+
+.loadingData {
+	margin: 15%;
+	text-align: center;
+}
+
+.forHire {
+	margin:0;
+	color: #2fa02f;
+	padding: 10px;
+	font-weight: bold;
+	font-family: raleway;
+}
+
+.noHire {
+	margin: 0;
+	color: #808080;
+	padding: 10px;
+	font-weight: bold;
+	font-family: raleway;
+}
+
+.mapColor {
+	color: #f15b5b;
+}
+
+.favBtn {
+	width: 50%;
+}
+
+.candidates {
+	align-items: center;
+
+	a {
+		width: 100%;
+		margin: 10px;
+		text-decoration: none;
+		color: black;
+		box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+	}
+
+	md-card {
+		
+		width: auto;
+		align-items: center;
+		margin: 0;
+
+		&:hover {
+			box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+			background: $leafii-theme;
+		}
+	}
+
+}
+
+@media(max-width: 1279px){
+	.candidates:nth-child(2){
+		margin: 0 0 0 20px;
+	}
+}
+
+@media(max-width: 600px){
+	.candidates:nth-child(2) {
+		margin: 0;
+	}
+}
+
+.full-width {
+	width: 100%;
+	align-items: center;
+}
+
+.info {
+	padding: 10px;
+}
+
+.cardInfo {
+	width: 100%;
+	text-align: center;
+}
+
+.noMargin {
+	margin: 0;
+}
+
+.cardInfoSmall {
+	text-align: center;
+}
+
+.featuredCan {
+	padding: 20px 20px 20px 20px;
+	font-weight: bold;
+	text-align: center;
+
+}
+
+.board {
+	padding: 50px 10%;
+}
+
+md-card-title {
+	padding: 0;
+	
+	p {
+		margin: 0;
+	}
+}
+
+.profilePic {
+	width: 200px;
+	height: 200px;
+	border-radius: 50% !important;
+	padding: 10px;
+}
+
+.profilePicSmall {
+	width: 100px;
+	height: 100px;
+	border-radius: 50% !important;
+	padding: 10px;
+}
+
+
+

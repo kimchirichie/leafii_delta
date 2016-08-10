@@ -14,6 +14,13 @@ class Search {
 		this.state = $state;
 		this.viewMode = 'line';
 		this.rootScope = $rootScope;
+		//if user is not logged in
+		if(this.rootScope.currentUser){
+			this.fav = true;
+		}
+		else {
+			this.fav = false;
+		}
 		this.subscribe('keywords', () => [this.getReactively('rootScope.search')]);
 		this.helpers({
 			results(){
