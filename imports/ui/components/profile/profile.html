@@ -8,10 +8,19 @@
 		<div ng-show="!profile.showPass" class="profileImg" layout="column" layout-align="start center" flex="40" flex-sm="100" flex-xs="100">
 
 			<div class="status" layout="row" layout-align="space-around center">
-				<i class="zmdi zmdi-eye zmdi-hc-2x grey"></i>
-				<p> {{profile.rootScope.currentUser.profile.views}}</p>
-				<i class="zmdi zmdi-star zmdi-hc-2x yellow"></i>
-				<p> {{profile.rootScope.currentUser.profile.likes.length ? profile.rootScope.currentUser.profile.likes.length : 0}}</p>
+				<div layout="row" layout="center center">
+					<i class="zmdi zmdi-eye zmdi-hc-2x grey">
+						<md-tooltip md-direction="top">Views</md-tooltip>
+			        </i>
+					<p> {{profile.rootScope.currentUser.profile.views}}</p>
+				</div>
+
+				<div layout="row" layout="center center">
+					<i class="zmdi zmdi-star zmdi-hc-2x grey">
+						<md-tooltip md-direction="top">Likes</md-tooltip>
+					</i>
+					<p> {{profile.rootScope.currentUser.profile.likes.length}}</p>
+				</div>
 			</div>
 
 			<img ng-show="!profile.imgHide" ng-src="{{profile.rootScope.currentUser.profile.image}}"/>

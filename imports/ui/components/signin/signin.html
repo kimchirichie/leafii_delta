@@ -18,7 +18,7 @@
 			</md-input-container>
 
 			<div layout="column" layout-align="center center">
-				<md-button class="md-raised md-primary full-width" ng-show="!signin.wait" type="submit">Sign In</md-button>
+				<md-button class="md-raised md-primary full-width" ng-hide="signin.wait" type="submit">Sign In</md-button>
 				<md-progress-circular ng-show="signin.wait" md-mode='indeterminate' md-diameter="40px"></md-progress-circular>
 			</div>
 			

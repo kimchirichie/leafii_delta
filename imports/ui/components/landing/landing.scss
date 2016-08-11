@@ -12,8 +12,18 @@
 	}
 
 	.fav {
-		color: yellow;
-		background: grey !important;
+		color: white;
+		background: grey;
+		cursor: pointer;
+		font-size: 30px;
+
+		&:hover {
+			color: $leafii-theme;
+		}
+	}
+
+	.upvoted {
+		color: $leafii-theme;
 	}
 
 	.filterBar {
@@ -36,10 +46,6 @@
 		padding: 10px;
 		width: 100%;
 	}
-}
-
-.liked {
-	color: red;
 }
 
 .All {
@@ -81,10 +87,6 @@
 	text-align: center;
 }
 
-.favBtn {
-	width: 50%;
-}
-
 
 .hot-candidates {
 	align-items: center;
@@ -110,10 +112,6 @@
 			align-items: center;
 			padding: 25px;
 		}
-
-		.favBtn {
-			width: 100%;
-		}
 	}
 	
 
@@ -126,10 +124,6 @@
 		md-card {
 			width: 100%;
 			align-items: center;
-		}
-
-		.favBtn {
-			width: 100%;
 		}
 
 	}
@@ -201,7 +195,7 @@ md-card-title {
 	text-align: center;
 	background: #27272b;
 	color: white;
-	padding: 60px;
+	padding: 30px;
 
 	.submitPort {
 		color: black;
@@ -271,9 +265,6 @@ md-card-title {
 	color: #f15b5b;
 }
 
-.favBtn {
-	width: 50%;
-}
 
 .candidates {
 	align-items: center;

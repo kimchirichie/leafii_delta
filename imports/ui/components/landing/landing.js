@@ -14,14 +14,7 @@ class Landing {
 		this.state = $state;
 		this.viewMode = 'grid';
 		this.rootScope = $rootScope;
-
-		//if user is not logged in
-		if(this.rootScope.currentUser){
-			this.fav = true;
-		}
-		else {
-			this.fav = false;
-		}
+		this.currentUser = Meteor.userId();
 
 		this.rootScope.$watch('search',function(){
 			if(this.rootScope.search){
@@ -45,8 +38,13 @@ class Landing {
 	}
 
 	liked(user){
-		Meteor.call("likeProfile", user._id, user.profile.url);
+		if(user.profile.likes.includes(this.currentUser)){
+			Meteor.call("unlikeProfile", user._id, user.profile.url);
+		} else {
+			Meteor.call("likeProfile", user._id, user.profile.url);
+		}	
 	}
+
 
 	viewLog(user){
 		var searchKey = 'Browse';
