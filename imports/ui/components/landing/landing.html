@@ -28,11 +28,11 @@
 			<div class="candidates" layout="row" layout-sm="column" layout-xs="column" ng-repeat="users in usersInPairs" flex>
 				<div class="full-width" layout="row" layout-md="column" layout-sm="column" layout-xs="column">
 					<md-card class="md-default-theme" layout="column" ng-repeat="user in users">
+						<md-tooltip md-direction="top">{{landing.absolutify(user.profile.url)}}</md-tooltip>
 						<p class="forHire" ng-show="{{user.profile.available}}"><i class="zmdi zmdi-circle"></i> Available</p>
 						<p class="noHire" ng-show="{{!user.profile.available}}"><i class="zmdi zmdi-circle"></i> Unavailable</p>
 						<a ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank">
 							<img class="profilePic" ng-src="{{user.profile.image ? user.profile.image : 'images/defaultProfilePic.png'}}"/>
-							<md-tooltip md-direction="left">{{landing.absolutify(user.profile.url)}}</md-tooltip>
 						</a>
 						<md-card-title>
 							<div class="cardInfo" layout="column">
