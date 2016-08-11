@@ -24,7 +24,7 @@
 			<md-button class="md-raised" ng-click="horizontal = true" aria-label="Horizontal"><i class="zmdi zmdi-menu"></i></md-button>
 		</div>
 		
-
+		<!-- Grid View Mode -->
 		<div layout="row" layout-align="center center" layout-wrap>
 
 	        <md-card ng-show="!horizontal" class="md-default-theme candidates grid" layout="column" layout-align="center center" ng-repeat="user in landing.users | orderBy: cardFilter">
@@ -32,7 +32,7 @@
 				<p class="forHire" ng-show="{{user.profile.available}}"><i class="zmdi zmdi-circle"></i> Available</p>
 				<p class="noHire" ng-show="{{!user.profile.available}}"><i class="zmdi zmdi-circle"></i> Unavailable</p>
 				<a ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank">
-					<img class="profilePic" ng-src="{{user.profile.image ? user.profile.image : 'images/defaultProfilePic.png'}}"/>
+					<img class="profilePic" ng-src="{{user.profile.image ? landing.secureProtocol(user.profile.image) : 'images/defaultProfilePic.png'}}"/>
 				</a> 
 	          <md-card-content>
            		<div class="cardInfo" layout="column">
@@ -56,7 +56,7 @@
 				<div class="info" layout="column" layout-align="center center">
 					<p class="forHire" ng-show="{{user.profile.available}}"><i class="zmdi zmdi-circle"></i> Available</p>
 					<p class="noHire" ng-show="{{!user.profile.available}}"><i class="zmdi zmdi-circle"></i> Unavailable</p>
-					<a ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank"><img class="profilePicSmall" ng-src="{{user.profile.image ? user.profile.image : 'images/defaultProfilePic.png'}}"/></a>
+					<a ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank"><img class="profilePicSmall" ng-src="{{user.profile.image ? landing.secureProtocol(user.profile.image) : 'images/defaultProfilePic.png'}}"/></a>
 					<p class="noMargin">{{user.profile.firstName + ' ' + user.profile.lastName}}</p>
 					<p class="noMargin"><i class="zmdi zmdi-pin mapColor"></i> {{user.profile.location.formatted_address ? user.profile.location.formatted_address : user.profile.location}}</p>
 				</div>
