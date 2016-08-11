@@ -15,13 +15,7 @@ class Search {
 		this.viewMode = 'line';
 		this.rootScope = $rootScope;
 		this.currentUser = Meteor.userId();
-		//if user is not logged in
-		if(this.rootScope.currentUser){
-			this.fav = true;
-		}
-		else {
-			this.fav = false;
-		}
+		
 		this.subscribe('keywords', () => [this.getReactively('rootScope.search')]);
 		this.helpers({
 			results(){
@@ -52,25 +46,6 @@ class Search {
 	liked(user){
 		Meteor.call("likeProfile", user._id, user.profile.url);
 	}
-
-
-	sortUsers(result){
-
-	    var usersInPairs = [];
-	    var usersInFours = [];
-
-	    //Cuts data in columns of 2
-	    for (var i = 0; i < result.length; i += 2) {
-	        usersInPairs.push(result.slice(i, i + 2));
-	    }
-
-	    //Cuts data in columns of 4
-	    for (var k = 0; k < usersInPairs.length; k += 2){
-	        usersInFours.push(usersInPairs.slice(k, k + 2));
-	    }
-	    
-	    this.usersInFours = usersInFours;
-  	}
 
 	absolutify(url){
 		return 'http://' + url.replace(/https:|http:|\/\//gi, "");

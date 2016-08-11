@@ -14,7 +14,6 @@ class Landing {
 		this.state = $state;
 		this.viewMode = 'grid';
 		this.scope = $scope;
-		this.loading = false;
 		this.rootScope = $rootScope;
 		this.currentUser = Meteor.userId();
 
@@ -26,7 +25,7 @@ class Landing {
 
 		this.helpers({
 			users(){
-				return Meteor.users.find({}, {sort: {"profile.available": -1}})
+				return Meteor.users.find();
 			}
 		});
 		
@@ -36,22 +35,6 @@ class Landing {
 
 	liked(user){
 		Meteor.call("likeProfile", user._id, user.profile.url);
-	}
-
-	mostLiked(){
-		this.users = Meteor.users.find({}, {sort: {"profile.likes": -1}}).fetch();
-		this.sortUsers();
-	}
-
-	mostViewed(){
-		this.users = Meteor.users.find({}, {sort: {"profile.views": -1}}).fetch();
-		this.sortUsers();
-	}
-
-	mostRecent(){
-		this.users = Meteor.users.find({}, {sort: {"createdAt": -1}}).fetch();
-		this.sortUsers();
-		
 	}
 
 	viewLog(user){
