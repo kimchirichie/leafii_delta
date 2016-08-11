@@ -50,11 +50,7 @@ class Search {
 	}
 
 	liked(user){
-		if(user.profile.likes.includes(this.currentUser)){
-			Meteor.call("unlikeProfile", user._id, user.profile.url);
-		} else {
-			Meteor.call("likeProfile", user._id, user.profile.url);
-		}	
+		Meteor.call("likeProfile", user._id, user.profile.url);
 	}
 
 
