@@ -17,6 +17,7 @@ class Header {
 	logout() {
 		this.loggedIn = false;
 		Meteor.logout();
+		this.gohome();
 	}
 
 	gohome(){

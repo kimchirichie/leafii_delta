@@ -13,6 +13,7 @@ class Landing {
 		$reactive(this).attach($scope);
 		this.state = $state;
 		this.viewMode = 'grid';
+		this.scope = $scope;
 		this.rootScope = $rootScope;
 		this.currentUser = Meteor.userId();
 
@@ -21,20 +22,22 @@ class Landing {
 				this.state.go('search');
 			}
 		}.bind(this));
+
+		this.helpers({
+			users(){
+				return Meteor.users.find({}, {sort: {"profile.available": -1, "profile.image": -1}})
+			}
+		})
+		
 		const handle = Meteor.subscribe("allUsers");
-		// // needs to wait until the subscription is ready.
+		// // needs to wait until the subscription is ready then sort!
 		Tracker.autorun(() => {
 			if(handle.ready()){
-				this.getUsers();
+				this.sortUsers();
 				$scope.$apply();
 			}
 		});
-	}
 
-	getUsers(){
-		this.users = Meteor.users.find({}, {sort: {"profile.available": -1, "profile.image": -1}}).fetch();
-		this.numOfUsers = this.users.length;
-		this.sortUsers();
 	}
 
 	liked(user){
@@ -45,12 +48,10 @@ class Landing {
 		}	
 	}
 
-
 	viewLog(user){
 		var searchKey = 'Browse';
 		Meteor.call('addToViews', user._id, searchKey, user.profile.url);
 	}
-
 
 	sortUsers(){
 		var usersInPairs = [];
