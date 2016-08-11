@@ -22,7 +22,6 @@
 					<p> {{profile.rootScope.currentUser.profile.likes.length}}</p>
 				</div>
 			</div>
-
 			<img ng-show="!profile.imgHide" ng-src="{{profile.rootScope.currentUser.profile.image ? profile.secureProtocol(profile.rootScope.currentUser.profile.image) : 'images/defaultProfilePic.png'}}"/>
 			<image-uploader files="profile.user.images"></image-uploader>
 			<md-progress-circular ng-if="profile.progress" md-mode='indeterminate' md-diameter="100px"></md-progress-circular>

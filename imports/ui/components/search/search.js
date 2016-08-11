@@ -52,10 +52,11 @@ class Search {
 	}
 
 	secureProtocol(url){
-		if(url)
+		if(url){
 			return 'https://' + url.replace(/https:|http:|\/\//gi, "");
-		else
+		}else{
 			return "";
+		}
 	}
 }
 
@@ -78,4 +79,3 @@ function config($stateProvider){
 		template: '<search></search>'
 	});
 }
-//window.prerenderReady = true;

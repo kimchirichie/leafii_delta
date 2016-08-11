@@ -128,10 +128,13 @@ class Profile {
 	}
 
 	secureProtocol(url){
-		if(url)
+		if(url){
 			return 'https://' + url.replace(/https:|http:|\/\//gi, "");
-		else
-			return "";	}
+		}else{
+			return "";
+		}
+	}
+
 };
 
 const name = 'profile';
