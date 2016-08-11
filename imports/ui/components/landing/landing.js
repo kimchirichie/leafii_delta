@@ -13,8 +13,8 @@ class Landing {
 		$reactive(this).attach($scope);
 		this.state = $state;
 		this.viewMode = 'grid';
-		this.loading = false;
 		this.scope = $scope;
+		this.loading = false;
 		this.rootScope = $rootScope;
 		this.currentUser = Meteor.userId();
 
@@ -46,19 +46,16 @@ class Landing {
 	}
 
 	mostLiked(){
-		this.loading = true;
 		this.users = Meteor.users.find({}, {sort: {"profile.likes": -1}}).fetch();
 		this.sortUsers();
 	}
 
 	mostViewed(){
-		this.loading = true;
 		this.users = Meteor.users.find({}, {sort: {"profile.views": -1}}).fetch();
 		this.sortUsers();
 	}
 
 	mostRecent(){
-		this.loading = true;
 		this.users = Meteor.users.find({}, {sort: {"createdAt": -1}}).fetch();
 		this.sortUsers();
 		

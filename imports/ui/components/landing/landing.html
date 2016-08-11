@@ -3,13 +3,14 @@
 	<div class="intro">
 		<h1 class="animated fadeIn">Showcase & Discover Personal Websites</h1>
 	</div>
+
 	<div class="filterBar" layout="row" layout-align="center center" layout-xs="column">
-		<span ng-click="landing.mostRecent()">Most Recent</span>
-		<span ng-click="landing.mostViewed()">Most Viewed</span>
+		<span ng-click="landing.mostRecent();">Most Recent</span>
+		<span ng-click="landing.mostViewed();">Most Viewed</span>
 		<span ng-click="landing.mostLiked()">Most Liked</span>
 	</div>
 
-	<div ng-show="!landing.usersInFours || landing.loading">
+	<div ng-show="!landing.usersInFours">
 		<div class="loadingData" layout="row" layout-xs="column" layout-align="center center">
 			<h1>Loading Users.....</h1>
 			<md-progress-circular md-mode='indeterminate' md-diameter="150px"></md-progress-circular>
@@ -63,7 +64,9 @@
 				</div>
 				<md-card-title layout="row" layout="end center">
 					<div class="cardInfoSmall" layout="column">
-						<a ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank">{{user.profile.occupation ? user.profile.occupation: 'Not specified'}}</a>
+						<a ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank">{{user.profile.occupation ? user.profile.occupation: 'Not specified'}}
+							<md-tooltip md-direction="top">{{landing.absolutify(user.profile.url)}}</md-tooltip>
+						</a>
 						<div class="status" layout="row" layout-align="space-around center">
 							<span><i class="zmdi zmdi-eye"></i> {{user.profile.views}}</span>
 							<md-button class="md-fab md-mini fav" ng-click="landing.liked(user)" ng-show="landing.rootScope.currentUser" aria-label="like"><i ng-class="{upvoted : user.profile.likes.includes(landing.currentUser)}" class="zmdi zmdi-long-arrow-up"></i></md-button>
