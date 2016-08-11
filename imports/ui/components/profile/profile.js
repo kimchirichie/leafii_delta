@@ -126,6 +126,13 @@ class Profile {
 			}
 		}.bind(this));
 	}
+
+	secureProtocol(url){
+			if(url)
+				return 'https://' + url.replace(/https:|http:|\/\//gi, "");
+			else
+				return "";
+	}
 };
 
 const name = 'profile';

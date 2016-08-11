@@ -30,7 +30,7 @@
 					<md-card class="md-default-theme" layout="column" ng-repeat="user in users">
 						<p class="forHire" ng-show="{{user.profile.available}}"><i class="zmdi zmdi-circle"></i> Available</p>
 						<p class="noHire" ng-show="{{!user.profile.available}}"><i class="zmdi zmdi-circle"></i> Unavailable</p>
-						<a ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank"><img class="profilePic" ng-src="{{user.profile.image ? user.profile.image : 'images/defaultProfilePic.png'}}"/></a>
+						<a ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank"><img class="profilePic" ng-src="{{user.profile.image ? landing.secureProtocol(user.profile.image) : 'images/defaultProfilePic.png'}}"/></a>
 						<md-card-title>
 							<div class="cardInfo" layout="column">
 								<a ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank">{{user.profile.occupation ? user.profile.occupation: 'Not specified' | limitTo: 17 }}{{user.profile.occupation.length > 17 ? '...' : ''}}</a>
@@ -54,7 +54,7 @@
 				<div class="info" layout="column" layout-align="center center">
 					<p class="forHire" ng-show="{{user.profile.available}}"><i class="zmdi zmdi-circle"></i> Available</p>
 					<p class="noHire" ng-show="{{!user.profile.available}}"><i class="zmdi zmdi-circle"></i> Unavailable</p>
-					<a ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank"><img class="profilePicSmall" ng-src="{{user.profile.image ? user.profile.image : 'images/defaultProfilePic.png'}}"/></a>
+					<a ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank"><img class="profilePicSmall" ng-src="{{user.profile.image ? landing.secureProtocol(user.profile.image) : 'images/defaultProfilePic.png'}}"/></a>
 					<p class="noMargin">{{user.profile.firstName + ' ' + user.profile.lastName}}</p>
 					<p class="noMargin"><i class="zmdi zmdi-pin mapColor"></i> {{user.profile.location.formatted_address ? user.profile.location.formatted_address : user.profile.location}}</p>
 				</div>
