@@ -76,6 +76,12 @@ class Search {
 		return 'http://' + url.replace(/https:|http:|\/\//gi, "");
 	}
 
+	secureProtocol(url){
+		if(url)
+			return 'https://' + url.replace(/https:|http:|\/\//gi, "");
+		else
+			return "";
+	}
 }
 
 const name = 'search';

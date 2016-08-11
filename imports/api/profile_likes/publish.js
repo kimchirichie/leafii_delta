@@ -8,9 +8,7 @@ if (Meteor.isServer) {
 		const selector = {clicker_user_id: this.userId};
 		return Profile_likes.find(selector);
 	});
-}
-// List of likes on the user's profile
-if (Meteor.isServer) {
+	
 	Meteor.publish('my_profile_likes', function(){
 		const selector = {liked_user_id: this.userId};
 		return Profile_likes.find(selector);

@@ -26,7 +26,7 @@ class Landing {
 
 		this.helpers({
 			users(){
-				return Meteor.users.find({}, {sort: {"profile.available": -1}})
+				return Meteor.users.find({}, {sort: {"createdAt": -1}});
 			}
 		});
 		
@@ -94,6 +94,13 @@ class Landing {
 
 	absolutify(url){
 		return 'http://' + url.replace(/https:|http:|\/\//gi, "");
+	}
+
+	secureProtocol(url){
+		if(url)
+			return 'https://' + url.replace(/https:|http:|\/\//gi, "");
+		else
+			return "";
 	}
 }
 

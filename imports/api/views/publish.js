@@ -9,6 +9,11 @@ if (Meteor.isServer) {
 		// Counts.publish(this, 'numberOfViews', Views.find(selector),{noReady:true});
 		return Views.find(selector);
 	});
+	Meteor.publish('viewsThisWeek', function(){
+		lastweek = Math.floor((Date.now() / 60000) - 10080);
+		const selector = {target_userId: this.userId, date: {$gt: lastweek}};
+		return Views.find(selector);
+	});
 }
 
 Views.allow({
