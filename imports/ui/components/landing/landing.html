@@ -5,9 +5,9 @@
 	</div>
 
 	<div class="filterBar" layout="row" layout-align="center center" layout-xs="column">
-		<span ng-click="cardFilter = '-createdAt'">Most Recent</span>
-		<span ng-click="cardFilter = '-profile.views'">Most Viewed</span>
-		<span ng-click="cardFilter = '-profile.likes'">Most Liked</span>
+		<span ng-class="{lightUp: landing.onfilter == 'recent'}" ng-click="cardFilter = '-createdAt'; landing.onfilter = 'recent'">Most Recent</span>
+		<span ng-class="{lightUp: landing.onfilter == 'view'}" ng-click="cardFilter = '-profile.views'; landing.onfilter = 'view'">Most Viewed</span>
+		<span ng-class="{lightUp: landing.onfilter == 'like'}" ng-click="cardFilter = '-profile.likes'; landing.onfilter = 'like'">Most Liked</span>
 	</div>
 
 	<div ng-show="!landing.users">
@@ -17,17 +17,17 @@
 		</div>
 	</div>
 
-	<div class="board" ng-init="horizontal = false; cardFilter = '-createdAt'">
+	<div class="board" ng-init="cardFilter = '-createdAt'">
 
 		<div ng-show="landing.users" layout="row" layout-align="center center">
-			<md-button class="md-raised" ng-click="horizontal = false" aria-label="Grid"><i class="zmdi zmdi-view-module"></i></md-button>
-			<md-button class="md-raised" ng-click="horizontal = true" aria-label="Horizontal"><i class="zmdi zmdi-menu"></i></md-button>
+			<md-button class="md-raised" ng-click="landing.horizontal = false" aria-label="Grid"><i class="zmdi zmdi-view-module"></i></md-button>
+			<md-button class="md-raised" ng-click="landing.horizontal = true" aria-label="Horizontal"><i class="zmdi zmdi-menu"></i></md-button>
 		</div>
 		
 		<!-- Grid View Mode -->
 		<div layout="row" layout-align="center center" layout-wrap>
 
-	        <md-card ng-show="!horizontal" class="md-default-theme candidates grid" layout="column" layout-align="center center" ng-repeat="user in landing.users | orderBy: cardFilter">
+	        <md-card ng-show="!landing.horizontal" class="md-default-theme candidates grid" layout="column" layout-align="center center" ng-repeat="user in landing.users | orderBy: cardFilter">
 				<md-tooltip md-direction="top">{{landing.absolutify(user.profile.url)}}</md-tooltip>
 				<p class="forHire" ng-show="{{user.profile.available}}"><i class="zmdi zmdi-circle"></i> Available</p>
 				<p class="noHire" ng-show="{{!user.profile.available}}"><i class="zmdi zmdi-circle"></i> Unavailable</p>
@@ -51,7 +51,7 @@
 	
 		
 		<!-- Horizaontal View Mode -->
-		<div ng-show="horizontal" class="candidates horizontal" layout="column">
+		<div ng-show="landing.horizontal" class="candidates horizontal" layout="column">
 			<md-card class="md-default-theme" layout="row" ng-repeat="user in landing.users | orderBy: cardFilter">
 				<div class="info" layout="column" layout-align="center center">
 					<p class="forHire" ng-show="{{user.profile.available}}"><i class="zmdi zmdi-circle"></i> Available</p>

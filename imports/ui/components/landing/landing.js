@@ -12,7 +12,8 @@ class Landing {
 		'ngInject';
 		$reactive(this).attach($scope);
 		this.state = $state;
-		this.viewMode = 'grid';
+		this.onfilter = 'recent';
+		this.horizontal = false;
 		this.scope = $scope;
 		this.rootScope = $rootScope;
 		this.currentUser = Meteor.userId();
