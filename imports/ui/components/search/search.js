@@ -14,6 +14,7 @@ class Search {
 		this.state = $state;
 		this.viewMode = 'line';
 		this.rootScope = $rootScope;
+		this.currentUser = Meteor.userId();
 		//if user is not logged in
 		if(this.rootScope.currentUser){
 			this.fav = true;
@@ -49,7 +50,11 @@ class Search {
 	}
 
 	liked(user){
-		Meteor.call('likeProfile', user._id, user.profile.url);
+		if(user.profile.likes.includes(this.currentUser)){
+			Meteor.call("unlikeProfile", user._id, user.profile.url);
+		} else {
+			Meteor.call("likeProfile", user._id, user.profile.url);
+		}	
 	}
 
 

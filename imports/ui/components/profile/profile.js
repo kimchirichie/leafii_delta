@@ -22,7 +22,6 @@ class Profile {
 		this.progress = false;
 		this.readonly = true;
 	    this.showPass = false;
-	    //this.subscribe('views');
 		this.subscribe('mykeywords');
 		this.helpers({
 			keywords(){

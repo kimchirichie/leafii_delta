@@ -12,6 +12,7 @@ class Header {
 		$reactive(this).attach($scope);
 		this.state = $state;
 		this.rootScope = $rootScope;
+		this.searching = true;
 	}
 
 	logout() {

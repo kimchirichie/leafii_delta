@@ -13,8 +13,18 @@
 	}
 
 	.fav {
-		color: yellow;
-		background: grey !important;
+		color: white;
+		background: grey;
+		cursor: pointer;
+		font-size: 30px;
+
+		&:hover {
+			color: $leafii-theme;
+		}
+	}
+
+	.upvoted {
+		color: $leafii-theme;
 	}
 	
 	.status {
