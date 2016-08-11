@@ -3,13 +3,13 @@
 	<div class="intro">
 		<h1 class="animated fadeIn">Showcase & Discover Personal Websites</h1>
 	</div>
-<!-- 	<div class="filterBar" layout="row" layout-align="center center" layout-xs="column">
-		<span>Recent</span>
-		<span>Most Viewed</span>
-		<span>Most Liked</span>
-	</div> -->
+	<div class="filterBar" layout="row" layout-align="center center" layout-xs="column">
+		<span ng-click="landing.mostRecent()">Most Recent</span>
+		<span ng-click="landing.mostViewed()">Most Viewed</span>
+		<span ng-click="landing.mostLiked()">Most Liked</span>
+	</div>
 
-	<div ng-show="!landing.usersInFours">
+	<div ng-show="!landing.usersInFours || landing.loading">
 		<div class="loadingData" layout="row" layout-xs="column" layout-align="center center">
 			<h1>Loading Users.....</h1>
 			<md-progress-circular md-mode='indeterminate' md-diameter="150px"></md-progress-circular>
@@ -30,7 +30,10 @@
 					<md-card class="md-default-theme" layout="column" ng-repeat="user in users">
 						<p class="forHire" ng-show="{{user.profile.available}}"><i class="zmdi zmdi-circle"></i> Available</p>
 						<p class="noHire" ng-show="{{!user.profile.available}}"><i class="zmdi zmdi-circle"></i> Unavailable</p>
-						<a ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank"><img class="profilePic" ng-src="{{user.profile.image ? user.profile.image : 'images/defaultProfilePic.png'}}"/></a>
+						<a ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank">
+							<img class="profilePic" ng-src="{{user.profile.image ? user.profile.image : 'images/defaultProfilePic.png'}}"/>
+							<md-tooltip md-direction="left">{{landing.absolutify(user.profile.url)}}</md-tooltip>
+						</a>
 						<md-card-title>
 							<div class="cardInfo" layout="column">
 								<a ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank">{{user.profile.occupation ? user.profile.occupation: 'Not specified' | limitTo: 17 }}{{user.profile.occupation.length > 17 ? '...' : ''}}</a>

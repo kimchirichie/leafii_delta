@@ -13,6 +13,7 @@ class Landing {
 		$reactive(this).attach($scope);
 		this.state = $state;
 		this.viewMode = 'grid';
+		this.loading = false;
 		this.rootScope = $rootScope;
 		this.currentUser = Meteor.userId();
 
@@ -32,7 +33,7 @@ class Landing {
 	}
 
 	getUsers(){
-		this.users = Meteor.users.find({}, {sort: {"profile.available": -1, "profile.image": -1}}).fetch();
+		this.users = Meteor.users.find({}, {sort: {"profile.available": -1}}).fetch();
 		this.numOfUsers = this.users.length;
 		this.sortUsers();
 	}
@@ -43,6 +44,25 @@ class Landing {
 		} else {
 			Meteor.call("likeProfile", user._id, user.profile.url);
 		}	
+	}
+
+	mostLiked(){
+		this.loading = true;
+		this.users = Meteor.users.find({}, {sort: {"profile.likes": -1}}).fetch();
+		this.sortUsers();
+	}
+
+	mostViewed(){
+		this.loading = true;
+		this.users = Meteor.users.find({}, {sort: {"profile.views": -1}}).fetch();
+		this.sortUsers();
+	}
+
+	mostRecent(){
+		this.loading = true;
+		this.users = Meteor.users.find({}, {sort: {"createdAt": -1}}).fetch();
+		this.sortUsers();
+		
 	}
 
 
@@ -71,6 +91,7 @@ class Landing {
 			usersInFours.push(usersInPairs.slice(k, k + 2));
 		}
 		this.usersInFours = usersInFours;
+		this.loading = false;
 		window.prerenderReady = true;
 	}
 
