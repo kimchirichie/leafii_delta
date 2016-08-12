@@ -265,7 +265,11 @@ md-card-title {
 }
 
 .cardInfoSmall {
-	text-align: center;
+	text-align: left;
+
+	a {
+		margin-bottom: 20px;
+	}
 }
 
 .featuredCan {

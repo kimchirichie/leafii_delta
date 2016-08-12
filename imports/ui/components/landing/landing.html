@@ -7,7 +7,7 @@
 	<div class="filterBar" layout="row" layout-align="center center" layout-xs="column">
 		<span ng-class="{lightUp: landing.onfilter == 'recent'}" ng-click="cardFilter = '-createdAt'; landing.onfilter = 'recent'">Most Recent</span>
 		<span ng-class="{lightUp: landing.onfilter == 'view'}" ng-click="cardFilter = '-profile.views'; landing.onfilter = 'view'">Most Viewed</span>
-		<span ng-class="{lightUp: landing.onfilter == 'like'}" ng-click="cardFilter = '-profile.likes'; landing.onfilter = 'like'">Most Liked</span>
+		<span ng-class="{lightUp: landing.onfilter == 'like'}" ng-click="cardFilter = '-profile.likes.length'; landing.onfilter = 'like'">Most Liked</span>
 	</div>
 
 	<div ng-show="!landing.users">
@@ -57,19 +57,19 @@
 					<p class="forHire" ng-show="{{user.profile.available}}"><i class="zmdi zmdi-circle"></i> Available</p>
 					<p class="noHire" ng-show="{{!user.profile.available}}"><i class="zmdi zmdi-circle"></i> Unavailable</p>
 					<a ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank"><img class="profilePicSmall" ng-src="{{user.profile.image ? landing.secureProtocol(user.profile.image) : 'images/defaultProfilePic.png'}}"/></a>
-					<p class="noMargin">{{user.profile.firstName + ' ' + user.profile.lastName}}</p>
-					<p class="noMargin"><i class="zmdi zmdi-pin mapColor"></i> {{user.profile.location.formatted_address ? user.profile.location.formatted_address : user.profile.location}}</p>
+					<div class="status" layout="row" layout-align="space-around center">
+						<span><i class="zmdi zmdi-eye"></i> {{user.profile.views}}</span>
+						<md-button class="md-fab md-mini fav" ng-click="landing.liked(user)" ng-show="landing.rootScope.currentUser" aria-label="like"><i ng-class="{upvoted : user.profile.likes.includes(landing.currentUser)}" class="zmdi zmdi-long-arrow-up"></i></md-button>
+						<span><i class="zmdi zmdi-star"></i> {{user.profile.likes.length}}</span>
+					</div>
 				</div>
 				<md-card-content layout="row" layout="end center">
 					<div class="cardInfoSmall" layout="column">
 						<a ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank">{{user.profile.occupation ? user.profile.occupation: 'Not specified'}}
 							<md-tooltip md-direction="top">{{landing.absolutify(user.profile.url)}}</md-tooltip>
 						</a>
-						<div class="status" layout="row" layout-align="space-around center">
-							<span><i class="zmdi zmdi-eye"></i> {{user.profile.views}}</span>
-							<md-button class="md-fab md-mini fav" ng-click="landing.liked(user)" ng-show="landing.rootScope.currentUser" aria-label="like"><i ng-class="{upvoted : user.profile.likes.includes(landing.currentUser)}" class="zmdi zmdi-long-arrow-up"></i></md-button>
-							<span><i class="zmdi zmdi-star"></i> {{user.profile.likes.length}}</span>
-						</div>
+						<p class="noMargin">{{user.profile.firstName + ' ' + user.profile.lastName}}</p>
+						<p class="noMargin"><i class="zmdi zmdi-pin mapColor"></i> {{user.profile.location.formatted_address ? user.profile.location.formatted_address : user.profile.location}}</p>
 					</div>
 				</md-card-content>
 			</md-card>
