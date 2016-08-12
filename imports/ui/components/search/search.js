@@ -7,18 +7,28 @@ import template from './search.html';
 import { Keywords } from '../../../api/keywords/index';
 
 class Search {
-	constructor ($scope, $reactive, $rootScope, $state){
+	constructor ($scope, $reactive, $rootScope, $state, $window){
 		'ngInject';
 		$reactive(this).attach($scope);
 		this.results = [];
 		this.state = $state;
-		this.viewMode = 'line';
+		this.horizontal = true;
 		this.rootScope = $rootScope;
 		this.currentUser = Meteor.userId();
+
+		angular.element($window).bind("resize", function(){
+			if($window.innerWidth < 600){
+				console.log('u got here');
+				angular.element('#gridView').trigger('click');
+			}
+		});
 		
 		this.subscribe('keywords', () => [this.getReactively('rootScope.search')]);
 		this.helpers({
 			results(){
+				if(angular.element(window).width() < 600) {
+					angular.element('#gridView').trigger('click');
+				}
 				return Keywords.find({}, {
 					sort : this.getReactively('sort')
 				}).map(function(keyword){

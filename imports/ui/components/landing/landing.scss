@@ -63,6 +63,12 @@
 }
 
 
+@media (max-width: 600px){
+	.viewMode {
+		display: none;
+	}
+}
+
 .All {
 	text-align: center;
 	margin-top: 30px;
@@ -202,7 +208,7 @@ md-card-title {
 .forHire {
 	margin:0;
 	color: #2fa02f;
-	padding: 10px;
+	margin: 10px 0 10px 0;
 	font-weight: bold;
 	font-family: raleway;
 }
@@ -210,7 +216,7 @@ md-card-title {
 .noHire {
 	margin: 0;
 	color: #808080;
-	padding: 10px;
+	margin: 10px 0 10px 0;
 	font-weight: bold;
 	font-family: raleway;
 }

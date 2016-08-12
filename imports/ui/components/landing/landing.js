@@ -8,7 +8,7 @@ import { Views } from '../../../api/views/index';
 
 
 class Landing {
-	constructor($scope, $reactive, $rootScope, $state){
+	constructor($scope, $reactive, $rootScope, $state, $window){
 		'ngInject';
 		$reactive(this).attach($scope);
 		this.state = $state;
@@ -23,6 +23,12 @@ class Landing {
 				this.state.go('search');
 			}
 		}.bind(this));
+
+		angular.element($window).bind("resize", function(){
+			if($window.innerWidth < 600){
+				angular.element('#gridView').trigger('click');
+			}
+		});
 
 		this.helpers({
 			users(){
