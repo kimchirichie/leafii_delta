@@ -9,20 +9,21 @@ import ngFileUpload from 'ng-file-upload';
 import template from "./leafii.html"
 
 // COMPONENTS
-import { name as Header } from '../header/header';
+import { name as About } from '../about/about';
+import { name as Feedback } from '../feedback/feedback';
 import { name as Footer } from '../footer/footer';
+import { name as Forgot } from '../forgot/forgot';
+import { name as Header } from '../header/header';
 import { name as Landing } from '../landing/landing';
-import { name as Signin } from '../signin/signin';
-import { name as Signup } from '../signup/signup';
-import { name as Welcome } from '../welcome/welcome';
+import { name as Potato } from '../potato/potato';
 import { name as Profile } from '../profile/profile';
 import { name as Reset } from '../reset/reset';
-import { name as Forgot } from '../forgot/forgot';
-import { name as Verify } from '../verify/verify';
-import { name as Feedback } from '../feedback/feedback';
-import { name as About } from '../about/about';
 import { name as Search } from '../search/search';
+import { name as Signin } from '../signin/signin';
+import { name as Signup } from '../signup/signup';
 import { name as Term } from '../term/term';
+import { name as Verify } from '../verify/verify';
+import { name as Welcome } from '../welcome/welcome';
 
 
 class Leafii{
@@ -39,26 +40,28 @@ const name = "leafii";
 
 export default angular.module(name,[
 	angularMeteor,
+	'angular-meteor.auth',
 	ngAnimate,
-	About,
 	uiRouter,
 	loadingBar,
 	ngMaterial,
 	ngFileUpload,
-	Header,
+	About,
+	Potato,
+	Feedback,
 	Footer,
+	Forgot,
+	Header,
 	Landing,
+	Profile,
+	Reset,
+	Search,
 	Signin,
 	Signup,
 	Welcome,
-	Profile,
-	Reset,
-	Forgot,
+	Term,
 	Verify,
-	Feedback,
-	Welcome,
-	Search,
-	Term
+	Welcome
 ])
 .component(name, {
 	template,
