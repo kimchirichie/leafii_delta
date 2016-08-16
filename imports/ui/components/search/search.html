@@ -40,7 +40,7 @@
 					<span flex></span>
 
 					<div class="upLike" layout="column" layout-align="center center">
-						<md-button class="md-fab md-mini fav" ng-click="search.liked(user)" ng-show="search.rootScope.currentUser" aria-label="like"><i ng-class="{upvoted : user.profile.likes.includes(search.currentUser)}" class="zmdi zmdi-long-arrow-up"></i></md-button>
+						<md-button class="md-fab md-mini fav" ng-click="search.liked(user)" ng-show="search.rootScope.currentUser" aria-label="like"><i ng-class="{upvoted : user.profile.likes.includes(search.currentUser)}" class="zmdi zmdi-star"></i></md-button>
 						<span><i class="zmdi zmdi-star"></i> {{user.profile.likes.length}}</span>
 					</div>
 				</md-card>
@@ -59,7 +59,7 @@
 					<a ng-click="search.viewLog(user)" href="{{search.absolutify(user.profile.url)}}" target="_blank">{{user.profile.occupation ? user.profile.occupation: 'Not specified' | limitTo: 17 }}{{user.profile.occupation.length > 17 ? '...' : ''}}</a>
 					<div layout="row" layout-align="space-around center">
 						<span><i class="zmdi zmdi-eye"></i> {{user.profile.views}}</span>
-				        <md-button class="md-fab md-mini fav" ng-click="search.liked(user)" ng-show="search.rootScope.currentUser" aria-label="like"><i ng-class="{upvoted : user.profile.likes.includes(search.currentUser)}" class="zmdi zmdi-long-arrow-up"></i></md-button>
+				        <md-button class="md-fab md-mini fav" ng-click="search.liked(user)" ng-show="search.rootScope.currentUser" aria-label="like"><i ng-class="{upvoted : user.profile.likes.includes(search.currentUser)}" class="zmdi zmdi-star"></i></md-button>
 						<span><i class="zmdi zmdi-star"></i> {{user.profile.likes.length}}</span>
 					</div>
 					<p>{{user.profile.firstName + ' ' + user.profile.lastName}}</p>

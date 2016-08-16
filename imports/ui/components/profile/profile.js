@@ -134,7 +134,6 @@ class Profile {
 			return "";
 		}
 	}
-
 };
 
 const name = 'profile';
