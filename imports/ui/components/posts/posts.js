@@ -4,16 +4,27 @@ import uiRouter from 'angular-ui-router';
  
 import { Accounts } from 'meteor/accounts-base';
 import template from './posts.html';
+import { Posts } from '../../../api/posts/index';
 
-class Posts {
-  constructor($scope, $reactive, $state){
+class Postings {
+  constructor($scope, $reactive, $state, $sce){
     "ngInject";
     $reactive(this).attach($scope);
     this.state = $state;
     this.onfilter = 'recent';
     this.wait = false;
     this.submitPost = false;
+    this.sce = $sce;
     Meteor.subscribe("posts");
+    this.helpers({
+      allPosts(){
+        return Posts.find({});
+      }
+    });
+  }
+
+  absolutify(url){
+    return this.sce.trustAsResourceUrl('http://' + url.replace(/https:|http:|\/\//gi, ""));
   }
 
   back(){
@@ -36,6 +47,7 @@ class Posts {
   createPost() {
     Meteor.call('createPost', this.post.title, [], this.post.content);
     this.post = {};
+    this.back();
   }
 
   updatePost(post) {
@@ -58,7 +70,7 @@ export default angular.module(name, [
 ]).component(name, {
   template,
   controllerAs: name,
-  controller: Posts
+  controller: Postings
 }).config(config);
  
 function config($stateProvider) {
