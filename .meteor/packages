@@ -35,6 +35,7 @@ angular:angular-route
 vinaynb:angular-loading-bar
 angular-meteor-auth
 
+
 #Accounts
 accounts-password
 accounts-base

@@ -10,6 +10,7 @@ import template from "./leafii.html"
 
 // COMPONENTS
 import { name as About } from '../about/about';
+import { name as Error } from '../error/error';
 import { name as Feedback } from '../feedback/feedback';
 import { name as Footer } from '../footer/footer';
 import { name as Forgot } from '../forgot/forgot';
@@ -27,19 +28,26 @@ import { name as Welcome } from '../welcome/welcome';
 
 
 class Leafii{
-	constructor($scope, $reactive, $state){
+	constructor($scope, $reactive, $state, $rootScope){
     'ngInject';
     	$reactive(this).attach($scope);
     	 $scope.$on('$viewContentLoaded', function(){
     	 	//window.prerenderReady = true;
   		});
-  	}
+
+		$rootScope.$on('$stateChangeError', function(e, toState, toParams, fromState, fromParams, error){
+			console.log('stat change error detected!', error);
+			$state.go('error', {reason: error});
+		});
+	}
+  	
 }
 
 const name = "leafii";
 
 export default angular.module(name,[
 	angularMeteor,
+	'angular-meteor',
 	'angular-meteor.auth',
 	ngAnimate,
 	uiRouter,
@@ -47,12 +55,13 @@ export default angular.module(name,[
 	ngMaterial,
 	ngFileUpload,
 	About,
-	Potato,
+	Error,
 	Feedback,
 	Footer,
 	Forgot,
 	Header,
 	Landing,
+	Potato,
 	Profile,
 	Reset,
 	Search,
