@@ -17,6 +17,7 @@ import { name as Forgot } from '../forgot/forgot';
 import { name as Header } from '../header/header';
 import { name as Landing } from '../landing/landing';
 import { name as Potato } from '../potato/potato';
+import { name as Posts } from '../posts/posts';
 import { name as Profile } from '../profile/profile';
 import { name as Reset } from '../reset/reset';
 import { name as Search } from '../search/search';
@@ -61,6 +62,7 @@ export default angular.module(name,[
 	Forgot,
 	Header,
 	Landing,
+	Posts,
 	Potato,
 	Profile,
 	Reset,

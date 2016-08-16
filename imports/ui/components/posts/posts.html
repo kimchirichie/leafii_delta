@@ -1,0 +1,89 @@
+
+<div id="roast">
+
+	<div class="intro">
+		<h1 class="animated fadeIn">Welcome to Roast Page</h1>
+		<h3>Post your website here to get feedbacks and critiques</h3>
+	</div>
+
+	<div class="filterBar" layout="row" layout-align="center center" layout-xs="column">
+		<span>Latest</span>
+		<span>Most Commented</span>
+	</div>
+
+	<div layout="column" layout-align="center center">
+		<div class="roastCards" layout="column" layout-align="start center">
+
+			<md-card class="md-default-theme" layout="row" ng-init="showComments = false; previewSite = false">
+				<div class="info" layout="column" layout-align="center center">
+					<a href="http://talentzeng.com" target="_blank"><img class="profilePicSmall" ng-src="images/defaultProfilePic.png"/></a>
+				</div>
+				<md-card-content layout="row">
+					<div class="postInfo" layout="column">
+						<h2>Check out the new site that I have created :D</h2>
+						<h3 ng-click="previewSite=!previewSite"><i class="zmdi zmdi-caret-down zmdi-hc-lg"></i> show</h3>
+						<p class="noMargin">Talent Zeng</p>
+						<p class="noMargin">Web Developer</p>
+						<p class="noMargin"><i class="zmdi zmdi-pin mapColor"></i> Waterloo ON, Canada</p>
+					</div>
+				</md-card-content>
+			</md-card>
+
+			<iframe ng-show="previewSite" src="http://talentzeng.com"></iframe>
+			
+			<div class="comments" ng-show="previewSite" layout="column">
+				<div class="comment" layout="column" layout-align="start start">
+					<b>Bobby Lee</b>
+					<span> Your website is awesome!!!</span>
+					<div layout="row">
+						<p class="edit">Edit</p>
+						<p class="del">Delete</p>
+					</div>
+				</div>
+
+				<div class="comment" layout="column" layout-align="start start">
+					<b>Captain Morgan</b>
+					<span>Here is another comment!</span>		
+				</div>
+			</div>
+		</div>
+
+		<div class="roastCards" layout="column" layout-align="start center">
+
+			<md-card class="md-default-theme" layout="row">
+				<div class="info" layout="column" layout-align="center center">
+					<a href="http://talentzeng.com" target="_blank"><img class="profilePicSmall" ng-src="images/defaultProfilePic.png"/></a>
+				</div>
+				<md-card-content layout="row">
+					<div class="cardInfoSmall" layout="column">
+						<a href="http://talentzeng.com" target="_blank">Web Developer
+							<md-tooltip md-direction="top">www.talentzeng.com</md-tooltip>
+						</a>
+						<p class="noMargin">Talent Zeng</p>
+						<p class="noMargin"><i class="zmdi zmdi-pin mapColor"></i> Waterloo ON, Canada</p>
+					</div>
+				</md-card-content>
+				<span flex></span>
+
+				<div layout="column" layout-align="center center" class="viewCommentBtn">
+					<h4 ng-click="showComments=!showComments"><i class="zmdi zmdi-caret-down zmdi-hc-lg"></i> View Comments</h4>
+				</div>
+			</md-card>
+
+			<div class="comments" ng-show="showComments">
+				<div layout="column" layout-align="start start">
+					<b>Bobby Lee</b>
+					<span>Your website is awesome!!!</span>	
+				</div>
+
+				<div layout="column" layout-align="start start">
+					<b>Captain Morgan</b>
+					<span>Here is another comment!</span>		
+				</div>
+			</div>
+		</div>
+
+		
+	</div>
+	
+</div>

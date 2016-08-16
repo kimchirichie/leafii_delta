@@ -56,15 +56,11 @@ function config($stateProvider) {
 					Meteor.setTimeout(function(){
 						var user = Meteor.user();
 						if(user && user.profile.role == 'admin'){
-							console.log('access granted');
 							defer.resolve()
 						} else {
 							if(user){
-								console.log(user);
-								console.log('user not admin');
 								defer.reject("Only admins can access this page. Access denied");
 							} else {
-								console.log('user not found');
 								defer.reject("You must be logged in as admin to access this page. Access denied");
 							}
 						}
