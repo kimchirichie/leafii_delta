@@ -26,6 +26,12 @@
 }
 
 .pages{
+
+	a:first-child {
+		&:hover {
+			color: #ea3354;
+		}
+	}
 	
 	a {
 		margin: 10px;

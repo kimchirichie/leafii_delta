@@ -50,12 +50,12 @@ class Postings {
     this.back();
   }
 
-  updatePost(post) {
-    Meteor.call('updatePost', post.timestamp, post.title, [], post.content);
+  updatePost() {
+    Meteor.call('updatePost', this.post.timestamp, this.post.title, [], this.post.content);
   }
 
-  deletePost(timestamp) {
-    Meteor.call('deletePost', timestamp);
+  deletePost() {
+    Meteor.call('deletePost', this.post.timestamp);
   }
 
 

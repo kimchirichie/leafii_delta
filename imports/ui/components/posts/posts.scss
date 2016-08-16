@@ -10,6 +10,31 @@
 		width: 80%;
 	}
 
+	.createPost {
+		color: black;
+		font-weight: bold;
+		background: #ea3354;
+	}
+
+	.edit {
+		cursor: pointer;
+		margin-right: 10px;
+
+		&:hover {
+			color: $leafii-theme;
+		}
+
+	}
+
+	.del {
+		
+		cursor: pointer;
+
+		&:hover {
+			color: $delete;
+		}
+	}
+
 
 	.postInfo {
 
@@ -80,25 +105,6 @@
 			border: thin solid #f3f0f0;
 			background: #f0f8ff;
 			box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-		}
-
-		.edit {
-			cursor: pointer;
-			margin-right: 10px;
-
-			&:hover {
-				color: $leafii-theme;
-			}
-
-		}
-
-		.del {
-			
-			cursor: pointer;
-
-			&:hover {
-				color: $delete;
-			}
 		}
 		
 	}
