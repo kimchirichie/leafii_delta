@@ -151,12 +151,11 @@ Meteor.startup(()=>{
 			}
 		},
 
-		createPost(title, tags, content, url){
+		createPost(title, tags, content){
 			if(Meteor.userId()){
-				user = Meteor.userId();
+				user = Meteor.user();
 				date = Date.now();
-
-				Posts.insert({poster_user_id: user, title: title, tags: tags, content: content, url: url, comments: [], date: date, last_edit: 0});
+				Posts.insert({poster_user_id: user._id, title: title, tags: tags, content: content, url: user.profile.url, name: user.profile.firstName + " " + user.profile.lastName, comments: [], date: date, last_edit: 0});
 
 				console.log(Posts.find({}).fetch());
 			}
