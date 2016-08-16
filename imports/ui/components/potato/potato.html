@@ -1,24 +1,23 @@
-<!-- <button ng-click="potato.userProfile(uz1HTIO5OpdH540GuG)">Button</button> -->
-<button ng-click="potato.test()">test</button>
-
 <div>
 	<div class="card" ng-repeat="person in potato.potatoes">
-		{{person.profile.firstName}} " " {{person.profile.lastName}}
-		<button ng-click="potato.show(person._id)">edit</button>
-		<div ng-show="person._id == potato.editing">
+		<p>{{person.profile.firstName}} {{person.profile.lastName}}</p>
+		<p><button ng-click="potato.show(person._id)">show</button></p>
+			<div ng-show="person._id == potato.editing">
 
-			<p>User ID: {{person._id}}</p>
-			<p>URL: {{person.profile.url}}</p>>
-			<!-- <ul>
-				<li ng-repeat="dict in potato.emailShow(person._id)">
-					{{dict}}
-				</li>
-			</ul> -->
-			<ul>
-				<li>Address: {{person.emails[0].address}}</li>
-				<li>Verified: {{person.emails[0].verified}}</li>
-			</ul>
-			<p> 
-		</div>
+				<p>User ID: {{person._id}}</p>
+				<p>URL: {{person.profile.url}}</p>>
+				<!-- <ul>
+					<li ng-repeat="dict in potato.emailShow(person._id)">
+						{{dict}}
+					</li>
+				</ul> -->
+				<ul>
+					<li id="address">Address: {{person.emails[0].address}}</li>
+					<button>edit</button>
+					<li id="verified">Verified: {{person.emails[0].verified}}</li>
+					<button>edit</button>
+				</ul>
+				<p> 
+			</div>
 	</div>
 </div>
