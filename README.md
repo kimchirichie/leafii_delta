@@ -77,7 +77,53 @@ $ sudo iptables -t nat -A INPUT -s 10.1.56.6 -j SNAT --to-source 208.75.74.227
 
 ### Running prerenderer for google crawlers
 
-(To be updated soon)
+Add these lines to ~/.bash_profile with the desired port and url:
+
+```
+export PRERENDER_SERVICE_URL=http://leafii.com:3005/
+export PORT=3005
+```
+
+Install the prerender middleware inside the meteor server directory:
+
+```sh
+$ meteor npm install prerender-node --save
+```
+
+Create a file called settings.json in the meteor server root directory and add the following lines to it:
+
+```json
+{
+  "PrerenderIO": {
+    "prerenderServiceUrl": "http://dev.leafii.com:3005/"
+  }
+}
+```
+
+Add these lines to server/startup.js to configure the prerender middleware:
+
+```js
+const prerenderio = Npm.require('prerender-node');
+const settings = Meteor.settings.PrerenderIO;
+
+if (settings && settings.host) {
+    prerenderio.set('host', settings.host);
+    prerenderio.set('protocol', 'http');
+    WebApp.rawConnectHandlers.use(prerenderio);
+}
+```
+
+Get prerender server from github outside the meteor server directory and start the server:
+
+```sh
+$ git clone https://github.com/prerender/prerender.git
+$ cd prerender
+$ npm install
+$ node server.js
+```
+
+To test the prerender server, open http://leafii.com:3005/https://leafii.com or the url to the prerender server followed by any valid url to be prerendered.
+
 
 ### Seeding the database
 
