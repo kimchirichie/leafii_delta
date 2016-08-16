@@ -131,7 +131,7 @@ class Profile {
 		if(url){
 			return 'https://' + url.replace(/https:|http:|\/\//gi, "");
 		}else{
-			return "";
+			return "";	
 		}
 	}
 };

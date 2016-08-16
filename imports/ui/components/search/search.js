@@ -18,7 +18,6 @@ class Search {
 
 		angular.element($window).bind("resize", function(){
 			if($window.innerWidth < 600){
-				console.log('u got here');
 				angular.element('#gridView').trigger('click');
 			}
 		});

@@ -4,27 +4,49 @@
 	<div class="intro">
 		<h1 class="animated fadeIn">Welcome to Roast Page</h1>
 		<h3>Post your website here to get feedbacks and critiques</h3>
+		<md-button ng-show="!posts.submitPost" ng-click="posts.submitPost=true" class="md-raised md-primary">Create a post</md-button>
 	</div>
 
-	<div class="filterBar" layout="row" layout-align="center center" layout-xs="column">
+	<div ng-show="!posts.submitPost" class="filterBar" layout="row" layout-align="center center" layout-xs="column">
 		<span>Latest</span>
 		<span>Most Commented</span>
 	</div>
 
-	<div layout="column" layout-align="center center">
+	<div ng-show="posts.submitPost" layout="column" layout-align="center center">
+		
+	  <form ng-submit="posts.createPost(posts.post)" class="form submitPost">
+	    
+	    <md-input-container class="md-block" flex-gt-sm>
+	      <label>Title</label>
+	      <input required ng-model="posts.post.title" placeholder="Check out my new website" type="text" name="title">
+	    </md-input-container>
+
+	    <md-input-container class="md-block" flex-gt-sm>
+	      <label>Content</label>
+	      <textarea required ng-model="posts.post.content" placeholder="I have added a new button" type="text" name="content"></textarea>
+	    </md-input-container>
+
+		<div layout="row" layout-align="space-between center">
+		    <md-button ng-click="posts.back()" class="md-raised">Back</md-button>
+		    <div layout="column" layout-align="center center">
+		      <md-button class="md-raised full-width md-primary" ng-show="!posts.wait" type="submit">Post</md-button>
+		      <md-progress-circular ng-show="posts.wait" md-mode='indeterminate' md-diameter="40px"></md-progress-circular>
+		    </div>
+		</div>
+	  </form>
+		
+	</div>
+
+	<div ng-show="!posts.submitPost" layout="column" layout-align="center center">
 		<div class="roastCards" layout="column" layout-align="start center">
 
 			<md-card class="md-default-theme" layout="row" ng-init="showComments = false; previewSite = false">
-				<div class="info" layout="column" layout-align="center center">
-					<a href="http://talentzeng.com" target="_blank"><img class="profilePicSmall" ng-src="images/defaultProfilePic.png"/></a>
-				</div>
 				<md-card-content layout="row">
 					<div class="postInfo" layout="column">
+						<p class="noMargin"><i class="zmdi zmdi-account-circle"></i> Talent Zeng</p>
 						<h2>Check out the new site that I have created :D</h2>
+						<p>This is where the content goes. No body will know.</p>
 						<h3 ng-click="previewSite=!previewSite"><i class="zmdi zmdi-caret-down zmdi-hc-lg"></i> show</h3>
-						<p class="noMargin">Talent Zeng</p>
-						<p class="noMargin">Web Developer</p>
-						<p class="noMargin"><i class="zmdi zmdi-pin mapColor"></i> Waterloo ON, Canada</p>
 					</div>
 				</md-card-content>
 			</md-card>
@@ -42,43 +64,6 @@
 				</div>
 			</div>
 		</div>
-
-		<div class="roastCards" layout="column" layout-align="start center">
-
-			<md-card class="md-default-theme" layout="row">
-				<div class="info" layout="column" layout-align="center center">
-					<a href="http://talentzeng.com" target="_blank"><img class="profilePicSmall" ng-src="images/defaultProfilePic.png"/></a>
-				</div>
-				<md-card-content layout="row">
-					<div class="cardInfoSmall" layout="column">
-						<a href="http://talentzeng.com" target="_blank">Web Developer
-							<md-tooltip md-direction="top">www.talentzeng.com</md-tooltip>
-						</a>
-						<p class="noMargin">Talent Zeng</p>
-						<p class="noMargin"><i class="zmdi zmdi-pin mapColor"></i> Waterloo ON, Canada</p>
-					</div>
-				</md-card-content>
-				<span flex></span>
-
-				<div layout="column" layout-align="center center" class="viewCommentBtn">
-					<h4 ng-click="showComments=!showComments"><i class="zmdi zmdi-caret-down zmdi-hc-lg"></i> View Comments</h4>
-				</div>
-			</md-card>
-
-			<div class="comments" ng-show="showComments">
-				<div layout="column" layout-align="start start">
-					<b>Bobby Lee</b>
-					<span>Your website is awesome!!!</span>	
-				</div>
-
-				<div layout="column" layout-align="start start">
-					<b>Captain Morgan</b>
-					<span>Here is another comment!</span>		
-				</div>
-			</div>
-		</div>
-
-		
 	</div>
 	
 </div>

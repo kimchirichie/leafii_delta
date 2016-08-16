@@ -5,6 +5,12 @@
 	padding-bottom: 50px;
 	background: #dcdcdc;
 
+	.submitPost {
+		background: white;
+		width: 80%;
+	}
+
+
 	.postInfo {
 
 		text-align: left;
@@ -58,6 +64,10 @@
 
 	@media(max-width: 600px){
 		.roastCards {
+			width: 100%;
+		}
+
+		.submitPost{
 			width: 100%;
 		}
 	}
