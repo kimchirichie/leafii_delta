@@ -8,12 +8,12 @@ import { Views } from '../../../api/views/index';
 
 
 class Landing {
-	constructor($scope, $reactive, $rootScope, $state){
+	constructor($scope, $reactive, $rootScope, $state, $window){
 		'ngInject';
 		$reactive(this).attach($scope);
 		this.state = $state;
-		this.viewMode = 'grid';
-		this.loading = false;
+		this.onfilter = 'recent';
+		this.horizontal = false;
 		this.scope = $scope;
 		this.rootScope = $rootScope;
 		this.currentUser = Meteor.userId();
@@ -24,20 +24,19 @@ class Landing {
 			}
 		}.bind(this));
 
+		angular.element($window).bind("resize", function(){
+			if($window.innerWidth < 600){
+				angular.element('#gridView').trigger('click');
+			}
+		});
+
 		this.helpers({
 			users(){
-				return Meteor.users.find({}, {sort: {"createdAt": -1}});
+				return Meteor.users.find();
 			}
 		});
 		
 		const handle = Meteor.subscribe("allUsers");
-		// // needs to wait until the subscription is ready then sort!
-		Tracker.autorun(() => {
-			if(handle.ready()){
-				this.sortUsers();
-				$scope.$apply();
-			}
-		});
 
 	}
 
@@ -45,51 +44,9 @@ class Landing {
 		Meteor.call("likeProfile", user._id, user.profile.url);
 	}
 
-	mostLiked(){
-		this.loading = true;
-		this.users = Meteor.users.find({}, {sort: {"profile.likes": -1}}).fetch();
-		this.sortUsers();
-	}
-
-	mostViewed(){
-		this.loading = true;
-		this.users = Meteor.users.find({}, {sort: {"profile.views": -1}}).fetch();
-		this.sortUsers();
-	}
-
-	mostRecent(){
-		this.loading = true;
-		this.users = Meteor.users.find({}, {sort: {"createdAt": -1}}).fetch();
-		this.sortUsers();
-		
-	}
-
 	viewLog(user){
 		var searchKey = 'Browse';
 		Meteor.call('addToViews', user._id, searchKey, user.profile.url);
-	}
-
-	sortUsers(){
-		var usersInPairs = [];
-		var usersInFours = [];
-
-		//Parse out any extra strings
-		for(var j = 0; j < this.users.length; j++){
-			this.users[j].profile.url = 'http://' +this.users[j].profile.url.replace(/https:|http:|\/\//gi, "");
-		}
-
-		//Cuts data in columns of 2
-		for (var i = 0; i < this.users.length; i += 2) {
-			usersInPairs.push(this.users.slice(i, i + 2));
-		}
-
-		//Cuts data in columns of 4
-		for (var k = 0; k < usersInPairs.length; k += 2){
-			usersInFours.push(usersInPairs.slice(k, k + 2));
-		}
-		this.usersInFours = usersInFours;
-		this.loading = false;
-		window.prerenderReady = true;
 	}
 
 	absolutify(url){
@@ -97,10 +54,11 @@ class Landing {
 	}
 
 	secureProtocol(url){
-		if(url)
+		if(url){
 			return 'https://' + url.replace(/https:|http:|\/\//gi, "");
-		else
+		}else{
 			return "";
+		}
 	}
 }
 

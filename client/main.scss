@@ -1,6 +1,8 @@
 
+
 //Variables
 $leafii-theme: #3edeaa;
+$delete: #ea4b4b;
 
 //Import all css files
 @import '../imports/ui/components/about/about.scss';
@@ -8,14 +10,16 @@ $leafii-theme: #3edeaa;
 @import '../imports/ui/components/footer/footer.scss';
 @import '../imports/ui/components/forgot/forgot.scss';
 @import '../imports/ui/components/header/header.scss';
-@import '../imports/ui/components/uploader/uploader.scss';
 @import '../imports/ui/components/landing/landing.scss';
 @import '../imports/ui/components/profile/profile.scss';
+@import '../imports/ui/components/posts/posts.scss';
+@import '../imports/ui/components/potato/potato.scss';
 @import '../imports/ui/components/reset/reset.scss';
 @import '../imports/ui/components/search/search.scss';
 @import '../imports/ui/components/signin/signin.scss';
 @import '../imports/ui/components/term/term.scss';
 @import '../imports/ui/components/welcome/welcome.scss';
+@import '../imports/ui/components/uploader/uploader.scss';
 
 
 body {
@@ -39,41 +43,48 @@ body {
 	box-shadow: 0px 3px 17px 3px rgba(0,0,0,0.75);
     border-color: grey;
     max-width: 60%;
+
+	label {
+		color: black;
+	}
+
 }
 
 @media(max-width: 600px){
-	.form {
+	.form {		
 		border: none;
 		max-width: 100%;
+		-moz-box-shadow: 0px 3px 17px 3px rgba(0,0,0,0.75);
+		-webkit-box-shadow: 0px 3px 17px 3px rgba(0,0,0,0.75);
+	    border-color: grey;
+	    max-width: 60%;
+		background-image: url('/images/values-bg.jpg');
+		background-size: cover;
+		color: #f8f8f8;
+		font:14px Raleway, Helvetica, Arial, sans-serif;
+		padding: 30px;
+		text-align: center;
+
+		.form {
+			background-color: #DC4141;
+			border-radius: 4px;
+			border: solid thin black;
+			box-shadow: 0px 3px 17px 3px rgba(0,0,0,0.75);
+			color: black !important;
+			color: grey;
+			color: red;
+			color: white;
+			font-size: 15px;
+			font-weight: bold;
+			height: 300px;
+			height: 40px;
+			line-height: 40px;
+			margin-bottom: 20px;
+			margin: 50px auto;
+			max-width: 605px;
+			padding: 30px;
+			text-align: center;
+			text-decoration: none;
+		}
 	}
-}
-
-label {
-	color: black !important;
-}
-
-.emailMsg {
-	max-width: 605px;
-	height: 300px;
-}
-
-span.req {
-	color: red;
-}
-
-#error {
-	color: white;
-	font-size: 15px;
-	background-color: #DC4141;
-	height: 40px;
-	line-height: 40px;
-	margin-bottom: 20px;
-	font-weight: bold;
-	border-radius: 4px;
-	text-align: center;
-}
-
-.signUpTag {
-	text-decoration: none;
-	color: grey;
 }

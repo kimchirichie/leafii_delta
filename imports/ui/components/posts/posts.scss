@@ -1,0 +1,115 @@
+//Roast CSS
+
+#roast {
+	
+	padding-bottom: 50px;
+	background: #dcdcdc;
+
+	.postInfo {
+
+		text-align: left;
+
+		h2 {
+			margin-bottom: 0;
+		}
+
+		h3 {
+			outline: 0;
+			width: 60px;
+
+			&:hover{
+
+				color: $leafii-theme;
+				cursor: pointer;
+			}
+
+			&:active {
+				i {
+					transform: rotate(180deg);
+				    -ms-transform:rotate(180deg); /* IE 9 */
+				    -moz-transform:rotate(180deg); /* Firefox */
+				    -webkit-transform:rotate(180deg); /* Safari and Chrome */
+				    -o-transform:rotate(180deg); /* Opera */
+				}
+			}
+		}
+	}
+
+	.roastCards {
+		align-items: center;
+		width: 90%;
+		padding-top: 30px;
+
+		iframe {
+			width: 100%;
+			height: 750px;
+		}
+
+		md-card {
+			
+			width: 100%;
+			box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+			align-items: center;
+			margin: 0;
+
+		}
+
+	}
+
+	@media(max-width: 600px){
+		.roastCards {
+			width: 100%;
+		}
+	}
+
+	.comments {
+		width: 100%;
+
+		.comment {
+			padding: 20px;
+			border: thin solid #f3f0f0;
+			background: #f0f8ff;
+			box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+		}
+
+		.edit {
+			cursor: pointer;
+			margin-right: 10px;
+
+			&:hover {
+				color: $leafii-theme;
+			}
+
+		}
+
+		.del {
+			
+			cursor: pointer;
+
+			&:hover {
+				color: $delete;
+			}
+		}
+		
+	}
+
+	.filterBar {
+		padding: 10px;
+		background: white;
+		outline: 0;
+
+		span {
+			padding: 10px;
+			color: black;
+			font-size: 18px;
+			font-weight: bold;
+			cursor: pointer;
+
+			&:hover {
+				color: $leafii-theme;
+			}
+		}
+	}
+
+}
+

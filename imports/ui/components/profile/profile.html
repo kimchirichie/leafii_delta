@@ -22,8 +22,7 @@
 					<p> {{profile.rootScope.currentUser.profile.likes.length}}</p>
 				</div>
 			</div>
-
-			<img ng-show="!profile.imgHide" ng-src="{{profile.secureProtocol(profile.rootScope.currentUser.profile.image)}}"/>
+			<img ng-show="!profile.imgHide" ng-src="{{profile.rootScope.currentUser.profile.image ? profile.secureProtocol(profile.rootScope.currentUser.profile.image) : 'images/defaultProfilePic.png'}}"/>
 			<image-uploader files="profile.user.images"></image-uploader>
 			<md-progress-circular ng-if="profile.progress" md-mode='indeterminate' md-diameter="100px"></md-progress-circular>
 		</div>
@@ -79,6 +78,7 @@
 			
 			<div layout="row">
 				<md-button class="md-raised" ng-click="profile.showPass=true">Change password</md-button>
+				<md-button class="md-raised md-primary" ng-click="profile.update(profile.rootScope.currentUser)">Update</md-button>
 			</div>
 
 		</ng-form>

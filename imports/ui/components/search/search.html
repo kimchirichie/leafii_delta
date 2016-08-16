@@ -1,64 +1,72 @@
 <div id="SearchResults">
-<title>Search - Leafii</title>
+
+	<title>Search - Leafii</title>
 	<div ng-show="!search.websites.length">
 		<div class="noResults" layout="row" layout-xs="column" layout-align="center center">
 			<h1>No Search Results</h1>
 		</div>
 	</div>
 
-	<div ng-show="search.websites.length" layout="row" layout-align="end center">
-		<md-button class="md-raised" ng-click="search.viewMode = 'grid'" aria-label="Grid"><i class="zmdi zmdi-view-module"></i></md-button>
-		<md-button class="md-raised" ng-click="search.viewMode = 'line'" aria-label="Horizontal"><i class="zmdi zmdi-menu"></i></md-button>
+	<div ng-show="search.websites.length" class="viewMode" layout="row" layout-align="center center">
+		<md-button id="gridView" class="md-raised" ng-click="search.horizontal = false" aria-label="Grid"><i class="zmdi zmdi-view-module"></i></md-button>
+		<md-button id="lineView" class="md-raised" ng-click="search.horizontal = true" aria-label="Horizontal"><i class="zmdi zmdi-menu"></i></md-button>
 	</div>
 
-	<div ng-show="search.websites.length">
-		
-		<!-- Horizaontal View Mode -->
-		<div ng-show="search.viewMode == 'line'" class="candidates" layout="column">
-			<md-card class="md-default-theme" layout="row" ng-repeat="result in search.websites">
-				<div class="info" layout="column" layout-align="center center">
-					<p class="forHire" ng-show="{{result.profile.available}}"><i class="zmdi zmdi-circle"></i> Available</p>
-					<p class="noHire" ng-show="{{!result.profile.available}}"><i class="zmdi zmdi-circle"></i> Unavailable</p>
-					<a ng-click="search.viewLog(result)" href="{{search.absolutify(result.profile.url)}}" target="_blank" ng-init="search.sortUsers(search.websites)"><img class="profilePicSmall" ng-src="{{result.profile.image ? search.secureProtocol(result.profile.image) : 'images/defaultProfilePic.png'}}"/></a>
-					<p class="noMargin">{{result.profile.firstName + ' ' + result.profile.lastName}}</p>
-					<p class="noMargin"><i class="zmdi zmdi-pin mapColor"></i> {{result.profile.location.formatted_address ? result.profile.location.formatted_address : result.profile.location}}</p>
-				</div>
-				<md-card-title layout="row" layout="end center">
-					<div class="cardInfoSmall" layout="column">
-						<a ng-click="search.viewLog(result)" href="{{search.absolutify(result.profile.url)}}" target="_blank" ng-init="search.sortUsers(search.websites)">{{result.profile.occupation ? result.profile.occupation: 'Not specified'}}</a>
-						<div class="status" layout="row" layout-align="space-around center">
-							<span><i class="zmdi zmdi-eye"></i> {{result.profile.views}}</span>
-							<md-button class="md-fab md-mini fav" ng-click="search.liked(result)" ng-show="search.rootScope.currentUser" aria-label="like"><i ng-class="{upvoted : result.profile.likes.includes(search.currentUser)}" class="zmdi zmdi-long-arrow-up"></i></md-button>
-							<span><i class="zmdi zmdi-star"></i> {{result.profile.likes.length ? result.profile.likes.length : 0}}</span>
-						</div>
-					</div>
-				</md-card-title>
-			</md-card>
-		</div>
+	<div ng-show="search.websites.length" ng-init="search.horizontal = true">
 
-		<!-- Grid View Mode -->
-		<div ng-show="search.viewMode == 'grid'" layout="row" layout-xs="column" ng-repeat="usersInPairs in search.usersInFours">
-			<div class="candidates" layout="row" layout-sm="column" layout-xs="column" ng-repeat="users in usersInPairs" flex>
-				<div class="full-width" layout="row" layout-md="column" layout-sm="column" layout-xs="column">
-					<md-card  class="md-default-theme" layout="column" ng-repeat="user in users">
+		<div layout="row" layout-align="center center" layout-wrap>
+
+			<!-- Horizaontal View Mode -->
+			<div ng-show="search.horizontal" class="candidates horizontal" layout="column">
+				<md-card class="md-default-theme" layout="row" ng-repeat="user in search.websites">
+					<div class="info" layout="column" layout-align="center center">
 						<p class="forHire" ng-show="{{user.profile.available}}"><i class="zmdi zmdi-circle"></i> Available</p>
 						<p class="noHire" ng-show="{{!user.profile.available}}"><i class="zmdi zmdi-circle"></i> Unavailable</p>
-						<a ng-click="search.viewLog(user)" href="{{search.absolutify(user.profile.url)}}" target="_blank"><img class="profilePic" ng-src="{{user.profile.image ? search.secureProtocol(result.profile.image) : 'images/defaultProfilePic.png'}}"/></a>
-						<md-card-title>
-							<div class="cardInfo" layout="column">
-								<a ng-click="search.viewLog(user)" href="{{search.absolutify(user.profile.url)}}" target="_blank">{{user.profile.occupation ? user.profile.occupation: 'Not specified' | limitTo: 17 }}{{user.profile.occupation.length > 17 ? '...' : ''}}</a>
-								<div class="status" layout="row" layout-align="space-around center">
-									<span><i class="zmdi zmdi-eye"></i> {{user.profile.views}}</span>
-									 <md-button class="md-fab md-mini fav" ng-click="search.liked(user)" ng-show="search.rootScope.currentUser" aria-label="like"><i ng-class="{upvoted : user.profile.likes.includes(search.currentUser)}" class="zmdi zmdi-long-arrow-up"></i></md-button>
-									<span><i class="zmdi zmdi-star"></i> {{user.profile.likes.length}}</span>
-								</div>
-								<p>{{user.profile.firstName + ' ' + user.profile.lastName}}</p>
-								<p><i class="zmdi zmdi-pin mapColor"></i> {{user.profile.location.formatted_address ? user.profile.location.formatted_address : user.profile.location}}</p>
-							</div>
-						</md-card-title>
-					</md-card>
-				</div>
+						<a ng-click="search.viewLog(user)" href="{{search.absolutify(user.profile.url)}}" target="_blank" ng-init="search.sortUsers(search.websites)">
+							<img class="profilePicSmall" ng-src="{{user.profile.image ? search.secureProtocol(user.profile.image) : 'images/defaultProfilePic.png'}}"/>
+						</a>
+						<span><i class="zmdi zmdi-eye"></i> {{user.profile.views}}</span>
+					</div>
+					<md-card-content layout="row">
+						<div class="cardInfoSmall" layout="column">
+							<a ng-click="search.viewLog(user)" href="{{search.absolutify(user.profile.url)}}" target="_blank">{{user.profile.occupation ? user.profile.occupation: 'Not specified'}}
+								<md-tooltip md-direction="top">{{search.absolutify(user.profile.url)}}</md-tooltip>
+							</a>
+							<p class="noMargin">{{user.profile.firstName + ' ' + user.profile.lastName}}</p>
+							<p class="noMargin"><i class="zmdi zmdi-pin mapColor"></i> {{user.profile.location.formatted_address ? user.profile.location.formatted_address : user.profile.location}}</p>
+						</div>
+					</md-card-content>
+
+					<span flex></span>
+
+					<div class="upLike" layout="column" layout-align="center center">
+						<md-button class="md-fab md-mini fav" ng-click="search.liked(user)" ng-show="search.rootScope.currentUser" aria-label="like"><i ng-class="{upvoted : user.profile.likes.includes(search.currentUser)}" class="zmdi zmdi-long-arrow-up"></i></md-button>
+						<span><i class="zmdi zmdi-star"></i> {{user.profile.likes.length}}</span>
+					</div>
+				</md-card>
 			</div>
+
+			<!-- Grid View Mode -->
+	        <md-card ng-show="!search.horizontal" class="md-default-theme candidates grid" layout="column" layout-align="center center" ng-repeat="user in search.websites">
+				<md-tooltip md-direction="top">{{search.absolutify(user.profile.url)}}</md-tooltip>
+				<p class="forHire" ng-show="{{user.profile.available}}"><i class="zmdi zmdi-circle"></i> Available</p>
+				<p class="noHire" ng-show="{{!user.profile.available}}"><i class="zmdi zmdi-circle"></i> Unavailable</p>
+				<a ng-click="search.viewLog(user)" href="{{search.absolutify(user.profile.url)}}" target="_blank">
+					<img class="profilePic" ng-src="{{user.profile.image ? search.secureProtocol(user.profile.image) : 'images/defaultProfilePic.png'}}"/>
+				</a> 
+	          <md-card-content>
+           		<div class="cardInfo" layout="column">
+					<a ng-click="search.viewLog(user)" href="{{search.absolutify(user.profile.url)}}" target="_blank">{{user.profile.occupation ? user.profile.occupation: 'Not specified' | limitTo: 17 }}{{user.profile.occupation.length > 17 ? '...' : ''}}</a>
+					<div layout="row" layout-align="space-around center">
+						<span><i class="zmdi zmdi-eye"></i> {{user.profile.views}}</span>
+				        <md-button class="md-fab md-mini fav" ng-click="search.liked(user)" ng-show="search.rootScope.currentUser" aria-label="like"><i ng-class="{upvoted : user.profile.likes.includes(search.currentUser)}" class="zmdi zmdi-long-arrow-up"></i></md-button>
+						<span><i class="zmdi zmdi-star"></i> {{user.profile.likes.length}}</span>
+					</div>
+					<p>{{user.profile.firstName + ' ' + user.profile.lastName}}</p>
+					<p><i class="zmdi zmdi-pin mapColor"></i> {{user.profile.location.formatted_address ? user.profile.location.formatted_address : user.profile.location | limitTo:25}}{{user.profile.location.formatted_address.length > 25 ? '...' : ''}}</p>
+				</div>
+	          </md-card-content>
+	        </md-card>
 		</div>
 	</div>
 </div>

@@ -7,24 +7,28 @@ import template from './search.html';
 import { Keywords } from '../../../api/keywords/index';
 
 class Search {
-	constructor ($scope, $reactive, $rootScope, $state){
+	constructor ($scope, $reactive, $rootScope, $state, $window){
 		'ngInject';
 		$reactive(this).attach($scope);
 		this.results = [];
 		this.state = $state;
-		this.viewMode = 'line';
+		this.horizontal = true;
 		this.rootScope = $rootScope;
 		this.currentUser = Meteor.userId();
-		//if user is not logged in
-		if(this.rootScope.currentUser){
-			this.fav = true;
-		}
-		else {
-			this.fav = false;
-		}
+
+		angular.element($window).bind("resize", function(){
+			if($window.innerWidth < 600){
+				console.log('u got here');
+				angular.element('#gridView').trigger('click');
+			}
+		});
+		
 		this.subscribe('keywords', () => [this.getReactively('rootScope.search')]);
 		this.helpers({
 			results(){
+				if(angular.element(window).width() < 600) {
+					angular.element('#gridView').trigger('click');
+				}
 				return Keywords.find({}, {
 					sort : this.getReactively('sort')
 				}).map(function(keyword){
@@ -53,34 +57,16 @@ class Search {
 		Meteor.call("likeProfile", user._id, user.profile.url);
 	}
 
-
-	sortUsers(result){
-
-	    var usersInPairs = [];
-	    var usersInFours = [];
-
-	    //Cuts data in columns of 2
-	    for (var i = 0; i < result.length; i += 2) {
-	        usersInPairs.push(result.slice(i, i + 2));
-	    }
-
-	    //Cuts data in columns of 4
-	    for (var k = 0; k < usersInPairs.length; k += 2){
-	        usersInFours.push(usersInPairs.slice(k, k + 2));
-	    }
-	    
-	    this.usersInFours = usersInFours;
-  	}
-
 	absolutify(url){
 		return 'http://' + url.replace(/https:|http:|\/\//gi, "");
 	}
 
 	secureProtocol(url){
-		if(url)
+		if(url){
 			return 'https://' + url.replace(/https:|http:|\/\//gi, "");
-		else
+		}else{
 			return "";
+		}
 	}
 }
 
@@ -103,4 +89,3 @@ function config($stateProvider){
 		template: '<search></search>'
 	});
 }
-//window.prerenderReady = true;

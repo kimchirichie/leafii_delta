@@ -9,56 +9,70 @@ import ngFileUpload from 'ng-file-upload';
 import template from "./leafii.html"
 
 // COMPONENTS
-import { name as Header } from '../header/header';
+import { name as About } from '../about/about';
+import { name as Error } from '../error/error';
+import { name as Feedback } from '../feedback/feedback';
 import { name as Footer } from '../footer/footer';
+import { name as Forgot } from '../forgot/forgot';
+import { name as Header } from '../header/header';
 import { name as Landing } from '../landing/landing';
-import { name as Signin } from '../signin/signin';
-import { name as Signup } from '../signup/signup';
-import { name as Welcome } from '../welcome/welcome';
+import { name as Potato } from '../potato/potato';
+import { name as Posts } from '../posts/posts';
 import { name as Profile } from '../profile/profile';
 import { name as Reset } from '../reset/reset';
-import { name as Forgot } from '../forgot/forgot';
-import { name as Verify } from '../verify/verify';
-import { name as Feedback } from '../feedback/feedback';
-import { name as About } from '../about/about';
 import { name as Search } from '../search/search';
+import { name as Signin } from '../signin/signin';
+import { name as Signup } from '../signup/signup';
 import { name as Term } from '../term/term';
+import { name as Verify } from '../verify/verify';
+import { name as Welcome } from '../welcome/welcome';
 
 
 class Leafii{
-	constructor($scope, $reactive, $state){
+	constructor($scope, $reactive, $state, $rootScope){
     'ngInject';
     	$reactive(this).attach($scope);
     	 $scope.$on('$viewContentLoaded', function(){
     	 	//window.prerenderReady = true;
   		});
-  	}
+
+		$rootScope.$on('$stateChangeError', function(e, toState, toParams, fromState, fromParams, error){
+			console.log('stat change error detected!', error);
+			$state.go('error', {reason: error});
+		});
+	}
+  	
 }
 
 const name = "leafii";
 
 export default angular.module(name,[
 	angularMeteor,
+	'angular-meteor',
+	'angular-meteor.auth',
 	ngAnimate,
-	About,
 	uiRouter,
 	loadingBar,
 	ngMaterial,
 	ngFileUpload,
-	Header,
+	About,
+	Error,
+	Feedback,
 	Footer,
+	Forgot,
+	Header,
 	Landing,
+	Posts,
+	Potato,
+	Profile,
+	Reset,
+	Search,
 	Signin,
 	Signup,
 	Welcome,
-	Profile,
-	Reset,
-	Forgot,
+	Term,
 	Verify,
-	Feedback,
-	Welcome,
-	Search,
-	Term
+	Welcome
 ])
 .component(name, {
 	template,
