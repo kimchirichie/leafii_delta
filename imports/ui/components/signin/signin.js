@@ -53,7 +53,23 @@ function config($stateProvider) {
 	$stateProvider
 		.state('signin', {
 			url: '/signin',
-			template: '<signin></signin>'
+			template: '<signin></signin>',
+			resolve:{
+				user: function($q, $state){
+					var defer = $q.defer();
+					Meteor.setTimeout(function(){
+						var user = Meteor.user();
+						if(user){
+							console.log('signed in users cannot access sign in page');
+							$state.go('profile');
+						} else {
+							console.log('access granted');
+							defer.resolve();
+						}
+					},500);
+					return defer.promise;
+				}
+			}
 		});
 }
 //window.prerenderReady = true;

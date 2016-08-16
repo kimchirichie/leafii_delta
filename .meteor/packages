@@ -33,6 +33,8 @@ angular:angular-touch
 angularui:angular-ui-router
 angular:angular-route
 vinaynb:angular-loading-bar
+angular-meteor-auth
+
 
 #Accounts
 accounts-password
