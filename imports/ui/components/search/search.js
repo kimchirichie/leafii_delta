@@ -12,17 +12,8 @@ class Search {
 		$reactive(this).attach($scope);
 		this.results = [];
 		this.state = $state;
-		this.horizontal = true;
 		this.rootScope = $rootScope;
-		this.currentUser = Meteor.userId();
-
-		angular.element($window).bind("resize", function(){
-			if($window.innerWidth < 600){
-				console.log('u got here');
-				angular.element('#gridView').trigger('click');
-			}
-		});
-		
+		this.subscribe('search', () => [this.getReactively('rootScope.search')]);
 		this.subscribe('keywords', () => [this.getReactively('rootScope.search')]);
 		this.helpers({
 			results(){
