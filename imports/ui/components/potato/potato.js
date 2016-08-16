@@ -4,12 +4,15 @@ import uiRouter from 'angular-ui-router';
 
 import template from './potato.html';
 
+
 class Potato {
 	constructor($scope, $reactive, $rootScope){
 		'ngInject';
 		$reactive(this).attach($scope);
 		this.rootScope = $rootScope;
+		this.showing;
 		this.editing;
+		this.more;
 		this.helpers({
 			potatoes(){
 				return Meteor.users.find({});
@@ -19,16 +22,32 @@ class Potato {
 	}
 
 	show(id){
-		this.editing = id;
+		this.showing = id;
 	}
 
-	changeEmail(id){
-		users.update({_id: id},{$set: {createdAt: '2016-05-24T23:17:58.674Z'}});
+	save(user){
+		Meteor.users.update({_id:user._id}, {
+			$set: {
+				"emails.address":user.emails.address,
+				"profile.firstName": user.profile.firstName,
+				"profile.lastName": user.profile.lastName,
+				"profile.occupation": user.profile.occupation,
+				"profile.available": user.profile.available
+
+			}
+		});
+		this.close();
 	}
 
-	test(){
-		console.log(this.rootScope.currentUser);
-		console.log(Meteor.user());
+
+	close(){
+		this.editing = false;
+		this.showing = undefined;
+	}
+
+	delete(){
+		Meteor.users.remove({_id:user._id})
+
 	}
 
 }
@@ -68,9 +87,11 @@ function config($stateProvider) {
 								defer.reject("You must be logged in as admin to access this page. Access denied");
 							}
 						}
-					},500)
+					},1000)
 					return defer.promise;
 				}
 			}
 		});
 }
+
+
