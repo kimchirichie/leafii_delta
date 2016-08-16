@@ -4,8 +4,8 @@ import { Counts } from 'meteor/tmeasday:publish-counts';
 import { Posts } from './collection';
 // List of profiles the user liked
 if (Meteor.isServer) {
-	Meteor.publish('posts', function(profile_id){
-		return Posts.find({profile_user_id: profile_id});
+	Meteor.publish('posts', function(){
+		return Posts.find({});
 	});
 }
 
