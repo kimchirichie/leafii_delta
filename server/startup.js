@@ -122,39 +122,60 @@ Meteor.startup(()=>{
 			}
 		},
 
-		postComment(profile_uID, comment){
+		createComment(post_id, comment){
 			if(Meteor.userId()){
 				user = Meteor.userId();
 				//date = Math.floor(Date.now() / 60000);
 				//date + commenter_user_id will be the unique key combo for the comments for a profile
 				date = Date.now();
-				post_base = Posts.find({profile_user_id: profile_uID}).fetch();
 
-				if(typeof post_base == 'undefined' || post_base == "{}")
-				{
-					Posts.insert(profile_uID, []);
-				}
-				
-				Posts.update({profile_user_id: profile_uID}, {$addToSet: {comments: {commenter_user_id: user, comment: comment, date: date, deleted: false}}});
+				console.log(Posts.find({}).fetch());
+				Posts.update({_id: post_id}, {$addToSet: {comments: {commenter_user_id: user, comment: comment, date: date, last_edit: 0}}}, false, false);
 			}
 		},
 
-		updateComment(profile_uID, comment, original_timestamp){
+		updateComment(original_timestamp, post_id, comment){
 			if(Meteor.userId()){
 				user = Meteor.userId();
 				date = Math.floor(Date.now() / 60000);
 				
-				Posts.update({profile_user_id: profile_uID, "comments.date": original_timestamp, "comments.commenter_user_id": user}, {"comments.$.comment": comment, "comments.$.last_edit": date});
+				Posts.update({_id: post_id, "comments.date": original_timestamp, "comments.commenter_user_id": user}, {$set:{"comments.$.comment": comment, "comments.$.last_edit": date}}, false, false);
 			}
 		},
 
-		deleteComment(profile_uID, original_timestamp){
+		deleteComment(original_timestamp, post_id){
 			if(Meteor.userId()){
 				user = Meteor.userId();
-				comment = "[deleted]";
+				
+				Posts.update({_id: post_id, "comments.date": original_timestamp, "comments.commenter_user_id": user}, {$pull: {comments:{commenter_user_id: user, date: original_timestamp }}}, false, false);
+			}
+		},
+
+		createPost(title, tags, content){
+			if(Meteor.userId()){
+				user = Meteor.userId();
+				date = Date.now();
+
+				Posts.insert({poster_user_id: user, title: title, tags: tags, content: content, comments: [], date: date, last_edit: 0});
+
+				console.log(Posts.find({}).fetch());
+			}
+		},
+
+		updatePost(original_timestamp, title, tags, content){
+			if(Meteor.userId()){
+				user = Meteor.userId();
 				date = Math.floor(Date.now() / 60000);
 				
-				Posts.update({profile_user_id: profile_uID, "comments.date": original_timestamp, "comments.commenter_user_id": user}, {"comments.$.comment": comment, "comments.$.last_edit": date, "comment.$.deleted": true});
+				Posts.update({poster_user_id: user, date: original_timestamp}, {$set:{title: title, tags: tags, content: content, last_edit: date}}, false, false);
+			}
+		},
+
+		deletePost(original_timestamp){
+			if(Meteor.userId()){
+				user = Meteor.userId();
+				
+				Posts.remove({poster_user_id: user, date: original_timestamp});
 			}
 		}
 	});

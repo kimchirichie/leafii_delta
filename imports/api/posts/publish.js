@@ -10,13 +10,13 @@ if (Meteor.isServer) {
 }
 
 Posts.allow({
-	insert(profile_user_id, comments) {
+	insert(poster_user_id, title, tags, content, date, comments) {
 		return true;
 	},
-	update(profile_user_id, comments, fields, modifier) {
+	update(poster_user_id, title, tags, content, date, comments, fields, modifier) {
 		return true;
 	},
-	remove(profile_user_id, comments) {
+	remove(poster_user_id, title, tags, content, date, comments) {
 		return true;		
 	}
 })
