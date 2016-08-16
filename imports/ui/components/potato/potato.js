@@ -20,6 +20,9 @@ class Potato {
 	show(id){
 		this.editing = id;
 	}
+	changeEmail(id){
+		users.update({_id: id},{$set: {createdAt: '2016-05-24T23:17:58.674Z'}});
+	}
 
 }
 
