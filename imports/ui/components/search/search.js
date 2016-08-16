@@ -15,28 +15,7 @@ class Search {
 		this.rootScope = $rootScope;
 		this.subscribe('search', () => [this.getReactively('rootScope.search')]);
 		this.subscribe('keywords', () => [this.getReactively('rootScope.search')]);
-		this.helpers({
-			results(){
-				if(angular.element(window).width() < 600) {
-					angular.element('#gridView').trigger('click');
-				}
-				return Keywords.find({}, {
-					sort : this.getReactively('sort')
-				}).map(function(keyword){
-					return keyword.user_id;
-				}).filter(function(item, pos, self) {
-					return self.indexOf(item) == pos;
-				});
-			},
-			keywordsCount() {
-				return Counts.get('numberOfKeywords');
-			},
-			websites(){
-				return Meteor.users.find({
-					_id: { $in: this.getReactively('results')}
-				})
-			}
-		});
+		
 		Meteor.subscribe("allUsers");
 	}
 

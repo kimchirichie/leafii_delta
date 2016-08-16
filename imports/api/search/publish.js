@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
-import { Counts } from 'meteor/tmeasday:publish-counts';
 
 import { Keywords } from '../keywords/collection';
+import { Words } from '../count/collection';
 
 if (Meteor.isServer) {
 	Meteor.publish('search', function(searchString){
@@ -12,15 +12,16 @@ if (Meteor.isServer) {
 			// 	$options : 'i'
 			// };
 
-			var words = searchString.split(" ");
-			console.log(words);
-			for (let i = 0; i < words.length; i++){
-				console.log(words[i]);
-				console.log(Keywords.find({keyword:{$regex:`.*${words[i]}.*`,$options:'i'}}).fetch());
+			var queries = searchString.split(" ");
+			console.log(queries);
+			for (let i = 0; i < queries.length; i++){
+				console.log(queries[i]);
+				console.log(Words.find({word:  queries[i]}));
+				// console.log(Keywords.find({keyword:{$regex:`.*${words[i]}.*`,$options:'i'}}).fetch());
 			}
 
 			
-			return Meteor.users.find({});
+			return;
 		} else {
 			return;
 		}
