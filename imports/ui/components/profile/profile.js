@@ -130,6 +130,7 @@ class Profile {
 	secureProtocol(url){
 		if(url){
 			return 'https://' + url.replace(/https:|http:|\/\//gi, "");
+		}
 		else
 			return "";	
 	}
