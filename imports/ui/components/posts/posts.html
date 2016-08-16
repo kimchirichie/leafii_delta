@@ -28,10 +28,7 @@
 
 		<div layout="row" layout-align="space-between center">
 		    <md-button ng-click="posts.back()" class="md-raised">Cancel</md-button>
-		    <div layout="column" layout-align="center center">
-		      <md-button class="md-raised full-width md-primary" ng-show="!posts.wait" type="submit">Post</md-button>
-		      <md-progress-circular ng-show="posts.wait" md-mode='indeterminate' md-diameter="40px"></md-progress-circular>
-		    </div>
+		    <md-button class="md-raised md-primary" ng-show="!posts.wait" type="submit">Post</md-button>
 		</div>
 	  </form>
 		

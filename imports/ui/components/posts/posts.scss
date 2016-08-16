@@ -7,7 +7,8 @@
 
 	.submitPost {
 		background: white;
-		width: 80%;
+		width: 100%;
+		max-width: 90%;
 	}
 
 	.createPost {
@@ -47,6 +48,7 @@
 		h3 {
 			outline: 0;
 			width: 60px;
+			margin-top: 0;
 
 			&:hover{
 
