@@ -13,6 +13,11 @@ class Header {
 		this.state = $state;
 		this.rootScope = $rootScope;
 		this.searching = true;
+		this.query = undefined;
+	}
+
+	search(){
+		this.rootScope.search = this.query;
 	}
 
 	logout() {
