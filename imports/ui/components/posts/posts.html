@@ -106,15 +106,16 @@
 					</div>
 
 					<!-- Edit Comment -->
-					<form ng-show="editComment" ng-submit="posts.editComment(comment.date, post._id, comment.comment)" class="comment" layout="column" layout-align="start start">
-						<div layout="row" layout-align="center center" class="postComment">
-							<img class="profileIcon" ng-src="images/defaultProfilePic.png"/>
+					<div ng-show="editComment" class="full-width" ng-submit="posts.editComment(comment.date, post._id, comment.comment); editComment=false" layout="column">
+						<div layout="column" layout-align="start start" class="postComment">
 							<div layout="row" class="full-width">
-						    	<input required ng-model="comment.comment" type="text" name="comment">
+								<img class="profileIcon" ng-src="images/defaultProfilePic.png"/>
+							    <input required ng-model="comment.comment" type="text" name="comment">
 							</div>
-							<p class="cancelEdit" ng-click="editComment = false">Cancel</p>
+							<p class="cancelEdit" ng-click="editComment=false">Cancel</p>
 						</div>
-					</form>
+					</div>
+
 				</div>
 			</div>
 		</div>
