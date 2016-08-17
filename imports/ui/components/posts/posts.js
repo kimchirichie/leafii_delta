@@ -46,7 +46,6 @@ class Postings {
 
   createPost() {
     Meteor.call('createPost', this.post.title, [], this.post.content);
-    this.post = {};
     this.back();
   }
 
