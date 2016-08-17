@@ -28,6 +28,19 @@ class Postings {
   }
 
   back(){
+    confirmed = swal({
+        title: "Are you sure?",
+        text: "Your unfinished post will be forever lost.",
+        type: "warning",
+        // #DD6B55
+        showCancelButton: true,
+        confirmButtonColor: "#3edeaa",
+      confirmButtonText: "Yes, abandon post!",
+        closeOnConfirm: true
+      },this.backHelper());
+  }
+
+  backHelper(){
     this.submitPost = false;
     this.post = {};
   }
@@ -41,7 +54,19 @@ class Postings {
   }
 
   deleteComment(timestamp, postId) {
-    Meteor.call('deleteComment', timestamp, postId);
+    confirmed = swal({
+        title: "Are you sure?",
+        text: "This will delete your comment.",
+        type: "warning",
+        // #DD6B55
+        showCancelButton: true,
+        confirmButtonColor: "#3edeaa",
+      confirmButtonText: "Yes, delete it!",
+        closeOnConfirm: true
+      },function(){
+        Meteor.call('deleteComment', timestamp, postId);
+        Bert.alert('Comment deleted','success', 'growl-top-right');
+      });
   }
 
   createPost() {
@@ -55,7 +80,19 @@ class Postings {
   }
 
   deletePost(postDate) {
-    Meteor.call('deletePost', postDate);
+    confirmed = swal({
+        title: "Are you sure?",
+        text: "This will delete the post and all its comments.",
+        type: "warning",
+        // #DD6B55
+        showCancelButton: true,
+        confirmButtonColor: "#3edeaa",
+      confirmButtonText: "Yes, delete it!",
+        closeOnConfirm: true
+      },function(){
+        Meteor.call('deletePost', postDate);
+        Bert.alert('Post deleted','success', 'growl-top-right');
+      });
   }
 
 
