@@ -75,7 +75,7 @@ class Profile {
 		this.newkeyword = undefined;
 	}
 
-	crawl(){
+	crawl(user_id){
 		confirmed = swal({
   			title: "Are you sure?",
   			text: "It will delete all the previous keywords & re-parse your website.",
@@ -86,7 +86,7 @@ class Profile {
  			confirmButtonText: "Yes, re-parse it!",
   			closeOnConfirm: true
 			},function(){
-				Meteor.call('startCrawl', function (err, res) {
+				Meteor.call('startCrawl', user_id, function (err, res) {
 				  if (err) {
 				    Bert.alert('Keywords Update Failed', 'danger');
 				  } else {
