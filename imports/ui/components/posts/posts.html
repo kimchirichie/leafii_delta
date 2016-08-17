@@ -74,28 +74,29 @@
 				</div>
 			</form>
 
-			<iframe ng-show="previewSite" ng-src="{{posts.absolutify(post.url)}}"></iframe>
+			<iframe class="animated slideDown" ng-show="previewSite" ng-src="{{posts.absolutify(post.url)}}"></iframe>
 
-			<form layout="row" class="postComment" ng-show="!editComment">
-
-				<img class="profileIcon" ng-src="images/defaultProfilePic.png"/>
-			  	<div layout="row" class="full-width">
-			    	<input required placeholder="write a comment..." ng-model="newComment" type="text" name="comment">
-				</div>
-				
-			</form>
 
 			<div class="comments" ng-show="previewSite" layout="column" ng-init="editComment = false">
+
+				<form ng-submit="posts.createComment(post._id, newComment)" layout="row" class="postComment" ng-show="!editComment">
+
+					<img class="profileIcon" ng-src="images/defaultProfilePic.png"/>
+				  	<div layout="row" class="full-width" type="submit">
+				    	<input required placeholder="write a comment..." ng-model="newComment" type="text" name="comment">
+					</div>
+					
+				</form>
 				
-				<div ng-show="!editComment" class="comment" layout="column" layout-align="start start">
+				<div ng-show="!editComment" class="comment" layout="column" layout-align="start start" ng-repeat="comment in post.comments | orderBy: '-date'">
 					<div layout="row" layout-align="center center">
 						<img class="profileIcon" ng-src="images/defaultProfilePic.png"/>
-						<b>Talent Zeng</b>
-						<span> &nbsp blah blah blah blah</span>
+						<b>{{comment.name}}</b>
+						<span> &nbsp {{comment.comment}}</span>
 					</div>
 					<div layout="row" class="changeComment">
 						<p class="edit" ng-click="editComment = true">Edit</p>
-						<p class="del">Delete</p>
+						<p class="del" ng-click="posts.deleteComment(post.date, post._id)">Delete</p>
 					</div>
 				</div>
 				

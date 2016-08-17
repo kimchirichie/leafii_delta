@@ -49,12 +49,15 @@ class Postings {
   }
 
   createComment(postId, comment) {
+
+    console.log('triggered');
     if(Meteor.userId()){
       user = Meteor.user();
       //date = Math.floor(Date.now() / 60000);
       //date + commenter_user_id will be the unique key combo for the comments for a profile
       date = Date.now();
       Posts.update({_id: postId}, {$addToSet: {comments: {commenter_user_id: user._id, name: user.profile.firstName + " " + user.profile.lastName, comment: comment, date: date, last_edit: 0}}}, false, false);
+      newComment = '';
     }
   }
 
@@ -68,6 +71,7 @@ class Postings {
   }
 
   deleteComment(timestamp, postId) {
+
     confirmed = swal({
         title: "Are you sure?",
         text: "This will delete your comment.",
@@ -80,7 +84,7 @@ class Postings {
       },function(){
         if(Meteor.userId()){
           user = Meteor.userId();
-          Posts.update({_id: postId, "comments.date": timestamp, "comments.commenter_user_id": user}, {$pull: {comments:{commenter_user_id: user, date: original_timestamp }}}, false, false);
+          Posts.update({_id: postId, "comments.date": timestamp, "comments.commenter_user_id": user}, {$pull: {comments:{commenter_user_id: user, date: timestamp }}}, false, false);
           Bert.alert('Comment deleted','success', 'growl-top-right');
         }
       });
@@ -100,7 +104,7 @@ class Postings {
     this.tempPost_content = content;
   }
 
-  updatePost(postDate, title, content) {
+  updatePost(postID, title, content) {
 
     if(Meteor.userId()){
       user = Meteor.userId();
