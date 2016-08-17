@@ -28,6 +28,7 @@ class Postings {
   }
 
   back(){
+    /*var self = this;
     confirmed = swal({
         title: "Are you sure?",
         text: "Your unfinished post will be forever lost.",
@@ -35,22 +36,40 @@ class Postings {
         // #DD6B55
         showCancelButton: true,
         confirmButtonColor: "#3edeaa",
-      confirmButtonText: "Yes, abandon post!",
+        confirmButtonText: "Yes, abandon post!",        
+        cancelButtonText: "Edit",
         closeOnConfirm: true
-      },this.backHelper());
-  }
+      }, function(){ 
+        console.log("Closing new post");
+      });*/
 
-  backHelper(){
-    this.submitPost = false;
-    this.post = {};
+      this.submitPost = false;
+      this.post = {};
   }
 
   createComment(postId, comment) {
-    Meteor.call('createComment', postId, comment);
+    if(Meteor.userId()){
+      user = Meteor.user();
+      //date = Math.floor(Date.now() / 60000);
+      //date + commenter_user_id will be the unique key combo for the comments for a profile
+      date = Date.now();
+
+      console.log(Posts.find({}).fetch());
+      Posts.update({_id: postId}, {$addToSet: {comments: {commenter_user_id: user._id, name: user.profile.firstName + " " + user.profile.lastName, comment: comment, date: date, last_edit: 0}}}, false, false);
+    }
+
+    //Meteor.call('createComment', postId, comment);
   }
 
   editComment(timestamp, postId, comment) {
-    Meteor.call('updateComment', timestamp, postId, comment);
+    if(Meteor.userId()){
+      user = Meteor.userId();
+      date = Math.floor(Date.now() / 60000);
+      
+      Posts.update({_id: postId, "comments.date": timestamp, "comments.commenter_user_id": user}, {$set:{"comments.$.comment": comment, "comments.$.last_edit": date}}, false, false);
+    }
+    
+    //Meteor.call('updateComment', timestamp, postId, comment);
   }
 
   deleteComment(timestamp, postId) {
@@ -61,25 +80,45 @@ class Postings {
         // #DD6B55
         showCancelButton: true,
         confirmButtonColor: "#3edeaa",
-      confirmButtonText: "Yes, delete it!",
+        confirmButtonText: "Yes, delete it!",
         closeOnConfirm: true
       },function(){
-        Meteor.call('deleteComment', timestamp, postId);
-        Bert.alert('Comment deleted','success', 'growl-top-right');
+        if(Meteor.userId()){
+          user = Meteor.userId();
+          
+          Posts.update({_id: postId, "comments.date": timestamp, "comments.commenter_user_id": user}, {$pull: {comments:{commenter_user_id: user, date: original_timestamp }}}, false, false);
+        
+          Bert.alert('Comment deleted','success', 'growl-top-right');
+        }
+        //Meteor.call('deleteComment', timestamp, postId);
       });
   }
 
   createPost() {
-    Meteor.call('createPost', this.post.title, [], this.post.content);
+    if(Meteor.userId()){
+      user = Meteor.user();
+      date = Date.now();
+      Posts.insert({poster_user_id: user._id, title: this.post.title, tags: [], content: this.post.content, url: user.profile.url, name: user.profile.firstName + " " + user.profile.lastName, comments: [], date: date, last_edit: 0});
+
+      //console.log(Posts.find({}).fetch());
+    }
+    //Meteor.call('createPost', this.post.title, [], this.post.content);
     this.post = {};
     this.back();
   }
 
   updatePost(postDate, title, content) {
-    Meteor.call('updatePost', postDate, title, [], content);
+    if(Meteor.userId()){
+      user = Meteor.userId();
+      date = Math.floor(Date.now() / 60000);
+      
+      Posts.update({poster_user_id: user, date: postDate}, {$set:{title: title, tags: tags, content: content, last_edit: date}}, false, false);
+    }
+    
+    //Meteor.call('updatePost', postDate, title, [], content);
   }
 
-  deletePost(postDate) {
+  deletePost(postID) {
     confirmed = swal({
         title: "Are you sure?",
         text: "This will delete the post and all its comments.",
@@ -87,12 +126,20 @@ class Postings {
         // #DD6B55
         showCancelButton: true,
         confirmButtonColor: "#3edeaa",
-      confirmButtonText: "Yes, delete it!",
+        confirmButtonText: "Yes, delete it!",
         closeOnConfirm: true
       },function(){
-        Meteor.call('deletePost', postDate);
-        Bert.alert('Post deleted','success', 'growl-top-right');
+        if(Meteor.userId()){
+          user = Meteor.userId();
+          
+          Posts.remove(postID);
+          
+          Bert.alert('Post deleted','success', 'growl-top-right');
+        }
+        //Meteor.call('deletePost', postDate);
       });
+
+
   }
 
 

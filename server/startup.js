@@ -121,62 +121,6 @@ Meteor.startup(()=>{
 				Meteor.users.update({_id:liked_userId}, {$pull: {"profile.likes": user}}, false, false);
 			}
 		},
-
-		createComment(post_id, comment){
-			if(Meteor.userId()){
-				user = Meteor.user();
-				//date = Math.floor(Date.now() / 60000);
-				//date + commenter_user_id will be the unique key combo for the comments for a profile
-				date = Date.now();
-
-				console.log(Posts.find({}).fetch());
-				Posts.update({_id: post_id}, {$addToSet: {comments: {commenter_user_id: user._id, name: user.profile.firstName + " " + user.profile.lastName, comment: comment, date: date, last_edit: 0}}}, false, false);
-			}
-		},
-
-		updateComment(original_timestamp, post_id, comment){
-			if(Meteor.userId()){
-				user = Meteor.userId();
-				date = Math.floor(Date.now() / 60000);
-				
-				Posts.update({_id: post_id, "comments.date": original_timestamp, "comments.commenter_user_id": user}, {$set:{"comments.$.comment": comment, "comments.$.last_edit": date}}, false, false);
-			}
-		},
-
-		deleteComment(original_timestamp, post_id){
-			if(Meteor.userId()){
-				user = Meteor.userId();
-				
-				Posts.update({_id: post_id, "comments.date": original_timestamp, "comments.commenter_user_id": user}, {$pull: {comments:{commenter_user_id: user, date: original_timestamp }}}, false, false);
-			}
-		},
-
-		createPost(title, tags, content){
-			if(Meteor.userId()){
-				user = Meteor.user();
-				date = Date.now();
-				Posts.insert({poster_user_id: user._id, title: title, tags: tags, content: content, url: user.profile.url, name: user.profile.firstName + " " + user.profile.lastName, comments: [], date: date, last_edit: 0});
-
-				//console.log(Posts.find({}).fetch());
-			}
-		},
-
-		updatePost(original_timestamp, title, tags, content){
-			if(Meteor.userId()){
-				user = Meteor.userId();
-				date = Math.floor(Date.now() / 60000);
-				
-				Posts.update({poster_user_id: user, date: original_timestamp}, {$set:{title: title, tags: tags, content: content, last_edit: date}}, false, false);
-			}
-		},
-
-		deletePost(original_timestamp){
-			if(Meteor.userId()){
-				user = Meteor.userId();
-				
-				Posts.remove({poster_user_id: user, date: original_timestamp});
-			}
-		}
 	});
 
 });``

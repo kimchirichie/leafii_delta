@@ -45,7 +45,7 @@
 						<p>{{post.content}}</p>
 						<div layout="row">
 							<p ng-click="posts.updatePost(post.date, post.title, post.content)" class="edit">Edit</p>
-							<p ng-click="posts.deletePost(post.date)" class="del">Delete</p>
+							<p ng-click="posts.deletePost(post._id)" class="del">Delete</p>
 						</div>
 						<h3 ng-click="previewSite=!previewSite"><i class="zmdi zmdi-caret-down zmdi-hc-lg"></i> show</h3>
 					</div>
