@@ -29,24 +29,9 @@ class Postings {
     return this.sce.trustAsResourceUrl('http://' + url.replace(/https:|http:|\/\//gi, ""));
   }
 
-  back(){
-    /*var self = this;
-    confirmed = swal({
-        title: "Are you sure?",
-        text: "Your unfinished post will be forever lost.",
-        type: "warning",
-        // #DD6B55
-        showCancelButton: true,
-        confirmButtonColor: "#3edeaa",
-        confirmButtonText: "Yes, abandon post!",        
-        cancelButtonText: "Edit",
-        closeOnConfirm: true
-      }, function(){ 
-        console.log("Closing new post");
-      });*/
-
-      this.submitPost = false;
-      this.post = {};
+  cancelNewPost(){
+    this.submitPost = false;
+    this.post = {};
   }
 
   createComment(postId) {
@@ -98,6 +83,10 @@ class Postings {
   editPost(title, content) {
     this.tempPost_title = title;
     this.tempPost_content = content;
+  }
+
+  editUserComment(comment){
+    this.temp_comment = comment;
   }
 
   updatePost(postID, title, content) {
