@@ -25,9 +25,7 @@ if (Meteor.isServer) {
 					}
 				}
 			}
-
-			console.log(ranks);
-			return this.ready();
+			return Meteor.users.find({_id:{$in:Object.keys(ranks)}})
 		} else {
 			return this.ready();
 		}
