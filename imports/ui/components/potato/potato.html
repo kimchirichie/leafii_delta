@@ -1,73 +1,57 @@
 <div>
-	<div class="card" ng-repeat="person in potato.potatoes">
-		<p>{{person.profile.firstName}} {{person.profile.lastName}}</p>
-		<button ng-click="potato.show(person._id)" style="display:block;">Show</button>
-		
-		<div ng-show="person._id == potato.showing">
-			<div ng-hide="potato.editing">
-				<button ng-click="potato.editing=true">Edit</button>
-				<p>User id: {{person._id}}</p>
-				<p>URL: {{person.profile.url}}</p>
-				<ul>
-					<li>First Name: {{person.profile.firstName}}</li>
-					<li>Last Name: {{person.profile.lastName}}</li>
-					<li>Email: {{person.emails[0].address}}</li>
-					<div ng-hide="!potato.more"
-						<button ng-click="potato.more = true">More</button>
-					</div>
-				</ul>
-			
-						
-				<div ng-show="potato.more">
-					<ul>
-						<li>Title: {{person.profile.occupation}}</li>
-						<li>Available: {{person.profile.available}}</li>
-						<li>Page Views: {{person.profile.views}}</li>
-						<li>Likes: {{person.profile.likes}}</li>
-						<button ng-click="potato.more = false">Show Less</button>
-					</ul>
-				</div>
-			</div>
-				
-			<div ng-show="potato.editing">
-				<ul>
-					<div>
-						<label>firstName</label>
-						<input type="text" ng-model="person.profile.firstName"/>
-					</div>
-					<div>
-						<label>lastName</label>
-						<input type="text" ng-model="person.profile.lastName"/>
-					</div>
-					<div>
-						<label>address</label>
-						<input type="text" ng-model="person.emails[0].address"/>
-					</div>
-					<div>
-						<label>occupation</label>
-						<input type="text" ng-model="person.profile.occupation"/>
-					</div>
-					<div>
-						<label>available</label>
-						<input type="text" ng-model="person.profile.available"/>
-					</div>
-				</ul>
-				<button ng-click="potato.close()">Cancel</button>
-				<button ng-click="potato.save(person)">Save</button>
-			</div>
-			<button ng-click="potato.delete">Terminate Troll</button>
+	<div class="card" ng-repeat="user in potato.users">
+		<div ng-hide="potato.showing(user)" ng-click="potato.display(user)">
+			<p>{{user.profile.firstName}} {{user.profile.lastName}}</p>
 		</div>
-			<!-- <div ng-controller="ExampleController">
-				<form name="edit">
-					<label>
-					First Name:
-					<input type="text" name="firstName" ng-model="person.profile.firstName" required>
-					</label>
-					<div role="alert">
-      					<span class="error" ng-show="edit.firstName.$error.required">
-      					Required!</span>
-    				</div>
-				</form>
-			</div> -->
+		<div ng-show="potato.showing(user) && !potato.editing(user)">
+			<ul>
+				<li>User id: {{user._id}}</li>
+				<li>URL: {{user.profile.url}}</li>
+				<li>First Name: {{user.profile.firstName}}</li>
+				<li>Last Name: {{user.profile.lastName}}</li>
+				<li>Email: {{user.emails[0].address}}</li>
+				<li>Occupation: {{user.profile.occupation}}</li>
+				<li>Available: {{user.profile.available}}</li>
+				<li>Page Views: {{user.profile.views}}</li>
+				<li>Likes: {{user.profile.likes.length}}</li>
+				<button ng-click="potato.close(user)">close</button>
+				<button ng-click="potato.edit(user)">edit</button>
+			</ul>
+		</div>
+		<div ng-show="potato.editing(user)">
+			<ul>
+				<li>User id: {{user._id}}</li>
+				<li>
+					<label>URL: </label>
+					<input type="text" ng-model="user.profile.url"/>
+				</li>
+				<li>
+					<label>First Name: </label>
+					<input type="text" ng-model="user.profile.firstName"/>
+				</li>
+				<li>
+					<label>Last Name: </label>
+					<input type="text" ng-model="user.profile.lastName"/>
+				</li>
+				<li>
+					<label>Email: </label>
+					<input type="email" ng-model="user.emails[0].address"/>
+				</li>
+				<li>
+					<label>Occupation: </label>
+					<input type="text" ng-model="user.profile.occupation"/>
+				</li>
+				<li>
+					<label>Available: </label>
+					<input type="text" ng-model="user.profile.available"/>
+				</li>
+				<li>Page Views: {{user.profile.views}}</li>
+				<li>Likes: {{user.profile.likes.length}}</li>
+				<button ng-click="potato.delete(user)">delete</button>
+				<button ng-click="potato.cancel(user)">cancel</button>
+				<button ng-click="potato.close(user)">close</button>
+				<button ng-click="potato.save(user)">save</button>
+			</ul>
+		</div>
 	</div>
 </div>

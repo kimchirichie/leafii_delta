@@ -12,42 +12,56 @@ class Potato {
 		this.rootScope = $rootScope;
 		this.showing;
 		this.editing;
-		this.more;
 		this.helpers({
-			potatoes(){
+			users(){
 				return Meteor.users.find({});
 			}
 		});
 		Meteor.subscribe("potato");
 	}
 
-	show(id){
-		this.showing = id;
+	display(user){
+		user.showing = true;
+	}
+
+	showing(user){
+		return user.showing;
+	}
+
+	edit(user){
+		user.editing = true;
+	}
+
+	editing(user){
+		return user.editing;
+	}
+
+	cancel(user){
+		user.editing = false;
+	}	
+
+	close(user){
+		user.showing = false;
+		user.editing = false;
 	}
 
 	save(user){
 		Meteor.users.update({_id:user._id}, {
 			$set: {
-				"emails.address":user.emails.address,
+				"profile.url":user.profile.url,
 				"profile.firstName": user.profile.firstName,
 				"profile.lastName": user.profile.lastName,
+				"emails[0].address":user.emails[0].address,
 				"profile.occupation": user.profile.occupation,
 				"profile.available": user.profile.available
 
 			}
 		});
-		this.close();
+		user.editing = false;
 	}
 
-
-	close(){
-		this.editing = false;
-		this.showing = undefined;
-	}
-
-	delete(){
-		Meteor.users.remove({_id:user._id})
-
+	delete(user){
+		Meteor.users.remove(user._id);
 	}
 
 }
