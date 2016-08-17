@@ -16,6 +16,7 @@ class Postings {
     this.submitPost = false;
     this.sce = $sce;
     Meteor.subscribe("posts");
+    this.user = Meteor.user();
     this.helpers({
       allPosts(){
         return Posts.find({});
@@ -32,30 +33,33 @@ class Postings {
     this.post = {};
   }
 
-  createComment(postId, comment) {
-    Meteor.call('createComment', postId, comment);
-  }
+  // createComment(postId, newComment) {
+  //   console.log(postId, newComment);
+  //   Meteor.call('createComment', postId, newComment);
+  // }
 
-  editComment(timestamp, postId, comment) {
-    Meteor.call('updateComment', timestamp, postId, comment);
-  }
+  // editComment(timestamp, postId, comment) {
+  //   Meteor.call('updateComment', timestamp, postId, comment);
+  // }
 
-  deleteComment(timestamp, postId) {
-    Meteor.call('deleteComment', timestamp, postId);
-  }
+  // deleteComment(timestamp, postId) {
+  //   Meteor.call('deleteComment', timestamp, postId);
+  // }
 
-  createPost() {
-    Meteor.call('createPost', this.post.title, [], this.post.content);
-    this.back();
-  }
+  // createPost() {
+  //   Post.insert({asdfsadflksadfk:asdfsadf})
+  //   Meteor.call('createPost', this.post.title, [], this.post.content);
+  //   this.back();
+  // }
 
-  updatePost(postDate, title, content) {
-    Meteor.call('updatePost', postDate, title, [], content);
-  }
+  // updatePost(postDate, title, content, post) {
+  //   post.update({$set:{asdfsadf}})
+  //   Meteor.call('updatePost', postDate, title, [], content);
+  // }
 
-  deletePost(postDate) {
-    Meteor.call('deletePost', postDate);
-  }
+  // deletePost(postDate) {
+  //   Meteor.call('deletePost', postDate);
+  // }
 
 
 

@@ -75,17 +75,30 @@
 			</form>
 
 			<iframe ng-show="previewSite" ng-src="{{posts.absolutify(post.url)}}"></iframe>
-			
-			<div class="comments" ng-show="previewSite" layout="column" ng-show="{{post.comments.length}}">
-				<div class="comment" layout="column" layout-align="start start">
-					<b>{{post.comments.name}}</b>
-					<span>{{post.comments.comment}}</span>
+
+			<form layout="column" ng-submit="posts.createComment(post._id, newComment)" class="postComment">
+				  	
+			  	<div layout="row">
+			  		<b>{{posts.user.profile.firstName + ' ' + posts.user.profile.lastName}}</b>
+			    	<input required placeholder="write a comment..." ng-model="newComment" type="text" name="comment">
+				</div>
+				
+			</form>
+
+			<div class="comments" ng-show="previewSite" layout="column" ng-repeat="user_comments in post.comments">
+
+				
+
+				<div class="comment" layout="column" ng-show="{{user_comments.length}}" layout-align="start start">
+					<b>{{user_comments.name}}</b>
+					<span>{{user_comments.comment}}</span>
 					<div layout="row">
 						<p class="edit">Edit</p>
 						<p class="del">Delete</p>
 					</div>
 				</div>
 			</div>
+			
 		</div>
 	</div>
 	
