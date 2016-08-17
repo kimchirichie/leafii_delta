@@ -106,7 +106,7 @@
 					</div>
 
 					<!-- Edit Comment -->
-					<div ng-show="editComment" class="full-width" ng-submit="posts.editComment(comment.date, post._id, comment.comment); editComment=false" layout="column">
+					<form ng-show="editComment" class="full-width" ng-submit="posts.editComment(comment.date, post._id, comment.comment); editComment=false" layout="column">
 						<div layout="column" layout-align="start start" class="postComment">
 							<div layout="row" class="full-width">
 								<img class="profileIcon" ng-src="images/defaultProfilePic.png"/>
@@ -114,7 +114,7 @@
 							</div>
 							<p class="cancelEdit" ng-click="editComment=false">Cancel</p>
 						</div>
-					</div>
+					</form>
 
 				</div>
 			</div>
