@@ -48,16 +48,15 @@ class Postings {
       this.post = {};
   }
 
-  createComment(postId, comment) {
+  createComment(postId) {
 
-    console.log('triggered');
     if(Meteor.userId()){
       user = Meteor.user();
       //date = Math.floor(Date.now() / 60000);
       //date + commenter_user_id will be the unique key combo for the comments for a profile
       date = Date.now();
-      Posts.update({_id: postId}, {$addToSet: {comments: {commenter_user_id: user._id, name: user.profile.firstName + " " + user.profile.lastName, comment: comment, date: date, last_edit: 0}}}, false, false);
-      newComment = '';
+      Posts.update({_id: postId}, {$addToSet: {comments: {commenter_user_id: user._id, name: user.profile.firstName + " " + user.profile.lastName, comment: this.newComment, date: date, last_edit: 0}}}, false, false);
+      this.newComment = '';
     }
   }
 

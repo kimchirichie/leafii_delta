@@ -38,7 +38,7 @@
 
 	<div layout="column" layout-align="center center">
 		<div class="roastCards" layout="column" layout-align="start center" ng-repeat="post in posts.allPosts | orderBy: '-date'">
-
+			
 			<md-card class="md-default-theme" layout="row" ng-init="previewSite = false">
 				<md-card-content ng-show="!postEdit" layout="row">
 					<div class="postInfo" layout="column">
@@ -73,46 +73,50 @@
 				    <md-button class="md-raised md-primary" type="submit">Update</md-button>
 				</div>
 			</form>
-
+			
+			<!-- preview website -->
 			<iframe class="animated slideDown" ng-show="previewSite" ng-src="{{posts.absolutify(post.url)}}"></iframe>
 
-
+			
+			<!-- Comments -->
 			<div class="comments" ng-show="previewSite" layout="column" ng-init="editComment = false">
-
-				<form ng-submit="posts.createComment(post._id, newComment)" layout="row" class="postComment" ng-show="!editComment">
+				
+				<!-- Create New Comment -->
+				<form ng-submit="posts.createComment(post._id)" layout="row" class="postComment" ng-show="!editComment">
 
 					<img class="profileIcon" ng-src="images/defaultProfilePic.png"/>
-				  	<div layout="row" class="full-width" type="submit">
-				    	<input required placeholder="write a comment..." ng-model="newComment" type="text" name="comment">
+				  	<div layout="row" class="full-width">
+				    	<input required placeholder="write a comment..." ng-model="posts.newComment" type="text" name="comment">
 					</div>
 					
 				</form>
 				
-				<div ng-show="!editComment" class="comment" layout="column" layout-align="start start" ng-repeat="comment in post.comments | orderBy: '-date'">
-					<div layout="row" layout-align="center center">
-						<img class="profileIcon" ng-src="images/defaultProfilePic.png"/>
-						<b>{{comment.name}}</b>
-						<span> &nbsp {{comment.comment}}</span>
-					</div>
-					<div layout="row" class="changeComment">
-						<p class="edit" ng-click="editComment = true">Edit</p>
-						<p class="del" ng-click="posts.deleteComment(post.date, post._id)">Delete</p>
-					</div>
-				</div>
-				
-				<!-- Edit Comment -->
-				<form class="comment" ng-show="editComment" layout="column" layout-align="start start">
-					<div layout="row" layout-align="center center" class="postComment">
-						<img class="profileIcon" ng-src="images/defaultProfilePic.png"/>
-						<div layout="row" class="full-width">
-					    	<input required ng-model="updateComment" type="text" name="comment">
+				<div class="comment" layout="column" layout-align="start start" ng-repeat="comment in post.comments | orderBy: '-date'">
+					
+					<div ng-show="!editComment">
+						<div layout="row" layout-align="center center">
+							<img class="profileIcon" ng-src="images/defaultProfilePic.png"/>
+							<b>{{comment.name}}</b>
+							<span> &nbsp {{comment.comment}}</span>
 						</div>
-						<p class="cancelEdit" ng-click="editComment = false">Cancel</p>
+						<div layout="row" class="changeComment">
+							<p class="edit" ng-click="editComment = true">Edit</p>
+							<p class="del" ng-click="posts.deleteComment(comment.date, post._id)">Delete</p>
+						</div>
 					</div>
-				</form>
+
+					<!-- Edit Comment -->
+					<form ng-show="editComment" ng-submit="posts.editComment(comment.date, post._id, comment.comment)" class="comment" layout="column" layout-align="start start">
+						<div layout="row" layout-align="center center" class="postComment">
+							<img class="profileIcon" ng-src="images/defaultProfilePic.png"/>
+							<div layout="row" class="full-width">
+						    	<input required ng-model="comment.comment" type="text" name="comment">
+							</div>
+							<p class="cancelEdit" ng-click="editComment = false">Cancel</p>
+						</div>
+					</form>
+				</div>
 			</div>
-			
 		</div>
 	</div>
-	
 </div>
