@@ -13,7 +13,18 @@ class Search {
 		this.results = [];
 		this.state = $state;
 		this.rootScope = $rootScope;
+<<<<<<< HEAD
 		this.subscribe('search', () => [this.getReactively('rootScope.search')]);
+=======
+		this.currentUser = Meteor.userId();
+
+		angular.element($window).bind("resize", function(){
+			if($window.innerWidth < 600){
+				angular.element('#gridView').trigger('click');
+			}
+		});
+		
+>>>>>>> 5df94370d4c5791b6a4fc152638a8e3a24c5c05d
 		this.subscribe('keywords', () => [this.getReactively('rootScope.search')]);
 		
 		Meteor.subscribe("allUsers");

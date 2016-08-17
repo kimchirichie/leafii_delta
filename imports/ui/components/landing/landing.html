@@ -39,7 +39,7 @@
 					<a ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank">{{user.profile.occupation ? user.profile.occupation: 'Not specified' | limitTo: 17 }}{{user.profile.occupation.length > 17 ? '...' : ''}}</a>
 					<div layout="row" layout-align="space-around center">
 						<span><i class="zmdi zmdi-eye"></i> {{user.profile.views}}</span>
-				        <md-button class="md-fab md-mini fav" ng-click="landing.liked(user)" ng-show="landing.rootScope.currentUser" aria-label="like"><i ng-class="{upvoted : user.profile.likes.includes(landing.currentUser)}" class="zmdi zmdi-long-arrow-up"></i></md-button>
+				        <md-button class="md-fab md-mini fav" ng-click="landing.liked(user)" ng-show="landing.rootScope.currentUser" aria-label="like"><i ng-class="{upvoted : user.profile.likes.includes(landing.currentUser)}" class="zmdi zmdi-star"></i></md-button>
 						<span><i class="zmdi zmdi-star"></i> {{user.profile.likes.length}}</span>
 					</div>
 					<p>{{user.profile.firstName + ' ' + user.profile.lastName}}</p>
@@ -59,7 +59,7 @@
 					<a ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank"><img class="profilePicSmall" ng-src="{{user.profile.image ? landing.secureProtocol(user.profile.image) : 'images/defaultProfilePic.png'}}"/></a>
 					<span><i class="zmdi zmdi-eye"></i> {{user.profile.views}}</span>
 				</div>
-				<md-card-content layout="row" layout="end center">
+				<md-card-content layout="row">
 					<div class="cardInfoSmall" layout="column">
 						<a ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank">{{user.profile.occupation ? user.profile.occupation: 'Not specified'}}
 							<md-tooltip md-direction="top">{{landing.absolutify(user.profile.url)}}</md-tooltip>
@@ -72,7 +72,7 @@
 				<span flex></span>
 
 				<div class="upLike" layout="column" layout-align="center center">
-					<md-button class="md-fab md-mini fav" ng-click="landing.liked(user)" ng-show="landing.rootScope.currentUser" aria-label="like"><i ng-class="{upvoted : user.profile.likes.includes(landing.currentUser)}" class="zmdi zmdi-long-arrow-up"></i></md-button>
+					<md-button class="md-fab md-mini fav" ng-click="landing.liked(user)" ng-show="landing.rootScope.currentUser" aria-label="like"><i ng-class="{upvoted : user.profile.likes.includes(landing.currentUser)}" class="zmdi zmdi-star"></i></md-button>
 					<span><i class="zmdi zmdi-star"></i> {{user.profile.likes.length}}</span>
 				</div>
 			</md-card>
