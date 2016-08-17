@@ -15,6 +15,7 @@ class Postings {
     this.wait = false;
     this.submitPost = false;
     this.sce = $sce;
+    this.hideNewComment = false;
     Meteor.subscribe("posts");
     this.user = Meteor.user();
     this.helpers({

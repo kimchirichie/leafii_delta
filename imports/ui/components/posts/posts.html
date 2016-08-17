@@ -79,10 +79,10 @@
 
 			
 			<!-- Comments -->
-			<div class="comments" ng-show="previewSite" layout="column" ng-init="editComment = false">
+			<div class="comments" ng-show="previewSite" layout="column" ng-init="editComment=false;createComment=true">
 				
 				<!-- Create New Comment -->
-				<form ng-submit="posts.createComment(post._id)" layout="row" class="postComment" ng-show="!editComment">
+				<form ng-submit="posts.createComment(post._id)" layout="row" class="postComment" ng-show="!posts.hideNewComment">
 
 					<img class="profileIcon" ng-src="images/defaultProfilePic.png"/>
 				  	<div layout="row" class="full-width">
@@ -100,7 +100,7 @@
 							<span> &nbsp {{comment.comment}}</span>
 						</div>
 						<div layout="row" class="changeComment">
-							<p class="edit" ng-click="editComment = true">Edit</p>
+							<p class="edit" ng-click="editComment=true;posts.hideNewComment=true">Edit</p>
 							<p class="del" ng-click="posts.deleteComment(comment.date, post._id)">Delete</p>
 						</div>
 					</div>
@@ -112,7 +112,7 @@
 								<img class="profileIcon" ng-src="images/defaultProfilePic.png"/>
 							    <input required ng-model="comment.comment" type="text" name="comment">
 							</div>
-							<p class="cancelEdit" ng-click="editComment=false">Cancel</p>
+							<p class="cancelEdit" ng-click="editComment=false;posts.hideNewComment=false">Cancel</p>
 						</div>
 					</form>
 
