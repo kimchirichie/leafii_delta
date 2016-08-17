@@ -13,10 +13,10 @@ Posts.allow({
 	insert(poster_user_id, post) {
 		return true;
 	},
-	update(poster_user_id, post, modifier) {
+	update(poster_user_id, post, fields, modifier) {
 		return true;
 	},
-	remove(poster_user_id, post, comments) {
+	remove(poster_user_id, post) {
 		return true;		
 	}
 })

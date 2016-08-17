@@ -61,12 +61,7 @@ class Postings {
   }
 
   editComment(timestamp, postId, comment) {
-    if(Meteor.userId()){
-      user = Meteor.userId();
-      date = Math.floor(Date.now() / 60000);
-      
-      Posts.update({_id: postId, "comments.date": timestamp, "comments.commenter_user_id": user}, {$set:{"comments.$.comment": comment, "comments.$.last_edit": date}}, false, false);
-    }
+    Meteor.call('updateComment', timestamp, postId, comment);
   }
 
   deleteComment(timestamp, postId) {

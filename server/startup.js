@@ -121,6 +121,16 @@ Meteor.startup(()=>{
 				Meteor.users.update({_id:liked_userId}, {$pull: {"profile.likes": user}}, false, false);
 			}
 		},
+
+		updateComment(timestamp, postId, comment)
+		{
+			if(Meteor.userId()){
+			  user = Meteor.userId();
+			  date = Math.floor(Date.now() / 60000);
+			  
+			  Posts.update({_id: postId, comments:{$elemMatch: {"comments.date": timestamp, "comments.commenter_user_id": user}}}, {$set:{"comments.$.comment": comment, "comments.$.last_edit": date}});
+			}
+		}
 	});
 
 });``
