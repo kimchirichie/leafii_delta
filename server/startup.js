@@ -63,11 +63,7 @@ Meteor.startup(()=>{
 			  		myFuture.return(results);
 				}
 			});
-			// var msg = shell.on('message', function (message) {
-			// 	// handle message (a line of text from stdout)
-			// 	myFuture.return(message);
-			// 	console.log(message);
-			// });
+			
 			return myFuture.wait();
 		},
 
@@ -91,8 +87,6 @@ Meteor.startup(()=>{
 		likeProfile(liked_userId, url){
 			if(Meteor.userId()){
 				user = Meteor.userId();
-				//console.log(Profile_likes.find({clicker_user_id: user, liked_user_id: liked_userId}).count());
-				//console.log(user+" ; "+liked_userId);
 				date = Math.floor(Date.now() / 60000);
 				data = {
 					clicker_user_id: user, 
@@ -100,7 +94,6 @@ Meteor.startup(()=>{
 					date: date,
 					url: url
 				};
-				//console.log("Add like");
 				Profile_likes.insert(data);
 				Meteor.users.update({_id:liked_userId}, {$addToSet: {"profile.likes": user}}, false, false);
 				
@@ -110,13 +103,10 @@ Meteor.startup(()=>{
 		unlikeProfile(liked_userId){
 			if(Meteor.userId()){
 				user = Meteor.userId();
-				//console.log(Profile_likes.find({clicker_user_id: user, liked_user_id: liked_userId}).count());
-				//console.log(user+" ; "+liked_userId);
 				data = {
 					clicker_user_id: user, 
 					liked_user_id: liked_userId,
 				};
-				//console.log("Delete like");
 				Profile_likes.remove(data);
 				Meteor.users.update({_id:liked_userId}, {$pull: {"profile.likes": user}}, false, false);
 			}

@@ -45,7 +45,7 @@
 						<p class="noMargin"><i class="zmdi zmdi-account-circle"></i> {{post.name}}</p>
 						<h2>{{post.title}}</h2>
 						<p>{{post.content}}</p>
-						<div layout="row">
+						<div layout="row" ng-show="posts.rootScope.currentUser._id == post.poster_user_id">
 							<p ng-click="postEdit = true; posts.editPost(post.title, post.content)" class="edit">Edit</p>
 							<p ng-click="posts.deletePost(post._id)" class="del">Delete</p>
 						</div>
