@@ -15,7 +15,7 @@
 	<div ng-show="posts.submitPost" layout="column" layout-align="center center">
 		
 		<!-- Create Post -->	
-	    <form ng-submit="posts.createPost(posts.post)" class="form submitPost">
+	    <form ng-submit="posts.createPost()" class="form submitPost">
 	    
 		    <md-input-container class="md-block" flex-gt-sm>
 		      <label>Title</label>
@@ -46,7 +46,7 @@
 						<h2>{{post.title}}</h2>
 						<p>{{post.content}}</p>
 						<div layout="row">
-							<p ng-click="postEdit = true" class="edit">Edit</p>
+							<p ng-click="postEdit = true; posts.editPost(post.title, post.content)" class="edit">Edit</p>
 							<p ng-click="posts.deletePost(post._id)" class="del">Delete</p>
 						</div>
 						<h3 ng-click="previewSite=!previewSite"><i class="zmdi zmdi-caret-down zmdi-hc-lg"></i> show</h3>

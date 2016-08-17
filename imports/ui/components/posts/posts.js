@@ -54,12 +54,8 @@ class Postings {
       //date = Math.floor(Date.now() / 60000);
       //date + commenter_user_id will be the unique key combo for the comments for a profile
       date = Date.now();
-
-      console.log(Posts.find({}).fetch());
       Posts.update({_id: postId}, {$addToSet: {comments: {commenter_user_id: user._id, name: user.profile.firstName + " " + user.profile.lastName, comment: comment, date: date, last_edit: 0}}}, false, false);
     }
-
-    //Meteor.call('createComment', postId, comment);
   }
 
   editComment(timestamp, postId, comment) {
@@ -100,23 +96,23 @@ class Postings {
       user = Meteor.user();
       date = Date.now();
       Posts.insert({poster_user_id: user._id, title: this.post.title, tags: [], content: this.post.content, url: user.profile.url, name: user.profile.firstName + " " + user.profile.lastName, comments: [], date: date, last_edit: 0});
-
-      //console.log(Posts.find({}).fetch());
     }
-    //Meteor.call('createPost', this.post.title, [], this.post.content);
-    this.post = {};
     this.back();
   }
 
+  editPost(title, content) {
+    this.tempPost_title = title;
+    this.tempPost_content = content;
+  }
+
   updatePost(postDate, title, content) {
+
     if(Meteor.userId()){
       user = Meteor.userId();
       date = Math.floor(Date.now() / 60000);
-      
-      Posts.update({poster_user_id: user, date: postDate}, {$set:{title: title, tags: tags, content: content, last_edit: date}}, false, false);
+      Posts.update({poster_user_id: user, date: postDate}, {$set:{title: title, tags: [], content: content, last_edit: date}}, false, false);
     }
     
-    //Meteor.call('updatePost', postDate, title, [], content);
   }
 
   deletePost(postID) {
@@ -131,13 +127,9 @@ class Postings {
         closeOnConfirm: true
       },function(){
         if(Meteor.userId()){
-          user = Meteor.userId();
-          
           Posts.remove(postID);
-          
           Bert.alert('Post deleted','success', 'growl-top-right');
         }
-        //Meteor.call('deletePost', postDate);
       });
   }
 }
