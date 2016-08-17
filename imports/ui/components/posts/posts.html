@@ -56,7 +56,7 @@
 			</md-card>
 
 			<!-- Update Post -->
-			<form ng-show="postEdit" ng-submit="posts.updatePost(post.date, post.title, post.content); postEdit = false" class="form editPost">
+			<form ng-show="postEdit" ng-submit="posts.updatePost(post._id, post.title, post.content); postEdit = false" class="form editPost">
     
 			    <md-input-container class="md-block" flex-gt-sm>
 			      <label>Title</label>

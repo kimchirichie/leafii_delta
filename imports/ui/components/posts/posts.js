@@ -65,8 +65,6 @@ class Postings {
       
       Posts.update({_id: postId, "comments.date": timestamp, "comments.commenter_user_id": user}, {$set:{"comments.$.comment": comment, "comments.$.last_edit": date}}, false, false);
     }
-    
-    //Meteor.call('updateComment', timestamp, postId, comment);
   }
 
   deleteComment(timestamp, postId) {
@@ -82,12 +80,9 @@ class Postings {
       },function(){
         if(Meteor.userId()){
           user = Meteor.userId();
-          
           Posts.update({_id: postId, "comments.date": timestamp, "comments.commenter_user_id": user}, {$pull: {comments:{commenter_user_id: user, date: original_timestamp }}}, false, false);
-        
           Bert.alert('Comment deleted','success', 'growl-top-right');
         }
-        //Meteor.call('deleteComment', timestamp, postId);
       });
   }
 
@@ -110,9 +105,8 @@ class Postings {
     if(Meteor.userId()){
       user = Meteor.userId();
       date = Math.floor(Date.now() / 60000);
-      Posts.update({poster_user_id: user, date: postDate}, {$set:{title: title, tags: [], content: content, last_edit: date}}, false, false);
+      Posts.update({_id: postID}, {$set:{title: title, tags: [], content: content, last_edit: date}}, false, false); 
     }
-    
   }
 
   deletePost(postID) {
