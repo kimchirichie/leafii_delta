@@ -76,27 +76,39 @@
 
 			<iframe ng-show="previewSite" ng-src="{{posts.absolutify(post.url)}}"></iframe>
 
-			<form layout="column" ng-submit="posts.createComment(post._id, newComment)" class="postComment">
-				  	
-			  	<div layout="row">
-			  		<b>{{posts.user.profile.firstName + ' ' + posts.user.profile.lastName}}</b>
+			<form layout="row" class="postComment" ng-show="!editComment">
+
+				<img class="profileIcon" ng-src="images/defaultProfilePic.png"/>
+			  	<div layout="row" class="full-width">
 			    	<input required placeholder="write a comment..." ng-model="newComment" type="text" name="comment">
 				</div>
 				
 			</form>
 
-			<div class="comments" ng-show="previewSite" layout="column" ng-repeat="user_comments in post.comments">
-
+			<div class="comments" ng-show="previewSite" layout="column" ng-init="editComment = false">
 				
-
-				<div class="comment" layout="column" ng-show="{{user_comments.length}}" layout-align="start start">
-					<b>{{user_comments.name}}</b>
-					<span>{{user_comments.comment}}</span>
-					<div layout="row">
-						<p class="edit">Edit</p>
+				<div ng-show="!editComment" class="comment" layout="column" layout-align="start start">
+					<div layout="row" layout-align="center center">
+						<img class="profileIcon" ng-src="images/defaultProfilePic.png"/>
+						<b>Talent Zeng</b>
+						<span> &nbsp blah blah blah blah</span>
+					</div>
+					<div layout="row" class="changeComment">
+						<p class="edit" ng-click="editComment = true">Edit</p>
 						<p class="del">Delete</p>
 					</div>
 				</div>
+				
+				<!-- Edit Comment -->
+				<form class="comment" ng-show="editComment" layout="column" layout-align="start start">
+					<div layout="row" layout-align="center center" class="postComment">
+						<img class="profileIcon" ng-src="images/defaultProfilePic.png"/>
+						<div layout="row" class="full-width">
+					    	<input required ng-model="updateComment" type="text" name="comment">
+						</div>
+						<p class="cancelEdit" ng-click="editComment = false">Cancel</p>
+					</div>
+				</form>
 			</div>
 			
 		</div>
