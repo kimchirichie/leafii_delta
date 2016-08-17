@@ -4,7 +4,7 @@
 	<div class="intro">
 		<h1 class="animated fadeIn">Welcome to Roast Page</h1>
 		<h3>Post your website here to get feedbacks and critiques</h3>
-		<md-button ng-show="!posts.submitPost" ng-click="posts.submitPost=true" class="md-raised createPost">Roast Me</md-button>
+		<md-button ng-show="!posts.submitPost" ng-click="posts.submitPost=true;postEdit=false" class="md-raised createPost">Roast Me</md-button>
 	</div>
 
 	<div ng-show="!posts.submitPost" class="filterBar" layout="row" layout-align="center center" layout-xs="column">
@@ -14,23 +14,25 @@
 
 	<div ng-show="posts.submitPost" layout="column" layout-align="center center">
 		
-	  <form ng-submit="posts.createPost(posts.post)" class="form submitPost">
+		<!-- Create Post -->	
+	    <form ng-submit="posts.createPost(posts.post)" class="form submitPost">
 	    
-	    <md-input-container class="md-block" flex-gt-sm>
-	      <label>Title</label>
-	      <input required ng-model="posts.post.title" placeholder="I have updated my website, check it out :D" type="text" name="title">
-	    </md-input-container>
+		    <md-input-container class="md-block" flex-gt-sm>
+		      <label>Title</label>
+		      <input required ng-model="posts.post.title" placeholder="I have updated my website, check it out :D" type="text" name="title">
+		    </md-input-container>
 
-	    <md-input-container class="md-block" flex-gt-sm>
-	      <label>Content</label>
-	      <textarea required ng-model="posts.post.content" placeholder="Please check for bugs and design flaws" type="text" name="content"></textarea>
-	    </md-input-container>
+		    <md-input-container class="md-block" flex-gt-sm>
+		      <label>Content</label>
+		      <textarea required ng-model="posts.post.content" placeholder="Please check for bugs and design flaws" type="text" name="content"></textarea>
+		    </md-input-container>
 
-		<div layout="row" layout-align="space-between center">
-		    <md-button ng-click="posts.back()" class="md-raised">Cancel</md-button>
-		    <md-button class="md-raised md-primary" ng-show="!posts.wait" type="submit">Post</md-button>
-		</div>
-	  </form>
+			<div layout="row" layout-align="space-between center">
+			    <md-button ng-click="posts.back()" class="md-raised">Cancel</md-button>
+			    <md-button class="md-raised md-primary" type="submit">Post</md-button>
+			</div>
+
+		</form>
 		
 	</div>
 
@@ -38,32 +40,65 @@
 		<div class="roastCards" layout="column" layout-align="start center" ng-repeat="post in posts.allPosts | orderBy: '-date'">
 
 			<md-card class="md-default-theme" layout="row" ng-init="previewSite = false">
-				<md-card-content layout="row">
+				<md-card-content ng-show="!postEdit" layout="row">
 					<div class="postInfo" layout="column">
 						<p class="noMargin"><i class="zmdi zmdi-account-circle"></i> {{post.name}}</p>
 						<h2>{{post.title}}</h2>
 						<p>{{post.content}}</p>
 						<div layout="row">
-							<p ng-click="posts.updatePost(post.date, post.title, post.content)" class="edit">Edit</p>
+							<p ng-click="postEdit = true" class="edit">Edit</p>
 							<p ng-click="posts.deletePost(post._id)" class="del">Delete</p>
 						</div>
 						<h3 ng-click="previewSite=!previewSite"><i class="zmdi zmdi-caret-down zmdi-hc-lg"></i> show</h3>
 					</div>
 				</md-card-content>
+
 			</md-card>
 
+			<!-- Update Post -->
+			<form ng-show="postEdit" ng-submit="posts.updatePost(post.date, post.title, post.content); postEdit = false" class="form editPost">
+    
+			    <md-input-container class="md-block" flex-gt-sm>
+			      <label>Title</label>
+			      <input required ng-model="post.title" type="text" name="title">
+			    </md-input-container>
+
+			    <md-input-container class="md-block" flex-gt-sm>
+			      <label>Content</label>
+			      <textarea required ng-model="post.content" type="text" name="content"></textarea>
+			    </md-input-container>
+
+				<div layout="row" layout-align="space-between center">
+				    <md-button ng-click="postEdit = false" class="md-raised">Cancel</md-button>
+				    <md-button class="md-raised md-primary" type="submit">Update</md-button>
+				</div>
+			</form>
+
 			<iframe ng-show="previewSite" ng-src="{{posts.absolutify(post.url)}}"></iframe>
-			
-			<div class="comments" ng-show="previewSite" layout="column">
-				<div class="comment" layout="column" layout-align="start start">
-					<b>Bobby Lee</b>
-					<span> Your website is awesome!!!</span>
+
+			<form layout="column" ng-submit="posts.createComment(post._id, newComment)" class="postComment">
+				  	
+			  	<div layout="row">
+			  		<b>{{posts.user.profile.firstName + ' ' + posts.user.profile.lastName}}</b>
+			    	<input required placeholder="write a comment..." ng-model="newComment" type="text" name="comment">
+				</div>
+				
+			</form>
+
+			<div class="comments" ng-show="previewSite" layout="column" ng-repeat="user_comments in post.comments">
+
+				
+
+				<div class="comment" layout="column" ng-show="{{user_comments.length}}" layout-align="start start">
+					<b>{{user_comments.name}}</b>
+					<span>{{user_comments.comment}}</span>
 					<div layout="row">
 						<p class="edit">Edit</p>
 						<p class="del">Delete</p>
 					</div>
 				</div>
 			</div>
+			
 		</div>
 	</div>
 	

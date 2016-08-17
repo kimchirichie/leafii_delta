@@ -11,6 +11,13 @@
 		max-width: 90%;
 	}
 
+	.editPost {
+		background: white;
+		width: 100%;
+		max-width: 100%;
+		margin: 0;
+	}
+
 	.createPost {
 		color: black;
 		font-weight: bold;
@@ -20,6 +27,7 @@
 	.edit {
 		cursor: pointer;
 		margin-right: 10px;
+		outline: 0;
 
 		&:hover {
 			color: $leafii-theme;

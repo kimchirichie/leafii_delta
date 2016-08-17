@@ -16,6 +16,7 @@ class Postings {
     this.submitPost = false;
     this.sce = $sce;
     Meteor.subscribe("posts");
+    this.user = Meteor.user();
     this.helpers({
       allPosts(){
         return Posts.find({});
@@ -138,12 +139,7 @@ class Postings {
         }
         //Meteor.call('deletePost', postDate);
       });
-
-
   }
-
-
-
 }
 
 const name = 'posts';
