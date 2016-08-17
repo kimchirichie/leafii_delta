@@ -84,7 +84,8 @@ class Postings {
       },function(){
         if(Meteor.userId()){
           user = Meteor.userId();
-          Posts.update({_id: postId, "comments.date": timestamp, "comments.commenter_user_id": user}, {$pull: {comments:{commenter_user_id: user, date: timestamp }}}, false, false);
+          //console.log(postId+ " " + user +" "+timestamp);
+          Posts.update({_id: postId}, {$pull: {comments:{commenter_user_id: user, date: timestamp}}});
           Bert.alert('Comment deleted','success', 'growl-top-right');
         }
       });
