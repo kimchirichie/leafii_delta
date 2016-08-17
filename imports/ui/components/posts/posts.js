@@ -100,7 +100,7 @@ class Postings {
     this.tempPost_content = content;
   }
 
-  updatePost(postDate, title, content) {
+  updatePost(postID, title, content) {
 
     if(Meteor.userId()){
       user = Meteor.userId();
