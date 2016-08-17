@@ -124,13 +124,13 @@ Meteor.startup(()=>{
 
 		createComment(post_id, comment){
 			if(Meteor.userId()){
-				user = Meteor.userId();
+				user = Meteor.user();
 				//date = Math.floor(Date.now() / 60000);
 				//date + commenter_user_id will be the unique key combo for the comments for a profile
 				date = Date.now();
 
 				console.log(Posts.find({}).fetch());
-				Posts.update({_id: post_id}, {$addToSet: {comments: {commenter_user_id: user, comment: comment, date: date, last_edit: 0}}}, false, false);
+				Posts.update({_id: post_id}, {$addToSet: {comments: {commenter_user_id: user._id, name: user.profile.firstName + " " + user.profile.lastName, comment: comment, date: date, last_edit: 0}}}, false, false);
 			}
 		},
 
