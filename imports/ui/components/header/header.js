@@ -17,6 +17,7 @@ class Header {
 	}
 
 	search(){
+		console.log('requesting search');
 		this.rootScope.search = this.query;
 	}
 

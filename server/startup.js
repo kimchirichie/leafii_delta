@@ -2,6 +2,8 @@ import { Meteor } from 'meteor/meteor';
 import { Views } from '../imports/api/views/index';
 import { Profile_likes } from '../imports/api/profile_likes/index';
 import { Posts } from '../imports/api/posts/index';
+import { Keywords } from '../imports/api/keywords/index';
+import { Words } from '../imports/api/count/index';
  
 Meteor.startup(()=>{
 
@@ -176,7 +178,44 @@ Meteor.startup(()=>{
 				
 				Posts.remove({poster_user_id: user, date: original_timestamp});
 			}
+		},
+
+		search(searchString){
+			console.log('searching: ',searchString);
+			if (typeof searchString === 'string' && searchString.length) {
+				var queries = searchString.split(" ");
+				console.log(queries);
+				var ranks = {};
+
+				for (let i = 0; i < queries.length; i++){
+					keywords = Keywords.find({keyword:{$regex:`.*${queries[i]}.*`,$options:'i'}}).fetch();
+					total = Words.findOne({word: queries[i]}).total;
+					console.log(queries[i], total);
+					points = 1/total;
+					for (let j = 0; j < keywords.length;  j++){
+						if (!(keywords[j].user_id in ranks)){
+							ranks[keywords[j].user_id] = points;
+						} else {
+							ranks[keywords[j].user_id] += points;
+						}
+					}
+				}
+
+				console.log(ranks);
+				console.log(Object.keys(ranks));
+				var result = Meteor.users.aggregate([
+					{ $match:
+						{ _id: 
+							{ $in:Object.keys(ranks)}
+						}
+					},
+					// {$project:{points:1}}
+				]);
+				console.log(result);
+				return result;
+			} else {
+				return []
+			}
 		}
 	});
-
-});``
+});

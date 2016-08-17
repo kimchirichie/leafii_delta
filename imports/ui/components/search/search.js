@@ -4,18 +4,24 @@ import uiRouter from 'angular-ui-router';
 import { Counts } from 'meteor/tmeasday:publish-counts';
 
 import template from './search.html';
-import { Keywords } from '../../../api/keywords/index';
 
 class Search {
 	constructor ($scope, $reactive, $rootScope, $state, $window){
 		'ngInject';
 		$reactive(this).attach($scope);
-		this.results = [];
 		this.state = $state;
 		this.rootScope = $rootScope;
-		this.subscribe('search', () => [this.getReactively('rootScope.search')]);
-		// this.subscribe('keywords', () => [this.getReactively('rootScope.search')]);
+		this.rootScope.results = [];
+		this.rootScope.$watch("search",function(){
+			console.log('search initiated');
+			Fetcher.retrieve("results", "search", $rootScope.search);
+			// $rootScope.results = Fetcher.get("results");
+		});
 		Meteor.subscribe("allUsers");
+	}
+
+	test(){
+		console.log(Fetcher.get("results"));
 	}
 
 	viewLog(user){
