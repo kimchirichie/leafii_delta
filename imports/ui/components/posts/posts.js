@@ -115,6 +115,13 @@ class Postings {
         }
       });
   }
+
+  loginCheck(){
+    if(!this.loggedIn)
+    {
+      Bert.alert('You need to log in to do ta','error');
+    }
+  }
 }
 
 const name = 'posts';

@@ -4,7 +4,7 @@
 	<div class="intro">
 		<h1 class="animated fadeIn">Welcome to the Roast Page</h1>
 		<h3>Post your website here to get feedbacks and critiques</h3>
-		<md-button ng-show="!posts.submitPost" ng-click="posts.submitPost=true;postEdit=false" class="md-raised createPost">Roast Me</md-button>
+		<md-button ng-show="!posts.submitPost" ng-click="post.loginCheck();posts.submitPost=true;postEdit=false" class="md-raised createPost">Roast Me</md-button>
 	</div>
 
 	<div ng-show="!posts.submitPost" class="filterBar" layout="row" layout-align="center center" layout-xs="column">
