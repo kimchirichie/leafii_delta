@@ -29,21 +29,6 @@ class Postings {
   }
 
   back(){
-    /*var self = this;
-    confirmed = swal({
-        title: "Are you sure?",
-        text: "Your unfinished post will be forever lost.",
-        type: "warning",
-        // #DD6B55
-        showCancelButton: true,
-        confirmButtonColor: "#3edeaa",
-        confirmButtonText: "Yes, abandon post!",        
-        cancelButtonText: "Edit",
-        closeOnConfirm: true
-      }, function(){ 
-        console.log("Closing new post");
-      });*/
-
       this.submitPost = false;
       this.post = {};
   }
