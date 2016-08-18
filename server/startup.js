@@ -128,16 +128,16 @@ Meteor.startup(()=>{
 		likePost(postId)
 		{
 			if(Meteor.userId()){
-			  user = Meteor.userId();
-			  if(Posts.find({_id: postId, "upvotes.user": user}).count())
-			  {
-			    Posts.update({_id:postId}, {$pull: {upvotes: {user: user}}}, false, false);
-			  }
-			  else
-			  {
-			    date = Math.floor(Date.now() / 60000);
-			    Posts.update({_id:postId}, {$addToSet: {upvotes: {user: user, date: date}}}, false, false);
-			  }
+				user = Meteor.userId();
+				if(Posts.find({_id: postId, "upvotes.user": user}).count())
+			  	{
+			    	Posts.update({_id:postId}, {$pull: {upvotes: {user: user}}}, false, false);
+			  	}
+			 	else
+			  	{
+			    	date = Math.floor(Date.now() / 60000);
+			    	Posts.update({_id:postId}, {$addToSet: {upvotes: {user: user, date: date}}}, false, false);
+			  	}
 			}
 		},
 
@@ -146,17 +146,15 @@ Meteor.startup(()=>{
 			if(Meteor.userId()){
 			  user = Meteor.userId();
 
-			  if(Posts.find({_id: postId, "comments.commenter_user_id": commenter, "comments.date": timestamp, "comments.upvotes.user": user}).count())
-			  {
-			    Posts.update({_id: postId, "comments.commenter_user_id":commenter, "comments.date": timestamp}, {$pull: {"comments.$.upvotes": {user: user}}}, false, false);
-			  }
-			  else
-			  {
-			    date = Math.floor(Date.now() / 60000);
-			    
-			    Profile_likes.insert(data);
-			    Posts.update({_id:postId, "comments.commenter_user_id": commenter, "comments.date": timestamp}, {$addToSet: {"comments.$.upvotes": {user: user, date: date}}}, false, false);
-			  }
+				if(Posts.find({_id: postId, "comments.commenter_user_id": commenter, "comments.date": timestamp, "comments.upvotes.user": user}).count())
+				{
+			    	Posts.update({_id: postId, "comments.commenter_user_id":commenter, "comments.date": timestamp}, {$pull: {"comments.$.upvotes": {user: user}}}, false, false);
+				}
+				else
+				{
+			    	date = Math.floor(Date.now() / 60000);
+					Posts.update({_id:postId, "comments.commenter_user_id": commenter, "comments.date": timestamp}, {$addToSet: {"comments.$.upvotes": {user: user, date: date}}}, false, false);
+				}
 			}
 		}
 	});
