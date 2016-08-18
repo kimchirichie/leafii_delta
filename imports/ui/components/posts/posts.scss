@@ -11,6 +11,11 @@
 		max-width: 90%;
 	}
 
+	.lightUp {
+		outline: 0;
+		color: $leafii-theme !important;
+	}
+
 	.changeComment {
 		margin-left: 50px;
 	}
@@ -136,6 +141,11 @@
 
 			b {
 				margin-left: 10px;
+				white-space: nowrap;
+			}
+
+			.commentTime {
+				margin-left: 50px;
 			}
 
 			.cancelEdit {
