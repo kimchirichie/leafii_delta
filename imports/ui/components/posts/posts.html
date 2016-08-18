@@ -62,9 +62,9 @@
 
 				<span flex></span>
 
-				<div layout="column" layout-align="space-around start" class="editIcons" ng-show="posts.rootScope.currentUser._id == post.poster_user_id">
-					<i ng-click="postEdit = true; posts.editPost(post.title, post.content)" class="zmdi zmdi-edit zmdi-hc-2x edit"></i>
-					<i ng-click="posts.deletePost(post._id)" class="zmdi zmdi-delete zmdi-hc-2x del"></i>
+				<div layout="column" layout-align="space-around space-around" class="editIcons" ng-show="posts.rootScope.currentUser._id == post.poster_user_id && !postEdit">
+					<i ng-click="postEdit = true; posts.editPost(post.title, post.content)" class="zmdi zmdi-edit zmdi-hc-lg edit"></i>
+					<i ng-click="posts.deletePost(post._id)" class="zmdi zmdi-delete zmdi-hc-lg del"></i>
 				</div>
 
 			</md-card>
@@ -112,15 +112,18 @@
 							<b>{{comment.name}}</b>
 							<pre> &nbsp {{comment.comment}}</pre>
 						</div>
-						<span class="commentTime">{{comment.date | date:'MM/dd/yyyy @ h:mma'}}</span>
-						<div layout="row" class="changeComment" ng-show="posts.rootScope.currentUser._id == comment.commenter_user_id">
-							<p class="edit" ng-click="editComment=true;posts.hideNewComment=true;posts.editUserComment(comment.comment)">Edit</p>
-							<p class="del" ng-click="posts.deleteComment(comment.date, post._id);posts.hideNewComment=false">Delete</p>
+						<div class="commentTime" layout="row">
+							<p><i class="zmdi zmdi-thumb-up" ng-click="posts.upvoteComment(post._id, comment.commenter_user_id, comment.date)"></i> &nbsp {{comment.upvotes.length}}</p>
+							<span> &nbsp {{comment.date | date:'MM/dd/yyyy @ h:mma'}}</span>
+						</div>
+						<div layout="row" layout-align="space-between center" class="changeComment" ng-show="posts.rootScope.currentUser._id == comment.commenter_user_id">
+							<i class="zmdi zmdi-edit edit" ng-click="editComment=true;posts.hideNewComment=true;posts.editUserComment(comment.comment)"></i>
+							<i class="zmdi zmdi-delete del" ng-click="posts.deleteComment(comment.date, post._id);posts.hideNewComment=false"></i>
 						</div>
 					</div>
 
 					<!-- Edit Comment -->
-					<form ng-show="editComment" class="full-width" ng-submit="posts.editComment(comment.date, post._id, comment.comment); editComment=false" layout="column">
+					<form ng-show="editComment" class="full-width" ng-submit="posts.editComment(comment.date, post._id, comment.comment);editComment=false" layout="column">
 						<div layout="column" layout-align="start start" class="postComment">
 							<div layout="row" class="full-width">
 								<img class="profileIcon" ng-src="images/defaultProfilePic.png"/>

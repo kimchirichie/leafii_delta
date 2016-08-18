@@ -25,6 +25,11 @@ class Postings {
     });
   }
 
+  upvoteComment(postId, commenterId, timestamp){
+    console.log(postId, commenterId, timestamp);
+    Meteor.call('likeComment', postId, commenterId, timestamp);
+  }
+
   upvotePost(postId) {
     Meteor.call('likePost', postId);
   }
@@ -52,6 +57,7 @@ class Postings {
   }
 
   editComment(timestamp, postId, comment) {
+    this.hideNewComment = false;
     Meteor.call('updateComment', timestamp, postId, comment);
   }
 
