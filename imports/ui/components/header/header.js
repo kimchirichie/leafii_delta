@@ -12,12 +12,14 @@ class Header {
 		$reactive(this).attach($scope);
 		this.state = $state;
 		this.rootScope = $rootScope;
+		this.rootScope.results = [];
 		this.searching = true;
 		this.query = undefined;
 	}
 
 	search(){
-		this.rootScope.search = this.query;
+		Fetcher.retrieve("results", "search", this.query);
+		this.rootScope.results = Fetcher.get("results");
 	}
 
 	logout() {

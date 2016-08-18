@@ -32,17 +32,6 @@ class Leafii{
 	constructor($scope, $reactive, $state, $rootScope){
 	'ngInject';
 		$reactive(this).attach($scope);
-		
-		// $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams, options){
-		// 	$("#cover").fadeIn();
-		// });
-
-		// $scope.$on('$viewContentLoaded', function(){
-		// 	setTimeout(function(){
-		// 		$("#cover").fadeOut();
-		// 	},1000);
-
-		// });
 
 		$rootScope.$on('$stateChangeError', function(e, toState, toParams, fromState, fromParams, error){
 			console.log('stat change error detected!', error);
