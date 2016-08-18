@@ -32,7 +32,7 @@ class Landing {
 
 		this.helpers({
 			users(){
-				return Meteor.users.find();
+				return Meteor.users.find( {"profile.url" : {$exists : true} } );
 			}
 		});
 		
