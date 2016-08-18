@@ -54,7 +54,7 @@
 					<label>Keywords</label>
 					<input ng-model="profile.newkeyword" placeholder="Enter a keyword">
 				</form>
-				<md-button class="md-raised md-primary parse" ng-click="profile.crawl()">Parse Keywords</md-button>
+				<md-button class="md-raised md-primary parse" ng-click="profile.crawl(profile.rootScope.currentUser._id)">Parse Keywords</md-button>
 			</md-input-container>
 
 			<md-chips ng-model="profile.keywords" readonly="profile.readonly" md-on-add="profile.record()" md-transform-chip="null">

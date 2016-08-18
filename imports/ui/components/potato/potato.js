@@ -6,12 +6,14 @@ import template from './potato.html';
 
 
 class Potato {
-	constructor($scope, $reactive, $rootScope){
+	constructor($scope, $reactive, $state, $timeout, $rootScope){
 		'ngInject';
 		$reactive(this).attach($scope);
 		this.rootScope = $rootScope;
 		this.showing;
 		this.editing;
+		this.state = $state;
+		this.wait = false;
 		this.helpers({
 			users(){
 				return Meteor.users.find({});
@@ -64,6 +66,82 @@ class Potato {
 		Meteor.users.remove(user._id);
 	}
 
+	send_verification(user){
+		Meteor.call('verifyUser', user, function(error, response){
+				
+			if(error){
+				Bert.alert(error.reason, 'danger', 'growl-top-right');
+				this.timeout(function(){this.wait = false;}.bind(this), 1300);
+						
+					} 
+			else {
+				this.wait = false;
+				Bert.alert('Verification email sent!', 'success', 'growl-top-right');
+				}
+		}.bind(this));
+	}
+
+	send_reset(email){
+
+    this.wait = true;
+
+    Accounts.forgotPassword({email: email}, function(error){
+
+      if(error){
+        Bert.alert(error.reason, 'danger', 'growl-top-right');
+        this.timeout(function(){this.wait = false;}.bind(this), 1300);
+      }
+      else {
+        Bert.alert('Email Sent! Please check your email to reset password', 'success', 'growl-top-right');
+        this.timeout(function(){this.wait = false;}.bind(this), 1300);
+        this.email = '';
+      }
+
+    }.bind(this));
+  	}
+
+  	reparse_user(user_id){
+		confirmed = swal({
+  		title: "Are you sure?",
+  		text: "It will delete all the previous keywords & re-parse the user's website.",
+  		type: "warning",
+  		// #DD6B55
+  		showCancelButton: true,
+  		confirmButtonColor: "#3edeaa",
+ 		confirmButtonText: "Yes, re-parse it!",
+  		closeOnConfirm: true
+		},function(){
+			Meteor.call('startCrawl', user_id, function (err, res) {
+			  if (err) {
+			    Bert.alert('Keywords Update Failed', 'danger');
+			  } else {
+			    Bert.alert('Keywords Updated','success')
+			  }
+			});
+		})
+	}
+
+	reparse_all(){
+		confirmed = swal({
+  		title: "Are you sure?",
+  		text: "It will delete all the previous keywords & re-parse all users' website.",
+  		type: "warning",
+  		// #DD6B55
+  		showCancelButton: true,
+  		confirmButtonColor: "#3edeaa",
+ 		confirmButtonText: "Yes, re-parse it!",
+  		closeOnConfirm: true
+  		},function(){
+			Meteor.call('allCrawl', function (err, res) {
+			  if (err) {
+			  	Bert.alert('Keywords Update Failed', 'danger');
+			  } else {
+			    Bert.alert('Keywords Updated','success')
+			  }
+			});
+		})
+
+	}
 }
 
 const name = 'potato';
