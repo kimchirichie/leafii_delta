@@ -10,18 +10,9 @@ class Search {
 		'ngInject';
 		$reactive(this).attach($scope);
 		this.state = $state;
+		this.scope = $scope;
 		this.rootScope = $rootScope;
-		this.rootScope.results = [];
-		this.rootScope.$watch("search",function(){
-			console.log('search initiated');
-			Fetcher.retrieve("results", "search", $rootScope.search);
-			// $rootScope.results = Fetcher.get("results");
-		});
 		Meteor.subscribe("allUsers");
-	}
-
-	test(){
-		console.log(Fetcher.get("results"));
 	}
 
 	viewLog(user){

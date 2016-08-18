@@ -181,41 +181,34 @@ Meteor.startup(()=>{
 		},
 
 		search(searchString){
-			console.log('searching: ',searchString);
-			if (typeof searchString === 'string' && searchString.length) {
-				var queries = searchString.split(" ");
-				console.log(queries);
-				var ranks = {};
+			// send illegitimate queries empty back
+			if (typeof searchString !== 'string' || !searchString.length) return [];
 
-				for (let i = 0; i < queries.length; i++){
-					keywords = Keywords.find({keyword:{$regex:`.*${queries[i]}.*`,$options:'i'}}).fetch();
-					total = Words.findOne({word: queries[i]}).total;
-					console.log(queries[i], total);
-					points = 1/total;
-					for (let j = 0; j < keywords.length;  j++){
-						if (!(keywords[j].user_id in ranks)){
-							ranks[keywords[j].user_id] = points;
-						} else {
-							ranks[keywords[j].user_id] += points;
-						}
+			var queries = searchString.split(" ");
+			var ranks = {};
+
+			for (let i = 0; i < queries.length; i++){
+				keywords = Keywords.find({keyword:{$regex:`.*${queries[i]}.*`,$options:'i'}}).fetch();
+				total = Words.findOne({word: queries[i]}).total;
+				points = 1/total;
+				for (let j = 0; j < keywords.length;  j++){
+					if (!(keywords[j].user_id in ranks)){
+						ranks[keywords[j].user_id] = points;
+					} else {
+						ranks[keywords[j].user_id] += points;
 					}
 				}
-
-				console.log(ranks);
-				console.log(Object.keys(ranks));
-				var result = Meteor.users.aggregate([
-					{ $match:
-						{ _id: 
-							{ $in:Object.keys(ranks)}
-						}
-					},
-					// {$project:{points:1}}
-				]);
-				console.log(result);
-				return result;
-			} else {
-				return []
 			}
+
+			result = Meteor.users.aggregate([
+					{$match:{_id:{$in: Object.keys(ranks)}}},
+					{$project:{profile:1}}
+				]).map(function(user){
+					user.points = ranks[user._id];
+					return user
+				});
+
+			return result;
 		}
 	});
 });
