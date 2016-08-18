@@ -131,10 +131,10 @@ class Potato {
   		confirmButtonColor: "#3edeaa",
  		confirmButtonText: "Yes, re-parse it!",
   		closeOnConfirm: true
-		},function(){
-			Meteor.call('crawlAll', function (err, res) {
+  		},function(){
+			Meteor.call('allCrawl', function (err, res) {
 			  if (err) {
-			    Bert.alert('Keywords Update Failed', 'danger');
+			  	Bert.alert('Keywords Update Failed', 'danger');
 			  } else {
 			    Bert.alert('Keywords Updated','success')
 			  }

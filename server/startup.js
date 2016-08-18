@@ -47,7 +47,6 @@ Meteor.startup(()=>{
 		startCrawl(user_id, err, res){
 			Future = Npm.require('fibers/future');
 			var myFuture = new Future(); 
-			//let userId = Meteor.userId();
 			//var shell = new PythonShell('update_user_kws.py', { scriptPath: '/root/Leafii/leafii_crawler/crawler/', args: [userId] });
 
       		var crawler_src = process.env.CRAWLERSRC;
@@ -78,11 +77,9 @@ Meteor.startup(()=>{
 		allCrawl(err, res){
 			Future = Npm.require('fibers/future');
 			var myFuture = new Future(); 
-			//let userId = Meteor.userId();
 			//var shell = new PythonShell('update_user_kws.py', { scriptPath: '/root/Leafii/leafii_crawler/crawler/', args: [userId] });
-
-      		var crawler_src = process.env.CRAWLERSRC;
-			PythonShell.run('reparse_all.py', { scriptPath: crawler_src+'crawler/scripts', args: [user_id] }, function (err, results) {
+			var crawler_src = process.env.CRAWLERSRC;
+			PythonShell.run('reparse_all.py', { scriptPath: crawler_src+'crawler/scripts' }, function (err, results) {
 				if (err) {
 					console.log(err)
 			  		myFuture.throw(err);
