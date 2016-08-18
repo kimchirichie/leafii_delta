@@ -132,14 +132,6 @@ class Postings {
       });
   }
 
-  likePost(postId){
-    if(Meteor.userId()){
-      
-    }
-    else
-      Bert.alert('You need to log in to do that!', 'danger');
-  }
-
   loginCheck(){
     if(!Meteor.userId())
     {
