@@ -19,12 +19,12 @@
 	    
 		    <md-input-container class="md-block" flex-gt-sm>
 		      <label>Title</label>
-		      <input required ng-model="posts.post.title" placeholder="I have updated my website, check it out :D" type="text" name="title">
+		      <input md-maxlength="150" required ng-model="posts.post.title" placeholder="I have updated my website, check it out :D" type="text" name="title">
 		    </md-input-container>
 
 		    <md-input-container class="md-block" flex-gt-sm>
 		      <label>Content</label>
-		      <textarea required ng-model="posts.post.content" placeholder="Please check for bugs and design flaws" type="text" name="content"></textarea>
+		      <textarea md-maxlength="200" required ng-model="posts.post.content" placeholder="Please check for bugs and design flaws" type="text" name="content"></textarea>
 		    </md-input-container>
 
 			<div layout="row" layout-align="space-between center">
@@ -44,7 +44,7 @@
 					<div class="postInfo" layout="column">
 						<p class="noMargin"><i class="zmdi zmdi-account-circle"></i> {{post.name}}</p>
 						<h2>{{post.title}}</h2>
-						<p>{{post.content}}</p>
+						<pre>{{post.content}}</pre>
 						<div layout="row" ng-show="posts.rootScope.currentUser._id == post.poster_user_id">
 							<p ng-click="postEdit = true; posts.editPost(post.title, post.content)" class="edit">Edit</p>
 							<p ng-click="posts.deletePost(post._id)" class="del">Delete</p>
@@ -64,12 +64,12 @@
     
 			    <md-input-container class="md-block" flex-gt-sm>
 			      <label>Title</label>
-			      <input required ng-model="post.title" type="text" name="title">
+			      <input md-maxlength="150" required ng-model="post.title" type="text" name="title">
 			    </md-input-container>
 
 			    <md-input-container class="md-block" flex-gt-sm>
 			      <label>Content</label>
-			      <textarea required ng-model="post.content" type="text" name="content"></textarea>
+			      <textarea md-maxlength="200" required ng-model="post.content" type="text" name="content"></textarea>
 			    </md-input-container>
 
 				<div layout="row" layout-align="space-between center">
@@ -96,14 +96,14 @@
 				
 				<div class="comment" layout="column" layout-align="start start" ng-repeat="comment in post.comments | orderBy: '-date'">
 					
-					<div ng-show="!editComment" ng-show="posts.rootScope.currentUser._id == comment.commenter_user_id">
+					<div ng-show="!editComment">
 						<div layout="row" layout-align="center center">
 							<img class="profileIcon" ng-src="images/defaultProfilePic.png"/>
 							<b>{{comment.name}}</b>
-							<p> &nbsp {{comment.comment}}</p>
+							<pre> &nbsp {{comment.comment}}</pre>
 						</div>
 						<span class="commentTime">{{comment.date | date:'MM/dd/yyyy @ h:mma'}}</span>
-						<div layout="row" class="changeComment">
+						<div layout="row" class="changeComment" ng-show="posts.rootScope.currentUser._id == comment.commenter_user_id">
 							<p class="edit" ng-click="editComment=true;posts.hideNewComment=true;posts.editUserComment(comment.comment)">Edit</p>
 							<p class="del" ng-click="posts.deleteComment(comment.date, post._id);posts.hideNewComment=false">Delete</p>
 						</div>

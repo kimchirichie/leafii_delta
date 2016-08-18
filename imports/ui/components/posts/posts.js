@@ -38,11 +38,12 @@ class Postings {
 
     if(Meteor.userId()){
       user = Meteor.user();
-      //date = Math.floor(Date.now() / 60000);
-      //date + commenter_user_id will be the unique key combo for the comments for a profile
       date = Date.now();
       Posts.update({_id: postId}, {$addToSet: {comments: {commenter_user_id: user._id, name: user.profile.firstName + " " + user.profile.lastName, comment: this.newComment, date: date, last_edit: 0}}}, false, false);
       this.newComment = '';
+    } else {
+      Bert.alert("Please login to comment", 'warning');
+      this.state.go('signin');
     }
   }
 
@@ -64,7 +65,6 @@ class Postings {
       },function(){
         if(Meteor.userId()){
           user = Meteor.userId();
-          //console.log(postId+ " " + user +" "+timestamp);
           Posts.update({_id: postId}, {$pull: {comments:{commenter_user_id: user, date: timestamp}}});
           Bert.alert('Comment deleted','success', 'growl-top-right');
         }
@@ -73,9 +73,15 @@ class Postings {
 
   createPost() {
     if(Meteor.userId()){
-      user = Meteor.user();
-      date = Date.now();
-      Posts.insert({poster_user_id: user._id, title: this.post.title, tags: [], content: this.post.content, url: user.profile.url, name: user.profile.firstName + " " + user.profile.lastName, comments: [], date: date, last_edit: 0});
+      //Check for word limit
+      if((this.post.title && this.post.title.length > 150) || (this.post.content && this.post.content.length > 200)){
+        Bert.alert("Word limit exceeded", 'warning');
+      }else {
+        user = Meteor.user();
+        date = Date.now();
+        Posts.insert({poster_user_id: user._id, title: this.post.title, tags: [], content: this.post.content, url: user.profile.url, name: user.profile.firstName + " " + user.profile.lastName, comments: [], date: date, last_edit: 0});
+      }
+      
     }
     this.cancelNewPost();
   }

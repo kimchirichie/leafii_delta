@@ -101,8 +101,12 @@
 
 	.roastCards {
 		align-items: center;
-		width: 90%;
+		width: 70%;
 		padding-top: 30px;
+
+		pre {
+			font-family: raleway;
+		}
 
 		iframe {
 			width: 100%;
@@ -142,6 +146,10 @@
 			b {
 				margin-left: 10px;
 				white-space: nowrap;
+			}
+
+			pre {
+				font-family: raleway;
 			}
 
 			.commentTime {
