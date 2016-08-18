@@ -117,9 +117,15 @@ class Postings {
   }
 
   loginCheck(){
-    if(!this.loggedIn)
+    if(!Meteor.userId())
     {
-      Bert.alert('You need to log in to do ta','error');
+      Bert.alert('You need to log in to do that!', 'danger');
+      this.submitPost = false;
+      this.post = {};
+    }
+    else
+    {
+      this.submitPost = true;
     }
   }
 }
