@@ -153,12 +153,6 @@ Meteor.startup(()=>{
 			  else
 			  {
 			    date = Math.floor(Date.now() / 60000);
-			    data = {
-			      clicker_user_id: user, 
-			      liked_user_id: liked_userId,
-			      date: date,
-			      url: url
-			    };
 			    
 			    Profile_likes.insert(data);
 			    Posts.update({_id:postId, "comments.commenter_user_id": commenter, "comments.date": timestamp}, {$addToSet: {"comments.$.upvotes": {user: user, date: date}}}, false, false);
