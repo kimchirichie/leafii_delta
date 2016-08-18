@@ -26,7 +26,6 @@ class Postings {
   }
 
   upvoteComment(postId, commenterId, timestamp){
-    console.log(postId, commenterId, timestamp);
     Meteor.call('likeComment', postId, commenterId, timestamp);
   }
 

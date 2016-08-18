@@ -39,7 +39,7 @@
 	<div layout="column" layout-align="center center">
 		<div class="roastCards" layout="column" layout-align="start center" ng-repeat="post in posts.allPosts | orderBy: cardFilter">
 			
-			<md-card class="md-default-theme" layout="row" ng-init="previewSite = false">
+			<md-card class="md-default-theme" layout="row" layout-align="start center" ng-init="previewSite = false">
 
 				<div ng-show="!postEdit" layout="column" layout-align="center space-around" class="upPost">
 					<i class="zmdi zmdi-star-circle zmdi-hc-2x" ng-click="posts.upvotePost(post._id)"></i>
