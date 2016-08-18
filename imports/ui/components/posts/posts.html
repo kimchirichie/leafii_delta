@@ -44,7 +44,7 @@
 				<md-card-content flex ng-show="!postEdit" layout="row" layout-align="start start">
 
 					<div flex="5" ng-show="!postEdit" layout="column" class="upPost">
-						<i class="zmdi zmdi-star-circle zmdi-hc-2x" ng-click="posts.upvotePost(post._id)"></i>
+						<i class="zmdi zmdi-star-circle zmdi-hc-2x" ng-class="{upvoted : posts.upvotedCheck(post.upvotes, posts.rootScope.currentUser._id)}"></i>
 						<p>{{post.upvotes.length}}</p>
 						<i class="zmdi zmdi-comment-text zmdi-hc-2x"></i>
 						<p>{{post.comments.length}}</p>
@@ -112,7 +112,7 @@
 							<pre> &nbsp {{comment.comment}}</pre>
 						</div>
 						<div class="commentTime" layout="row">
-							<p><i class="zmdi zmdi-thumb-up" ng-click="posts.upvoteComment(post._id, comment.commenter_user_id, comment.date)"></i> &nbsp {{comment.upvotes.length}}</p>
+							<p><i class="zmdi zmdi-thumb-up" ng-click="posts.upvoteComment(post._id, comment.commenter_user_id, comment.date)" ng-class="{upvoted : posts.upvotedCheck(comment.upvotes, posts.rootScope.currentUser._id)}"></i> &nbsp {{comment.upvotes.length}}</p>
 							<span> &nbsp {{comment.date | date:'MM/dd/yyyy @ h:mma'}}</span>
 						</div>
 						<div layout="row" layout-align="space-between center" class="changeComment" ng-show="posts.rootScope.currentUser._id == comment.commenter_user_id">

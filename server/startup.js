@@ -143,6 +143,7 @@ Meteor.startup(()=>{
 
 		likeComment(postId, commenter, timestamp)
 		{
+			console.log(postId, commenter, timestamp);
 			if(Meteor.userId()){
 			  user = Meteor.userId();
 

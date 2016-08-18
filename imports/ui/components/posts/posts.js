@@ -132,14 +132,6 @@ class Postings {
       });
   }
 
-  likePost(postId){
-    if(Meteor.userId()){
-      
-    }
-    else
-      Bert.alert('You need to log in to do that!', 'danger');
-  }
-
   loginCheck(){
     if(!Meteor.userId())
     {
@@ -151,6 +143,15 @@ class Postings {
     {
       this.submitPost = true;
     }
+  }
+
+  upvotedCheck(upvotes, id){
+    for(var i = 0; i < upvotes.length; i++){
+      if(upvotes[i].user == id){
+        return true;
+      }
+    }
+    return false;
   }
 }
 
