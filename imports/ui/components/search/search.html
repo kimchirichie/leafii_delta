@@ -21,6 +21,9 @@
 						<p>{{user.profile.url}}</p>
 					</a>
 				</div>
+				<ul>
+					<li ng-repeat="keyword in user.keywords track by $index">{{keyword}}</li>
+				</ul>
 			</md-card-content>
 		</md-card>
 	</div>
