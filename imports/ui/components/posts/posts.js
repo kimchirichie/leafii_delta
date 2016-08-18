@@ -39,7 +39,7 @@ class Postings {
     if(Meteor.userId()){
       user = Meteor.user();
       date = Date.now();
-      Posts.update({_id: postId}, {$addToSet: {comments: {commenter_user_id: user._id, name: user.profile.firstName + " " + user.profile.lastName, comment: this.newComment, date: date, last_edit: 0}}}, false, false);
+      Posts.update({_id: postId}, {$addToSet: {comments: {commenter_user_id: user._id, name: user.profile.firstName + " " + user.profile.lastName, comment: this.newComment, date: date, last_edit: 0, likes: []}}}, false, false);
       this.newComment = '';
     } else {
       Bert.alert("Please login to comment", 'warning');
@@ -79,7 +79,7 @@ class Postings {
       }else {
         user = Meteor.user();
         date = Date.now();
-        Posts.insert({poster_user_id: user._id, title: this.post.title, tags: [], content: this.post.content, url: user.profile.url, name: user.profile.firstName + " " + user.profile.lastName, comments: [], date: date, last_edit: 0});
+        Posts.insert({poster_user_id: user._id, title: this.post.title, tags: [], content: this.post.content, url: user.profile.url, name: user.profile.firstName + " " + user.profile.lastName, comments: [], date: date, last_edit: 0, likes: []});
       }
       
     }
@@ -120,6 +120,27 @@ class Postings {
           Bert.alert('Post deleted','success', 'growl-top-right');
         }
       });
+  }
+
+  likePost(postId){
+    if(Meteor.userId()){
+      
+    }
+    else
+      Bert.alert('You need to log in to do that!', 'danger');
+  }
+
+  loginCheck(){
+    if(!Meteor.userId())
+    {
+      Bert.alert('You need to log in to do that!', 'danger');
+      this.submitPost = false;
+      this.post = {};
+    }
+    else
+    {
+      this.submitPost = true;
+    }
   }
 }
 
