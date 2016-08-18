@@ -41,7 +41,7 @@ class Postings {
       //date = Math.floor(Date.now() / 60000);
       //date + commenter_user_id will be the unique key combo for the comments for a profile
       date = Date.now();
-      Posts.update({_id: postId}, {$addToSet: {comments: {commenter_user_id: user._id, name: user.profile.firstName + " " + user.profile.lastName, comment: this.newComment, date: date, last_edit: 0}}}, false, false);
+      Posts.update({_id: postId}, {$addToSet: {comments: {commenter_user_id: user._id, name: user.profile.firstName + " " + user.profile.lastName, comment: this.newComment, date: date, last_edit: 0, likes: []}}}, false, false);
       this.newComment = '';
     }
   }
@@ -75,7 +75,7 @@ class Postings {
     if(Meteor.userId()){
       user = Meteor.user();
       date = Date.now();
-      Posts.insert({poster_user_id: user._id, title: this.post.title, tags: [], content: this.post.content, url: user.profile.url, name: user.profile.firstName + " " + user.profile.lastName, comments: [], date: date, last_edit: 0});
+      Posts.insert({poster_user_id: user._id, title: this.post.title, tags: [], content: this.post.content, url: user.profile.url, name: user.profile.firstName + " " + user.profile.lastName, comments: [], date: date, last_edit: 0, likes: []});
     }
     this.cancelNewPost();
   }
@@ -114,6 +114,14 @@ class Postings {
           Bert.alert('Post deleted','success', 'growl-top-right');
         }
       });
+  }
+
+  likePost(postId){
+    if(Meteor.userId()){
+      
+    }
+    else
+      Bert.alert('You need to log in to do that!', 'danger');
   }
 
   loginCheck(){
