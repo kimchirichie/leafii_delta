@@ -44,7 +44,7 @@
 				<md-card-content flex ng-show="!postEdit" layout="row" layout-align="start start">
 
 					<div flex="5" ng-show="!postEdit" layout="column" class="upPost">
-						<i class="zmdi zmdi-star-circle zmdi-hc-2x" ng-class="{upvoted : posts.upvotedCheck(post.upvotes, posts.rootScope.currentUser._id)}"></i>
+						<i class="zmdi zmdi-star-circle zmdi-hc-2x" ng-click="posts.upvotePost(post._id)" ng-class="{upvoted : posts.upvotedCheck(post.upvotes, posts.rootScope.currentUser._id)}"></i>
 						<p>{{post.upvotes.length}}</p>
 						<i class="zmdi zmdi-comment-text zmdi-hc-2x"></i>
 						<p>{{post.comments.length}}</p>
