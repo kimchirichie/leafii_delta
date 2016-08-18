@@ -10,16 +10,16 @@
 		<span ng-class="{lightUp: landing.onfilter == 'like'}" ng-click="cardFilter = '-profile.likes.length'; landing.onfilter = 'like'">Most Liked</span>
 	</div>
 
-	<div ng-show="!landing.users">
+	<div ng-show="!landing.users.length">
 		<div class="loadingData" layout="row" layout-xs="column" layout-align="center center">
 			<h1>Loading Users.....</h1>
 			<md-progress-circular md-mode='indeterminate' md-diameter="150px"></md-progress-circular>
 		</div>
 	</div>
 
-	<div class="board" ng-init="cardFilter = '-createdAt'">
+	<div ng-show="landing.users.length" class="board" ng-init="cardFilter = '-createdAt'">
 
-		<div ng-show="landing.users" class="viewMode" layout="row" layout-align="center center">
+		<div class="viewMode" layout="row" layout-align="center center">
 			<md-button id="gridView" class="md-raised" ng-click="landing.horizontal = false" aria-label="Grid"><i class="zmdi zmdi-view-module"></i></md-button>
 			<md-button id="lineView" class="md-raised" ng-click="landing.horizontal = true" aria-label="Horizontal"><i class="zmdi zmdi-menu"></i></md-button>
 		</div>

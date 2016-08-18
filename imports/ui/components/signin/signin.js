@@ -60,10 +60,8 @@ function config($stateProvider) {
 					Meteor.setTimeout(function(){
 						var user = Meteor.user();
 						if(user){
-							console.log('signed in users cannot access sign in page');
 							$state.go('profile');
 						} else {
-							console.log('access granted');
 							defer.resolve();
 						}
 					},500);
@@ -72,4 +70,3 @@ function config($stateProvider) {
 			}
 		});
 }
-//window.prerenderReady = true;
