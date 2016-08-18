@@ -152,6 +152,15 @@ class Postings {
       this.submitPost = true;
     }
   }
+
+  upvotedCheck(upvotes, id){
+    for(var i = 0; i < upvotes.length; i++){
+      if(upvotes[i].user == id){
+        return true;
+      }
+    }
+    return false;
+  }
 }
 
 const name = 'posts';
