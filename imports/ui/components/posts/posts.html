@@ -8,11 +8,11 @@
 	</div>
 
 	<div ng-show="!posts.submitPost" class="filterBar" layout="row" layout-align="center center" layout-xs="column">
-		<span>Latest</span>
-		<span>Most Commented</span>
+		<span ng-class="{lightUp: posts.onfilter == 'latest'}" ng-click="cardFilter = '-date'; posts.onfilter = 'latest'" >Latest</span>
+		<span ng-class="{lightUp: posts.onfilter == 'mostCommented'}" ng-click="cardFilter = '-comments.length';posts.onfilter = 'mostCommented'">Most Commented</span>
 	</div>
 
-	<div ng-show="posts.submitPost" layout="column" layout-align="center center">
+	<div ng-show="posts.submitPost" layout="column" layout-align="center center" ng-init="cardFilter = '-date'">
 		
 		<!-- Create Post -->	
 	    <form ng-submit="posts.createPost()" class="form submitPost">
@@ -37,7 +37,7 @@
 	</div>
 
 	<div layout="column" layout-align="center center">
-		<div class="roastCards" layout="column" layout-align="start center" ng-repeat="post in posts.allPosts | orderBy: '-date'">
+		<div class="roastCards" layout="column" layout-align="start center" ng-repeat="post in posts.allPosts | orderBy: cardFilter">
 			
 			<md-card class="md-default-theme" layout="row" ng-init="previewSite = false">
 				<md-card-content ng-show="!postEdit" layout="row">
@@ -49,7 +49,11 @@
 							<p ng-click="postEdit = true; posts.editPost(post.title, post.content)" class="edit">Edit</p>
 							<p ng-click="posts.deletePost(post._id)" class="del">Delete</p>
 						</div>
-						<h3 ng-click="previewSite=!previewSite"><i class="zmdi zmdi-caret-down zmdi-hc-lg"></i> show</h3>
+						<div layout="row">
+							<h3 ng-click="previewSite=!previewSite"><i class="zmdi zmdi-caret-down zmdi-hc-lg"></i> show</h3>
+							<span>{{post.comments.length}} Comments</span>
+							<span>&nbsp Posted On: {{post.date | date:'MM/dd/yyyy @ h:mma'}}</span>
+						</div>
 					</div>
 				</md-card-content>
 
@@ -92,12 +96,13 @@
 				
 				<div class="comment" layout="column" layout-align="start start" ng-repeat="comment in post.comments | orderBy: '-date'">
 					
-					<div ng-show="!editComment">
+					<div ng-show="!editComment" ng-show="posts.rootScope.currentUser._id == comment.commenter_user_id">
 						<div layout="row" layout-align="center center">
 							<img class="profileIcon" ng-src="images/defaultProfilePic.png"/>
 							<b>{{comment.name}}</b>
-							<span> &nbsp {{comment.comment}}</span>
+							<p> &nbsp {{comment.comment}}</p>
 						</div>
+						<span class="commentTime">{{comment.date | date:'MM/dd/yyyy @ h:mma'}}</span>
 						<div layout="row" class="changeComment">
 							<p class="edit" ng-click="editComment=true;posts.hideNewComment=true;posts.editUserComment(comment.comment)">Edit</p>
 							<p class="del" ng-click="posts.deleteComment(comment.date, post._id);posts.hideNewComment=false">Delete</p>
@@ -109,7 +114,7 @@
 						<div layout="column" layout-align="start start" class="postComment">
 							<div layout="row" class="full-width">
 								<img class="profileIcon" ng-src="images/defaultProfilePic.png"/>
-							    <input required ng-model="comment.comment" type="text" name="comment">
+							    <input required ng-model="comment.comment" type="text" name="comment"/>
 							</div>
 							<p class="cancelEdit" ng-click="posts.editComment(comment.date, post._id, posts.temp_comment);editComment=false;posts.hideNewComment=false">Cancel</p>
 						</div>

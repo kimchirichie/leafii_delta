@@ -11,8 +11,8 @@ class Postings {
     "ngInject";
     $reactive(this).attach($scope);
     this.state = $state;
-    this.onfilter = 'recent';
     this.submitPost = false;
+    this.onfilter = 'latest';
     this.sce = $sce;
     this.rootScope = $rootScope;
     this.hideNewComment = false;
@@ -77,7 +77,7 @@ class Postings {
       date = Date.now();
       Posts.insert({poster_user_id: user._id, title: this.post.title, tags: [], content: this.post.content, url: user.profile.url, name: user.profile.firstName + " " + user.profile.lastName, comments: [], date: date, last_edit: 0});
     }
-    this.back();
+    this.cancelNewPost();
   }
 
   editPost(title, content) {
