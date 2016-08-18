@@ -3,6 +3,12 @@
 	padding: 5% 5% 15% 5%;
 	background: #dcdcdc;
 
+	.cardInfoSmall {
+		a {
+			margin: 0;
+		}
+	}
+
 	.noResults {
 		margin: 15%;
 		text-align: center;
