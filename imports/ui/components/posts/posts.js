@@ -7,14 +7,15 @@ import template from './posts.html';
 import { Posts } from '../../../api/posts/index';
 
 class Postings {
-  constructor($scope, $reactive, $state, $sce){
+  constructor($scope, $reactive, $state, $sce, $rootScope){
     "ngInject";
     $reactive(this).attach($scope);
     this.state = $state;
     this.onfilter = 'recent';
-    this.wait = false;
     this.submitPost = false;
     this.sce = $sce;
+    this.rootScope = $rootScope;
+    this.hideNewComment = false;
     Meteor.subscribe("posts");
     this.user = Meteor.user();
     this.helpers({
@@ -28,9 +29,9 @@ class Postings {
     return this.sce.trustAsResourceUrl('http://' + url.replace(/https:|http:|\/\//gi, ""));
   }
 
-  back(){
-      this.submitPost = false;
-      this.post = {};
+  cancelNewPost(){
+    this.submitPost = false;
+    this.post = {};
   }
 
   createComment(postId) {
@@ -82,6 +83,10 @@ class Postings {
   editPost(title, content) {
     this.tempPost_title = title;
     this.tempPost_content = content;
+  }
+
+  editUserComment(comment){
+    this.temp_comment = comment;
   }
 
   updatePost(postID, title, content) {
