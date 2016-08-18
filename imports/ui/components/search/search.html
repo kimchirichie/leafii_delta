@@ -9,11 +9,8 @@
 
 	<div ng-show="search.websites.length">
 		<div layout="row" layout-align="center center" layout-wrap>
+
 			<!-- Horizaontal View Mode -->
-			<div class="candidates horizontal" layout="column">
-				<!-- <md-card class="md-default-theme" layout="row" ng-repeat="user in search.websites">
-					<md-card-content layout="row" layout="end center">
-=======
 			<div ng-show="search.horizontal" class="candidates horizontal" layout="column">
 				<md-card class="md-default-theme" layout="row" ng-repeat="user in search.websites">
 					<div class="info" layout="column" layout-align="center center">
@@ -25,7 +22,6 @@
 						<span><i class="zmdi zmdi-eye"></i> {{user.profile.views}}</span>
 					</div>
 					<md-card-content layout="row">
->>>>>>> 5df94370d4c5791b6a4fc152638a8e3a24c5c05d
 						<div class="cardInfoSmall" layout="column">
 							<a ng-click="search.viewLog(user)" href="{{search.absolutify(user.profile.url)}}" target="_blank">{{user.profile.occupation ? user.profile.occupation: 'Not specified'}}
 								<md-tooltip md-direction="top">{{search.absolutify(user.profile.url)}}</md-tooltip>
@@ -34,20 +30,14 @@
 							<p class="noMargin"><i class="zmdi zmdi-pin mapColor"></i> {{user.profile.location.formatted_address ? user.profile.location.formatted_address : user.profile.location}}</p>
 						</div>
 					</md-card-content>
-<<<<<<< HEAD
-					<div class="info" layout="column" layout-align="center center">
-						<p class="forHire" ng-show="{{user.profile.available}}"><i class="zmdi zmdi-circle"></i> Available</p>
-						<p class="noHire" ng-show="{{!user.profile.available}}"><i class="zmdi zmdi-circle"></i> Unavailable</p>
-=======
 
 					<span flex></span>
 
 					<div class="upLike" layout="column" layout-align="center center">
 						<md-button class="md-fab md-mini fav" ng-click="search.liked(user)" ng-show="search.rootScope.currentUser" aria-label="like"><i ng-class="{upvoted : user.profile.likes.includes(search.currentUser)}" class="zmdi zmdi-star"></i></md-button>
 						<span><i class="zmdi zmdi-star"></i> {{user.profile.likes.length}}</span>
->>>>>>> 5df94370d4c5791b6a4fc152638a8e3a24c5c05d
 					</div>
-				</md-card> -->
+				</md-card>
 			</div>
 
 			<!-- Grid View Mode -->

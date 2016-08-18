@@ -7,15 +7,17 @@ import template from './posts.html';
 import { Posts } from '../../../api/posts/index';
 
 class Postings {
-  constructor($scope, $reactive, $state, $sce){
+  constructor($scope, $reactive, $state, $sce, $rootScope){
     "ngInject";
     $reactive(this).attach($scope);
     this.state = $state;
     this.onfilter = 'recent';
-    this.wait = false;
     this.submitPost = false;
     this.sce = $sce;
+    this.rootScope = $rootScope;
+    this.hideNewComment = false;
     Meteor.subscribe("posts");
+    this.user = Meteor.user();
     this.helpers({
       allPosts(){
         return Posts.find({});
@@ -27,13 +29,21 @@ class Postings {
     return this.sce.trustAsResourceUrl('http://' + url.replace(/https:|http:|\/\//gi, ""));
   }
 
-  back(){
+  cancelNewPost(){
     this.submitPost = false;
     this.post = {};
   }
 
-  createComment(postId, comment) {
-    Meteor.call('createComment', postId, comment);
+  createComment(postId) {
+
+    if(Meteor.userId()){
+      user = Meteor.user();
+      //date = Math.floor(Date.now() / 60000);
+      //date + commenter_user_id will be the unique key combo for the comments for a profile
+      date = Date.now();
+      Posts.update({_id: postId}, {$addToSet: {comments: {commenter_user_id: user._id, name: user.profile.firstName + " " + user.profile.lastName, comment: this.newComment, date: date, last_edit: 0}}}, false, false);
+      this.newComment = '';
+    }
   }
 
   editComment(timestamp, postId, comment) {
@@ -41,25 +51,70 @@ class Postings {
   }
 
   deleteComment(timestamp, postId) {
-    Meteor.call('deleteComment', timestamp, postId);
+
+    confirmed = swal({
+        title: "Are you sure?",
+        text: "This will delete your comment.",
+        type: "warning",
+        // #DD6B55
+        showCancelButton: true,
+        confirmButtonColor: "#3edeaa",
+        confirmButtonText: "Yes, delete it!",
+        closeOnConfirm: true
+      },function(){
+        if(Meteor.userId()){
+          user = Meteor.userId();
+          //console.log(postId+ " " + user +" "+timestamp);
+          Posts.update({_id: postId}, {$pull: {comments:{commenter_user_id: user, date: timestamp}}});
+          Bert.alert('Comment deleted','success', 'growl-top-right');
+        }
+      });
   }
 
   createPost() {
-    Meteor.call('createPost', this.post.title, [], this.post.content);
-    this.post = {};
+    if(Meteor.userId()){
+      user = Meteor.user();
+      date = Date.now();
+      Posts.insert({poster_user_id: user._id, title: this.post.title, tags: [], content: this.post.content, url: user.profile.url, name: user.profile.firstName + " " + user.profile.lastName, comments: [], date: date, last_edit: 0});
+    }
     this.back();
   }
 
-  updatePost() {
-    Meteor.call('updatePost', this.post.timestamp, this.post.title, [], this.post.content);
+  editPost(title, content) {
+    this.tempPost_title = title;
+    this.tempPost_content = content;
   }
 
-  deletePost() {
-    Meteor.call('deletePost', this.post.timestamp);
+  editUserComment(comment){
+    this.temp_comment = comment;
   }
 
+  updatePost(postID, title, content) {
 
+    if(Meteor.userId()){
+      user = Meteor.userId();
+      date = Math.floor(Date.now() / 60000);
+      Posts.update({_id: postID}, {$set:{title: title, tags: [], content: content, last_edit: date}}, false, false); 
+    }
+  }
 
+  deletePost(postID) {
+    confirmed = swal({
+        title: "Are you sure?",
+        text: "This will delete the post and all its comments.",
+        type: "warning",
+        // #DD6B55
+        showCancelButton: true,
+        confirmButtonColor: "#3edeaa",
+        confirmButtonText: "Yes, delete it!",
+        closeOnConfirm: true
+      },function(){
+        if(Meteor.userId()){
+          Posts.remove(postID);
+          Bert.alert('Post deleted','success', 'growl-top-right');
+        }
+      });
+  }
 }
 
 const name = 'posts';
