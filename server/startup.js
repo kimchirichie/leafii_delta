@@ -182,33 +182,58 @@ Meteor.startup(()=>{
 
 		search(searchString){
 			// send illegitimate queries empty back
-			if (typeof searchString !== 'string' || !searchString.length) return [];
+			if (typeof searchString !== 'string') return [];
+			if (!searchString.length) return [];
 
-			var queries = searchString.split(" ");
 			var ranks = {};
+			// var points = 0;
+			// var results = [];
+			var queries = searchString.split(" ");
 
-			for (let i = 0; i < queries.length; i++){
-				keywords = Keywords.find({keyword:{$regex:`.*${queries[i]}.*`,$options:'i'}}).fetch();
-				total = Words.findOne({word: queries[i]}).total;
-				points = 1/total;
-				for (let j = 0; j < keywords.length;  j++){
-					if (!(keywords[j].user_id in ranks)){
-						ranks[keywords[j].user_id] = points;
-					} else {
-						ranks[keywords[j].user_id] += points;
-					}
-				}
+			for (i in queries){
+				console.log(queries[i]);
+				var keywords = Keywords.aggregate([
+						{$match:{keyword:{$regex:`.*${queries[i]}.*`,$options:'i'}}},
+						{$project:{_id:0,user_id:1,keyword:1}}
+					]);
+				var distinct = keywords.map(function(keyword){
+						return keyword.keyword;
+					}).filter(function(value, index, self) { 
+						return self.indexOf(value) === index;
+					});
+				var counts = Words.aggregate([
+						{$match:{word:{$in:distinct}}},
+						{$project:{_id:0,total:1,word:1}}
+					]);
+				console.log(counts);
 			}
 
-			result = Meteor.users.aggregate([
-					{$match:{_id:{$in: Object.keys(ranks)}}},
-					{$project:{profile:1}}
-				]).map(function(user){
-					user.points = ranks[user._id];
-					return user
-				});
 
-			return result;
+
+
+
+			// for (let i = 0; i < queries.length; i++){
+			// 	keywords = Keywords.find({keyword:{$regex:`.*${queries[i]}.*`,$options:'i'}}).fetch();
+			// 	total = Words.findOne({word: queries[i]}).total;
+			// 	points = 1/total;
+			// 	for (let j = 0; j < keywords.length;  j++){
+			// 		if (!(keywords[j].user_id in ranks)){
+			// 			ranks[keywords[j].user_id] = points;
+			// 		} else {
+			// 			ranks[keywords[j].user_id] += points;
+			// 		}
+			// 	}
+			// }
+
+			// result = Meteor.users.aggregate([
+			// 		{$match:{_id:{$in: Object.keys(ranks)}}},
+			// 		{$project:{profile:1}}
+			// 	]).map(function(user){
+			// 		user.points = ranks[user._id];
+			// 		return user
+			// 	});
+
+			// return result;
 		}
 	});
 });
