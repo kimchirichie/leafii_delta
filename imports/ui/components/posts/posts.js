@@ -25,6 +25,10 @@ class Postings {
     });
   }
 
+  upvotePost(postId) {
+    Meteor.call('likePost', postId);
+  }
+
   absolutify(url){
     return this.sce.trustAsResourceUrl('http://' + url.replace(/https:|http:|\/\//gi, ""));
   }
@@ -42,7 +46,7 @@ class Postings {
       Posts.update({_id: postId}, {$addToSet: {comments: {commenter_user_id: user._id, name: user.profile.firstName + " " + user.profile.lastName, comment: this.newComment, date: date, last_edit: 0, likes: []}}}, false, false);
       this.newComment = '';
     } else {
-      Bert.alert("Please login to comment", 'warning');
+      Bert.alert("Please login to comment", 'warning', 'growl-top-right');
       this.state.go('signin');
     }
   }
@@ -72,18 +76,19 @@ class Postings {
   }
 
   createPost() {
+
     if(Meteor.userId()){
       //Check for word limit
-      if((this.post.title && this.post.title.length > 150) || (this.post.content && this.post.content.length > 200)){
-        Bert.alert("Word limit exceeded", 'warning');
+      if(!this.post.title || !this.post.content){
+        Bert.alert("Word limit exceeded", 'danger', 'growl-top-right');
       }else {
         user = Meteor.user();
         date = Date.now();
         Posts.insert({poster_user_id: user._id, title: this.post.title, tags: [], content: this.post.content, url: user.profile.url, name: user.profile.firstName + " " + user.profile.lastName, comments: [], date: date, last_edit: 0, likes: []});
+        this.cancelNewPost();
       }
       
     }
-    this.cancelNewPost();
   }
 
   editPost(title, content) {

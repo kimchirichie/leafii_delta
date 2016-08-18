@@ -7,8 +7,26 @@
 
 	.submitPost {
 		background: white;
-		width: 100%;
-		max-width: 90%;
+		width: 70%;
+	}
+
+	.upPost {
+		margin-left: 20px;
+		outline: 0;
+
+		i:first-child {
+			
+			cursor: pointer;
+
+			&:hover {
+				color: $leafii-theme;
+			}
+		}
+
+		p {
+			text-align: center;
+			margin: 5px 0 10px 0;
+		}
 	}
 
 	.lightUp {
@@ -47,34 +65,34 @@
 		background: #ea3354;
 	}
 
-	.edit {
-		cursor: pointer;
-		margin-right: 10px;
-		outline: 0;
+	.editIcons {
+		padding: 30px;
 
-		&:hover {
-			color: $leafii-theme;
+		.edit {
+			cursor: pointer;
+			outline: 0;
+
+			&:hover {
+				color: $leafii-theme;
+			}
 		}
 
-	}
+		.del {
+			
+			cursor: pointer;
 
-	.del {
-		
-		cursor: pointer;
-
-		&:hover {
-			color: $delete;
+			&:hover {
+				color: $delete;
+			}
 		}
 	}
+
+	
 
 
 	.postInfo {
 
 		text-align: left;
-
-		h2 {
-			margin-bottom: 0;
-		}
 
 		h3 {
 			outline: 0;

@@ -40,22 +40,32 @@
 		<div class="roastCards" layout="column" layout-align="start center" ng-repeat="post in posts.allPosts | orderBy: cardFilter">
 			
 			<md-card class="md-default-theme" layout="row" ng-init="previewSite = false">
+
+				<div ng-show="!postEdit" layout="column" layout-align="center space-around" class="upPost">
+					<i class="zmdi zmdi-star-circle zmdi-hc-2x" ng-click="posts.upvotePost(post._id)"></i>
+					<p>{{post.upvotes.length}}</p>
+					<i class="zmdi zmdi-comment-text zmdi-hc-2x"></i>
+					<p>{{post.comments.length}}</p>
+				</div>
+
 				<md-card-content ng-show="!postEdit" layout="row">
 					<div class="postInfo" layout="column">
-						<p class="noMargin"><i class="zmdi zmdi-account-circle"></i> {{post.name}}</p>
 						<h2>{{post.title}}</h2>
 						<pre>{{post.content}}</pre>
-						<div layout="row" ng-show="posts.rootScope.currentUser._id == post.poster_user_id">
-							<p ng-click="postEdit = true; posts.editPost(post.title, post.content)" class="edit">Edit</p>
-							<p ng-click="posts.deletePost(post._id)" class="del">Delete</p>
-						</div>
 						<div layout="row">
-							<h3 ng-click="previewSite=!previewSite"><i class="zmdi zmdi-caret-down zmdi-hc-lg"></i> show</h3>
-							<span>{{post.comments.length}} Comments</span>
-							<span>&nbsp Posted On: {{post.date | date:'MM/dd/yyyy @ h:mma'}}</span>
+							<p class="noMargin"><i class="zmdi zmdi-account-circle"></i> {{post.name}}</p>
+							<span>&nbsp posted on: {{post.date | date:'MM/dd/yyyy @ h:mma'}}</span>
 						</div>
+						<h3 ng-click="previewSite=!previewSite"><i class="zmdi zmdi-caret-down zmdi-hc-lg"></i> show</h3>
 					</div>
 				</md-card-content>
+
+				<span flex></span>
+
+				<div layout="column" layout-align="space-around start" class="editIcons" ng-show="posts.rootScope.currentUser._id == post.poster_user_id">
+					<i ng-click="postEdit = true; posts.editPost(post.title, post.content)" class="zmdi zmdi-edit zmdi-hc-2x edit"></i>
+					<i ng-click="posts.deletePost(post._id)" class="zmdi zmdi-delete zmdi-hc-2x del"></i>
+				</div>
 
 			</md-card>
 
