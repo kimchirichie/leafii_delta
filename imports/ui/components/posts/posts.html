@@ -62,7 +62,7 @@
 						<pre>{{post.content}}</pre>
 						<div layout="row" layout-xs="column">
 							<p class="noMargin"><i class="zmdi zmdi-account-circle"></i> {{post.name}} &nbsp</p>
-							<span>posted on: {{post.date | date:'MM/dd/yyyy @ h:mma'}}</span>
+							<span>posted {{posts.getTimeElapsed(post.date,false)}}</span>
 						</div>
 						<h3 ng-click="previewSite=!previewSite"><i class="zmdi zmdi-caret-down zmdi-hc-lg"></i> show</h3>
 					</div>
@@ -120,7 +120,9 @@
 						</div>
 						<div class="commentTime" layout="row">
 							<p><i class="zmdi zmdi-thumb-up" ng-click="posts.upvoteComment(post._id, comment.commenter_user_id, comment.date)" ng-class="{upvoted : posts.upvotedCheck(comment.upvotes, posts.rootScope.currentUser._id)}"></i> &nbsp {{comment.upvotes.length}}</p>
-							<span> &nbsp {{comment.date | date:'MM/dd/yyyy @ h:mma'}}</span>
+						</div>
+						<div class="commentTime" layout="row">
+							<p class="time">{{posts.getTimeElapsed(comment.date,false)}}</p>
 						</div>
 						<div layout="row" layout-align="space-between center" class="changeComment" ng-show="posts.rootScope.currentUser._id == comment.commenter_user_id">
 							<i class="zmdi zmdi-edit edit" ng-click="editComment=true;posts.hideNewComment=true;posts.editUserComment(comment.comment)"></i>

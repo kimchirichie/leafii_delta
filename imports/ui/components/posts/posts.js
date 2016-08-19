@@ -160,6 +160,54 @@ class Postings {
     }
     return false;
   }
+
+  getTimeElapsed(timestamp, isInMinutes){
+    var then = new Date(0);
+    if(isInMinutes)      
+      then.setUTCMinutes(timestamp);
+    else
+      then.setUTCMilliseconds(timestamp);
+    var now = new Date();
+    var delta = now - then;
+    var years = now.getFullYear() - then.getFullYear();
+    var months = (years) * 12 + (now.getMonth() - then.getMonth());
+    var days = Math.round(delta / 86400000);
+    var hours = Math.round(delta / 3600000);
+    var minutes = Math.round(delta / 60000);
+    if(years > 0){
+      if(years > 1)
+        return "" + years + " years ago";
+      else
+        return "" + years + " year ago";        
+    }
+    else if(months > 0){
+      if(months > 1)
+        return "" + months + " months ago";
+      else
+        return "" + months + " month ago"; 
+    }
+    else if(days > 0){
+      if(days > 1)
+        return "" + days + " days ago";
+      else
+        return "" + days + " day ago";
+    }
+    else if(hours > 0){
+      if(hours > 1)
+        return "" + hours + " hours ago";
+      else
+        return "" + hours + " hour ago"; 
+    }
+    else if(minutes > 0){
+      if(minutes > 1)
+        return "" + minutes + " minutes ago";
+      else
+        return "" + minutes + " minute ago";
+    }
+    else{
+      return "Now";
+    }
+  }
 }
 
 const name = 'posts';
