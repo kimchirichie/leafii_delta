@@ -1,14 +1,14 @@
 <div id="SearchResults">
 
 	<title>Search - Leafii</title>
-	<div ng-hide="search.rootScope.results.length">
+	<div ng-hide="search.results.length">
 		<div class="noResults" layout="row" layout-xs="column" layout-align="center center">
 			<h1>No Search Results</h1>
 		</div>
 	</div>
 
-	<div ng-show="search.rootScope.results.length" class="candidates horizontal" layout="column">
-		<md-card class="md-default-theme" layout="row" ng-repeat="user in search.rootScope.results | orderBy:'-points'">
+	<div ng-show="search.results.length" class="candidates horizontal" layout="column">
+		<md-card class="md-default-theme" layout="row" ng-repeat="user in search.results | orderBy:'-points'">
 			<md-card-content layout="row">
 				<div class="cardInfoSmall" layout="column">
 					<p class="noMargin">{{user.profile.firstName + ' ' + user.profile.lastName}}</p>

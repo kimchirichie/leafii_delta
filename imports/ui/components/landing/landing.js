@@ -25,10 +25,10 @@ class Landing {
 
 		angular.element($window).bind("resize", function(){
 			if($window.innerWidth < 600){
-				angular.element('#gridView').trigger('click');
+				this.horizontal = false;
+				this.scope.$digest();
 			}
-		});
-
+		}.bind(this));
 		Meteor.subscribe("allUsers");
 	}
 

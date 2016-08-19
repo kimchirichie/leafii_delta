@@ -25,6 +25,7 @@ urigo:static-templates # Helps import files as string
 ixdi:material-design-iconic-font # Font
 seba:minifiers-autoprefixer #Minifier
 fourseven:scss # SCSS compiler
+session # Session for meteor
 
 #Angular stuff
 angular:angular
@@ -42,7 +43,6 @@ accounts-base
 email
 
 ## Tools for searching
-msavin:fetcher
 meteorhacks:aggregate
 
 #Utilities
@@ -62,3 +62,4 @@ kevohagan:sweetalert
 
 ## Prerenderer for static page SEO
 dfischer:prerenderio
+msavin:fetcher

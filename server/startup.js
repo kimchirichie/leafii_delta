@@ -1,10 +1,11 @@
 import { Meteor } from 'meteor/meteor';
+import { Session } from 'meteor/session'
 import { Views } from '../imports/api/views/index';
 import { Profile_likes } from '../imports/api/profile_likes/index';
 import { Posts } from '../imports/api/posts/index';
 import { Keywords } from '../imports/api/keywords/index';
 import { Words } from '../imports/api/count/index';
- 
+
 Meteor.startup(()=>{
 
 	// var domain = 'support@leafii.com';
@@ -181,6 +182,8 @@ Meteor.startup(()=>{
 		},
 
 		search(searchString){
+			console.log(searchString);
+
 			// send illegitimate queries empty back
 			if (typeof searchString !== 'string') return [];
 			if (!searchString.length) return [];
@@ -233,8 +236,9 @@ Meteor.startup(()=>{
 					user.keywords = ranks[user._id].keywords;
 					return user
 				});
-
-			return result;
+			console.log(result);
+			// Session.set("result", result);
+			return result
 		}
 	});
 });

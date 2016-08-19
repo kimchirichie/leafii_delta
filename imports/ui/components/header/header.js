@@ -1,5 +1,6 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
+import { Session } from 'meteor/session'
 
 // import { Accounts } from 'meteor/accounts-base';
 import template from './header.html';
@@ -12,25 +13,13 @@ class Header {
 		$reactive(this).attach($scope);
 		this.state = $state;
 		this.rootScope = $rootScope;
+		this.rootScope.query = "";
 		this.rootScope.results = [];
-		this.searching = true;
-		this.query = undefined;
-		this.init = true;
-		this.rootScope.$watch("results",function(){
-			this.state.go('search');
-		}.bind(this));
-		Tracker.autorun(function(){
-			this.rootScope.results = Fetcher.get("results");
-			if(this.init){
-				this.init = false;
-				return;
-			}
-			this.state.go("search");
-		}.bind(this))
 	}
 
 	search(){
-		Fetcher.retrieve("results", "search", this.query);
+		Fetcher.retrieve("results", "search", this.rootScope.query);
+		this.state.go('search');
 	}
 
 	logout() {
@@ -44,8 +33,6 @@ class Header {
 		this.state.go('landing');
 	}
 }
-
-
 
 const name = 'header';
 
