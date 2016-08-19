@@ -15,11 +15,22 @@ class Header {
 		this.rootScope.results = [];
 		this.searching = true;
 		this.query = undefined;
+		this.init = true;
+		this.rootScope.$watch("results",function(){
+			this.state.go('search');
+		}.bind(this));
+		Tracker.autorun(function(){
+			this.rootScope.results = Fetcher.get("results");
+			if(this.init){
+				this.init = false;
+				return;
+			}
+			this.state.go("search");
+		}.bind(this))
 	}
 
 	search(){
 		Fetcher.retrieve("results", "search", this.query);
-		this.rootScope.results = Fetcher.get("results");
 	}
 
 	logout() {

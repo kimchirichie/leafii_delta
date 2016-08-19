@@ -17,12 +17,11 @@ class Landing {
 		this.scope = $scope;
 		this.rootScope = $rootScope;
 		this.currentUser = Meteor.userId();
-
-		this.rootScope.$watch('search',function(){
-			if(this.rootScope.search){
-				this.state.go('search');
+		this.helpers({
+			users(){
+				return Meteor.users.find();
 			}
-		}.bind(this));
+		});
 
 		angular.element($window).bind("resize", function(){
 			if($window.innerWidth < 600){
@@ -30,14 +29,7 @@ class Landing {
 			}
 		});
 
-		this.helpers({
-			users(){
-				return Meteor.users.find();
-			}
-		});
-		
-		const handle = Meteor.subscribe("allUsers");
-
+		Meteor.subscribe("allUsers");
 	}
 
 	liked(user){

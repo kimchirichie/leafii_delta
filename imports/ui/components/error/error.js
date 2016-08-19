@@ -9,7 +9,6 @@ class Error {
 		'ngInject';
 		$reactive(this).attach($scope);
 		this.state = $state;
-
 	}
 }
 
