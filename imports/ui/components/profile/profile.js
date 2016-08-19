@@ -41,11 +41,6 @@ class Profile {
 			this.imgHide = false;
 		}.bind(this));
 
-		//Update the user's profile when they leave the page
-		$scope.$on("$destroy", function(){
-			this.update(this.rootScope.currentUser);
-		}.bind(this));
-
 	}
 
 	passBack() {
