@@ -54,7 +54,7 @@
 					<label>Keywords</label>
 					<input ng-model="profile.newkeyword" placeholder="Enter a keyword">
 				</form>
-				<md-button class="md-raised md-primary parse" ng-click="profile.crawl()">Parse Keywords</md-button>
+				<md-button class="md-raised md-primary parse" ng-click="profile.crawl(profile.rootScope.currentUser._id)">Parse Keywords</md-button>
 			</md-input-container>
 
 			<md-chips ng-model="profile.keywords" readonly="profile.readonly" md-on-add="profile.record()" md-transform-chip="null">
@@ -64,11 +64,11 @@
 				</md-chip-template>
 			</md-chips>
 
-			<md-switch ng-model="profile.rootScope.currentUser.profile.available">Available for Hire?</md-switch>
+			<!-- <md-switch ng-model="profile.rootScope.currentUser.profile.available">Available for Hire?</md-switch> -->
 			
-			<md-input-container class="md-block" flex-gt-sm>
+			<md-input-container class="md-block marginTop" flex-gt-sm>
 				<label>Portfolio URL</label>
-				<input required ng-model="profile.rootScope.currentUser.profile.url" type="url" name="url"/>
+				<input required ng-model="profile.rootScope.currentUser.profile.url" placeholder="http://richardsin.com" type="url" name="url"/>
 			</md-input-container>
 
 			<md-input-container class="md-block" flex-gt-sm>

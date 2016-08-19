@@ -2,69 +2,147 @@
 <div id="roast">
 
 	<div class="intro">
-		<h1 class="animated fadeIn">Welcome to Roast Page</h1>
+		<h1 class="animated fadeIn">Welcome to the Roast Page</h1>
 		<h3>Post your website here to get feedbacks and critiques</h3>
-		<md-button ng-show="!posts.submitPost" ng-click="posts.submitPost=true" class="md-raised createPost">Roast Me</md-button>
+		<md-button ng-show="!posts.submitPost" ng-click="posts.loginCheck();postEdit=false" class="md-raised createPost">Roast Me</md-button>
 	</div>
 
 	<div ng-show="!posts.submitPost" class="filterBar" layout="row" layout-align="center center" layout-xs="column">
-		<span>Latest</span>
-		<span>Most Commented</span>
+		<span ng-class="{lightUp: posts.onfilter == 'latest'}" ng-click="cardFilter = '-date'; posts.onfilter = 'latest'" >Latest</span>
+		<span ng-class="{lightUp: posts.onfilter == 'mostCommented'}" ng-click="cardFilter = '-comments.length';posts.onfilter = 'mostCommented'">Most Commented</span>
 	</div>
 
-	<div ng-show="posts.submitPost" layout="column" layout-align="center center">
-		
-	  <form ng-submit="posts.createPost(posts.post)" class="form submitPost">
-	    
-	    <md-input-container class="md-block" flex-gt-sm>
-	      <label>Title</label>
-	      <input required ng-model="posts.post.title" placeholder="I have updated my website, check it out :D" type="text" name="title">
-	    </md-input-container>
-
-	    <md-input-container class="md-block" flex-gt-sm>
-	      <label>Content</label>
-	      <textarea required ng-model="posts.post.content" placeholder="Please check for bugs and design flaws" type="text" name="content"></textarea>
-	    </md-input-container>
-
-		<div layout="row" layout-align="space-between center">
-		    <md-button ng-click="posts.back()" class="md-raised">Cancel</md-button>
-		    <md-button class="md-raised md-primary" ng-show="!posts.wait" type="submit">Post</md-button>
+	<div ng-show="!posts.allPosts.length">
+		<div class="loadingData" layout="row" layout-xs="column" layout-align="center center">
+			<h1>Loading Posts.....</h1>
+			<md-progress-circular md-mode='indeterminate' md-diameter="150px"></md-progress-circular>
 		</div>
-	  </form>
+	</div>
+
+	<div ng-show="posts.submitPost" layout="column" layout-align="center center" ng-init="cardFilter = '-date'">
+		
+		<!-- Create Post -->	
+	    <form ng-submit="posts.createPost()" class="form submitPost">
+	    
+		    <md-input-container class="md-block" flex-gt-sm>
+		      <label>Title</label>
+		      <input md-maxlength="150" required ng-model="posts.post.title" placeholder="I have updated my website, check it out :D" type="text" name="title">
+		    </md-input-container>
+
+		    <md-input-container class="md-block" flex-gt-sm>
+		      <label>Content</label>
+		      <textarea md-maxlength="200" required ng-model="posts.post.content" placeholder="Please check for bugs and design flaws" type="text" name="content"></textarea>
+		    </md-input-container>
+
+			<div layout="row" layout-align="space-between center">
+			    <md-button ng-click="posts.cancelNewPost()" class="md-raised">Cancel</md-button>
+			    <md-button class="md-raised md-primary" type="submit">Post</md-button>
+			</div>
+
+		</form>
 		
 	</div>
 
-	<div layout="column" layout-align="center center">
-		<div class="roastCards" layout="column" layout-align="start center" ng-repeat="post in posts.allPosts | orderBy: '-date'">
+	<div ng-show="posts.allPosts.length" layout="column" layout-align="center center">
+		<div class="roastCards" layout="column" layout-align="start center" ng-repeat="post in posts.allPosts | orderBy: cardFilter">
+			
+			<md-card class="md-default-theme" ng-init="previewSite = false">
 
-			<md-card class="md-default-theme" layout="row" ng-init="previewSite = false">
-				<md-card-content layout="row">
-					<div class="postInfo" layout="column">
-						<p class="noMargin"><i class="zmdi zmdi-account-circle"></i> {{post.name}}</p>
+				<md-card-content flex ng-show="!postEdit" layout="row" layout-align="start start">
+
+					<div flex="5" ng-show="!postEdit" layout="column" class="upPost">
+						<i class="zmdi zmdi-star-circle zmdi-hc-2x" ng-click="posts.upvotePost(post._id)" ng-class="{upvoted : posts.upvotedCheck(post.upvotes, posts.rootScope.currentUser._id)}"></i>
+						<p>{{post.upvotes.length}}</p>
+						<i class="zmdi zmdi-comment-text zmdi-hc-2x"></i>
+						<p>{{post.comments.length}}</p>
+					</div>
+
+					<div flex="90" class="postInfo" layout="column">
 						<h2>{{post.title}}</h2>
 						<p>{{post.content}}</p>
-						<div layout="row">
-							<p ng-click="posts.updatePost()" class="edit">Edit</p>
-							<p ng-click="posts.deletePost()" class="del">Delete</p>
+						<div layout="row" layout-xs="column">
+							<p class="noMargin"><i class="zmdi zmdi-account-circle"></i> {{post.name}} &nbsp</p>
+							<span>posted {{posts.getTimeElapsed(post.date,false)}}</span>
 						</div>
 						<h3 ng-click="previewSite=!previewSite"><i class="zmdi zmdi-caret-down zmdi-hc-lg"></i> show</h3>
 					</div>
+
+					<div flex="5" layout="row" layout-xs="column" layout-sm="column" layout-align="space-around center" class="editIcons" ng-show="posts.rootScope.currentUser._id == post.poster_user_id && !postEdit">
+						<i ng-click="postEdit = true; posts.editPost(post.title, post.content)" class="zmdi zmdi-edit zmdi-hc-lg edit"></i>
+						<i ng-click="posts.deletePost(post._id)" class="zmdi zmdi-delete zmdi-hc-lg del"></i>
+					</div>
 				</md-card-content>
+
 			</md-card>
 
-			<iframe ng-show="previewSite" ng-src="{{posts.absolutify(post.url)}}"></iframe>
+			<!-- Update Post -->
+			<form ng-show="postEdit" ng-submit="posts.updatePost(post._id, post.title, post.content); postEdit = false" class="form editPost">
+    
+			    <md-input-container class="md-block" flex-gt-sm>
+			      <label>Title</label>
+			      <input md-maxlength="150" required ng-model="post.title" type="text" name="title">
+			    </md-input-container>
+
+			    <md-input-container class="md-block" flex-gt-sm>
+			      <label>Content</label>
+			      <textarea md-maxlength="200" required ng-model="post.content" type="text" name="content"></textarea>
+			    </md-input-container>
+
+				<div layout="row" layout-align="space-between center">
+				    <md-button ng-click="postEdit=false;posts.updatePost(post._id, posts.tempPost.title, posts.tempPost.content)" class="md-raised">Cancel</md-button>
+				    <md-button class="md-raised md-primary" type="submit">Update</md-button>
+				</div>
+			</form>
 			
-			<div class="comments" ng-show="previewSite" layout="column">
-				<div class="comment" layout="column" layout-align="start start">
-					<b>Bobby Lee</b>
-					<span> Your website is awesome!!!</span>
-					<div layout="row">
-						<p class="edit">Edit</p>
-						<p class="del">Delete</p>
+			<!-- preview website -->
+			<iframe class="animated fadeIn" ng-show="previewSite" ng-src="{{posts.absolutify(post.url)}}"></iframe>
+
+			<!-- Comments -->
+			<div class="comments" ng-show="previewSite" layout="column" ng-init="editComment=false;createComment=true">
+				
+				<!-- Create New Comment -->
+				<form ng-submit="posts.createComment(post._id)" layout="row" class="postComment" ng-show="!posts.hideNewComment">
+
+					<img class="profileIcon" ng-src="images/defaultProfilePic.png"/>
+				  	<div layout="row" class="full-width">
+				    	<input required placeholder="write a comment..." ng-model="posts.newComment" type="text" name="comment">
 					</div>
+					
+				</form>
+				
+				<div class="comment" layout="column" layout-align="start start" ng-repeat="comment in post.comments | orderBy: '-date'">
+					
+					<div ng-show="!editComment">
+						<div layout="row" layout-align="start center">
+							<img class="profileIcon" ng-src="images/defaultProfilePic.png"/>
+							<b>{{comment.deleted ? "[deleted]" : comment.name}}</b>
+							<p>{{comment.deleted ? "[deleted]" : comment.comment}}</p>
+						</div>
+						<div class="commentTime" layout="row" ng-show="!comment.deleted">
+							<p><i class="zmdi zmdi-thumb-up" ng-click="posts.upvoteComment(post._id, comment.commenter_user_id, comment.date)" ng-class="{upvoted : posts.upvotedCheck(comment.upvotes, posts.rootScope.currentUser._id)}"></i> &nbsp {{comment.upvotes.length}}</p>
+						</div>
+						<div class="commentTime" layout="row">
+							<p class="time">{{posts.getTimeElapsed(comment.date,false)}}</p>
+						</div>
+						<div layout="row" layout-align="space-between center" class="changeComment" ng-show="posts.rootScope.currentUser._id == comment.commenter_user_id && !comment.deleted">
+							<i class="zmdi zmdi-edit edit" ng-click="editComment=true;posts.hideNewComment=true;posts.editUserComment(comment.comment)"></i>
+							<i class="zmdi zmdi-delete del" ng-click="posts.deleteComment(comment.date, post._id);posts.hideNewComment=false"></i>
+						</div>
+					</div>
+
+					<!-- Edit Comment -->
+					<form ng-show="editComment" class="full-width" ng-submit="posts.editComment(comment.date, post._id, comment.comment);editComment=false" layout="column">
+						<div layout="column" layout-align="start start" class="postComment">
+							<div layout="row" class="full-width">
+								<img class="profileIcon" ng-src="images/defaultProfilePic.png"/>
+							    <input required ng-model="comment.comment" type="text" name="comment"/>
+							</div>
+							<p class="cancelEdit" ng-click="posts.editComment(comment.date, post._id, posts.temp_comment);editComment=false;posts.hideNewComment=false">Cancel</p>
+						</div>
+					</form>
+
 				</div>
 			</div>
 		</div>
 	</div>
-	
 </div>

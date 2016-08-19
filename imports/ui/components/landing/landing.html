@@ -11,22 +11,23 @@
 		<span ng-class="{lightUp: landing.onfilter == 'like'}" ng-click="cardFilter = '-profile.likes.length'; landing.onfilter = 'like'">Most Liked</span>
 	</div>
 
-	<div ng-show="!landing.users">
+	<div ng-show="!landing.users.length">
 		<div class="loadingData" layout="row" layout-xs="column" layout-align="center center">
 			<h1>Loading Users.....</h1>
 			<md-progress-circular md-mode='indeterminate' md-diameter="150px"></md-progress-circular>
 		</div>
 	</div>
 
-	<div class="board" ng-init="cardFilter = '-createdAt'">
+	<div ng-show="landing.users.length" class="board" ng-init="cardFilter = '-createdAt'">
+
 
 		<!-- Grid View Mode -->
 		<div layout="row" layout-align="center center" layout-wrap>
 
 	        <md-card ng-show="!landing.horizontal" class="md-default-theme candidates grid" layout="column" layout-align="center center" ng-repeat="user in landing.users | orderBy: cardFilter">
 				<md-tooltip md-direction="top">{{landing.absolutify(user.profile.url)}}</md-tooltip>
-				<p class="forHire" ng-show="{{user.profile.available}}"><i class="zmdi zmdi-circle"></i> Available</p>
-				<p class="noHire" ng-show="{{!user.profile.available}}"><i class="zmdi zmdi-circle"></i> Unavailable</p>
+				<!-- <p class="forHire" ng-show="{{user.profile.available}}"><i class="zmdi zmdi-circle"></i> Available</p>
+				<p class="noHire" ng-show="{{!user.profile.available}}"><i class="zmdi zmdi-circle"></i> Unavailable</p> -->
 				<a ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank">
 					<img class="profilePic" ng-src="{{user.profile.image ? landing.secureProtocol(user.profile.image) : 'images/defaultProfilePic.png'}}"/>
 				</a> 
@@ -35,7 +36,7 @@
 					<a ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank">{{user.profile.occupation ? user.profile.occupation: 'Not specified' | limitTo: 17 }}{{user.profile.occupation.length > 17 ? '...' : ''}}</a>
 					<div layout="row" layout-align="space-around center">
 						<span><i class="zmdi zmdi-eye"></i> {{user.profile.views}}</span>
-				        <md-button class="md-fab md-mini fav" ng-click="landing.liked(user)" ng-show="landing.rootScope.currentUser" aria-label="like"><i ng-class="{upvoted : user.profile.likes.includes(landing.currentUser)}" class="zmdi zmdi-star"></i></md-button>
+				        <md-button class="md-fab md-mini fav" ng-click="landing.liked(user)" ng-show="landing.rootScope.currentUser" aria-label="like"><i ng-class="{upvoted : user.profile.likes.includes(landing.rootScope.currentUser._id)}" class="zmdi zmdi-star"></i></md-button>
 						<span><i class="zmdi zmdi-star"></i> {{user.profile.likes.length}}</span>
 					</div>
 					<p>{{user.profile.firstName + ' ' + user.profile.lastName}}</p>

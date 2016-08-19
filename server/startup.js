@@ -33,6 +33,9 @@ Meteor.startup(()=>{
 				return Accounts.sendVerificationEmail(userId);
 			}
 		},
+		verifyUser(user){
+			return Accounts.sendVerificationEmail(user._id);
+		},
 
 		sendFeedback(to, from, subject, text){
 			this.unblock();
@@ -44,15 +47,15 @@ Meteor.startup(()=>{
 			});
 		},
 
-		startCrawl(err, res){
-			let userId = Meteor.userId();
+		startCrawl(user_id, err, res){
+			Future = Npm.require('fibers/future');
+			var myFuture = new Future(); 
 			//var shell = new PythonShell('update_user_kws.py', { scriptPath: '/root/Leafii/leafii_crawler/crawler/', args: [userId] });
 
-      		Future = Npm.require('fibers/future');
-			var myFuture = new Future();	
-   			var crawler_src = process.env.CRAWLERSRC;
-			PythonShell.run('update_user_kws.py', { scriptPath: crawler_src+'crawler/', args: [userId] }, function (err, results) {
+      		var crawler_src = process.env.CRAWLERSRC;
+			PythonShell.run('reparse_user.py', { scriptPath: crawler_src+'crawler/scripts', args: [user_id] }, function (err, results) {
 				if (err) {
+					console.log(err)
 			  		myFuture.throw(err);
 				}
 				else {
@@ -71,6 +74,31 @@ Meteor.startup(()=>{
 			// 	myFuture.return(message);
 			// 	console.log(message);
 			// });
+			return myFuture.wait();
+		},
+
+		allCrawl(err, res){
+			Future = Npm.require('fibers/future');
+			var myFuture = new Future(); 
+			//var shell = new PythonShell('update_user_kws.py', { scriptPath: '/root/Leafii/leafii_crawler/crawler/', args: [userId] });
+			var crawler_src = process.env.CRAWLERSRC;
+			PythonShell.run('reparse_all.py', { scriptPath: crawler_src+'crawler/scripts' }, function (err, results) {
+				if (err) {
+					console.log(err)
+			  		myFuture.throw(err);
+				}
+				else {
+					for (i = 0; i < results.length; i++)
+					{
+						if(results[i].indexOf("Error") > -1) {
+			  				console.log('Results: '+results);
+			  				break;
+			  			}
+			  		}
+			  		myFuture.return(results);
+				}
+			});
+			
 			return myFuture.wait();
 		},
 
@@ -96,88 +124,82 @@ Meteor.startup(()=>{
 				user = Meteor.userId();
 				//console.log(Profile_likes.find({clicker_user_id: user, liked_user_id: liked_userId}).count());
 				//console.log(user+" ; "+liked_userId);
-				date = Math.floor(Date.now() / 60000);
-				data = {
-					clicker_user_id: user, 
-					liked_user_id: liked_userId,
-					date: date,
-					url: url
-				};
-				//console.log("Add like");
-				Profile_likes.insert(data);
-				Meteor.users.update({_id:liked_userId}, {$addToSet: {"profile.likes": user}}, false, false);
-				
+				if(Profile_likes.find({clicker_user_id: user, liked_user_id: liked_userId}).count())
+				{
+					data = {
+						clicker_user_id: user, 
+						liked_user_id: liked_userId,
+					};
+					//console.log("Delete like");
+					Profile_likes.remove(data);
+					Meteor.users.update({_id:liked_userId}, {$pull: {"profile.likes": user}}, false, false);
+				}
+				else
+				{
+					date = Math.floor(Date.now() / 60000);
+					data = {
+						clicker_user_id: user, 
+						liked_user_id: liked_userId,
+						date: date,
+						url: url
+					};
+					//console.log("Add like");
+					Profile_likes.insert(data);
+					Meteor.users.update({_id:liked_userId}, {$addToSet: {"profile.likes": user}}, false, false);
+				}
 			}
 		},
-		
-		unlikeProfile(liked_userId){
+
+		updateComment(timestamp, postId, comment)
+		{
+			if(Meteor.userId()){
+			  user = Meteor.userId();
+			  date = Math.floor(Date.now() / 60000);
+			  
+			  Posts.update({_id: postId, comments:{$elemMatch: {"date": timestamp, "commenter_user_id": user}}}, {$set:{"comments.$.comment": comment, "comments.$.last_edit": date}});
+			}
+		},
+
+		zombifyComment(timestamp, postId)
+		{
+			if(Meteor.userId()){
+			  user = Meteor.userId();
+			  date = Math.floor(Date.now() / 60000);
+			  
+			  Posts.update({_id: postId, comments:{$elemMatch: {"date": timestamp, "commenter_user_id": user}}}, {$set:{"comments.$.deleted": true}});
+			}
+		},
+
+		likePost(postId)
+		{
 			if(Meteor.userId()){
 				user = Meteor.userId();
-				//console.log(Profile_likes.find({clicker_user_id: user, liked_user_id: liked_userId}).count());
-				//console.log(user+" ; "+liked_userId);
-				data = {
-					clicker_user_id: user, 
-					liked_user_id: liked_userId,
-				};
-				//console.log("Delete like");
-				Profile_likes.remove(data);
-				Meteor.users.update({_id:liked_userId}, {$pull: {"profile.likes": user}}, false, false);
+				if(Posts.find({_id: postId, "upvotes.user": user}).count())
+			  	{
+			    	Posts.update({_id:postId}, {$pull: {upvotes: {user: user}}}, false, false);
+			  	}
+			 	else
+			  	{
+			    	date = Math.floor(Date.now() / 60000);
+			    	Posts.update({_id:postId}, {$addToSet: {upvotes: {user: user, date: date}}}, false, false);
+			  	}
 			}
 		},
 
-		createComment(post_id, comment){
+		likeComment(postId, commenter, timestamp)
+		{
 			if(Meteor.userId()){
-				user = Meteor.userId();
-				//date = Math.floor(Date.now() / 60000);
-				//date + commenter_user_id will be the unique key combo for the comments for a profile
-				date = Date.now();
+			  user = Meteor.userId();
 
-				console.log(Posts.find({}).fetch());
-				Posts.update({_id: post_id}, {$addToSet: {comments: {commenter_user_id: user, comment: comment, date: date, last_edit: 0}}}, false, false);
-			}
-		},
-
-		updateComment(original_timestamp, post_id, comment){
-			if(Meteor.userId()){
-				user = Meteor.userId();
-				date = Math.floor(Date.now() / 60000);
-				
-				Posts.update({_id: post_id, "comments.date": original_timestamp, "comments.commenter_user_id": user}, {$set:{"comments.$.comment": comment, "comments.$.last_edit": date}}, false, false);
-			}
-		},
-
-		deleteComment(original_timestamp, post_id){
-			if(Meteor.userId()){
-				user = Meteor.userId();
-				
-				Posts.update({_id: post_id, "comments.date": original_timestamp, "comments.commenter_user_id": user}, {$pull: {comments:{commenter_user_id: user, date: original_timestamp }}}, false, false);
-			}
-		},
-
-		createPost(title, tags, content){
-			if(Meteor.userId()){
-				user = Meteor.user();
-				date = Date.now();
-				Posts.insert({poster_user_id: user._id, title: title, tags: tags, content: content, url: user.profile.url, name: user.profile.firstName + " " + user.profile.lastName, comments: [], date: date, last_edit: 0});
-
-				console.log(Posts.find({}).fetch());
-			}
-		},
-
-		updatePost(original_timestamp, title, tags, content){
-			if(Meteor.userId()){
-				user = Meteor.userId();
-				date = Math.floor(Date.now() / 60000);
-				
-				Posts.update({poster_user_id: user, date: original_timestamp}, {$set:{title: title, tags: tags, content: content, last_edit: date}}, false, false);
-			}
-		},
-
-		deletePost(original_timestamp){
-			if(Meteor.userId()){
-				user = Meteor.userId();
-				
-				Posts.remove({poster_user_id: user, date: original_timestamp});
+			  	if(Posts.find({_id: postId, comments: {$elemMatch : {commenter_user_id: commenter, date: timestamp, upvotes: {$elemMatch: {user: user}}}}}).count())
+				{
+			    	Posts.update({_id: postId, "comments.commenter_user_id":commenter, "comments.date": timestamp}, {$pull: {"comments.$.upvotes": {user: user}}}, false, false);
+				}
+				else
+				{
+			    	date = Math.floor(Date.now() / 60000);
+					Posts.update({_id:postId, "comments.commenter_user_id": commenter, "comments.date": timestamp}, {$addToSet: {"comments.$.upvotes": {user: user, date: date}}}, false, false);
+				}
 			}
 		},
 

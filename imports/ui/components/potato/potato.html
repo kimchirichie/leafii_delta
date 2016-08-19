@@ -1,4 +1,5 @@
 <div>
+	<button ng-click="potato.reparse_all()">reparse all users</button>
 	<div class="card" ng-repeat="user in potato.users">
 		<div ng-hide="potato.showing(user)" ng-click="potato.display(user)">
 			<p>{{user.profile.firstName}} {{user.profile.lastName}}</p>
@@ -10,12 +11,17 @@
 				<li>First Name: {{user.profile.firstName}}</li>
 				<li>Last Name: {{user.profile.lastName}}</li>
 				<li>Email: {{user.emails[0].address}}</li>
+				<li>Verified: {{user.emails[0].verified}}</li>
 				<li>Occupation: {{user.profile.occupation}}</li>
 				<li>Available: {{user.profile.available}}</li>
 				<li>Page Views: {{user.profile.views}}</li>
 				<li>Likes: {{user.profile.likes.length}}</li>
 				<button ng-click="potato.close(user)">close</button>
 				<button ng-click="potato.edit(user)">edit</button>
+				
+				<button ng-click="potato.send_verification(user)">send verification email</button>
+				<button ng-click="potato.send_reset(user.emails[0].address)">send reset password email</button>
+				<button ng-click="potato.reparse_user(user._id)">reparse user</button>
 			</ul>
 		</div>
 		<div ng-show="potato.editing(user)">

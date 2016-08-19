@@ -29,7 +29,7 @@ class Header {
 	}
 
 	gohome(){
-		this.rootScope.search = "";
+		this.query = "";
 		this.state.go('landing');
 	}
 }
