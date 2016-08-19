@@ -29,8 +29,8 @@
 
 	        <md-card ng-show="!landing.horizontal" class="md-default-theme candidates grid" layout="column" layout-align="center center" ng-repeat="user in landing.users | orderBy: cardFilter">
 				<md-tooltip md-direction="top">{{landing.absolutify(user.profile.url)}}</md-tooltip>
-				<p class="forHire" ng-show="{{user.profile.available}}"><i class="zmdi zmdi-circle"></i> Available</p>
-				<p class="noHire" ng-show="{{!user.profile.available}}"><i class="zmdi zmdi-circle"></i> Unavailable</p>
+				<!-- <p class="forHire" ng-show="{{user.profile.available}}"><i class="zmdi zmdi-circle"></i> Available</p>
+				<p class="noHire" ng-show="{{!user.profile.available}}"><i class="zmdi zmdi-circle"></i> Unavailable</p> -->
 				<a ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank">
 					<img class="profilePic" ng-src="{{user.profile.image ? landing.secureProtocol(user.profile.image) : 'images/defaultProfilePic.png'}}"/>
 				</a> 
@@ -54,8 +54,8 @@
 		<div ng-show="landing.horizontal" class="candidates horizontal" layout="column">
 			<md-card class="md-default-theme" layout="row" ng-repeat="user in landing.users | orderBy: cardFilter">
 				<div class="info" layout="column" layout-align="center center">
-					<p class="forHire" ng-show="{{user.profile.available}}"><i class="zmdi zmdi-circle"></i> Available</p>
-					<p class="noHire" ng-show="{{!user.profile.available}}"><i class="zmdi zmdi-circle"></i> Unavailable</p>
+					<!-- <p class="forHire" ng-show="{{user.profile.available}}"><i class="zmdi zmdi-circle"></i> Available</p>
+					<p class="noHire" ng-show="{{!user.profile.available}}"><i class="zmdi zmdi-circle"></i> Unavailable</p> -->
 					<a ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank"><img class="profilePicSmall" ng-src="{{user.profile.image ? landing.secureProtocol(user.profile.image) : 'images/defaultProfilePic.png'}}"/></a>
 					<span><i class="zmdi zmdi-eye"></i> {{user.profile.views}}</span>
 				</div>
