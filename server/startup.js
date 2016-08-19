@@ -159,6 +159,16 @@ Meteor.startup(()=>{
 			}
 		},
 
+		zombifyComment(timestamp, postId)
+		{
+			if(Meteor.userId()){
+			  user = Meteor.userId();
+			  date = Math.floor(Date.now() / 60000);
+			  
+			  Posts.update({_id: postId, comments:{$elemMatch: {"date": timestamp, "commenter_user_id": user}}}, {$set:{"comments.$.deleted": true}});
+			}
+		},
+
 		likePost(postId)
 		{
 			if(Meteor.userId()){

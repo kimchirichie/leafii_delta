@@ -197,8 +197,10 @@
 				white-space: nowrap;
 			}
 
-			pre {
+			p {
 				font-family: raleway;
+				word-break: break-all;
+				margin-left: 10px;
 			}
 
 			.commentTime {
