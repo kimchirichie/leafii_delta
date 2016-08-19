@@ -12,6 +12,13 @@
 		<span ng-class="{lightUp: posts.onfilter == 'mostCommented'}" ng-click="cardFilter = '-comments.length';posts.onfilter = 'mostCommented'">Most Commented</span>
 	</div>
 
+	<div ng-show="!posts.allPosts.length">
+		<div class="loadingData" layout="row" layout-xs="column" layout-align="center center">
+			<h1>Loading Posts.....</h1>
+			<md-progress-circular md-mode='indeterminate' md-diameter="150px"></md-progress-circular>
+		</div>
+	</div>
+
 	<div ng-show="posts.submitPost" layout="column" layout-align="center center" ng-init="cardFilter = '-date'">
 		
 		<!-- Create Post -->	
@@ -36,36 +43,35 @@
 		
 	</div>
 
-	<div layout="column" layout-align="center center">
+	<div ng-show="posts.allPosts.length" layout="column" layout-align="center center">
 		<div class="roastCards" layout="column" layout-align="start center" ng-repeat="post in posts.allPosts | orderBy: cardFilter">
 			
-			<md-card class="md-default-theme" layout="row" layout-align="start center" ng-init="previewSite = false">
+			<md-card class="md-default-theme" ng-init="previewSite = false">
 
-				<div ng-show="!postEdit" layout="column" layout-align="center space-around" class="upPost">
-					<i class="zmdi zmdi-star-circle zmdi-hc-2x" ng-click="posts.upvotePost(post._id)" ng-class="{upvoted : posts.upvotedCheck(post.upvotes, posts.rootScope.currentUser._id)}"></i>
-					<p>{{post.upvotes.length}}</p>
-					<i class="zmdi zmdi-comment-text zmdi-hc-2x"></i>
-					<p>{{post.comments.length}}</p>
-				</div>
+				<md-card-content flex ng-show="!postEdit" layout="row" layout-align="start start">
 
-				<md-card-content ng-show="!postEdit" layout="row">
-					<div class="postInfo" layout="column">
+					<div flex="5" ng-show="!postEdit" layout="column" class="upPost">
+						<i class="zmdi zmdi-star-circle zmdi-hc-2x" ng-click="posts.upvotePost(post._id)" ng-class="{upvoted : posts.upvotedCheck(post.upvotes, posts.rootScope.currentUser._id)}"></i>
+						<p>{{post.upvotes.length}}</p>
+						<i class="zmdi zmdi-comment-text zmdi-hc-2x"></i>
+						<p>{{post.comments.length}}</p>
+					</div>
+
+					<div flex="90" class="postInfo" layout="column">
 						<h2>{{post.title}}</h2>
 						<pre>{{post.content}}</pre>
-						<div layout="row">
-							<p class="noMargin"><i class="zmdi zmdi-account-circle"></i> {{post.name}}</p>
-							<span>&nbsp posted on: {{post.date | date:'MM/dd/yyyy @ h:mma'}}</span>
+						<div layout="row" layout-xs="column">
+							<p class="noMargin"><i class="zmdi zmdi-account-circle"></i> {{post.name}} &nbsp</p>
+							<span>posted on: {{post.date | date:'MM/dd/yyyy @ h:mma'}}</span>
 						</div>
 						<h3 ng-click="previewSite=!previewSite"><i class="zmdi zmdi-caret-down zmdi-hc-lg"></i> show</h3>
 					</div>
+
+					<div flex="5" layout="row" layout-xs="column" layout-sm="column" layout-align="space-around center" class="editIcons" ng-show="posts.rootScope.currentUser._id == post.poster_user_id && !postEdit">
+						<i ng-click="postEdit = true; posts.editPost(post.title, post.content)" class="zmdi zmdi-edit zmdi-hc-lg edit"></i>
+						<i ng-click="posts.deletePost(post._id)" class="zmdi zmdi-delete zmdi-hc-lg del"></i>
+					</div>
 				</md-card-content>
-
-				<span flex></span>
-
-				<div layout="column" layout-align="space-around space-around" class="editIcons" ng-show="posts.rootScope.currentUser._id == post.poster_user_id && !postEdit">
-					<i ng-click="postEdit = true; posts.editPost(post.title, post.content)" class="zmdi zmdi-edit zmdi-hc-lg edit"></i>
-					<i ng-click="posts.deletePost(post._id)" class="zmdi zmdi-delete zmdi-hc-lg del"></i>
-				</div>
 
 			</md-card>
 
@@ -107,7 +113,7 @@
 				<div class="comment" layout="column" layout-align="start start" ng-repeat="comment in post.comments | orderBy: '-date'">
 					
 					<div ng-show="!editComment">
-						<div layout="row" layout-align="center center">
+						<div layout="row" layout-align="start center">
 							<img class="profileIcon" ng-src="images/defaultProfilePic.png"/>
 							<b>{{comment.name}}</b>
 							<pre> &nbsp {{comment.comment}}</pre>

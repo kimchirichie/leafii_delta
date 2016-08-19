@@ -26,11 +26,21 @@ class Postings {
   }
 
   upvoteComment(postId, commenterId, timestamp){
-    Meteor.call('likeComment', postId, commenterId, timestamp);
+    if(Meteor.userId()){
+      Meteor.call('likeComment', postId, commenterId, timestamp);
+    } else {
+      Bert.alert('You need to be signed in to like comments', 'danger', 'growl-top-right');
+    }
+    
   }
 
   upvotePost(postId) {
-    Meteor.call('likePost', postId);
+    if(Meteor.userId()){
+      Meteor.call('likePost', postId);
+    } else {
+      Bert.alert('You need to be signed in to like posts', 'danger', 'growl-top-right');
+    }
+    
   }
 
   absolutify(url){
@@ -50,7 +60,7 @@ class Postings {
       Posts.update({_id: postId}, {$addToSet: {comments: {commenter_user_id: user._id, name: user.profile.firstName + " " + user.profile.lastName, comment: this.newComment, date: date, last_edit: 0, upvotes: []}}}, false, false);
       this.newComment = '';
     } else {
-      Bert.alert("Please login to comment", 'warning', 'growl-top-right');
+      Bert.alert("Please login to comment", 'danger', 'growl-top-right');
       this.state.go('signin');
     }
   }
@@ -133,14 +143,11 @@ class Postings {
   }
 
   loginCheck(){
-    if(!Meteor.userId())
-    {
-      Bert.alert('You need to log in to do that!', 'danger');
+    if(!Meteor.userId()){
+      Bert.alert('You need to signed in to post!', 'danger');
       this.submitPost = false;
       this.post = {};
-    }
-    else
-    {
+    } else {
       this.submitPost = true;
     }
   }

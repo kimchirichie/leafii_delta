@@ -2,6 +2,8 @@ import { Meteor } from 'meteor/meteor';
 import { Views } from '../imports/api/views/index';
 import { Profile_likes } from '../imports/api/profile_likes/index';
 import { Posts } from '../imports/api/posts/index';
+import { Keywords } from '../imports/api/keywords/index';
+import { Words } from '../imports/api/count/index';
  
 Meteor.startup(()=>{
 
@@ -30,6 +32,9 @@ Meteor.startup(()=>{
 				return Accounts.sendVerificationEmail(userId);
 			}
 		},
+		verifyUser(user){
+			return Accounts.sendVerificationEmail(user._id);
+		},
 
 		sendFeedback(to, from, subject, text){
 			this.unblock();
@@ -41,15 +46,44 @@ Meteor.startup(()=>{
 			});
 		},
 
-		startCrawl(err, res){
-			let userId = Meteor.userId();
+		startCrawl(user_id, err, res){
+			Future = Npm.require('fibers/future');
+			var myFuture = new Future(); 
 			//var shell = new PythonShell('update_user_kws.py', { scriptPath: '/root/Leafii/leafii_crawler/crawler/', args: [userId] });
 
-      		Future = Npm.require('fibers/future');
-			var myFuture = new Future();	
-   			var crawler_src = process.env.CRAWLERSRC;
-			PythonShell.run('update_user_kws.py', { scriptPath: crawler_src+'crawler/', args: [userId] }, function (err, results) {
+      		var crawler_src = process.env.CRAWLERSRC;
+			PythonShell.run('reparse_user.py', { scriptPath: crawler_src+'crawler/scripts', args: [user_id] }, function (err, results) {
 				if (err) {
+					console.log(err)
+			  		myFuture.throw(err);
+				}
+				else {
+					for (i = 0; i < results.length; i++)
+					{
+						if(results[i].indexOf("Error") > -1) {
+			  				console.log('Results: '+results);
+			  				break;
+			  			}
+			  		}
+			  		myFuture.return(results);
+				}
+			});
+			// var msg = shell.on('message', function (message) {
+			// 	// handle message (a line of text from stdout)
+			// 	myFuture.return(message);
+			// 	console.log(message);
+			// });
+			return myFuture.wait();
+		},
+
+		allCrawl(err, res){
+			Future = Npm.require('fibers/future');
+			var myFuture = new Future(); 
+			//var shell = new PythonShell('update_user_kws.py', { scriptPath: '/root/Leafii/leafii_crawler/crawler/', args: [userId] });
+			var crawler_src = process.env.CRAWLERSRC;
+			PythonShell.run('reparse_all.py', { scriptPath: crawler_src+'crawler/scripts' }, function (err, results) {
+				if (err) {
+					console.log(err)
 			  		myFuture.throw(err);
 				}
 				else {
@@ -159,7 +193,63 @@ Meteor.startup(()=>{
 					console.log("add");
 				}
 			}
+		},
+
+		search(searchString){
+			// send illegitimate queries empty back
+			if (typeof searchString !== 'string') return [];
+			if (!searchString.length) return [];
+
+			var ranks = {};
+			// var points = 0;
+			var queries = searchString.split(" ");
+
+			for (i in queries){
+				var keywords = Keywords.aggregate([
+						{$match:{keyword:{$regex:`.*${queries[i]}.*`,$options:'i'}}},
+						{$project:{_id:0,user_id:1,keyword:1}}
+					]);
+				if (!keywords.length) continue;
+				var distinct = keywords.map(function(keyword){
+						return keyword.keyword;
+					}).filter(function(value, index, self) { 
+						return self.indexOf(value) === index;
+					});
+				var total = Words.aggregate([
+						{$match:{word:{$in:distinct}}},
+						{$project:{_id:0,total:1,word:1}}
+					]);
+				var points = {};
+				for (j in total){
+					points[total[j].word] = 1/total[j].total;
+				}
+
+				for(k in keywords){
+					if(!(keywords[k].user_id in ranks)){
+						ranks[keywords[k].user_id] = {
+							points: points[keywords[k].keyword],
+							keywords: [keywords[k].keyword]
+						};
+					} else {
+						ranks[keywords[k].user_id].points += points[keywords[k].keyword];
+						ranks[keywords[k].user_id].keywords.push(keywords[k].keyword);
+					}
+				}
+
+			}
+
+			if(!Object.keys(ranks).length) return [];
+
+			var result = Meteor.users.aggregate([
+					{$match:{_id:{$in: Object.keys(ranks)}}},
+					{$project:{profile:1}}
+				]).map(function(user){
+					user.points = ranks[user._id].points;
+					user.keywords = ranks[user._id].keywords;
+					return user
+				});
+
+			return result;
 		}
 	});
-
-});``
+});

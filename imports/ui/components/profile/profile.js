@@ -41,11 +41,6 @@ class Profile {
 			this.imgHide = false;
 		}.bind(this));
 
-		//Update the user's profile when they leave the page
-		$scope.$on("$destroy", function(){
-			this.update(this.rootScope.currentUser);
-		}.bind(this));
-
 	}
 
 	passBack() {
@@ -56,8 +51,20 @@ class Profile {
 	}
 
 	update(user){
-		Meteor.users.update(Meteor.userId(), {$set: {profile: user.profile}}, false, false);
-		Bert.alert('Profile Updated', 'success', 'growl-top-right');
+
+		var firstName = user.profile.firstName;
+		var lastName = user.profile.lastName;
+		var occupation = user.profile.occupation;
+		var url = user.profile.url;
+		var location = user.profile.location;
+
+		if(!(firstName && lastName && occupation && url && location)){
+			Bert.alert('Profile Error: Please fill in the required fields', 'danger', 'growl-top-right');
+		} else {
+			Bert.alert('Profile Updated', 'success', 'growl-top-right');
+			Meteor.users.update(Meteor.userId(), {$set: {profile: user.profile}}, false, false);
+		}
+
 	}
 
 	delete(keyword) {
@@ -75,7 +82,7 @@ class Profile {
 		this.newkeyword = undefined;
 	}
 
-	crawl(){
+	crawl(user_id){
 		confirmed = swal({
   			title: "Are you sure?",
   			text: "It will delete all the previous keywords & re-parse your website.",
@@ -86,7 +93,7 @@ class Profile {
  			confirmButtonText: "Yes, re-parse it!",
   			closeOnConfirm: true
 			},function(){
-				Meteor.call('startCrawl', function (err, res) {
+				Meteor.call('startCrawl', user_id, function (err, res) {
 				  if (err) {
 				    Bert.alert('Keywords Update Failed', 'danger');
 				  } else {

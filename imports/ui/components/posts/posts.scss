@@ -11,7 +11,7 @@
 	}
 
 	.upPost {
-		margin-left: 20px;
+		text-align: center;
 
 		i:first-child {
 			outline: 0;
@@ -85,15 +85,20 @@
 	}
 
 	.editIcons {
-		margin-right: 30px;
+		text-align: center;
 
 		.edit {
-			margin-bottom: 50px;
 			cursor: pointer;
 			outline: 0;
 
 			&:hover {
 				color: $leafii-theme;
+			}
+		}
+
+		@media(max-width:960px){
+			.edit {
+				margin-bottom: 20px;
 			}
 		}
 
@@ -110,9 +115,10 @@
 	.postInfo {
 
 		text-align: left;
+		margin: 0 10px 0 10px;
 
 		h2 {
-			margin-bottom: 0;
+			margin: 0;
 		}
 
 		h3 {
@@ -158,9 +164,12 @@
 			box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 			align-items: center;
 			margin: 0;
+			
+			md-card-content {
+				width: 100%;
+			}
 
 		}
-
 	}
 
 	@media(max-width: 600px){
@@ -170,6 +179,7 @@
 
 		.submitPost{
 			width: 100%;
+			max-width: 100% !important;
 		}
 	}
 

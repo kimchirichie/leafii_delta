@@ -41,6 +41,10 @@ accounts-password
 accounts-base
 email
 
+## Tools for searching
+msavin:fetcher
+meteorhacks:aggregate
+
 #Utilities
 themeteorchef:bert
 meteorhacks:fast-render
