@@ -110,37 +110,43 @@
 					
 				</form>
 				
-				<div class="comment" layout="column" layout-align="start start" ng-repeat="comment in post.comments | orderBy: '-date'">
+				<div class="comment" layout="row" layout-align="start start" ng-repeat="comment in post.comments | orderBy: '-date'">
 					
-					<div ng-show="!editComment">
-						<div layout="row" layout-align="start center">
-							<img class="profileIcon" ng-src="images/defaultProfilePic.png"/>
-							<b>{{comment.deleted ? "[deleted]" : comment.name}}</b>
-							<p>{{comment.deleted ? "[deleted]" : comment.comment}}</p>
-						</div>
-						<div class="commentTime" layout="row" ng-show="!comment.deleted">
+					<div ng-show="!editComment && !comment.deleted"">
+						<div class="commentLike" layout="row">
 							<p><i class="zmdi zmdi-thumb-up" ng-click="posts.upvoteComment(post._id, comment.commenter_user_id, comment.date)" ng-class="{upvoted : posts.upvotedCheck(comment.upvotes, posts.rootScope.currentUser._id)}"></i> &nbsp {{comment.upvotes.length}}</p>
 						</div>
-						<div class="commentTime" layout="row">
-							<p class="time">{{posts.getTimeElapsed(comment.date,false)}}</p>
-						</div>
-						<div layout="row" layout-align="space-between center" class="changeComment" ng-show="posts.rootScope.currentUser._id == comment.commenter_user_id && !comment.deleted">
-							<i class="zmdi zmdi-edit edit" ng-click="editComment=true;posts.hideNewComment=true;posts.editUserComment(comment.comment)"></i>
-							<i class="zmdi zmdi-delete del" ng-click="posts.deleteComment(comment.date, post._id);posts.hideNewComment=false"></i>
-						</div>
 					</div>
-
-					<!-- Edit Comment -->
-					<form ng-show="editComment" class="full-width" ng-submit="posts.editComment(comment.date, post._id, comment.comment);editComment=false" layout="column">
-						<div layout="column" layout-align="start start" class="postComment">
-							<div layout="row" class="full-width">
+					<div layout="column">
+						<div ng-show="!editComment">
+							<div layout="row" layout-align="start center">
 								<img class="profileIcon" ng-src="images/defaultProfilePic.png"/>
-							    <input required ng-model="comment.comment" type="text" name="comment"/>
+								<b>{{comment.deleted ? "[deleted]" : comment.name}}</b>
+								<p>{{comment.deleted ? "[deleted]" : comment.comment}}</p>
 							</div>
-							<p class="cancelEdit" ng-click="posts.editComment(comment.date, post._id, posts.temp_comment);editComment=false;posts.hideNewComment=false">Cancel</p>
+							<div class="commentTime" layout="row" ng-show="!comment.deleted">
+								<p><i class="zmdi zmdi-thumb-up" ng-click="posts.upvoteComment(post._id, comment.commenter_user_id, comment.date)" ng-class="{upvoted : posts.upvotedCheck(comment.upvotes, posts.rootScope.currentUser._id)}"></i> &nbsp {{comment.upvotes.length}}</p>
+							</div>
+							<div class="commentTime" layout="row">
+								<p class="time">{{posts.getTimeElapsed(comment.date,false)}}</p>
+							</div>
+							<div layout="row" layout-align="space-between center" class="changeComment" ng-show="posts.rootScope.currentUser._id == comment.commenter_user_id && !comment.deleted">
+								<i class="zmdi zmdi-edit edit" ng-click="editComment=true;posts.hideNewComment=true;posts.editUserComment(comment.comment)"></i>
+								<i class="zmdi zmdi-delete del" ng-click="posts.deleteComment(comment.date, post._id);posts.hideNewComment=false"></i>
+							</div>
 						</div>
-					</form>
 
+						<!-- Edit Comment -->
+						<form ng-show="editComment" class="full-width" ng-submit="posts.editComment(comment.date, post._id, comment.comment);editComment=false" layout="column">
+							<div layout="column" layout-align="start start" class="postComment">
+								<div layout="row" class="full-width">
+									<img class="profileIcon" ng-src="images/defaultProfilePic.png"/>
+								    <input required ng-model="comment.comment" type="text" name="comment"/>
+								</div>
+								<p class="cancelEdit" ng-click="posts.editComment(comment.date, post._id, posts.temp_comment);editComment=false;posts.hideNewComment=false">Cancel</p>
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>

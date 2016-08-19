@@ -57,7 +57,7 @@ class Postings {
     if(Meteor.userId()){
       user = Meteor.user();
       date = Date.now();
-      Posts.update({_id: postId}, {$addToSet: {comments: {commenter_user_id: user._id, name: user.profile.firstName + " " + user.profile.lastName, comment: this.newComment, date: date, last_edit: 0, upvotes: []}}}, false, false);
+      Posts.update({_id: postId}, {$addToSet: {comments: {commenter_user_id: user._id, name: user.profile.firstName, comment: this.newComment, date: date, last_edit: 0, upvotes: []}}}, false, false);
       this.newComment = '';
     } else {
       Bert.alert("Please login to comment", 'danger', 'growl-top-right');
@@ -100,7 +100,7 @@ class Postings {
       }else {
         user = Meteor.user();
         date = Date.now();
-        Posts.insert({poster_user_id: user._id, title: this.post.title, tags: [], content: this.post.content, url: user.profile.url, name: user.profile.firstName + " " + user.profile.lastName, comments: [], date: date, last_edit: 0, upvotes: []});
+        Posts.insert({poster_user_id: user._id, title: this.post.title, tags: [], content: this.post.content, url: user.profile.url, name: user.profile.firstName, comments: [], date: date, last_edit: 0, upvotes: []});
         this.cancelNewPost();
       }
       
