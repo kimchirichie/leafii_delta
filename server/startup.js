@@ -177,20 +177,17 @@ Meteor.startup(()=>{
 
 		likeComment(postId, commenter, timestamp)
 		{
-			console.log(postId, commenter, timestamp);
 			if(Meteor.userId()){
 			  user = Meteor.userId();
 
 			  	if(Posts.find({_id: postId, comments: {$elemMatch : {commenter_user_id: commenter, date: timestamp, upvotes: {$elemMatch: {user: user}}}}}).count())
 				{
 			    	Posts.update({_id: postId, "comments.commenter_user_id":commenter, "comments.date": timestamp}, {$pull: {"comments.$.upvotes": {user: user}}}, false, false);
-			    	console.log(Posts.find({_id: postId, "comments.commenter_user_id": commenter, "comments.date": timestamp, "comments.upvotes.user": user}).count());
 				}
 				else
 				{
 			    	date = Math.floor(Date.now() / 60000);
 					Posts.update({_id:postId, "comments.commenter_user_id": commenter, "comments.date": timestamp}, {$addToSet: {"comments.$.upvotes": {user: user, date: date}}}, false, false);
-					console.log("add");
 				}
 			}
 		},
