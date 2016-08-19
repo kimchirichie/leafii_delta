@@ -57,6 +57,10 @@
 				<md-button class="md-raised md-primary parse" ng-click="profile.crawl(profile.rootScope.currentUser._id)">Parse Keywords</md-button>
 			</md-input-container>
 
+			<md-input-container class="md-block" flex-gt-sm>
+				<md-button class="md-raised md-primary parse" ng-click="profile.fbimport()">Update Profile From Facebook</md-button>
+			</md-input-container>
+
 			<md-chips ng-model="profile.keywords" readonly="profile.readonly" md-on-add="profile.record()" md-transform-chip="null">
 				<md-chip-template>
 					<div class="md-chip-content">{{$chip.keyword}}</div>

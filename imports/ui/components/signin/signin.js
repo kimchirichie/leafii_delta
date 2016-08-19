@@ -32,8 +32,36 @@ class Signin {
 				this.wait = false;
 				this.state.go('profile');
 			}
-			
+		
 		}.bind(this));
+	}
+
+	facebook(){
+		Meteor.loginWithFacebook({requestPermissions: ['user_friends', 'public_profile', 'email']}, function(err){
+			if (err) {
+				Bert.alert('Could Not Log In To Facebook', 'danger', 'growl-top-right');
+				console.log(err);
+			} else {
+				this.state.go('profile');
+				console.log('suceess');
+			}
+		}.bind(this));
+
+		console.log(user);
+		//var user = db.collection('users').find({"_id" : userID})
+		var	 firstName = user.get("services.facebook.first_name")
+		var lastName = user.get("services.facebook.last_name")
+		var email = user.get("services.facebook.email")
+		console.log(firstName)
+		console.log(lastName)
+		console.log(email)
+		Meteor.users.update({_id:userId}, {
+			$set: {
+				"profile.firstName": firstName,
+				"profile.lastName": lastName,
+				"emails[0].address":email,
+			}
+		});
 	}
 }
 

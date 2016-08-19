@@ -155,6 +155,11 @@ Meteor.startup(()=>{
 			  
 			  Posts.update({_id: postId, comments:{$elemMatch: {"comments.date": timestamp, "comments.commenter_user_id": user}}}, {$set:{"comments.$.comment": comment, "comments.$.last_edit": date}});
 			}
+		},
+
+		fbimport(){
+			console.log(Meteor.user());
+			//Meteor.users.update({_id:Meteor.userId()},{$set:{"profile.firstName": Meteor.user().get("services.facebook.first_name")}});
 		}
 	});
 

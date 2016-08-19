@@ -51,5 +51,8 @@
       <md-button class="md-raised full-width md-primary" ng-show="!signup.wait" type="submit">Sign Up</md-button>
       <md-progress-circular ng-show="signup.wait" md-mode='indeterminate' md-diameter="40px"></md-progress-circular>
     </div>
+    <div class="full-width" layout="column" layout-align="center center">
+      <md-button class="md-raised full-width md-primary" ng-click="signup.facebook()">Sign In With Facebook</md-button>
+    </div>
   </form>
 </div>
