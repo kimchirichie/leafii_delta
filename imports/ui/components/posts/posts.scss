@@ -118,7 +118,8 @@
 		margin: 0 10px 0 10px;
 
 		h2 {
-			margin: 0;
+			margin: 0;			
+		    word-break: break-all;
 		}
 
 		h3 {
@@ -149,8 +150,10 @@
 		width: 70%;
 		padding-top: 30px;
 
-		pre {
+		p {
 			font-family: raleway;
+			white-space: pre-wrap;
+		    word-break: break-all;
 		}
 
 		iframe {
@@ -199,7 +202,8 @@
 
 			p {
 				font-family: raleway;
-				word-break: break-all;
+				white-space: pre-wrap;
+			    word-break: break-all;
 				margin-left: 10px;
 			}
 
