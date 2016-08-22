@@ -1,4 +1,63 @@
-.card {
-	border-style: solid;
-	border-color: green;
+#potato {
+
+	background: #dcdcdc;
+	padding: 50px;
+
+	.userName {
+		cursor: pointer;
+		outline: 0;
+	}
+
+	.close {
+		width: 100%;
+		
+		i {
+			cursor: pointer;
+			outline: 0;
+
+			&:hover {
+				color: $delete;
+			}
+		}
+	}
+
+	.editables {
+		margin-top: 30px;
+	}
+
+	.editUser {
+
+		md-input-container {
+			margin: 0;
+		}
+
+		p {
+			margin: 0;
+		}
+
+	}
+
+	md-card {
+		md-card-content {
+
+			padding: 0;
+
+			.userInfo {
+				width: 100%;
+			}
+
+			p {
+				margin: 0;
+			}
+		}
+	}
+
+	.usersInAdmin {
+
+		md-card {
+			width: 1000px;
+			padding: 30px;
+		}
+	}
 }
+
