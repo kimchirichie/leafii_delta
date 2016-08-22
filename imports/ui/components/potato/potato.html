@@ -3,7 +3,7 @@
 	<div class="usersInAdmin" layout="column" layout-align="center center">
 		<md-button class="md-raised" ng-click="potato.reparse_all()">reparse all users</md-button>
 		<md-card class="card" ng-repeat="user in potato.users">
-			<div class="userName" ng-hide="potato.showing(user)" ng-click="potato.display(user)" flex>
+			<div class="userName" ng-hide="potato.showing(user)" ng-click="potato.display(user)">
 				<b>{{user.profile.firstName}} {{user.profile.lastName}}</b>
 			</div>
 

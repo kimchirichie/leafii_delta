@@ -6,6 +6,7 @@
 	.userName {
 		cursor: pointer;
 		outline: 0;
+		padding: 30px;
 	}
 
 	.close {
@@ -27,6 +28,8 @@
 
 	.editUser {
 
+		padding: 30px;
+
 		md-input-container {
 			margin: 0;
 		}
@@ -38,9 +41,11 @@
 	}
 
 	md-card {
+
+
 		md-card-content {
 
-			padding: 0;
+			padding: 30px;
 
 			.userInfo {
 				width: 100%;
@@ -55,8 +60,7 @@
 	.usersInAdmin {
 
 		md-card {
-			width: 1000px;
-			padding: 30px;
+			width: 700px;
 		}
 	}
 }
