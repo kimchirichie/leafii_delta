@@ -43,28 +43,64 @@ class Press {
 	}
 
 	update(blog){
-		if(!confirm('Are you sure you want to update this blog?')) return;
-		Blogs.update({_id:blog._id},{$set:{title:blog.title, content:blog.content, updatedAt: new Date()}})
-		Bert.alert("Blog updated","success", "growl-top-right");
-		this.close();
+
+		confirmed = swal({
+	        title: "Are you sure?",
+	        text: "This will update this blog",
+	        type: "warning",
+	        // #DD6B55
+	        showCancelButton: true,
+	        confirmButtonColor: "#3edeaa",
+	        confirmButtonText: "Yes, update it!",
+	        closeOnConfirm: true
+	      },function(){
+	      	  Blogs.update({_id:blog._id},{$set:{title:blog.title, content:blog.content, updatedAt: new Date()}})
+			  Bert.alert("Blog updated","success", "growl-top-right");
+			  this.close();
+	    }.bind(this));
+		
 	}
 
 	delete(blog){
-		if(!confirm('Are you sure you want to delete this blog?')) return;
-		Blogs.remove({_id:blog._id})
-		Bert.alert("Blog deleted","success", "growl-top-right");
-		this.close();
+
+		confirmed = swal({
+	        title: "Are you sure?",
+	        text: "This will discard the changes",
+	        type: "warning",
+	        // #DD6B55
+	        showCancelButton: true,
+	        confirmButtonColor: "#3edeaa",
+	        confirmButtonText: "Yes, delete it!",
+	        closeOnConfirm: true
+	      },function(){
+	      	  Blogs.remove({_id:blog._id});
+	      	  this.close();
+	          Bert.alert("Blog deleted","success", "growl-top-right");
+	    }.bind(this));
+
 	}
 
 	close(){
 		this.posting = false;
 		this.blog_id = undefined;
-		console.log(this.blog);
+		this.blo = {};
 	}
 
 	cancel(){
-		if(!confirm('Are you sure you want to discard this blog?')) return;
-		this.close();
+
+		confirmed = swal({
+	        title: "Are you sure?",
+	        text: "This will discard the changes",
+	        type: "warning",
+	        // #DD6B55
+	        showCancelButton: true,
+	        confirmButtonColor: "#3edeaa",
+	        confirmButtonText: "Yes, discard it!",
+	        closeOnConfirm: true
+	      },function(){
+	          this.close();
+	          Bert.alert('Blog deleted','success', 'growl-top-right');
+	    }.bind(this));
 	}
 }
 
