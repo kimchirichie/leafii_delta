@@ -25,7 +25,6 @@ class Profile {
 		this.keywordsReady = false;
 		this.postsReady = false;
 		this.commentsReady = false;
-
 		this.imgHide = false;
 		this.progress = false;
 		this.readonly = true;
@@ -35,7 +34,7 @@ class Profile {
 		this.helpers({
 			user(){
 				this.userReady = true;
-				return Meteor.users.findOne({_id:this.user_id});
+				return Meteor.users.find({});
 			},
 			keywords(){
 				this.keywordsReady = true;
@@ -66,8 +65,11 @@ class Profile {
 	}
 
 	testing(){
-		console.log(this.posts);
-		console.log(this.comments);
+		// console.log(this.posts);
+		// console.log(this.comments);
+		console.log(this.user_id);
+		console.log(this.user);
+
 	}
 
 	loading(){
