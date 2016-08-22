@@ -20,14 +20,16 @@ class Profile {
 		this.user_id = $stateParams.user_id || Meteor.userId();
 		this.editable = this.user_id == Meteor.userId();
 		this.timeout = $timeout;
+		this.loading = true;
+		console.log(this.user)
 		this.imgHide = false;
 		this.progress = false;
 		this.readonly = true;
 	    this.showPass = false;
-		this.subscribe('mykeywords');
+		// this.subscribe('mykeywords');
 		this.helpers({
 			user(){
-				console.log("loaded");
+				this.loading = false;
 				return Meteor.users.findOne({_id:this.user_id});
 			},
 			keywords(){

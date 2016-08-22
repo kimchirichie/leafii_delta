@@ -1,4 +1,11 @@
-<div id="profile">
+<div ng-hide="profile.user">
+	<div class="loadingData" layout="row" layout-xs="column" layout-align="center center">
+		<h1>Loading profile...</h1>
+		<md-progress-circular md-mode='indeterminate' md-diameter="150px"></md-progress-circular>
+	</div>
+</div>
+
+<div ng-show="profile.user" id="profile">
 	<div id="header">
 		<h1>{{profile.user.profile.firstName}} {{profile.user.profile.lastName}} | {{profile.user.profile.occupation}}</h1>
 		<div class="status" layout="row" layout-align="space-around center">
