@@ -37,15 +37,15 @@
 			<div class="profileInfo" flex-gt-md="70" flex="100">
 
 				<div ng-show="profile.tabOpen('history')">
-					<h2>Recent Posts</h2>
+					<h2 class="noTitleMargin">Recent Posts</h2>
 					<md-card class="recentPosts" ng-repeat="post in profile.posts">
 						<h2>{{post.title}}</h2>
 						<p>{{post.content}}</p>
 					</md-card>
 				</div>
 
-				<div ng-show="profile.tabOpen('edit')">
-					<ng-form class="userProfile">
+				<div class="userProfile" ng-show="profile.tabOpen('edit')">
+					<ng-form>
 						
 						<md-button class="verifyBtn md-raised full-width" ng-hide="profile.user.emails[0].verified" ng-click="profile.verify()">verify email</md-button>
 
@@ -105,7 +105,7 @@
 					</ng-form>
 				</div>
 
-				<div ng-show="profile.tabOpen('password')">
+				<div class="userProfile" ng-show="profile.tabOpen('password')">
 					<form class="changePass" ng-submit="profile.changePassword()"> 
 						<md-input-container class="md-block" flex-gt-sm>
 							<label>Old Password</label>
