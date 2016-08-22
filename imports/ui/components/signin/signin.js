@@ -32,7 +32,20 @@ class Signin {
 				this.wait = false;
 				this.state.go('profile');
 			}
-			
+		
+		}.bind(this));
+	}
+
+	facebook(){
+		Meteor.loginWithFacebook({requestPermissions: ['user_friends', 'public_profile', 'email']}, function(err){
+			if (err) {
+				Bert.alert('Could Not Log In To Facebook', 'danger', 'growl-top-right');
+				console.log(err);
+			} else {
+				Meteor.call('fbimport');
+				this.state.go('profile');
+				console.log('suceess');
+			}
 		}.bind(this));
 	}
 }
@@ -60,10 +73,8 @@ function config($stateProvider) {
 					Meteor.setTimeout(function(){
 						var user = Meteor.user();
 						if(user){
-							console.log('signed in users cannot access sign in page');
 							$state.go('profile');
 						} else {
-							console.log('access granted');
 							defer.resolve();
 						}
 					},500);
@@ -72,4 +83,3 @@ function config($stateProvider) {
 			}
 		});
 }
-//window.prerenderReady = true;

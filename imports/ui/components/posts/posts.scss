@@ -7,8 +7,75 @@
 
 	.submitPost {
 		background: white;
+		width: 70%;
+	}
+
+	.upPost {
+		text-align: center;
+
+		i:first-child {
+			outline: 0;
+			cursor: pointer;
+
+			&:hover {
+				color: $leafii-theme;
+			}
+		}
+
+		p {
+			text-align: center;
+			margin: 5px 0 10px 0;
+		}
+	}
+
+	.lightUp {
+		outline: 0;
+		color: $leafii-theme !important;
+	}
+
+	.changeComment {
+		margin-left: 50px;
+		margin-top: 10px;
+		width: 30px;
+
+		.edit {
+			cursor: pointer;
+			outline: 0;
+
+			&:hover {
+				color: $leafii-theme;
+			}
+		}
+
+		.del {
+			
+			cursor: pointer;
+
+			&:hover {
+				color: $delete;
+			}
+		}
+	}
+
+	.profileIcon {
+		height: 40px;
+		width: 40px;
+	}
+
+	.postComment {
 		width: 100%;
-		max-width: 90%;
+
+		input {
+			width: 100%;
+			padding: 10px;
+		}
+	}
+
+	.editPost {
+		background: white;
+		width: 100%;
+		max-width: 100%;
+		margin: 0;
 	}
 
 	.createPost {
@@ -17,32 +84,42 @@
 		background: #ea3354;
 	}
 
-	.edit {
-		cursor: pointer;
-		margin-right: 10px;
+	.editIcons {
+		text-align: center;
 
-		&:hover {
-			color: $leafii-theme;
+		.edit {
+			cursor: pointer;
+			outline: 0;
+
+			&:hover {
+				color: $leafii-theme;
+			}
 		}
 
-	}
+		@media(max-width:960px){
+			.edit {
+				margin-bottom: 20px;
+			}
+		}
 
-	.del {
-		
-		cursor: pointer;
+		.del {
+			
+			cursor: pointer;
 
-		&:hover {
-			color: $delete;
+			&:hover {
+				color: $delete;
+			}
 		}
 	}
-
 
 	.postInfo {
 
 		text-align: left;
+		margin: 0 10px 0 10px;
 
 		h2 {
-			margin-bottom: 0;
+			margin: 0;			
+		    word-break: break-all;
 		}
 
 		h3 {
@@ -70,8 +147,14 @@
 
 	.roastCards {
 		align-items: center;
-		width: 90%;
+		width: 70%;
 		padding-top: 30px;
+
+		p {
+			font-family: raleway;
+			white-space: pre-wrap;
+		    word-break: break-all;
+		}
 
 		iframe {
 			width: 100%;
@@ -84,9 +167,12 @@
 			box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 			align-items: center;
 			margin: 0;
+			
+			md-card-content {
+				width: 100%;
+			}
 
 		}
-
 	}
 
 	@media(max-width: 600px){
@@ -96,6 +182,7 @@
 
 		.submitPost{
 			width: 100%;
+			max-width: 100% !important;
 		}
 	}
 
@@ -107,6 +194,48 @@
 			border: thin solid #f3f0f0;
 			background: #f0f8ff;
 			box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+
+			b {
+				margin-left: 10px;
+				white-space: nowrap;
+			}
+
+			p {
+				font-family: raleway;
+				white-space: pre-wrap;
+			    word-break: break-all;
+				margin-left: 10px;
+			}
+
+			.commentTime {
+				margin-left: 50px;
+
+				p {
+					margin: 0;
+				}
+
+				i {
+					cursor: pointer;
+					outline: 0;
+
+					&:hover {
+						color: $leafii-theme;
+					}
+				}
+
+				.time {
+					margin-top: 10px;
+				}
+
+			}
+
+			.cancelEdit {
+				cursor: pointer;
+
+				&:hover {
+					color: $delete;
+				}
+			}
 		}
 		
 	}
@@ -127,6 +256,10 @@
 				color: $leafii-theme;
 			}
 		}
+	}
+
+	.upvoted {
+		color: $leafii-theme;
 	}
 
 }

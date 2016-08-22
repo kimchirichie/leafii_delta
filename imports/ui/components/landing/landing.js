@@ -17,27 +17,19 @@ class Landing {
 		this.scope = $scope;
 		this.rootScope = $rootScope;
 		this.currentUser = Meteor.userId();
-
-		this.rootScope.$watch('search',function(){
-			if(this.rootScope.search){
-				this.state.go('search');
+		this.helpers({
+			users(){
+				return Meteor.users.find( {"profile.url" : {$exists : true} } );
 			}
-		}.bind(this));
+		});
 
 		angular.element($window).bind("resize", function(){
 			if($window.innerWidth < 600){
-				angular.element('#gridView').trigger('click');
+				this.horizontal = false;
+				this.scope.$digest();
 			}
-		});
-
-		this.helpers({
-			users(){
-				return Meteor.users.find();
-			}
-		});
-		
-		const handle = Meteor.subscribe("allUsers");
-
+		}.bind(this));
+		Meteor.subscribe("allUsers");
 	}
 
 	liked(user){

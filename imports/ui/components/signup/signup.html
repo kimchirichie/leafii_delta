@@ -45,12 +45,14 @@
 
     <md-input-container class="md-block" flex-gt-sm>
       <label>Portfolio URL</label>
-      <input required ng-model="signup.user.profile.url" placeholder="http://richardsin.com" type="url" name="url"/>
+      <input ng-model="signup.user.profile.url" placeholder="http://richardsin.com" type="url" name="url"/>
     </md-input-container>
-
     <div class="full-width" layout="column" layout-align="center center">
       <md-button class="md-raised full-width md-primary" ng-show="!signup.wait" type="submit">Sign Up</md-button>
       <md-progress-circular ng-show="signup.wait" md-mode='indeterminate' md-diameter="40px"></md-progress-circular>
+    </div>
+    <div class="full-width" layout="column" layout-align="center center">
+      <md-button class="md-raised full-width md-primary" ng-click="signup.facebook()">Sign In With Facebook</md-button>
     </div>
   </form>
 </div>
