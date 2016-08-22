@@ -27,8 +27,9 @@ class Blog {
 const name = 'blog';
 
 export default angular.module(name, [
-	angularMeteor,
-	uiRouter,
+  angularMeteor,
+  'ngSanitize',
+  uiRouter,
 ]).component(name, {
 	template,
 	controllerAs: name,

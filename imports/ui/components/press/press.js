@@ -66,12 +66,17 @@ class Press {
 		if(!confirm('Are you sure you want to discard this blog?')) return;
 		this.close();
 	}
+
+	getContent(blog){
+	  return blog.content;
+	}
 }
 
 const name = 'press';
 
 export default angular.module(name, [
 	angularMeteor,
+	'ngSanitize',
 	uiRouter,
 ]).component(name, {
 	template,
@@ -90,7 +95,7 @@ function config($stateProvider) {
 					var defer = $q.defer();
 					Meteor.setTimeout(function(){
 						var user = Meteor.user();
-						if(user && user.profile.role == 'admin'){
+						if(user && user.role == 'admin'){
 							defer.resolve()
 						} else {
 							if(user){

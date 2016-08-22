@@ -166,7 +166,7 @@ function config($stateProvider) {
 					var defer = $q.defer();
 					Meteor.setTimeout(function(){
 						var user = Meteor.user();
-						if(user && user.profile.role == 'admin'){
+						if(user && user.role == 'admin'){
 							defer.resolve()
 						} else {
 							if(user){

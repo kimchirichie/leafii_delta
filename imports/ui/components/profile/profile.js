@@ -20,11 +20,10 @@ class Profile {
 		this.rootScope = $rootScope;
 		this.user_id = $stateParams.user_id || Meteor.userId();
 		this.timeout = $timeout;
-		this.tab = 'profile';
+		this.tab = 'history';
 		this.userReady = false;
 		this.keywordsReady = false;
 		this.postsReady = false;
-		this.commentsReady = false;
 		this.imgHide = false;
 		this.progress = false;
 		this.readonly = true;
@@ -34,7 +33,7 @@ class Profile {
 		this.helpers({
 			user(){
 				this.userReady = true;
-				return Meteor.users.find({});
+				return Meteor.users.findOne({_id:this.user_id});
 			},
 			keywords(){
 				this.keywordsReady = true;
@@ -44,10 +43,6 @@ class Profile {
 				this.postsReady = true;
 				return Posts.find({poster_user_id: this.user_id});
 			},
-			comments(){
-				this.commentsReady = true;
-				return Posts.find({comments:{$elemMatch:{$eq:{commenter_user_id:this.user_id}}}});
-			}
 		});
 
 		//Hide profile pic while editing
@@ -65,15 +60,12 @@ class Profile {
 	}
 
 	testing(){
-		// console.log(this.posts);
-		// console.log(this.comments);
-		console.log(this.user_id);
-		console.log(this.user);
-
+		console.log(this.posts);
+		console.log(this.comments);
 	}
 
 	loading(){
-		return this.userReady && this.keywordsReady && this.postsReady && this.commentsReady;
+		return this.userReady && this.keywordsReady && this.postsReady;
 	}
 
 	editable(){

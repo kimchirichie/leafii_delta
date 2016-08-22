@@ -1,7 +1,6 @@
 <button ng-click="profile.testing()">testing</button>
 <div ng-hide="profile.user">
 	<div class="loadingData" layout="row" layout-xs="column" layout-align="center center">
-		<h1>Loading profile...</h1>
 		<md-progress-circular md-mode='indeterminate' md-diameter="150px"></md-progress-circular>
 	</div>
 </div>
@@ -27,7 +26,7 @@
 
 		<md-card class="profileImg" layout="column" layout-align="center center" flex-gt-md="30" flex="100">
 			<image-uploader files="profile.user.images"></image-uploader>
-			<img ng-hide="profile.imgHide" ng-src="{{profile.user.profile.image ? profile.secureProtocol(profile.user.profile.image) : 'images/defaultProfilePic.png'}}"/>
+			<img ng-hide="profile.imgHide" ng-src="{{profile.user.profile.image ? profile.secureProtocol(profile.user.profile.image) : '/images/defaultProfilePic.png'}}"/>
 			<md-progress-circular ng-if="profile.progress" md-mode='indeterminate' md-diameter="100px"></md-progress-circular>
 			<div class="tabBtns" layout="row" layout-align="space-around center">
 				<md-button class="md-raised" ng-click="profile.openTab('edit')">edit profile</md-button>
@@ -37,6 +36,14 @@
 
 
 		<div class="profileInfo" flex-gt-md="70" flex="100">
+
+			<div ng-show="profile.tabOpen('history')">
+				<h2>Recent Posts</h2>
+				<div ng-repeat="post in profile.posts">
+					<p>{{post.title}}</p>
+					<p>{{post.content}}</p>
+				</div>
+			</div>
 
 			<div ng-show="profile.tabOpen('edit')">
 				<ng-form class="userProfile">
@@ -92,14 +99,12 @@
 					</md-input-container>
 					
 					<div layout="row">
-						<md-button class="md-raised" ng-click="profile.openTab('profile')">back</md-button>
+						<md-button class="md-raised" ng-click="profile.openTab('history')">back</md-button>
 						<md-button class="md-raised md-primary" ng-click="profile.update(profile.user)">Update</md-button>
 					</div>
 
 				</ng-form>
 			</div>
-
-
 
 			<div ng-show="profile.tabOpen('password')">
 				<form class="changePass" ng-submit="profile.changePassword()"> 
@@ -117,7 +122,7 @@
 					</md-input-container>
 					
 					<div layout="row">
-						<md-button class="md-raised" ng-click="profile.openTab('profile')">back</md-button>
+						<md-button class="md-raised" ng-click="profile.openTab('history')">back</md-button>
 						<md-button class="md-raised md-primary" type="submit">Change Password</md-button>
 					</div>
 				</form>
