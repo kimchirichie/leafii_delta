@@ -25,6 +25,7 @@ class Profile {
 		this.imgHide = false;
 		this.progress = false;
 		this.readonly = true;
+
 		// this.subscribe('mykeywords');
 		this.helpers({
 			user(){
@@ -51,7 +52,7 @@ class Profile {
 	}
 
 	editable(){
-		return this.user == Meteor.user();
+		return this.user && this.user._id == Meteor.userId()
 	}
 
 	openTab(tab){
