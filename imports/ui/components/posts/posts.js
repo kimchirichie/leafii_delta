@@ -14,12 +14,14 @@ class Postings {
     this.submitPost = false;
     this.onfilter = 'latest';
     this.sce = $sce;
+    this.postsReady = false;
     this.rootScope = $rootScope;
     this.hideNewComment = false;
     Meteor.subscribe("posts");
     this.user = Meteor.user();
     this.helpers({
       allPosts(){
+        this.postsReady = true;
         return Posts.find({deleted: false});
       }
     });

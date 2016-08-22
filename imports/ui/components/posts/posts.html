@@ -12,7 +12,7 @@
 		<span ng-class="{lightUp: posts.onfilter == 'mostCommented'}" ng-click="cardFilter = '-comments.length';posts.onfilter = 'mostCommented'">Most Commented</span>
 	</div>
 
-	<div ng-show="!posts.allPosts.length">
+	<div ng-hide="posts.postsReady">
 		<div class="loadingData" layout="row" layout-xs="column" layout-align="center center">
 			<h1>Loading Posts.....</h1>
 			<md-progress-circular md-mode='indeterminate' md-diameter="150px"></md-progress-circular>
@@ -41,6 +41,12 @@
 
 		</form>
 		
+	</div>
+
+	<div ng-show="posts.allPosts.length == 0 && posts.postsReady && !posts.submitPost">
+		<div class="loadingData" layout="row" layout-xs="column" layout-align="center center">
+			<h1>No Posts Available</h1>
+		</div>
 	</div>
 
 	<div ng-show="posts.allPosts.length" layout="column" layout-align="center center">
