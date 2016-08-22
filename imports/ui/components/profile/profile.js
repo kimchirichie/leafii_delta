@@ -96,12 +96,6 @@ class Profile {
 			})
 	}
 
-	//should crawl as option from import from facebook in signin
-	fbimport(){ 
-		console.log("Importing from facebook...")
-		Meteor.call("fbimport");
-	}
-
 	changePassword(){
 		if(this.newPass != this.confirm){
 	        Bert.alert('Password does not match!', 'danger', 'growl-top-right');

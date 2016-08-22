@@ -158,8 +158,21 @@ Meteor.startup(()=>{
 		},
 
 		fbimport(){
+
+			if(! Meteor.user().profile.firstName || ! Meteor.user().profile.lastName || ! Meteor.user().emails[0].address){
+				console.log("Updating User Profile")
+				Meteor.users.update({_id:Meteor.userId()},
+					{$set:{
+						"profile.firstName": Meteor.user().services.facebook.first_name,
+						"profile.lastName" : Meteor.user().services.facebook.last_name,
+						emails: [{address: Meteor.user().services.facebook.email, verified : "true"}]
+
+					}});
+			}
+			else{
+				console.log("Profile Already Updated")
+			}
 			console.log(Meteor.user());
-			//Meteor.users.update({_id:Meteor.userId()},{$set:{"profile.firstName": Meteor.user().get("services.facebook.first_name")}});
 		}
 	});
 
