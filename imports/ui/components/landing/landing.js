@@ -11,11 +11,11 @@ class Landing {
 	constructor($scope, $reactive, $rootScope, $state, $window){
 		'ngInject';
 		$reactive(this).attach($scope);
+		this.scope = $scope;
 		this.state = $state;
+		this.rootScope = $rootScope;
 		this.onfilter = 'recent';
 		this.horizontal = false;
-		this.scope = $scope;
-		this.rootScope = $rootScope;
 		this.currentUser = Meteor.userId();
 		this.helpers({
 			users(){
