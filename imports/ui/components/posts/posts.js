@@ -20,7 +20,7 @@ class Postings {
     this.user = Meteor.user();
     this.helpers({
       allPosts(){
-        return Posts.find({});
+        return Posts.find({deleted: false});
       }
     });
   }

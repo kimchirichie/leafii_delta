@@ -15,10 +15,13 @@ if (Meteor.isServer) {
 }
 
 Profile_likes.allow({
-	insert(clickerUserId, likedUserId, date, url) {
-		return true;
+	insert() {
+		return (userId && true);
 	},
-	remove(clickerUserId, likedUserId, date, url) {
-		return true;		
+	update(){
+		return Meteor.user().role=="admin";
+	},
+	remove() {
+		return (userId && true);		
 	}
 })
