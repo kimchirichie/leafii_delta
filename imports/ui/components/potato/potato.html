@@ -36,7 +36,7 @@
 						<p>Likes: {{user.profile.likes.length}}</p>
 					</div>
 
-					<div layout="column" layout-align="end center">
+					<div layout="column" layout-align="center end">
 						<md-button class="md-raised" ng-click="potato.edit(user)">edit</md-button>
 						<md-button class="md-raised" ng-click="potato.send_verification(user)">send verification email</md-button>
 						<md-button class="md-raised" ng-click="potato.send_reset(user.emails[0].address)">send reset password email</md-button>
