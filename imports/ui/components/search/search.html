@@ -1,14 +1,23 @@
 <div id="SearchResults">
 
 	<title>Search - Leafii</title>
-	<div ng-hide="search.rootScope.results.length">
-		<div class="noResults" layout="row" layout-xs="column" layout-align="center center">
-			<h1>No Search Results</h1>
+
+	<div ng-show="search.rootScope.searching">
+		<div class="loadingData" layout="row" layout-xs="column" layout-align="center center">
+			<h1>Loading Results.....</h1>
+			<md-progress-circular md-mode='indeterminate' md-diameter="150px"></md-progress-circular>
 		</div>
 	</div>
 
-	<div ng-show="search.rootScope.results.length" class="candidates horizontal" layout="column">
-		<md-card class="md-default-theme" layout="row" ng-repeat="user in search.rootScope.results | orderBy:'-points'">
+
+
+	<div ng-hide="search.rootScope.searching" class="candidates horizontal" layout="column">
+		<div ng-hide="search.results.length">
+			<div class="noResults" layout="row" layout-xs="column" layout-align="center center">
+				<h1>No Search Results</h1>
+			</div>
+		</div>
+		<md-card ng-show="search.results.length" class="md-default-theme" layout="row" ng-repeat="user in search.results | orderBy:'-points'">
 			<md-card-content layout="row">
 				<div class="cardInfoSmall" layout="column">
 					<a ng-click="search.viewLog(user)" href="{{search.absolutify(user.profile.url)}}" target="_blank">{{user.profile.occupation ? user.profile.occupation: 'Not specified'}}

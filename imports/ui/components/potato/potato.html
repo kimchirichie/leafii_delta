@@ -1,63 +1,97 @@
-<div>
-	<button ng-click="potato.reparse_all()">reparse all users</button>
-	<div class="card" ng-repeat="user in potato.users">
-		<div ng-hide="potato.showing(user)" ng-click="potato.display(user)">
-			<p>{{user.profile.firstName}} {{user.profile.lastName}}</p>
+<div id="potato">
+
+	<div class="usersInAdmin" layout="column" layout-align="center center">
+
+		<div class="adminSearch" layout="row" layout-align="space-between center">
+			<form layout="row" ng-submit="header.search()">
+				<md-input-container class="md-block" flex-gt-sm>
+		    		<input placeholder="Search" class="search-top" ng-model="test">
+				</md-input-container>
+			</form>
+			<md-button class="md-raised" ng-click="potato.reparse_all()">reparse all users</md-button>
 		</div>
-		<div ng-show="potato.showing(user) && !potato.editing(user)">
-			<ul>
-				<li>User id: {{user._id}}</li>
-				<li>URL: {{user.profile.url}}</li>
-				<li>First Name: {{user.profile.firstName}}</li>
-				<li>Last Name: {{user.profile.lastName}}</li>
-				<li>Email: {{user.emails[0].address}}</li>
-				<li>Verified: {{user.emails[0].verified}}</li>
-				<li>Occupation: {{user.profile.occupation}}</li>
-				<li>Available: {{user.profile.available}}</li>
-				<li>Page Views: {{user.profile.views}}</li>
-				<li>Likes: {{user.profile.likes.length}}</li>
-				<button ng-click="potato.close(user)">close</button>
-				<button ng-click="potato.edit(user)">edit</button>
-				
-				<button ng-click="potato.send_verification(user)">send verification email</button>
-				<button ng-click="potato.send_reset(user.emails[0].address)">send reset password email</button>
-				<button ng-click="potato.reparse_user(user._id)">reparse user</button>
-			</ul>
-		</div>
-		<div ng-show="potato.editing(user)">
-			<ul>
-				<li>User id: {{user._id}}</li>
-				<li>
-					<label>URL: </label>
-					<input type="text" ng-model="user.profile.url"/>
-				</li>
-				<li>
-					<label>First Name: </label>
-					<input type="text" ng-model="user.profile.firstName"/>
-				</li>
-				<li>
-					<label>Last Name: </label>
-					<input type="text" ng-model="user.profile.lastName"/>
-				</li>
-				<li>
-					<label>Email: </label>
-					<input type="email" ng-model="user.emails[0].address"/>
-				</li>
-				<li>
-					<label>Occupation: </label>
-					<input type="text" ng-model="user.profile.occupation"/>
-				</li>
-				<li>
-					<label>Available: </label>
-					<input type="text" ng-model="user.profile.available"/>
-				</li>
-				<li>Page Views: {{user.profile.views}}</li>
-				<li>Likes: {{user.profile.likes.length}}</li>
-				<button ng-click="potato.delete(user)">delete</button>
-				<button ng-click="potato.cancel(user)">cancel</button>
-				<button ng-click="potato.close(user)">close</button>
-				<button ng-click="potato.save(user)">save</button>
-			</ul>
-		</div>
+
+		<md-card class="card" ng-repeat="user in potato.users">
+			<div class="userName" ng-hide="potato.showing(user)" ng-click="potato.display(user)">
+				<b>{{user.profile.firstName}} {{user.profile.lastName}}</b>
+			</div>
+
+			<md-card-content layout="column" layout-align="start center" ng-show="potato.showing(user) && !potato.editing(user)">
+				<div class="close" layout="row" layout-align="end center">
+					<i class="zmdi zmdi-close zmdi-hc-lg" ng-click="potato.close(user)"></i>
+				</div>
+
+				<div class="userInfo" layout="row" layout-align="space-between center">
+
+					<div layout="column">
+						<p>User id: {{user._id}}</p>
+						<p>URL: {{user.profile.url}}</p>
+						<p>First Name: {{user.profile.firstName}}</p>
+						<p>Last Name: {{user.profile.lastName}}</p>
+						<p>Email: {{user.emails[0].address}}</p>
+						<p>Verified: {{user.emails[0].verified}}</p>
+						<p>Occupation: {{user.profile.occupation}}</p>
+						<p>Available: {{user.profile.available}}</p>
+						<p>Page Views: {{user.profile.views}}</p>
+						<p>Likes: {{user.profile.likes.length}}</p>
+					</div>
+
+					<div layout="column" layout-align="center end">
+						<md-button class="md-raised" ng-click="potato.edit(user)">edit</md-button>
+						<md-button class="md-raised" ng-click="potato.send_verification(user)">send verification email</md-button>
+						<md-button class="md-raised" ng-click="potato.send_reset(user.emails[0].address)">send reset password email</md-button>
+						<md-button class="md-raised" ng-click="potato.reparse_user(user._id)">reparse user</md-button>
+					</div>
+				</div>
+
+			</md-card-content>
+
+			<div class="editUser" ng-show="potato.editing(user)">
+				<div layout="column">
+					<div class="close" layout="row" layout-align="end center">
+						<i class="zmdi zmdi-close zmdi-hc-lg" ng-click="potato.close(user)"></i>
+					</div>
+
+					<p>User id: {{user._id}}</p>
+					<div class="editables">
+						<md-input-container class="md-block" flex-gt-sm>
+							<label>URL: </label>
+							<input type="text" ng-model="user.profile.url"/>
+						</md-input-container>
+
+						<md-input-container class="md-block" flex-gt-sm>
+							<label>First Name: </label>
+							<input type="text" ng-model="user.profile.firstName"/>
+						</md-input-container>
+						<md-input-container class="md-block" flex-gt-sm>
+							<label>Last Name: </label>
+							<input type="text" ng-model="user.profile.lastName"/>
+						</md-input-container>
+
+						<md-input-container class="md-block" flex-gt-sm>
+							<label>Email: </label>
+							<input type="email" ng-model="user.emails[0].address"/>
+						</md-input-container>
+
+						<md-input-container class="md-block" flex-gt-sm>
+							<label>Occupation: </label>
+							<input type="text" ng-model="user.profile.occupation"/>
+						</md-input-container>
+					</div>
+
+					<md-switch ng-model="user.profile.available">Available</md-switch>
+
+
+					<p>Page Views: {{user.profile.views}}</p>
+					<p>Likes: {{user.profile.likes.length}}</p>
+				</div>
+
+				<div layout="row" layout-align="end center">
+					<md-button class="md-raised" ng-click="potato.delete(user)">delete</md-button>
+					<md-button class="md-raised" ng-click="potato.cancel(user)">cancel</md-button>
+					<md-button class="md-raised" ng-click="potato.save(user)">save</md-button>
+				</div>
+			</div>
+		</md-card>
 	</div>
 </div>

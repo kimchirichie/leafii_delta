@@ -1,7 +1,7 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
-import { Counts } from 'meteor/tmeasday:publish-counts';
+import { Session } from 'meteor/session';
 
 import template from './search.html';
 
@@ -12,11 +12,18 @@ class Search {
 		this.state = $state;
 		this.scope = $scope;
 		this.rootScope = $rootScope;
+		this.helpers({
+			results(){
+				console.log(this);
+				this.rootScope.searching = false;
+				return Fetcher.get("results");
+			}
+		})
 		Meteor.subscribe("allUsers");
 	}
 
 	viewLog(user){
-		Meteor.call('addToViews', user._id, this.rootScope.search, user.profile.url);
+		Meteor.call('addToViews', user._id, this.rootScope.query, user.profile.url);
 	}
 
 	liked(user){

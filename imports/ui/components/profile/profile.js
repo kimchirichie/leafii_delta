@@ -12,18 +12,25 @@ import { name as Uploader } from '../uploader/uploader';
 
 class Profile {
 
-	constructor($scope, $reactive, $state, $timeout, Upload, $rootScope){
+	constructor($scope, $reactive, $state, $timeout, Upload, $rootScope, $stateParams){
 		"ngInject";
 		$reactive(this).attach($scope);
-		this.rootScope = $rootScope;
 		this.state = $state;
+		this.rootScope = $rootScope;
+		this.user_id = $stateParams.user_id || Meteor.userId();
 		this.timeout = $timeout;
+		this.loading = true;
+	    this.tab = 'profile';
 		this.imgHide = false;
 		this.progress = false;
 		this.readonly = true;
-	    this.showPass = false;
-		this.subscribe('mykeywords');
+
+		// this.subscribe('mykeywords');
 		this.helpers({
+			user(){
+				this.loading = false;
+				return Meteor.users.findOne({_id:this.user_id});
+			},
 			keywords(){
 				return Keywords.find({});
 			}
@@ -43,15 +50,19 @@ class Profile {
 
 	}
 
-	passBack() {
-		this.showPass = false;
-		this.oldPass = undefined;
-		this.confirm = undefined;
-		this.newPass = undefined;
+	editable(){
+		return this.user && this.user._id == Meteor.userId()
+	}
+
+	openTab(tab){
+		this.tab = tab;
+	}
+
+	tabOpen(tab){
+		return this.tab == tab;
 	}
 
 	update(user){
-
 		var firstName = user.profile.firstName;
 		var lastName = user.profile.lastName;
 		var occupation = user.profile.occupation;
@@ -64,23 +75,22 @@ class Profile {
 			Bert.alert('Profile Updated', 'success', 'growl-top-right');
 			Meteor.users.update(Meteor.userId(), {$set: {profile: user.profile}}, false, false);
 		}
-
 	}
 
-	delete(keyword) {
-		Keywords.remove(keyword._id);
-	}
+	// delete(keyword) {
+	// 	Keywords.remove(keyword._id);
+	// }
 
-	insert(){
-		data = {
-			url: this.rootScope.currentUser.profile.url, 
-			type: "self",
-			user_id: this.rootScope.currentUser._id, 
-			keyword: this.newkeyword
-		};
-		Keywords.insert(data);
-		this.newkeyword = undefined;
-	}
+	// insert(){
+	// 	data = {
+	// 		url: this.rootScope.currentUser.profile.url, 
+	// 		type: "self",
+	// 		user_id: this.rootScope.currentUser._id, 
+	// 		keyword: this.newkeyword
+	// 	};
+	// 	Keywords.insert(data);
+	// 	this.newkeyword = undefined;
+	// }
 
 	crawl(user_id){
 		confirmed = swal({
@@ -159,7 +169,7 @@ export default angular.module(name, [
 function config($stateProvider) {
 	'ngInject';
 	$stateProvider.state('profile', {
-        url: '/profile',
+        url: '/profile/:user_id',
         template: '<profile></profile>'
 	});
 }

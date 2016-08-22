@@ -2,17 +2,23 @@ import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
 
-import template from './about.html';
+import template from './blog.html';
+import { Blogs } from '../../../api/blogs/index';
 
-class About {
-    constructor($scope, $reactive, $rootScope){
+class Blog {
+    constructor($scope, $reactive){
     'ngInject';
     $reactive(this).attach($scope);
-    this.rootScope = $rootScope;
+    this.helpers({
+      blogs(){
+        return Blogs.find();
+      }
+    });
+    Meteor.subscribe("blogs");
   }
 }
 
-const name = 'about';
+const name = 'blog';
 
 export default angular.module(name, [
   angularMeteor,
@@ -20,14 +26,14 @@ export default angular.module(name, [
 ]).component(name, {
   template,
   controllerAs: name,
-  controller: About
+  controller: Blog
 }).config(config);
  
 function config($stateProvider) {
   'ngInject';
   $stateProvider
-    .state('about', {
-      url: '/about',
-      template: '<about></about>'
+    .state('blog', {
+      url: '/blog',
+      template: '<blog></blog>'
     });
 }

@@ -4,7 +4,7 @@
 			<a class="logo clickable" ng-click="header.gohome()"><img class="logo" src="/images/leafii.svg" alt="Leafii"/></a>
 			<div layout="row" layout-align="start center" class="search-top-field">
 				<form layout="row" ng-submit="header.search()">
-			    	<input id="searchbar" placeholder="Search" class="search-top" ng-model="header.query">
+			    	<input id="searchbar" placeholder="Search" class="search-top" ng-model="header.rootScope.query">
 				</form>
 			</div>
 

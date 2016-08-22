@@ -11,33 +11,25 @@ class Landing {
 	constructor($scope, $reactive, $rootScope, $state, $window){
 		'ngInject';
 		$reactive(this).attach($scope);
+		this.scope = $scope;
 		this.state = $state;
+		this.rootScope = $rootScope;
 		this.onfilter = 'recent';
 		this.horizontal = false;
-		this.scope = $scope;
-		this.rootScope = $rootScope;
 		this.currentUser = Meteor.userId();
-
-		this.rootScope.$watch('search',function(){
-			if(this.rootScope.search){
-				this.state.go('search');
-			}
-		}.bind(this));
-
-		angular.element($window).bind("resize", function(){
-			if($window.innerWidth < 600){
-				angular.element('#gridView').trigger('click');
-			}
-		});
-
 		this.helpers({
 			users(){
 				return Meteor.users.find( {"profile.url" : {$exists : true} } );
 			}
 		});
-		
-		const handle = Meteor.subscribe("allUsers");
 
+		angular.element($window).bind("resize", function(){
+			if($window.innerWidth < 600){
+				this.horizontal = false;
+				this.scope.$digest();
+			}
+		}.bind(this));
+		Meteor.subscribe("allUsers");
 	}
 
 	liked(user){
