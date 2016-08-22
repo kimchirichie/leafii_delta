@@ -21,7 +21,7 @@
 		<div ng-repeat="blog in press.blogs | orderBy:'-createdAt'">
 			<h3>{{blog.title}}</h3>
 			<h3>Posted:{{ blog.createdAt | date:'mediumDate'}}</h3>
-			<p>{{blog.content}}</p>
+			<p ng-bind-html="press.getContent(blog)"></p>
 			<button ng-click="press.delete(blog)">delete</button>
 			<button ng-click="press.edit(blog)">edit</button>
 		</div>

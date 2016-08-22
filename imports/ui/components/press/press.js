@@ -66,12 +66,17 @@ class Press {
 		if(!confirm('Are you sure you want to discard this blog?')) return;
 		this.close();
 	}
+
+	getContent(blog){
+	  return blog.content;
+	}
 }
 
 const name = 'press';
 
 export default angular.module(name, [
 	angularMeteor,
+	'ngSanitize',
 	uiRouter,
 ]).component(name, {
 	template,

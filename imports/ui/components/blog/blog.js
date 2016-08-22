@@ -9,6 +9,7 @@ class Blog {
     constructor($scope, $reactive){
     'ngInject';
     $reactive(this).attach($scope);
+    this.test = 'I am an <code>HTML</code>string with ' + '<a href="#">links!</a> and other <em>stuff</em>';
     this.helpers({
       blogs(){
         return Blogs.find();
@@ -16,12 +17,17 @@ class Blog {
     });
     Meteor.subscribe("blogs");
   }
+
+  getContent(blog){
+    return blog.content;
+  }
 }
 
 const name = 'blog';
 
 export default angular.module(name, [
   angularMeteor,
+  'ngSanitize',
   uiRouter,
 ]).component(name, {
   template,
