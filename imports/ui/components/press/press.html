@@ -1,0 +1,30 @@
+<div>
+	<h1>Maintain blogs here</h1>
+	<div ng-show="press.posting">
+		<h2>New blog</h2>
+		<form ng-submit="press.publish(press.blog)">
+			<div>
+				<label>Title</label>
+				<input type="text" ng-model="press.blog.title"/>				
+			</div>
+			<div>
+				<label>Content</label>
+				<textarea ng-model="press.blog.content"></textarea>
+			</div>
+			<input type="submit" value="save"/>
+			<button ng-click="press.cancel()">cancel</button>
+		</form>
+	</div>
+	<div ng-hide="press.posting">
+		<h2>List of blogs</h2>
+		<button ng-click="press.new()">new</button>
+		<div ng-repeat="blog in press.blogs | orderBy:'-createdAt'">
+			<h3>{{blog.title}}</h3>
+			<h3>Posted:{{ blog.createdAt | date:'mediumDate'}}</h3>
+			<p>{{blog.content}}</p>
+			<button ng-click="press.delete(blog)">delete</button>
+			<button ng-click="press.edit(blog)">edit</button>
+		</div>
+		<p ng-hide="press.blogs">no blogs to show yet!</p>
+	</div>
+</div>

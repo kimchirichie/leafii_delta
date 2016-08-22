@@ -41,11 +41,6 @@ class Profile {
 			this.imgHide = false;
 		}.bind(this));
 
-		//Update the user's profile when they leave the page
-		$scope.$on("$destroy", function(){
-			this.update(this.rootScope.currentUser);
-		}.bind(this));
-
 	}
 
 	passBack() {
@@ -56,8 +51,20 @@ class Profile {
 	}
 
 	update(user){
-		Meteor.users.update(Meteor.userId(), {$set: {profile: user.profile}}, false, false);
-		Bert.alert('Profile Updated', 'success', 'growl-top-right');
+
+		var firstName = user.profile.firstName;
+		var lastName = user.profile.lastName;
+		var occupation = user.profile.occupation;
+		var url = user.profile.url;
+		var location = user.profile.location;
+
+		if(!(firstName && lastName && occupation && url && location)){
+			Bert.alert('Profile Error: Please fill in the required fields', 'danger', 'growl-top-right');
+		} else {
+			Bert.alert('Profile Updated', 'success', 'growl-top-right');
+			Meteor.users.update(Meteor.userId(), {$set: {profile: user.profile}}, false, false);
+		}
+
 	}
 
 	delete(keyword) {

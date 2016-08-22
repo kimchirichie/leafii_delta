@@ -1,8 +1,11 @@
 import { Meteor } from 'meteor/meteor';
+import { Session } from 'meteor/session'
 import { Views } from '../imports/api/views/index';
 import { Profile_likes } from '../imports/api/profile_likes/index';
 import { Posts } from '../imports/api/posts/index';
- 
+import { Keywords } from '../imports/api/keywords/index';
+import { Words } from '../imports/api/count/index';
+
 Meteor.startup(()=>{
 
 	// var domain = 'support@leafii.com';
@@ -153,8 +156,112 @@ Meteor.startup(()=>{
 			  user = Meteor.userId();
 			  date = Math.floor(Date.now() / 60000);
 			  
-			  Posts.update({_id: postId, comments:{$elemMatch: {"comments.date": timestamp, "comments.commenter_user_id": user}}}, {$set:{"comments.$.comment": comment, "comments.$.last_edit": date}});
+			  Posts.update({_id: postId, comments:{$elemMatch: {"date": timestamp, "commenter_user_id": user}}}, {$set:{"comments.$.comment": comment, "comments.$.last_edit": date}});
 			}
+		},
+
+		zombifyComment(timestamp, postId)
+		{
+			if(Meteor.userId()){
+			  user = Meteor.userId();
+			  date = Math.floor(Date.now() / 60000);
+			  
+			  Posts.update({_id: postId, comments:{$elemMatch: {"date": timestamp, "commenter_user_id": user}}}, {$set:{"comments.$.deleted": true}});
+			}
+		},
+
+		likePost(postId)
+		{
+			if(Meteor.userId()){
+				user = Meteor.userId();
+				if(Posts.find({_id: postId, "upvotes.user": user}).count())
+			  	{
+			    	Posts.update({_id:postId}, {$pull: {upvotes: {user: user}}}, false, false);
+			  	}
+			 	else
+			  	{
+			    	date = Math.floor(Date.now() / 60000);
+			    	Posts.update({_id:postId}, {$addToSet: {upvotes: {user: user, date: date}}}, false, false);
+			  	}
+			}
+		},
+
+		likeComment(postId, commenter, timestamp)
+		{
+			if(Meteor.userId()){
+			  user = Meteor.userId();
+
+			  	if(Posts.find({_id: postId, comments: {$elemMatch : {commenter_user_id: commenter, date: timestamp, upvotes: {$elemMatch: {user: user}}}}}).count())
+				{
+			    	Posts.update({_id: postId, "comments.commenter_user_id":commenter, "comments.date": timestamp}, {$pull: {"comments.$.upvotes": {user: user}}}, false, false);
+				}
+				else
+				{
+			    	date = Math.floor(Date.now() / 60000);
+					Posts.update({_id:postId, "comments.commenter_user_id": commenter, "comments.date": timestamp}, {$addToSet: {"comments.$.upvotes": {user: user, date: date}}}, false, false);
+				}
+			}
+		},
+
+		search(searchString){
+			console.log(searchString);
+
+			// send illegitimate queries empty back
+			if (typeof searchString !== 'string') return [];
+			if (!searchString.length) return [];
+
+			var ranks = {};
+			// var points = 0;
+			var queries = searchString.split(" ");
+
+			for (i in queries){
+				var keywords = Keywords.aggregate([
+						{$match:{keyword:{$regex:`.*${queries[i]}.*`,$options:'i'}}},
+						{$project:{_id:0,user_id:1,keyword:1}}
+					]);
+				if (!keywords.length) continue;
+				var distinct = keywords.map(function(keyword){
+						return keyword.keyword;
+					}).filter(function(value, index, self) { 
+						return self.indexOf(value) === index;
+					});
+				var total = Words.aggregate([
+						{$match:{word:{$in:distinct}}},
+						{$project:{_id:0,total:1,word:1}}
+					]);
+				var points = {};
+				for (j in total){
+					points[total[j].word] = 1/total[j].total;
+				}
+
+				for(k in keywords){
+					if(!(keywords[k].user_id in ranks)){
+						ranks[keywords[k].user_id] = {
+							points: points[keywords[k].keyword],
+							keywords: [keywords[k].keyword]
+						};
+					} else {
+						ranks[keywords[k].user_id].points += points[keywords[k].keyword];
+						ranks[keywords[k].user_id].keywords.push(keywords[k].keyword);
+					}
+				}
+
+			}
+
+			if(!Object.keys(ranks).length) return [];
+
+			var result = Meteor.users.aggregate([
+					{$match:{_id:{$in: Object.keys(ranks)}}},
+					{$project:{profile:1}}
+				]).map(function(user){
+					user.points = ranks[user._id].points;
+					user.keywords = ranks[user._id].keywords;
+					return user
+				});
+			console.log(result);
+			// Session.set("result", result);
+			return result
+
 		},
 
 		fbimport(){
@@ -175,5 +282,4 @@ Meteor.startup(()=>{
 			console.log(Meteor.user());
 		}
 	});
-
-});``
+});

@@ -10,6 +10,7 @@ import template from "./leafii.html"
 
 // COMPONENTS
 import { name as About } from '../about/about';
+import { name as Blog } from '../blog/blog';
 import { name as Error } from '../error/error';
 import { name as Feedback } from '../feedback/feedback';
 import { name as Footer } from '../footer/footer';
@@ -18,6 +19,7 @@ import { name as Header } from '../header/header';
 import { name as Landing } from '../landing/landing';
 import { name as Potato } from '../potato/potato';
 import { name as Posts } from '../posts/posts';
+import { name as Press } from '../press/press';
 import { name as Profile } from '../profile/profile';
 import { name as Reset } from '../reset/reset';
 import { name as Search } from '../search/search';
@@ -32,17 +34,6 @@ class Leafii{
 	constructor($scope, $reactive, $state, $rootScope){
 	'ngInject';
 		$reactive(this).attach($scope);
-		
-		// $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams, options){
-		// 	$("#cover").fadeIn();
-		// });
-
-		// $scope.$on('$viewContentLoaded', function(){
-		// 	setTimeout(function(){
-		// 		$("#cover").fadeOut();
-		// 	},1000);
-
-		// });
 
 		$rootScope.$on('$stateChangeError', function(e, toState, toParams, fromState, fromParams, error){
 			console.log('stat change error detected!', error);
@@ -63,6 +54,7 @@ export default angular.module(name,[
 	ngMaterial,
 	ngFileUpload,
 	About,
+	Blog,
 	Error,
 	Feedback,
 	Footer,
@@ -71,6 +63,7 @@ export default angular.module(name,[
 	Landing,
 	Posts,
 	Potato,
+	Press,
 	Profile,
 	Reset,
 	Search,
