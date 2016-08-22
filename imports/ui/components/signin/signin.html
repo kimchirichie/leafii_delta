@@ -18,9 +18,13 @@
 			</md-input-container>
 
 			<div layout="column" layout-align="center center">
-				<md-button class="md-raised md-primary full-width" ng-hide="signin.wait" type="submit">Sign In</md-button>
+				<md-button class="md-raised md-primary full-width signUpBtn" ng-hide="signin.wait" type="submit">Sign In</md-button>
 				<md-progress-circular ng-show="signin.wait" md-mode='indeterminate' md-diameter="40px"></md-progress-circular>
 			</div>
+
+			<div class="full-width" layout="column" layout-align="center center">
+    		  <md-button class="md-raised full-width md-primary" ng-click="signin.facebook()">Sign In With Facebook</md-button>
+   			</div>
 			
 			<div class="signInOpt" layout="column">
 				<span>Forgot your password?<a ui-sref="forgot" class="tag"> Reset</a></span>

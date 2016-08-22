@@ -14,13 +14,15 @@ class Postings {
     this.submitPost = false;
     this.onfilter = 'latest';
     this.sce = $sce;
+    this.postsReady = false;
     this.rootScope = $rootScope;
     this.hideNewComment = false;
     Meteor.subscribe("posts");
     this.user = Meteor.user();
     this.helpers({
       allPosts(){
-        return Posts.find({});
+        this.postsReady = true;
+        return Posts.find({deleted: false});
       }
     });
   }
@@ -36,7 +38,18 @@ class Postings {
 
   upvotePost(postId) {
     if(Meteor.userId()){
-      Meteor.call('likePost', postId);
+      if(Meteor.userId()){
+        user = Meteor.userId();
+        if(Posts.find({_id: postId, "upvotes.user": user}).count())
+        {
+          Posts.update({_id:postId}, {$pull: {upvotes: {user: user}}}, false, false);
+        }
+        else
+        {
+          date = Math.floor(Date.now() / 60000);
+          Posts.update({_id:postId}, {$addToSet: {upvotes: {user: user, date: date}}}, false, false);
+        }
+      }
     } else {
       Bert.alert('You need to be signed in to like posts', 'danger', 'growl-top-right');
     }
@@ -57,7 +70,7 @@ class Postings {
     if(Meteor.userId()){
       user = Meteor.user();
       date = Date.now();
-      Posts.update({_id: postId}, {$addToSet: {comments: {commenter_user_id: user._id, name: user.profile.firstName + " " + user.profile.lastName, comment: this.newComment, date: date, last_edit: 0, upvotes: []}}}, false, false);
+      Posts.update({_id: postId}, {$addToSet: {comments: {commenter_user_id: user._id, name: user.profile.firstName, comment: this.newComment, date: date, last_edit: 0, upvotes: []}}}, false, false);
       this.newComment = '';
     } else {
       Bert.alert("Please login to comment", 'danger', 'growl-top-right');
@@ -85,7 +98,7 @@ class Postings {
         if(Meteor.userId()){
           user = Meteor.userId();
           //Posts.update({_id: postId}, {$pull: {comments:{commenter_user_id: user, date: timestamp}}});
-          Meteor.call('zombifyComment', timestamp, postId);
+          Meteor.call('tagDeleteComment', timestamp, postId);
           Bert.alert('Comment deleted','success', 'growl-top-right');
         }
       });
@@ -100,7 +113,7 @@ class Postings {
       }else {
         user = Meteor.user();
         date = Date.now();
-        Posts.insert({poster_user_id: user._id, title: this.post.title, tags: [], content: this.post.content, url: user.profile.url, name: user.profile.firstName + " " + user.profile.lastName, comments: [], date: date, last_edit: 0, upvotes: []});
+        Posts.insert({poster_user_id: user._id, title: this.post.title, tags: [], content: this.post.content, url: user.profile.url, name: user.profile.firstName, comments: [], date: date, last_edit: 0, upvotes: [], deleted: false});
         this.cancelNewPost();
       }
       
@@ -137,7 +150,7 @@ class Postings {
         closeOnConfirm: true
       },function(){
         if(Meteor.userId()){
-          Posts.remove(postID);
+          Posts.update({_id: postID}, {$set:{deleted: true}}, false, false); 
           Bert.alert('Post deleted','success', 'growl-top-right');
         }
       });

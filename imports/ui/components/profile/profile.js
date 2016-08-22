@@ -6,6 +6,7 @@ import uiRouter from 'angular-ui-router';
 import template from './profile.html';
 import { Accounts } from 'meteor/accounts-base';
 import { Keywords } from '../../../api/profile/index';
+import { Posts } from '../../../api/posts/index';
 import { Views } from '../../../api/views/index';
 
 import { name as Uploader } from '../uploader/uploader';
@@ -19,21 +20,29 @@ class Profile {
 		this.rootScope = $rootScope;
 		this.user_id = $stateParams.user_id || Meteor.userId();
 		this.timeout = $timeout;
-		this.loading = true;
-	    this.tab = 'profile';
+		this.tab = 'history';
+		this.userReady = false;
+		this.keywordsReady = false;
+		this.postsReady = false;
 		this.imgHide = false;
 		this.progress = false;
 		this.readonly = true;
 
-		// this.subscribe('mykeywords');
+		this.subscribe('mykeywords');
+		this.subscribe('posts');
 		this.helpers({
 			user(){
-				this.loading = false;
+				this.userReady = true;
 				return Meteor.users.findOne({_id:this.user_id});
 			},
 			keywords(){
+				this.keywordsReady = true;
 				return Keywords.find({});
-			}
+			},
+			posts(){
+				this.postsReady = true;
+				return Posts.find({poster_user_id: this.user_id});
+			},
 		});
 
 		//Hide profile pic while editing
@@ -48,6 +57,15 @@ class Profile {
 			this.imgHide = false;
 		}.bind(this));
 
+	}
+
+	testing(){
+		console.log(this.posts);
+		console.log(this.comments);
+	}
+
+	loading(){
+		return this.userReady && this.keywordsReady && this.postsReady;
 	}
 
 	editable(){
@@ -94,20 +112,20 @@ class Profile {
 
 	crawl(user_id){
 		confirmed = swal({
-  			title: "Are you sure?",
-  			text: "It will delete all the previous keywords & re-parse your website.",
-  			type: "warning",
-  			// #DD6B55
-  			showCancelButton: true,
-  			confirmButtonColor: "#3edeaa",
- 			confirmButtonText: "Yes, re-parse it!",
-  			closeOnConfirm: true
+			title: "Are you sure?",
+			text: "It will delete all the previous keywords & re-parse your website.",
+			type: "warning",
+			// #DD6B55
+			showCancelButton: true,
+			confirmButtonColor: "#3edeaa",
+			confirmButtonText: "Yes, re-parse it!",
+			closeOnConfirm: true
 			},function(){
 				Meteor.call('startCrawl', user_id, function (err, res) {
 				  if (err) {
-				    Bert.alert('Keywords Update Failed', 'danger');
+					Bert.alert('Keywords Update Failed', 'danger');
 				  } else {
-				    Bert.alert('Keywords Updated','success')
+					Bert.alert('Keywords Updated','success')
 				  }
 				});
 			})
@@ -115,8 +133,8 @@ class Profile {
 
 	changePassword(){
 		if(this.newPass != this.confirm){
-	        Bert.alert('Password does not match!', 'danger', 'growl-top-right');
-	        return;
+			Bert.alert('Password does not match!', 'danger', 'growl-top-right');
+			return;
 		}
 
 		Accounts.changePassword(this.oldPass, this.newPass, function(error){
@@ -131,7 +149,7 @@ class Profile {
 				this.timeout(function(){this.wait = false;}.bind(this), 1300);
 				this.email = '';
 			}
-	    }.bind(this));
+		}.bind(this));
 	}
 
 	verify(){
@@ -169,7 +187,7 @@ export default angular.module(name, [
 function config($stateProvider) {
 	'ngInject';
 	$stateProvider.state('profile', {
-        url: '/profile/:user_id',
-        template: '<profile></profile>'
+		url: '/profile/:user_id',
+		template: '<profile></profile>'
 	});
 }

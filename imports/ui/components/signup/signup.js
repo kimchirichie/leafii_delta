@@ -3,7 +3,10 @@ import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
 
 import { Accounts } from 'meteor/accounts-base';
+import { Meteor } from 'meteor/meteor'
 import template from './signup.html';
+
+
 
 class Signup { 
 	constructor($scope, $reactive, $state, $timeout, $rootScope){
@@ -16,6 +19,19 @@ class Signup {
 		this.rootScope = $rootScope;
 		this.rootScope.$broadcast('disableSearch');
 		
+	}
+
+	facebook(){
+		Meteor.loginWithFacebook({requestPermissions: ['user_friends', 'public_profile', 'email']}, function(err){
+			if (err) {
+				Bert.alert('Could Not Log In To Facebook', 'danger', 'growl-top-right');
+				console.log(err);
+			} else {
+				Meteor.call('fbimport');
+				this.state.go('profile');
+				console.log('suceess');
+			}
+		}.bind(this));
 	}
 
 	submit(user){
@@ -50,14 +66,11 @@ class Signup {
 						this.wait = false;
 						this.state.go('welcome');
 						Bert.alert('Verification email sent!', 'success', 'growl-top-right');
-						Meteor.logout();
 					}
 				}.bind(this));
 			}
 		}.bind(this));
-
 	}
-
 }
 
 const name = 'signup';
@@ -65,6 +78,7 @@ const name = 'signup';
 export default angular.module(name, [
 	angularMeteor,
 	uiRouter,
+	'accounts.ui',
 	'google.places'
 ]).component(name, {
 	template,

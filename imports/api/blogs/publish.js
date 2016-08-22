@@ -10,12 +10,12 @@ if (Meteor.isServer) {
 
 Blogs.allow({
 	insert() {
-		return Meteor.user().profile.role=="admin";
+		return Meteor.user().role=="admin";
 	},
 	update() {
-		return Meteor.user().profile.role=="admin";
+		return Meteor.user().role=="admin";
 	},
 	remove(){
-		return Meteor.user().profile.role=="admin";
+		return Meteor.user().role=="admin";
 	}
 })
