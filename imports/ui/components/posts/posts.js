@@ -36,7 +36,18 @@ class Postings {
 
   upvotePost(postId) {
     if(Meteor.userId()){
-      Meteor.call('likePost', postId);
+      if(Meteor.userId()){
+        user = Meteor.userId();
+        if(Posts.find({_id: postId, "upvotes.user": user}).count())
+        {
+          Posts.update({_id:postId}, {$pull: {upvotes: {user: user}}}, false, false);
+        }
+        else
+        {
+          date = Math.floor(Date.now() / 60000);
+          Posts.update({_id:postId}, {$addToSet: {upvotes: {user: user, date: date}}}, false, false);
+        }
+      }
     } else {
       Bert.alert('You need to be signed in to like posts', 'danger', 'growl-top-right');
     }
@@ -85,7 +96,7 @@ class Postings {
         if(Meteor.userId()){
           user = Meteor.userId();
           //Posts.update({_id: postId}, {$pull: {comments:{commenter_user_id: user, date: timestamp}}});
-          Meteor.call('zombifyComment', timestamp, postId);
+          Meteor.call('tagDeleteComment', timestamp, postId);
           Bert.alert('Comment deleted','success', 'growl-top-right');
         }
       });
@@ -100,7 +111,7 @@ class Postings {
       }else {
         user = Meteor.user();
         date = Date.now();
-        Posts.insert({poster_user_id: user._id, title: this.post.title, tags: [], content: this.post.content, url: user.profile.url, name: user.profile.firstName, comments: [], date: date, last_edit: 0, upvotes: []});
+        Posts.insert({poster_user_id: user._id, title: this.post.title, tags: [], content: this.post.content, url: user.profile.url, name: user.profile.firstName, comments: [], date: date, last_edit: 0, upvotes: [], deleted: false});
         this.cancelNewPost();
       }
       
@@ -137,7 +148,7 @@ class Postings {
         closeOnConfirm: true
       },function(){
         if(Meteor.userId()){
-          Posts.remove(postID);
+          Posts.update({_id: postID}, {$set:{deleted: true}}, false, false); 
           Bert.alert('Post deleted','success', 'growl-top-right');
         }
       });

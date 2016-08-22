@@ -159,29 +159,12 @@ Meteor.startup(()=>{
 			}
 		},
 
-		zombifyComment(timestamp, postId)
+		tagDeleteComment(timestamp, postId)
 		{
 			if(Meteor.userId()){
 			  user = Meteor.userId();
-			  date = Math.floor(Date.now() / 60000);
 			  
 			  Posts.update({_id: postId, comments:{$elemMatch: {"date": timestamp, "commenter_user_id": user}}}, {$set:{"comments.$.deleted": true}});
-			}
-		},
-
-		likePost(postId)
-		{
-			if(Meteor.userId()){
-				user = Meteor.userId();
-				if(Posts.find({_id: postId, "upvotes.user": user}).count())
-			  	{
-			    	Posts.update({_id:postId}, {$pull: {upvotes: {user: user}}}, false, false);
-			  	}
-			 	else
-			  	{
-			    	date = Math.floor(Date.now() / 60000);
-			    	Posts.update({_id:postId}, {$addToSet: {upvotes: {user: user, date: date}}}, false, false);
-			  	}
 			}
 		},
 
