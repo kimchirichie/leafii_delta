@@ -21,7 +21,6 @@ class Profile {
 		this.timeout = $timeout;
 		this.loading = true;
 	    this.tab = 'profile';
-
 		this.imgHide = false;
 		this.progress = false;
 		this.readonly = true;
