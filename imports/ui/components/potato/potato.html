@@ -1,7 +1,16 @@
 <div id="potato">
 
 	<div class="usersInAdmin" layout="column" layout-align="center center">
-		<md-button class="md-raised" ng-click="potato.reparse_all()">reparse all users</md-button>
+
+		<div class="adminSearch" layout="row" layout-align="space-between center">
+			<form layout="row" ng-submit="header.search()">
+				<md-input-container class="md-block" flex-gt-sm>
+		    		<input placeholder="Search" class="search-top" ng-model="test">
+				</md-input-container>
+			</form>
+			<md-button class="md-raised" ng-click="potato.reparse_all()">reparse all users</md-button>
+		</div>
+
 		<md-card class="card" ng-repeat="user in potato.users">
 			<div class="userName" ng-hide="potato.showing(user)" ng-click="potato.display(user)">
 				<b>{{user.profile.firstName}} {{user.profile.lastName}}</b>
