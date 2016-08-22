@@ -97,3 +97,15 @@
 
 	}
 }
+
+#error {
+	background-image: url("../images/values-bg.jpg");
+	background-size: cover;
+	padding: 20%;
+
+	.note {
+		text-align: center;
+		color: white;
+	}
+
+}

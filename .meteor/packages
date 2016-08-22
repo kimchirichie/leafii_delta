@@ -41,6 +41,10 @@ angular-meteor-auth
 accounts-password
 accounts-base
 email
+accounts-facebook
+service-configuration
+dotansimha:accounts-ui-angular
+accounts-ui-unstyled
 
 ## Tools for searching
 meteorhacks:aggregate

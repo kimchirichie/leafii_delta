@@ -32,7 +32,20 @@ class Signin {
 				this.wait = false;
 				this.state.go('profile');
 			}
-			
+		
+		}.bind(this));
+	}
+
+	facebook(){
+		Meteor.loginWithFacebook({requestPermissions: ['user_friends', 'public_profile', 'email']}, function(err){
+			if (err) {
+				Bert.alert('Could Not Log In To Facebook', 'danger', 'growl-top-right');
+				console.log(err);
+			} else {
+				Meteor.call('fbimport');
+				this.state.go('profile');
+				console.log('suceess');
+			}
 		}.bind(this));
 	}
 }
