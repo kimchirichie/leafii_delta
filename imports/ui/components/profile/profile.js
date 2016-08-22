@@ -18,14 +18,13 @@ class Profile {
 		this.state = $state;
 		this.rootScope = $rootScope;
 		this.user_id = $stateParams.user_id || Meteor.userId();
-		this.editable = this.user_id == Meteor.userId();
 		this.timeout = $timeout;
 		this.loading = true;
-		console.log(this.user)
+	    this.tab = 'profile';
+
 		this.imgHide = false;
 		this.progress = false;
 		this.readonly = true;
-	    this.showPass = false;
 		// this.subscribe('mykeywords');
 		this.helpers({
 			user(){
@@ -51,19 +50,19 @@ class Profile {
 
 	}
 
-	test(){
-		console.log(this.user);
+	editable(){
+		return this.user == Meteor.user();
 	}
 
-	passBack() {
-		this.showPass = false;
-		this.oldPass = undefined;
-		this.confirm = undefined;
-		this.newPass = undefined;
+	openTab(tab){
+		this.tab = tab;
+	}
+
+	tabOpen(tab){
+		return this.tab == tab;
 	}
 
 	update(user){
-
 		var firstName = user.profile.firstName;
 		var lastName = user.profile.lastName;
 		var occupation = user.profile.occupation;
@@ -76,23 +75,22 @@ class Profile {
 			Bert.alert('Profile Updated', 'success', 'growl-top-right');
 			Meteor.users.update(Meteor.userId(), {$set: {profile: user.profile}}, false, false);
 		}
-
 	}
 
-	delete(keyword) {
-		Keywords.remove(keyword._id);
-	}
+	// delete(keyword) {
+	// 	Keywords.remove(keyword._id);
+	// }
 
-	insert(){
-		data = {
-			url: this.rootScope.currentUser.profile.url, 
-			type: "self",
-			user_id: this.rootScope.currentUser._id, 
-			keyword: this.newkeyword
-		};
-		Keywords.insert(data);
-		this.newkeyword = undefined;
-	}
+	// insert(){
+	// 	data = {
+	// 		url: this.rootScope.currentUser.profile.url, 
+	// 		type: "self",
+	// 		user_id: this.rootScope.currentUser._id, 
+	// 		keyword: this.newkeyword
+	// 	};
+	// 	Keywords.insert(data);
+	// 	this.newkeyword = undefined;
+	// }
 
 	crawl(user_id){
 		confirmed = swal({
