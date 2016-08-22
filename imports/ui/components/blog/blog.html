@@ -2,7 +2,11 @@
 	<div class="intro">
 		<h1>Leafii Press</h1>
 	</div>
-	<div>
+	<div ng-if="blog.stateParams.blog_id">
+		<p>{{blog.blog.title}}</p>
+		<p>{{blog.blog.content}}</p>
+	</div>
+	<div ng-if="!blog.stateParams.blog_id">
 		<div class="blogPosts" layout="row" layout-align="center center" ng-repeat="blog in blog.blogs | orderBy:'-createdAt'">
 			<div class="blogContents" layout="column" layout-align="center start">
 				<h1>{{blog.title}}</h1>
