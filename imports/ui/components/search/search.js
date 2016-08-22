@@ -14,6 +14,8 @@ class Search {
 		this.rootScope = $rootScope;
 		this.helpers({
 			results(){
+				console.log(this);
+				this.rootScope.searching = false;
 				return Fetcher.get("results");
 			}
 		})

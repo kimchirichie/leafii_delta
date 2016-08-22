@@ -16,6 +16,6 @@ Blogs.allow({
 		return Meteor.user().profile.role=="admin";
 	},
 	remove(){
-		return Meteor.user().profile.role=="admin";		
+		return Meteor.user().profile.role=="admin";
 	}
 })

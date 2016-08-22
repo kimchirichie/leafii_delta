@@ -11,14 +11,14 @@
 		<span ng-class="{lightUp: landing.onfilter == 'like'}" ng-click="cardFilter = '-profile.likes.length'; landing.onfilter = 'like'">Most Liked</span>
 	</div>
 
-	<div ng-show="!landing.users.length">
+	<div ng-show="landing.users.length <= 1">
 		<div class="loadingData" layout="row" layout-xs="column" layout-align="center center">
 			<h1>Loading Users.....</h1>
 			<md-progress-circular md-mode='indeterminate' md-diameter="150px"></md-progress-circular>
 		</div>
 	</div>
 
-	<div ng-show="landing.users.length" class="board" ng-init="cardFilter = '-createdAt'">
+	<div ng-show="landing.users.length > 1" class="board" ng-init="cardFilter = '-createdAt'">
 
 
 		<!-- Grid View Mode -->

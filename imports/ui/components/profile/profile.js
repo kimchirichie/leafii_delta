@@ -12,18 +12,26 @@ import { name as Uploader } from '../uploader/uploader';
 
 class Profile {
 
-	constructor($scope, $reactive, $state, $timeout, Upload, $rootScope){
+	constructor($scope, $reactive, $state, $timeout, Upload, $rootScope, $stateParams){
 		"ngInject";
 		$reactive(this).attach($scope);
-		this.rootScope = $rootScope;
 		this.state = $state;
+		this.rootScope = $rootScope;
+		this.user_id = $stateParams.user_id || Meteor.userId();
+		this.editable = this.user_id == Meteor.userId();
 		this.timeout = $timeout;
+		this.loading = true;
+		console.log(this.user)
 		this.imgHide = false;
 		this.progress = false;
 		this.readonly = true;
 	    this.showPass = false;
-		this.subscribe('mykeywords');
+		// this.subscribe('mykeywords');
 		this.helpers({
+			user(){
+				this.loading = false;
+				return Meteor.users.findOne({_id:this.user_id});
+			},
 			keywords(){
 				return Keywords.find({});
 			}
@@ -41,6 +49,10 @@ class Profile {
 			this.imgHide = false;
 		}.bind(this));
 
+	}
+
+	test(){
+		console.log(this.user);
 	}
 
 	passBack() {
@@ -159,7 +171,7 @@ export default angular.module(name, [
 function config($stateProvider) {
 	'ngInject';
 	$stateProvider.state('profile', {
-        url: '/profile',
+        url: '/profile/:user_id',
         template: '<profile></profile>'
 	});
 }
