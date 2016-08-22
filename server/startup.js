@@ -258,8 +258,7 @@ Meteor.startup(()=>{
 					user.keywords = ranks[user._id].keywords;
 					return user
 				});
-			console.log(result);
-			// Session.set("result", result);
+
 			return result
 
 		},

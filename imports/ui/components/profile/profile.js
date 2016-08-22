@@ -6,26 +6,48 @@ import uiRouter from 'angular-ui-router';
 import template from './profile.html';
 import { Accounts } from 'meteor/accounts-base';
 import { Keywords } from '../../../api/profile/index';
+import { Posts } from '../../../api/posts/index';
 import { Views } from '../../../api/views/index';
 
 import { name as Uploader } from '../uploader/uploader';
 
 class Profile {
 
-	constructor($scope, $reactive, $state, $timeout, Upload, $rootScope){
+	constructor($scope, $reactive, $state, $timeout, Upload, $rootScope, $stateParams){
 		"ngInject";
 		$reactive(this).attach($scope);
-		this.rootScope = $rootScope;
 		this.state = $state;
+		this.rootScope = $rootScope;
+		this.user_id = $stateParams.user_id || Meteor.userId();
 		this.timeout = $timeout;
+		this.tab = 'profile';
+		this.userReady = false;
+		this.keywordsReady = false;
+		this.postsReady = false;
+		this.commentsReady = false;
+
 		this.imgHide = false;
 		this.progress = false;
 		this.readonly = true;
-	    this.showPass = false;
+
 		this.subscribe('mykeywords');
+		this.subscribe('posts');
 		this.helpers({
+			user(){
+				this.userReady = true;
+				return Meteor.users.findOne({_id:this.user_id});
+			},
 			keywords(){
+				this.keywordsReady = true;
 				return Keywords.find({});
+			},
+			posts(){
+				this.postsReady = true;
+				return Posts.find({poster_user_id: this.user_id});
+			},
+			comments(){
+				this.commentsReady = true;
+				return Posts.find({comments:{$elemMatch:{$eq:{commenter_user_id:this.user_id}}}});
 			}
 		});
 
@@ -43,15 +65,28 @@ class Profile {
 
 	}
 
-	passBack() {
-		this.showPass = false;
-		this.oldPass = undefined;
-		this.confirm = undefined;
-		this.newPass = undefined;
+	testing(){
+		console.log(this.posts);
+		console.log(this.comments);
+	}
+
+	loading(){
+		return this.userReady && this.keywordsReady && this.postsReady && this.commentsReady;
+	}
+
+	editable(){
+		return this.user && this.user._id == Meteor.userId()
+	}
+
+	openTab(tab){
+		this.tab = tab;
+	}
+
+	tabOpen(tab){
+		return this.tab == tab;
 	}
 
 	update(user){
-
 		var firstName = user.profile.firstName;
 		var lastName = user.profile.lastName;
 		var occupation = user.profile.occupation;
@@ -64,40 +99,39 @@ class Profile {
 			Bert.alert('Profile Updated', 'success', 'growl-top-right');
 			Meteor.users.update(Meteor.userId(), {$set: {profile: user.profile}}, false, false);
 		}
-
 	}
 
-	delete(keyword) {
-		Keywords.remove(keyword._id);
-	}
+	// delete(keyword) {
+	// 	Keywords.remove(keyword._id);
+	// }
 
-	insert(){
-		data = {
-			url: this.rootScope.currentUser.profile.url, 
-			type: "self",
-			user_id: this.rootScope.currentUser._id, 
-			keyword: this.newkeyword
-		};
-		Keywords.insert(data);
-		this.newkeyword = undefined;
-	}
+	// insert(){
+	// 	data = {
+	// 		url: this.rootScope.currentUser.profile.url, 
+	// 		type: "self",
+	// 		user_id: this.rootScope.currentUser._id, 
+	// 		keyword: this.newkeyword
+	// 	};
+	// 	Keywords.insert(data);
+	// 	this.newkeyword = undefined;
+	// }
 
 	crawl(user_id){
 		confirmed = swal({
-  			title: "Are you sure?",
-  			text: "It will delete all the previous keywords & re-parse your website.",
-  			type: "warning",
-  			// #DD6B55
-  			showCancelButton: true,
-  			confirmButtonColor: "#3edeaa",
- 			confirmButtonText: "Yes, re-parse it!",
-  			closeOnConfirm: true
+			title: "Are you sure?",
+			text: "It will delete all the previous keywords & re-parse your website.",
+			type: "warning",
+			// #DD6B55
+			showCancelButton: true,
+			confirmButtonColor: "#3edeaa",
+			confirmButtonText: "Yes, re-parse it!",
+			closeOnConfirm: true
 			},function(){
 				Meteor.call('startCrawl', user_id, function (err, res) {
 				  if (err) {
-				    Bert.alert('Keywords Update Failed', 'danger');
+					Bert.alert('Keywords Update Failed', 'danger');
 				  } else {
-				    Bert.alert('Keywords Updated','success')
+					Bert.alert('Keywords Updated','success')
 				  }
 				});
 			})
@@ -105,8 +139,8 @@ class Profile {
 
 	changePassword(){
 		if(this.newPass != this.confirm){
-	        Bert.alert('Password does not match!', 'danger', 'growl-top-right');
-	        return;
+			Bert.alert('Password does not match!', 'danger', 'growl-top-right');
+			return;
 		}
 
 		Accounts.changePassword(this.oldPass, this.newPass, function(error){
@@ -121,7 +155,7 @@ class Profile {
 				this.timeout(function(){this.wait = false;}.bind(this), 1300);
 				this.email = '';
 			}
-	    }.bind(this));
+		}.bind(this));
 	}
 
 	verify(){
@@ -159,7 +193,7 @@ export default angular.module(name, [
 function config($stateProvider) {
 	'ngInject';
 	$stateProvider.state('profile', {
-        url: '/profile',
-        template: '<profile></profile>'
+		url: '/profile/:user_id',
+		template: '<profile></profile>'
 	});
 }

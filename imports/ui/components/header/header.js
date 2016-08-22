@@ -15,9 +15,12 @@ class Header {
 		this.rootScope = $rootScope;
 		this.rootScope.query = "";
 		this.rootScope.results = [];
+		this.rootScope.searching = false;
 	}
 
 	search(){
+		this.rootScope.results = [];
+		this.rootScope.searching = true;
 		Fetcher.retrieve("results", "search", this.rootScope.query);
 		this.state.go('search');
 	}
