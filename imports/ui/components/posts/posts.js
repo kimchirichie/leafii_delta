@@ -141,7 +141,7 @@ class Postings {
 				user = Meteor.user();
 				date = Date.now();
 				Posts.insert({poster_user_id: user._id, title: this.post.title, tags: [], content: this.post.content, url: user.profile.url, name: user.profile.firstName, comments: [], date: date, last_edit: 0, upvotes: [], deleted: false});
-				this.cancelNewPost();
+				this.cancel();
 			}
 			
 		}

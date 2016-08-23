@@ -9,10 +9,8 @@
 						<md-input-container>
 							<label>Title</label>
 							<input type="text" ng-model="press.blog.title"/>
-						</md-input-container>			
-					
+						</md-input-container>					
 						<text-angular ng-model="press.blog.content"></text-angular>
-
 					</div>
 
 					<div layout="row" layout-align="end end">
@@ -31,7 +29,7 @@
 				<h1 ng-hide="press.blogs.length">no blogs to show yet!</h1>
 				<div class="postings" layout="column" ng-repeat="blog in press.blogs | orderBy:'-createdAt'">
 					<h2>{{blog.title}}</h2>
-					<p class="content" ng-bind-html="press.safeHtml(blog.content)"></p>
+					<p class="postContent" ng-bind-html="press.safeHtml(blog.content)"></p>
 					<h5>Posted:{{ blog.createdAt | date:'mediumDate'}}</h5>
 					<div layout="row" layout-align="end end">
 						<md-button class="md-raised del" ng-click="press.delete(blog)">delete</md-button>

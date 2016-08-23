@@ -12,8 +12,8 @@
 
 
 	<div ng-hide="search.rootScope.searching" class="candidates horizontal" layout="column">
-		<div ng-hide="search.results.length">
-			<div class="noResults" layout="row" layout-xs="column" layout-align="center center">
+		<div class="noResults" ng-hide="search.results.length">
+			<div layout="row" layout-xs="column" layout-align="center center">
 				<h1>No Search Results</h1>
 			</div>
 		</div>
