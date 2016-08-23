@@ -88,19 +88,7 @@ class Press {
 
 	cancel(){
 
-		confirmed = swal({
-	        title: "Are you sure?",
-	        text: "This will discard the changes",
-	        type: "warning",
-	        // #DD6B55
-	        showCancelButton: true,
-	        confirmButtonColor: "#3edeaa",
-	        confirmButtonText: "Yes, discard it!",
-	        closeOnConfirm: true
-	      },function(){
-	          this.close();
-	          Bert.alert('Blog deleted','success', 'growl-top-right');
-	    }.bind(this));
+		this.close();
 	}
 
 	getContent(blog){
@@ -114,6 +102,7 @@ export default angular.module(name, [
 	angularMeteor,
 	'ngSanitize',
 	uiRouter,
+	'textAngular'
 ]).component(name, {
 	template,
 	controllerAs: name,

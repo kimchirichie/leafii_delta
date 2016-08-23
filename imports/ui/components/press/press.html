@@ -12,11 +12,10 @@
 						<md-input-container>
 							<label>Title</label>
 							<input type="text" ng-model="press.blog.title"/>
-						</md-input-container>			
-						<md-input-container>
-							<label>Content</label>
-							<textarea row="10" ng-model="press.blog.content"></textarea>
 						</md-input-container>
+						<label>Content</label>
+						<text-angular ng-model="press.blog.content"></text-angular>
+						
 					</div>
 					<md-button class="md-raised" type="submit">Save</md-button>
 					<md-button class="md-raised" ng-click="press.cancel()">cancel</md-button>
@@ -24,16 +23,20 @@
 			</md-card>
 
 			<div ng-hide="press.posting">
-				<md-button class="md-raised" ng-click="press.new()">new</md-button>
-				<h2>List of blogs</h2>
-				<div ng-repeat="blog in press.blogs | orderBy:'-createdAt'">
-					<h3>{{blog.title}}</h3>
-					<h3>Posted:{{ blog.createdAt | date:'mediumDate'}}</h3>
-					<p>{{blog.content}}</p>
-					<md-button class="md-raised" ng-click="press.delete(blog)">delete</md-button>
-					<md-button class="md-raised" ng-click="press.edit(blog)">edit</md-button>
+				<div layout="row" layout-align="space-between center">
+					<h2>List of blogs</h2>
+					<md-button class="md-raised noMargin" ng-click="press.new()">new</md-button>
 				</div>
 				<h1 ng-hide="press.blogs.length">no blogs to show yet!</h1>
+				<div class="postings" layout="column" ng-repeat="blog in press.blogs | orderBy:'-createdAt'">
+					<h3>{{blog.title}}</h3>
+					<pre>{{blog.content}}</pre>
+					<h3>Posted:{{ blog.createdAt | date:'mediumDate'}}</h3>
+					<div layout="row" layout-align="start center">
+						<md-button class="md-raised noMargin" ng-click="press.delete(blog)">delete</md-button>
+						<md-button class="md-raised" ng-click="press.edit(blog)">edit</md-button>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
