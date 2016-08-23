@@ -12,6 +12,7 @@ class Blog {
 		this.stateParams = $stateParams;
 		this.helpers({
 			blogs(){
+				if(this.stateParams.blog_id) return;
 				return Blogs.find();
 			},
 			blog(){
