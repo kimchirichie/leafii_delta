@@ -1,58 +1,59 @@
+<title>Sign Up - Leafii</title>
+
 <div id="header">
-  <title>Sign Up - Leafii</title>
-  <h1>Submit your online portfolio</h1>
+	<h1>Submit your online portfolio</h1>
 </div>
 
 <div class="form animated fadeIn">
-  <form ng-submit="signup.submit(signup.user)">
+	<form ng-submit="signup.submit(signup.user)">
 
-    <div layout="row" layout-xs="column">
-      <md-input-container class="md-block" flex-gt-sm>
-        <label>First Name</label>
-        <input required ng-model="signup.user.profile.firstName" type="text" name="firstName"/>
-      </md-input-container>
+		<div layout="row" layout-xs="column">
+			<md-input-container class="md-block" flex-gt-sm>
+				<label>First Name</label>
+				<input required ng-model="signup.user.profile.firstName" type="text" name="firstName"/>
+			</md-input-container>
 
-      <md-input-container class="md-block" flex-gt-sm>
-        <label>Last Name</label>
-        <input required ng-model="signup.user.profile.lastName" type="text" name="lastName"/>
-      </md-input-container>
-    </div>
-    
-    <md-input-container class="md-block" flex-gt-sm>
-      <label>Location</label>
-      <input required ng-model="signup.user.profile.location" g-places-autocomplete type="text" name="location"/>
-    </md-input-container>
+			<md-input-container class="md-block" flex-gt-sm>
+				<label>Last Name</label>
+				<input required ng-model="signup.user.profile.lastName" type="text" name="lastName"/>
+			</md-input-container>
+		</div>
+		
+		<md-input-container class="md-block" flex-gt-sm>
+			<label>Location</label>
+			<input required ng-model="signup.user.profile.location" g-places-autocomplete type="text" name="location"/>
+		</md-input-container>
 
-    <md-input-container class="md-block" flex-gt-sm>
-      <label>Email Address</label>
-      <input required ng-model="signup.user.email" type="email" name="email"/>
-    </md-input-container>
+		<md-input-container class="md-block" flex-gt-sm>
+			<label>Email Address</label>
+			<input required ng-model="signup.user.email" type="email" name="email"/>
+		</md-input-container>
 
-    <md-input-container class="md-block" flex-gt-sm>
-      <label>Profession</label>
-      <input required ng-model="signup.user.profile.occupation" type="text" name="occupation"/>
-    </md-input-container>
+		<md-input-container class="md-block" flex-gt-sm>
+			<label>Profession</label>
+			<input required ng-model="signup.user.profile.occupation" type="text" name="occupation"/>
+		</md-input-container>
 
-    <md-input-container class="md-block" flex-gt-sm>
-      <label>Password</label>
-      <input required ng-model="signup.user.password" type="password" name="password"/>
-    </md-input-container>
+		<md-input-container class="md-block" flex-gt-sm>
+			<label>Password</label>
+			<input required ng-model="signup.user.password" type="password" name="password"/>
+		</md-input-container>
 
-    <md-input-container class="md-block" flex-gt-sm>
-      <label>Confirm Password</label>
-      <input required ng-model="signup.confirm" type="password" name="confirm"/>
-    </md-input-container>
+		<md-input-container class="md-block" flex-gt-sm>
+			<label>Confirm Password</label>
+			<input required ng-model="signup.confirm" type="password" name="confirm"/>
+		</md-input-container>
 
-    <md-input-container class="md-block" flex-gt-sm>
-      <label>Portfolio URL</label>
-      <input ng-model="signup.user.profile.url" placeholder="http://richardsin.com" type="url" name="url"/>
-    </md-input-container>
-    <div class="full-width"  layout="column" layout-align="center center">
-      <md-button class="md-raised full-width md-primary  signUpBtn" ng-show="!signup.wait" type="submit">Sign Up</md-button>
-      <md-progress-circular ng-show="signup.wait" md-mode='indeterminate' md-diameter="40px"></md-progress-circular>
-    </div>
-    <div class="full-width" layout="column" layout-align="center center">
-      <md-button class="md-raised full-width md-primary" ng-click="signup.facebook()">Sign In With Facebook</md-button>
-    </div>
-  </form>
+		<md-input-container class="md-block" flex-gt-sm>
+			<label>Portfolio URL</label>
+			<input ng-model="signup.user.profile.url" placeholder="http://richardsin.com" type="url" name="url"/>
+		</md-input-container>
+		<div class="full-width"  layout="column" layout-align="center center">
+			<md-button class="md-raised full-width md-primary  signUpBtn" ng-show="!signup.wait" type="submit">Sign Up</md-button>
+			<md-progress-circular ng-show="signup.wait" md-mode='indeterminate' md-diameter="40px"></md-progress-circular>
+		</div>
+		<div class="full-width" layout="column" layout-align="center center">
+			<md-button class="md-raised full-width md-primary" ng-click="signup.facebook()">Sign In With Facebook</md-button>
+		</div>
+	</form>
 </div>

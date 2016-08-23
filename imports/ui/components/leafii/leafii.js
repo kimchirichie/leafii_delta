@@ -24,7 +24,7 @@ import { name as Reset } from '../reset/reset';
 import { name as Search } from '../search/search';
 import { name as Signin } from '../signin/signin';
 import { name as Signup } from '../signup/signup';
-import { name as Term } from '../term/term';
+import { name as Terms } from '../terms/terms';
 import { name as Verify } from '../verify/verify';
 import { name as Welcome } from '../welcome/welcome';
 
@@ -68,7 +68,7 @@ export default angular.module(name,[
 	Signin,
 	Signup,
 	Welcome,
-	Term,
+	Terms,
 	Verify,
 	Welcome
 ])
