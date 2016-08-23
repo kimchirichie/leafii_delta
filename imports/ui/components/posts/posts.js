@@ -34,6 +34,9 @@ class Postings {
 					DocHead.removeDocHeadAddedTags()
 					DocHead.setTitle("Leafii | " + post.title);
 				} 
+        else{
+          this.state.go('error', {reason: "Post doesn't exist"});
+        }
 				return post;
 			}
 		});
