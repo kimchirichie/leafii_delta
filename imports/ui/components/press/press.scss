@@ -2,13 +2,17 @@
 
 	background: #dcdcdc;
 
+	.save {
+		background: $leafii-theme;
+	}
+
+	.del {
+		background: $delete;
+	}
+
 	.blogs {
 		width: 80%;
 		padding: 50px;
-	}
-
-	.noMargin {
-		margin: 0;
 	}
 
 	.postings {
@@ -18,6 +22,12 @@
 
 		pre {
 			font-family: raleway;
+		}
+
+		.content {
+			max-height: 110px;
+			overflow: hidden;
+			display: block;
 		}
 
 	}

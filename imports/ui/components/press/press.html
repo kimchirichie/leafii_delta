@@ -3,38 +3,22 @@
 	<div layout="column" layout-align="center center">
 
 		<div class="blogs"> 
-			<h1>Leafii Blogs</h1>
 			<md-card ng-show="press.posting">
-				<h2>New blog</h2>
 				<form ng-submit="press.publish(press.blog)">
 					<div layout="column">
 						<md-input-container>
 							<label>Title</label>
 							<input type="text" ng-model="press.blog.title"/>
-						</md-input-container>			
-						<md-input-container>
-							<label>Description</label>
-							<input type="text" ng-model="press.blog.description"/>
-						</md-input-container>
-						<md-input-container>
-							<label>Content</label>
-							<text-angular ng-model="press.blog.content"></text-angular>
-						</md-input-container>
+						</md-input-container>					
+						<text-angular ng-model="press.blog.content"></text-angular>
 					</div>
-					<div layout="row">
-						<md-button class="md-raised" type="submit">Save</md-button>
+
+					<div layout="row" layout-align="end end">
+						<md-button class="md-raised save" type="submit">Save</md-button>
 						<md-button class="md-raised" ng-click="press.cancel()">cancel</md-button>
-						<md-switch class="md-primary" ng-model="press.preview">Preview</md-switch>
 					</div>
+
 				</form>
-			</md-card>
-			<md-card ng-show="press.posting && press.preview">
-				<div>
-					<h2>Preview</h2>
-					<h3>{{press.blog.title}}</h3>
-					<h3>Posted:{{ press.blog.createdAt | date:'mediumDate'}}</h3>
-					<p ng-bind-html="press.safeHtml(press.blog.content)"></p>
-				</div>
 			</md-card>
 
 			<div ng-hide="press.posting">
@@ -44,11 +28,11 @@
 				</div>
 				<h1 ng-hide="press.blogs.length">no blogs to show yet!</h1>
 				<div class="postings" layout="column" ng-repeat="blog in press.blogs | orderBy:'-createdAt'">
-					<h3>{{blog.title}}</h3>
-					<pre>{{blog.content}}</pre>
-					<h3>Posted:{{ blog.createdAt | date:'mediumDate'}}</h3>
-					<div layout="row" layout-align="start center">
-						<md-button class="md-raised noMargin" ng-click="press.delete(blog)">delete</md-button>
+					<h2>{{blog.title}}</h2>
+					<p class="content" ng-bind-html="press.safeHtml(blog.content)"></p>
+					<h5>Posted:{{ blog.createdAt | date:'mediumDate'}}</h5>
+					<div layout="row" layout-align="end end">
+						<md-button class="md-raised del" ng-click="press.delete(blog)">delete</md-button>
 						<md-button class="md-raised" ng-click="press.edit(blog)">edit</md-button>
 					</div>
 				</div>
@@ -56,3 +40,6 @@
 		</div>
 	</div>
 </div>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">

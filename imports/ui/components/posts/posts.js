@@ -7,6 +7,7 @@ import template from './posts.html';
 import { Posts } from '../../../api/posts/index';
 
 class Postings {
+
 	constructor($scope, $reactive, $state, $sce, $rootScope, $stateParams){
 		"ngInject";
 		$reactive(this).attach($scope);
@@ -245,6 +246,7 @@ class Postings {
 			return "Now";
 		}
 	}
+
 }
 
 const name = 'posts';

@@ -4,6 +4,7 @@
 	.context {
 		font-family: raleway;
 		margin: 30px;
+		width: 70%;
 
 		h2 {
 			font-weight: bold;
@@ -44,13 +45,39 @@
 #teamPage {
 
 	padding: 0 5% 5% 5%;
-	background: white;
+	background: #dcdcdc;
+	
+	.marginTop {
+		margin-top: 50px;
+	}
 
 	hr {
 		width: 250px;
 	    height: 1px;
 	    background: #333;
+	    margin-bottom: 65px;
 	    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+	}
+
+	.team {
+		width: 80%;
+		padding: 30px;
+		background: white;
+
+		h1:nth-child(2){
+			margin-top: 65px;
+		}
+	}
+
+
+	.teamInfo {
+		text-align: center;
+		align-items: center;
+
+		p {
+			margin: 10px;
+		}
+
 	}
 
 	.teamTitle {
@@ -58,30 +85,19 @@
 		font-weight: bold;
 	}
 
-	p {
-		line-height: 0px;
-	}
-
 	.members {
 		align-items: center;
 		width: 100%;
 	}
 
-	@media (max-width: 1279px){
-		.teamMembers:nth-child(2){
-			margin: 0 0 0 20px;
-		}
-	}
-
-	@media (max-width: 599px){
-		.teamMembers:nth-child(2){
-			margin: 0;
-		}
-	}
-
-
 	.teamMembers {
 		align-items: center;
+		width: 100%;
+
+		div {
+			align-items: center;
+			padding: 10px;
+		}
 
 		img {
 			object-fit: cover;
