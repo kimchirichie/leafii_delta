@@ -1,5 +1,5 @@
 .blogPosts {
-	width: 70%;
+	width: 90%;
 	background: #dcdcdc;
 	padding: 30px;
 	margin: 20px;
@@ -7,6 +7,7 @@
 
 .blogContents {
 	padding: 30px;
+  text-align: left;
 	padding-left: 5px;	
 }
 
@@ -14,16 +15,12 @@ h1 {
 	margin: 2px;
 }
 
-h6 {
-	font-size: 110%;
+h4 {
 	margin: 2px;
 }
 
 a { text-decoration: none; color:black; }
 a:visited { text-decoration: none; color:black; }
-a:hover { text-decoration: none; color:gray; }
-a:focus { text-decoration: none; color:gray; }
-a:hover, a:active { text-decoration: none; color:black }
 
 /* mixin for multiline */
 @mixin multiLineEllipsis($lineHeight: 1.2em, $lineCount: 1, $bgColor: white){
@@ -36,7 +33,7 @@ a:hover, a:active { text-decoration: none; color:black }
   padding-right: 1em;
   margin-left: 1px;
   &:before {
-    content: '...';
+    content: '';
     position: absolute;
     right: 0;
     bottom: 0;
@@ -56,4 +53,20 @@ a:hover, a:active { text-decoration: none; color:black }
   @include multiLineEllipsis($lineHeight: 1.2em, $lineCount: 3.75, $bgColor: white);
   margin-right: 1px;
 
+}
+
+.individualPost
+{
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  float: right;
+  position: relative;
+}
+
+
+.returnBar
+{
+  float: left;
+  position: absolute;
 }
