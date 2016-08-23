@@ -39,6 +39,7 @@
 
 				<div ng-show="profile.tabOpen('history')">
 					<h2 class="noTitleMargin">Recent Posts</h2>
+					<h3 ng-show="!profile.posts.length">No posts</h3>
 					<md-card class="recentPosts" ng-repeat="post in profile.posts">
 						<a ui-sref="posts({post_id:post._id})"><h2>{{post.title}}</h2></a>
 						<p>{{post.date | date:'mediumDate'}}</p>
