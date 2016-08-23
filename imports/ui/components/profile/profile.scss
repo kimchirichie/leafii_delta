@@ -4,10 +4,6 @@
 	width: 170px !important;
 }
 
-.changePass {
-	width: 100%;
-	padding: 5%
-}
 
 .verifyBtn {
 	background: #ff0000 !important;
@@ -30,10 +26,19 @@
 	}
 }
 
+.likes {
+	margin-left: 30px !important;
+}
+
 .profilePanel {
 	
 	line-height: 30px;
 	padding: 60px 0px;
+	background: #e8e8e8;
+
+	md-card {
+		box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+	}
 
 	.marginTop {
 		margin-top: 40px;
@@ -49,12 +54,9 @@
 			font-weight: bold;
 		}
 
-		.space{
-			margin-left: 60px;
-		}
-
 		i {
 			line-height: 70px;
+
 		}
 
 	}
@@ -65,20 +67,58 @@
 
 }
 
+.noTitleMargin {
+	
+	margin: 0;
+	margin-bottom: 10px;
+}
+
+.recentPosts {
+	padding: 20px;
+	margin: 0;
+	margin-bottom: 10px;
+	
+	h2 {
+		margin:0;
+		margin-bottom: 10px;
+	}
+
+}
+
+.profileInfo {
+	margin-left: 30px;
+}
+
+@media(max-width: 600px){
+	.profileInfo {
+		margin: 0;
+		width: 85%;
+	}
+}
+
+.profileContent {
+	width: 75%;
+}
+
 .profileImg {
 
-	.upload {
-		margin-top: 30px;
-	}
+	margin:0;
+	margin-bottom: 20px;
 	
 	img {
-		height: 300px;
-		width: 300px;
+		border-radius: 150px;
+		height: 200px;
+		width: 200px;
+	}
+
+	.tabBtns {
+		margin: 25px;
 	}
 }
 
 .userProfile {
 	padding: 20px;
+	background: white;
 
 	md-input-container {
 		width: 100%;

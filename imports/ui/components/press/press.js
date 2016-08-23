@@ -6,11 +6,13 @@ import template from './press.html';
 import { Blogs } from '../../../api/blogs/index';
 
 class Press {
-	constructor($scope, $reactive){
+	constructor($scope, $reactive, $sce){
 		'ngInject';
 		$reactive(this).attach($scope);
 		this.posting = false;
 		this.blog_id;
+		this.sce = $sce;
+		this.preview = false;
 		this.helpers({
 			blogs(){
 				return Blogs.find();
@@ -40,31 +42,62 @@ class Press {
 	edit(blog){
 		this.posting = true;
 		this.blog_id = blog._id;
+        this.preview = false;
 	}
 
 	update(blog){
-		if(!confirm('Are you sure you want to update this blog?')) return;
-		Blogs.update({_id:blog._id},{$set:{title:blog.title, content:blog.content, updatedAt: new Date()}})
-		Bert.alert("Blog updated","success", "growl-top-right");
-		this.close();
+
+		confirmed = swal({
+	        title: "Are you sure?",
+	        text: "This will update this blog",
+	        type: "warning",
+	        // #DD6B55
+	        showCancelButton: true,
+	        confirmButtonColor: "#3edeaa",
+	        confirmButtonText: "Yes, update it!",
+	        closeOnConfirm: true
+	      },function(){
+	      	  Blogs.update({_id:blog._id},{$set:{title:blog.title, content:blog.content, updatedAt: new Date()}})
+			  Bert.alert("Blog updated","success", "growl-top-right");
+			  this.close();
+	    }.bind(this));
+		
 	}
 
 	delete(blog){
-		if(!confirm('Are you sure you want to delete this blog?')) return;
-		Blogs.remove({_id:blog._id})
-		Bert.alert("Blog deleted","success", "growl-top-right");
-		this.close();
+
+		confirmed = swal({
+	        title: "Are you sure?",
+	        text: "This will discard the changes",
+	        type: "warning",
+	        // #DD6B55
+	        showCancelButton: true,
+	        confirmButtonColor: "#3edeaa",
+	        confirmButtonText: "Yes, delete it!",
+	        closeOnConfirm: true
+	      },function(){
+	      	  Blogs.remove({_id:blog._id});
+	      	  this.close();
+	          Bert.alert("Blog deleted","success", "growl-top-right");
+	    }.bind(this));
+
 	}
 
 	close(){
 		this.posting = false;
 		this.blog_id = undefined;
-		console.log(this.blog);
+		this.blo = {};
+        this.preview = false;
 	}
 
 	cancel(){
-		if(!confirm('Are you sure you want to discard this blog?')) return;
-		this.close();
+        this.close();
+        this.preview = false;
+	}
+
+	safeHtml(content){
+		if(content) return (this.sce.trustAsHtml(content));
+		return "";
 	}
 }
 
@@ -72,7 +105,9 @@ const name = 'press';
 
 export default angular.module(name, [
 	angularMeteor,
+	'ngSanitize',
 	uiRouter,
+	'textAngular'
 ]).component(name, {
 	template,
 	controllerAs: name,
@@ -90,7 +125,7 @@ function config($stateProvider) {
 					var defer = $q.defer();
 					Meteor.setTimeout(function(){
 						var user = Meteor.user();
-						if(user && user.profile.role == 'admin'){
+						if(user && user.role == 'admin'){
 							defer.resolve()
 						} else {
 							if(user){

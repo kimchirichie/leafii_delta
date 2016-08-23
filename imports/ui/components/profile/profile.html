@@ -1,7 +1,5 @@
-<button ng-click="profile.testing()">testing</button>
 <div ng-hide="profile.user">
 	<div class="loadingData" layout="row" layout-xs="column" layout-align="center center">
-		<h1>Loading profile...</h1>
 		<md-progress-circular md-mode='indeterminate' md-diameter="150px"></md-progress-circular>
 	</div>
 </div>
@@ -11,111 +9,124 @@
 		<h1>{{profile.user.profile.firstName}} {{profile.user.profile.lastName}} | {{profile.user.profile.occupation}}</h1>
 		<div class="status" layout="row" layout-align="space-around center">
 			<div layout="row" layout="center center">
-				<i class="zmdi zmdi-eye zmdi-hc-2x grey">
+				<i class="zmdi zmdi-eye zmdi-hc-2x">
 					<md-tooltip md-direction="top">Views</md-tooltip>
+					<span>{{profile.user.profile.views}}</span>
 				</i>
-				<span> {{profile.user.profile.views}}</span>
-				<i class="zmdi zmdi-star zmdi-hc-2x grey">
+				<i class="zmdi zmdi-star zmdi-hc-2x likes">
 					<md-tooltip md-direction="top">Likes</md-tooltip>
+					<span>{{profile.user.profile.likes.length}}</span>
 				</i>
-				<span> {{profile.user.profile.likes.length}}</span>
 			</div>
 		</div>
 	</div>
 
-	<div class="profilePanel">
-		<div class="profileImg">
-			<img ng-hide="profile.imgHide" ng-src="{{profile.user.profile.image ? profile.secureProtocol(profile.user.profile.image) : 'images/defaultProfilePic.png'}}"/>
-			<md-progress-circular ng-if="profile.progress" md-mode='indeterminate' md-diameter="100px"></md-progress-circular>
-			<div ng-show="profile.editable()">
+	<div class="profilePanel" layout="column" layout-align="center center">
+		<div class="profileContent" layout="row" layout-xs="column" layout-align="center start" layout-align-xs="center center">
+			<md-card class="profileImg" layout="column" layout-align="center center" flex-gt-md="30" flex="100">
 				<image-uploader files="profile.user.images"></image-uploader>
-				<md-button class="md-raised" ng-click="profile.openTab('edit')">edit profile</md-button>
-				<md-button class="md-raised" ng-click="profile.openTab('password')">Change password</md-button>
-			</div>
-		</div>
+				<img ng-hide="profile.imgHide" ng-src="{{profile.user.profile.image ? profile.secureProtocol(profile.user.profile.image) : '/images/defaultProfilePic.png'}}"/>
+				<md-progress-circular ng-if="profile.progress" md-mode='indeterminate' md-diameter="100px"></md-progress-circular>
+				<div class="tabBtns" layout="row" layout-align="space-around center">
+					<md-button class="md-raised" ng-click="profile.openTab('edit')">edit</md-button>
+					<md-button class="md-raised" ng-click="profile.openTab('password')">Change password</md-button>
+				</div>
+			</md-card>
 
-		<div ng-show="profile.tabOpen('profile')">
-			<p>stuff</p>
-		</div>
 
-		<div ng-show="profile.tabOpen('edit')">
-			<ng-form class="userProfile">
-				
-				<md-button class="verifyBtn md-raised full-width" ng-hide="profile.user.emails[0].verified" ng-click="profile.verify()">verify email</md-button>
+			<div class="profileInfo" flex-gt-md="70" flex="100">
 
-				<div class="name full-width" layout="row">
-					<md-input-container class="md-block" flex-gt-sm>
-						<label>First Name</label>
-						<input required ng-model="profile.user.profile.firstName" type="text" name="firstName"/>
-					</md-input-container>
-
-					<md-input-container class="md-block" flex-gt-sm>
-						<label>Last Name</label>
-						<input required ng-model="profile.user.profile.lastName" type="text" name="lastName"/>
-					</md-input-container>
+				<div ng-show="profile.tabOpen('history')">
+					<h2 class="noTitleMargin">Recent Posts</h2>
+					<md-card class="recentPosts" ng-repeat="post in profile.posts">
+						<h2>{{post.title}}</h2>
+						<p>{{post.content}}</p>
+					</md-card>
 				</div>
 
-				<md-input-container class="md-block" flex-gt-sm>
-					<label>Profession/Occupation</label>
-					<input required ng-model="profile.user.profile.occupation" type="text" name="occupation"/>
-				</md-input-container>
+				<div class="userProfile" ng-show="profile.tabOpen('edit')">
+					<ng-form>
+						
+						<md-button class="verifyBtn md-raised full-width" ng-hide="profile.user.emails[0].verified" ng-click="profile.verify()">verify email</md-button>
+
+						<div class="name full-width" layout="row">
+							<md-input-container class="md-block" flex-gt-sm>
+								<label>First Name</label>
+								<input required ng-model="profile.user.profile.firstName" type="text" name="firstName"/>
+							</md-input-container>
+
+							<md-input-container class="md-block" flex-gt-sm>
+								<label>Last Name</label>
+								<input required ng-model="profile.user.profile.lastName" type="text" name="lastName"/>
+							</md-input-container>
+						</div>
+
+						<md-input-container class="md-block" flex-gt-sm>
+							<label>Profession/Occupation</label>
+							<input required ng-model="profile.user.profile.occupation" type="text" name="occupation"/>
+						</md-input-container>
 
 
-				<!-- <md-input-container class="md-block" flex-gt-sm>
-					<form ng-submit="profile.insert()">
-						<label>Keywords</label>
-						<input ng-model="profile.newkeyword" placeholder="Enter a keyword">
+						<!-- <md-input-container class="md-block" flex-gt-sm>
+							<form ng-submit="profile.insert()">
+								<label>Keywords</label>
+								<input ng-model="profile.newkeyword" placeholder="Enter a keyword">
+							</form>
+							<md-button class="md-raised md-primary parse" ng-click="profile.crawl(profile.user._id)">Parse Keywords</md-button>
+						</md-input-container>
+
+						<md-chips ng-model="profile.keywords" readonly="profile.readonly" md-on-add="profile.record()" md-transform-chip="null">
+							<md-chip-template>
+								<div class="md-chip-content">{{$chip.keyword}}</div>
+								<md-icon class="md-chip-remove delChip" md-svg-icon="md-close" ng-click="profile.delete($chip)"></md-icon>
+							</md-chip-template>
+						</md-chips> -->
+
+						<md-input-container class="md-block marginTop" flex-gt-sm>
+							<label>Portfolio URL</label>
+							<input required ng-model="profile.user.profile.url" placeholder="http://richardsin.com" type="url" name="url"/>
+						</md-input-container>
+
+						<md-input-container class="md-block" flex-gt-sm>
+							<label>Location</label>
+							<input required ng-model="profile.user.profile.location" g-places-autocomplete type="text" name="location" />
+						</md-input-container>
+
+						<md-input-container class="md-block" flex-gt-sm>
+							<label>Bio</label>
+							<textarea rows="10" ng-model="profile.user.profile.bio" type="text" name="Biography"></textarea>
+						</md-input-container>
+						
+						<div layout="row">
+							<md-button class="md-raised" ng-click="profile.openTab('history')">back</md-button>
+							<md-button class="md-raised md-primary" ng-click="profile.update(profile.user)">Update</md-button>
+						</div>
+
+					</ng-form>
+				</div>
+
+				<div class="userProfile" ng-show="profile.tabOpen('password')">
+					<form class="changePass" ng-submit="profile.changePassword()"> 
+						<md-input-container class="md-block" flex-gt-sm>
+							<label>Old Password</label>
+							<input required ng-model="profile.oldPass" type="password" name="password"/>
+						</md-input-container>
+						<md-input-container class="md-block" flex-gt-sm>
+							<label>New Password</label>
+							<input required ng-model="profile.newPass" type="password" name="password"/>
+						</md-input-container>
+						<md-input-container class="md-block" flex-gt-sm>
+							<label>Confirm Password</label>
+							<input required ng-model="profile.confirm" type="password" name="password"/>
+						</md-input-container>
+						
+						<div layout="row">
+							<md-button class="md-raised" ng-click="profile.openTab('history')">back</md-button>
+							<md-button class="md-raised md-primary" type="submit">Change Password</md-button>
+						</div>
 					</form>
-					<md-button class="md-raised md-primary parse" ng-click="profile.crawl(profile.user._id)">Parse Keywords</md-button>
-				</md-input-container>
-
-				<md-chips ng-model="profile.keywords" readonly="profile.readonly" md-on-add="profile.record()" md-transform-chip="null">
-					<md-chip-template>
-						<div class="md-chip-content">{{$chip.keyword}}</div>
-						<md-icon class="md-chip-remove delChip" md-svg-icon="md-close" ng-click="profile.delete($chip)"></md-icon>
-					</md-chip-template>
-				</md-chips> -->
-
-				<md-input-container class="md-block marginTop" flex-gt-sm>
-					<label>Portfolio URL</label>
-					<input required ng-model="profile.user.profile.url" placeholder="http://richardsin.com" type="url" name="url"/>
-				</md-input-container>
-
-				<md-input-container class="md-block" flex-gt-sm>
-					<label>Location</label>
-					<input required ng-model="profile.user.profile.location" g-places-autocomplete type="text" name="location" />
-				</md-input-container>
-				
-				<div layout="row">
-					<md-button class="md-raised" ng-click="profile.openTab('profile')">back</md-button>
-					<md-button class="md-raised md-primary" ng-click="profile.update(profile.user)">Update</md-button>
 				</div>
-
-			</ng-form>
-		</div>
-
-
-
-		<div ng-show="profile.tabOpen('password')">
-			<form class="changePass" ng-submit="profile.changePassword()"> 
-				<md-input-container class="md-block" flex-gt-sm>
-					<label>Old Password</label>
-					<input required ng-model="profile.oldPass" type="password" name="password"/>
-				</md-input-container>
-				<md-input-container class="md-block" flex-gt-sm>
-					<label>New Password</label>
-					<input required ng-model="profile.newPass" type="password" name="password"/>
-				</md-input-container>
-				<md-input-container>
-					<label>Confirm Password</label>
-					<input required ng-model="profile.confirm" type="password" name="password"/>
-				</md-input-container>
-				
-				<div layout="row">
-					<md-button class="md-raised" ng-click="profile.openTab('profile')">back</md-button>
-					<md-button class="md-raised md-primary" type="submit">Change Password</md-button>
-				</div>
-			</form>
+			</div>
 		</div>
 
 	</div>

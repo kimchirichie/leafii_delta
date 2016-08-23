@@ -66,7 +66,6 @@ class Signup {
 						this.wait = false;
 						this.state.go('welcome');
 						Bert.alert('Verification email sent!', 'success', 'growl-top-right');
-						Meteor.logout();
 					}
 				}.bind(this));
 			}

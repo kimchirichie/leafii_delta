@@ -1,0 +1,29 @@
+#blogPosts {
+
+	background: #dcdcdc;
+
+	.blogs {
+		width: 80%;
+		padding: 50px;
+	}
+
+	.noMargin {
+		margin: 0;
+	}
+
+	.postings {
+		padding: 30px;
+		background: white;
+		margin-bottom: 10px;
+
+		pre {
+			font-family: raleway;
+		}
+
+	}
+
+	md-card {
+		padding: 30px;
+		box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+	}
+}

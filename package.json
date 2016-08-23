@@ -24,6 +24,6 @@
     "prerender-node": "^2.3.0",
     "python-shell": "^0.4.0",
     "spawn-sync": "^1.0.15",
-    "try-thread-sleep ": "^1.0.0"
+    "try-thread-sleep": "^1.0.0"
   }
 }

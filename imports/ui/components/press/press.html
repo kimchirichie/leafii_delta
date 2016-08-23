@@ -1,30 +1,53 @@
-<div>
-	<h1>Maintain blogs here</h1>
-	<div ng-show="press.posting">
-		<h2>New blog</h2>
-		<form ng-submit="press.publish(press.blog)">
-			<div>
-				<label>Title</label>
-				<input type="text" ng-model="press.blog.title"/>				
+<div id="blogPosts">
+
+	<div layout="column" layout-align="center center">
+
+		<div class="blogs"> 
+			<h1>Leafii Blogs</h1>
+			<md-card ng-show="press.posting">
+				<h2>New blog</h2>
+				<form ng-submit="press.publish(press.blog)">
+					<div layout="column">
+						<md-input-container>
+							<label>Title</label>
+							<input type="text" ng-model="press.blog.title"/>
+						</md-input-container>
+						<label>Content</label>
+						<text-angular ng-model="press.blog.content"></text-angular>
+						
+					</div>
+					<div layout="row">
+						<md-button class="md-raised" type="submit">Save</md-button>
+						<md-button class="md-raised" ng-click="press.cancel()">cancel</md-button>
+						<md-switch class="md-primary" ng-model="press.preview">Preview</md-switch>
+					</div>
+				</form>
+			</md-card>
+			<md-card ng-show="press.posting && press.preview">
+				<div>
+					<h2>Preview</h2>
+					<h3>{{press.blog.title}}</h3>
+					<h3>Posted:{{ press.blog.createdAt | date:'mediumDate'}}</h3>
+					<p ng-bind-html="press.safeHtml(press.blog.content)"></p>
+				</div>
+			</md-card>
+
+			<div ng-hide="press.posting">
+				<div layout="row" layout-align="space-between center">
+					<h2>List of blogs</h2>
+					<md-button class="md-raised noMargin" ng-click="press.new()">new</md-button>
+				</div>
+				<h1 ng-hide="press.blogs.length">no blogs to show yet!</h1>
+				<div class="postings" layout="column" ng-repeat="blog in press.blogs | orderBy:'-createdAt'">
+					<h3>{{blog.title}}</h3>
+					<pre>{{blog.content}}</pre>
+					<h3>Posted:{{ blog.createdAt | date:'mediumDate'}}</h3>
+					<div layout="row" layout-align="start center">
+						<md-button class="md-raised noMargin" ng-click="press.delete(blog)">delete</md-button>
+						<md-button class="md-raised" ng-click="press.edit(blog)">edit</md-button>
+					</div>
+				</div>
 			</div>
-			<div>
-				<label>Content</label>
-				<textarea ng-model="press.blog.content"></textarea>
-			</div>
-			<input type="submit" value="save"/>
-			<button ng-click="press.cancel()">cancel</button>
-		</form>
-	</div>
-	<div ng-hide="press.posting">
-		<h2>List of blogs</h2>
-		<button ng-click="press.new()">new</button>
-		<div ng-repeat="blog in press.blogs | orderBy:'-createdAt'">
-			<h3>{{blog.title}}</h3>
-			<h3>Posted:{{ blog.createdAt | date:'mediumDate'}}</h3>
-			<p>{{blog.content}}</p>
-			<button ng-click="press.delete(blog)">delete</button>
-			<button ng-click="press.edit(blog)">edit</button>
 		</div>
-		<p ng-hide="press.blogs">no blogs to show yet!</p>
 	</div>
 </div>

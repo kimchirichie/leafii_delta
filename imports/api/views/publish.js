@@ -17,10 +17,13 @@ if (Meteor.isServer) {
 }
 
 Views.allow({
-	insert(userId, targetUserId, searchKeys, date, url) {
+	insert() {
 		return true;
 	},
-	remove(userId, targetUserId, searchKeys, date, url) {
-		return true;		
+	update(){
+		return Meteor.user().role=="admin";
+	},
+	remove() {
+		return Meteor.user().role=="admin";		
 	}
 })

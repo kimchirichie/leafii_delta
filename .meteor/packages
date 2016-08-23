@@ -31,10 +31,11 @@ session # Session for meteor
 angular:angular
 angular:angular-material
 angular:angular-touch
-angularui:angular-ui-router
 angular:angular-route
-vinaynb:angular-loading-bar
 angular-meteor-auth
+angularui:angular-ui-router
+angularjs:angular-sanitize
+vinaynb:angular-loading-bar
 
 
 #Accounts
@@ -63,6 +64,7 @@ jalik:ufs-gridfs
 #CSS
 natestrauser:animate-css
 kevohagan:sweetalert
+sebastianilves:angular-text-angular
 
 ## Prerenderer for static page SEO
 dfischer:prerenderio

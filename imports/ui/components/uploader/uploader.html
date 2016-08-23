@@ -9,7 +9,7 @@
     ngf-accept="'image/*'"
     ngf-drop-available="false"
     ng-hide="imageUploader.cropImgSrc; imageUploader.editing">
-    <md-button class="md-raised">Upload image</md-button>
+    <md-button class="md-fab md-mini" aria-label="upload"><i class="zmdi zmdi-camera"></i></md-button>
   </div>
   <div ng-show="imageUploader.cropImgSrc" layout="column" class="ng-crop">
     <div>

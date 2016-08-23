@@ -21,7 +21,7 @@
 					</a>
 					<h4>Posted:{{blog.createdAt | date:'mediumDate'}}</h4>
 					<div class="blogText">
-						<p>{{blog.content}}</p>
+						<p ng-bind-html="blog.content"></p>
 					</div>
 				<a ui-sref=blog({blog_id:blog._id})>
 					<p>Read More </p>
