@@ -106,6 +106,7 @@ reload@1.1.10
 retry@1.0.8
 routepolicy@1.0.11
 seba:minifiers-autoprefixer@1.0.1
+sebastianilves:angular-text-angular@0.1.1
 service-configuration@1.0.10
 session@1.1.6
 sha@1.0.8
@@ -116,6 +117,7 @@ standard-minifier-js@1.0.7_1
 templating@1.1.12_1
 templating-tools@1.0.4
 themeteorchef:bert@2.1.0
+timdown:rangy@1.2.3
 tmeasday:check-npm-versions@0.1.1
 tmeasday:publish-counts@0.7.3
 tracker@1.0.14
