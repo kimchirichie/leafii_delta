@@ -31,9 +31,7 @@
 					<md-button class="md-raised" ng-click="profile.openTab('edit')">edit</md-button>
 					<md-button class="md-raised" ng-click="profile.openTab('password')">Change password</md-button>
 				</div>
-				<p>Name: {{profile.user.profile.firstName}} {{profile.user.profile.lastName}}</p>
-				<p ng-show="profile.user.profile.occupation">Occupation: {{profile.user.profile.occupation}}</p>
-				<p ng-show="profile.user.profile.bio">Bio: {{profile.user.profile.bio}}</p>
+				<p ng-show="profile.user.profile.bio">{{profile.user.profile.bio}}</p>
 			</md-card>
 
 
@@ -41,6 +39,7 @@
 
 				<div ng-show="profile.tabOpen('history')">
 					<h2 class="noTitleMargin">Recent Posts</h2>
+					<h3 ng-show="!profile.posts.length">No posts</h3>
 					<md-card class="recentPosts" ng-repeat="post in profile.posts">
 						<a ui-sref="posts({post_id:post._id})"><h2>{{post.title}}</h2></a>
 						<p>{{post.date | date:'mediumDate'}}</p>
