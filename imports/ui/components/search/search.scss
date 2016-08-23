@@ -4,10 +4,28 @@
 	background: #dcdcdc;
 
 	.cardInfoSmall {
+		
+		width:100%;
+
 		a {
 			margin: 0;
 			display: table !important;
 		}
+	}
+
+	.chips {
+		overflow-x: auto;
+		overflow-y: hidden;
+	}
+
+	.keywordTitle {
+		margin:0;
+		margin-top:10px;
+	}
+
+	.name {
+		margin:0;
+		margin-top: 10px;
 	}
 
 	.grid {
