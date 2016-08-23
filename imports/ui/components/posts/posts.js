@@ -46,7 +46,7 @@ class Postings {
         }
         else
         {
-          date = Math.floor(Date.now() / 60000);
+          var date = Math.floor(Date.now() / 60000);
           Posts.update({_id:postId}, {$addToSet: {upvotes: {user: user, date: date}}}, false, false);
         }
       }
@@ -68,8 +68,8 @@ class Postings {
   createComment(postId) {
 
     if(Meteor.userId()){
-      user = Meteor.user();
-      date = Date.now();
+      var user = Meteor.user();
+      var date = Date.now();
       Posts.update({_id: postId}, {$addToSet: {comments: {commenter_user_id: user._id, name: user.profile.firstName, comment: this.newComment, date: date, last_edit: 0, upvotes: []}}}, false, false);
       this.newComment = '';
     } else {
@@ -111,8 +111,8 @@ class Postings {
       if(!this.post.title || !this.post.content){
         Bert.alert("Word limit exceeded", 'danger', 'growl-top-right');
       }else {
-        user = Meteor.user();
-        date = Date.now();
+        var user = Meteor.user();
+        var date = Date.now();
         Posts.insert({poster_user_id: user._id, title: this.post.title, tags: [], content: this.post.content, url: user.profile.url, name: user.profile.firstName, comments: [], date: date, last_edit: 0, upvotes: [], deleted: false});
         this.cancelNewPost();
       }
@@ -132,8 +132,8 @@ class Postings {
   updatePost(postID, title, content) {
 
     if(Meteor.userId()){
-      user = Meteor.userId();
-      date = Math.floor(Date.now() / 60000);
+      var user = Meteor.userId();
+      var date = Math.floor(Date.now() / 60000);
       Posts.update({_id: postID}, {$set:{title: title, tags: [], content: content, last_edit: date}}, false, false); 
     }
   }

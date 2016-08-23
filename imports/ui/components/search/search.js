@@ -2,6 +2,7 @@ import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
 import { Session } from 'meteor/session';
+import { Logs } from '../../../api/logs/index';
 
 import template from './search.html';
 
@@ -14,16 +15,19 @@ class Search {
 		this.rootScope = $rootScope;
 		this.helpers({
 			results(){
-				console.log(this);
 				this.rootScope.searching = false;
 				return Fetcher.get("results");
 			}
 		})
 		Meteor.subscribe("allUsers");
+    	Meteor.subscribe("logs");
 	}
 
 	viewLog(user){
-		Meteor.call('addToViews', user._id, this.rootScope.query, user.profile.url);
+		var viewer = 'guest';
+		if(Meteor.userId()) viewer = Meteor.userId();
+		Logs.insert({type: 'view', createdAt: new Date(), details: {viewer_user_id: viewer, target_user_id: user._id, search_keys: this.rootScope.query, url: user.profile.url}});
+		Meteor.call('addToViews',user._id);
 	}
 
 	liked(user){
