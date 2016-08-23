@@ -1,72 +1,43 @@
-.blogPosts {
-	width: 90%;
-	background: #dcdcdc;
-	padding: 30px;
-	margin: 20px;
-}
+#blog {
 
-.blogContents {
-	padding: 30px;
-  text-align: left;
-	padding-left: 5px;	
-}
-
-h1 {
-	margin: 2px;
-}
-
-h4 {
-	margin: 2px;
-}
-
-a { text-decoration: none; color:black; }
-a:visited { text-decoration: none; color:black; }
-
-/* mixin for multiline */
-@mixin multiLineEllipsis($lineHeight: 1.2em, $lineCount: 1, $bgColor: white){
-  overflow: hidden;
-  position: relative;
-  line-height: $lineHeight;
-  max-height: $lineHeight * $lineCount; 
-  text-align: justify;
-  margin-right: -1em;
-  padding-right: 1em;
-  margin-left: 1px;
-  &:before {
-    content: '';
-    position: absolute;
-    right: 0;
-    bottom: 0;
+  .blogPosts {
+  	width: 90%;
+  	background: #dcdcdc;
+  	padding: 30px;
+  	margin: 20px;
   }
-  &:after {
-    content: '';
-    position: absolute;
-    right: 0;
-    width: 1em;
-    height: 1em;
-    margin-top: 0.2em;
-    background: $bgColor;
+
+  .blogContent {
+        max-height: 300px;
+        overflow: hidden;
+        display: block;
+      }
+
+  h1 {
+  	margin: 2px;
   }
-}
 
-.blogText {
-  @include multiLineEllipsis($lineHeight: 1.2em, $lineCount: 3.75, $bgColor: white);
-  margin-right: 1px;
+  h4 {
+  	margin: 2px;
+  }
 
-}
+  a { text-decoration: none; color:black; }
+  a:visited { text-decoration: none; color:black; }
 
-.individualPost
-{
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
-  float: right;
-  position: relative;
-}
+  .individualPost
+  {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    float: right;
+    position: relative;
+  }
 
 
-.returnBar
-{
-  float: left;
-  position: absolute;
+  .returnBar
+  {
+    float: left;
+    position: absolute;
+  }
+
 }
