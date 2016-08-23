@@ -6,11 +6,13 @@ import template from './press.html';
 import { Blogs } from '../../../api/blogs/index';
 
 class Press {
-	constructor($scope, $reactive){
+	constructor($scope, $reactive, $sce){
 		'ngInject';
 		$reactive(this).attach($scope);
 		this.posting = false;
 		this.blog_id;
+		this.sce = $sce;
+		this.preview = false;
 		this.helpers({
 			blogs(){
 				return Blogs.find();
@@ -40,6 +42,7 @@ class Press {
 	edit(blog){
 		this.posting = true;
 		this.blog_id = blog._id;
+        this.preview = false;
 	}
 
 	update(blog){
@@ -84,27 +87,17 @@ class Press {
 		this.posting = false;
 		this.blog_id = undefined;
 		this.blo = {};
+        this.preview = false;
 	}
 
 	cancel(){
-
-		confirmed = swal({
-	        title: "Are you sure?",
-	        text: "This will discard the changes",
-	        type: "warning",
-	        // #DD6B55
-	        showCancelButton: true,
-	        confirmButtonColor: "#3edeaa",
-	        confirmButtonText: "Yes, discard it!",
-	        closeOnConfirm: true
-	      },function(){
-	          this.close();
-	          Bert.alert('Blog deleted','success', 'growl-top-right');
-	    }.bind(this));
+        this.close();
+        this.preview = false;
 	}
 
-	getContent(blog){
-	  return blog.content;
+	safeHtml(content){
+		if(content) return (this.sce.trustAsHtml(content));
+		return "";
 	}
 }
 

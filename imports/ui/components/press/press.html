@@ -4,7 +4,6 @@
 
 		<div class="blogs"> 
 			<h1>Leafii Blogs</h1>
-
 			<md-card ng-show="press.posting">
 				<h2>New blog</h2>
 				<form ng-submit="press.publish(press.blog)">
@@ -18,9 +17,20 @@
 							<textarea row="10" ng-model="press.blog.content"></textarea>
 						</md-input-container>
 					</div>
-					<md-button class="md-raised" type="submit">Save</md-button>
-					<md-button class="md-raised" ng-click="press.cancel()">cancel</md-button>
+					<div layout="row">
+						<md-button class="md-raised" type="submit">Save</md-button>
+						<md-button class="md-raised" ng-click="press.cancel()">cancel</md-button>
+						<md-switch class="md-primary" ng-model="press.preview">Preview</md-switch>
+					</div>
 				</form>
+			</md-card>
+			<md-card ng-show="press.posting && press.preview">
+				<div>
+					<h2>Preview</h2>
+					<h3>{{press.blog.title}}</h3>
+					<h3>Posted:{{ press.blog.createdAt | date:'mediumDate'}}</h3>
+					<p ng-bind-html="press.safeHtml(press.blog.content)"></p>
+				</div>
 			</md-card>
 
 			<div ng-hide="press.posting">
@@ -29,7 +39,7 @@
 				<div ng-repeat="blog in press.blogs | orderBy:'-createdAt'">
 					<h3>{{blog.title}}</h3>
 					<h3>Posted:{{ blog.createdAt | date:'mediumDate'}}</h3>
-					<p>{{blog.content}}</p>
+					<p ng-bind-html="blog.content"></p>
 					<md-button class="md-raised" ng-click="press.delete(blog)">delete</md-button>
 					<md-button class="md-raised" ng-click="press.edit(blog)">edit</md-button>
 				</div>
