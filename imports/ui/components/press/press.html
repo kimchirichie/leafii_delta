@@ -19,17 +19,8 @@
 					<div layout="row">
 						<md-button class="md-raised" type="submit">Save</md-button>
 						<md-button class="md-raised" ng-click="press.cancel()">cancel</md-button>
-						<md-switch class="md-primary" ng-model="press.preview">Preview</md-switch>
 					</div>
 				</form>
-			</md-card>
-			<md-card ng-show="press.posting && press.preview">
-				<div>
-					<h2>Preview</h2>
-					<h3>{{press.blog.title}}</h3>
-					<h3>Posted:{{ press.blog.createdAt | date:'mediumDate'}}</h3>
-					<p ng-bind-html="press.safeHtml(press.blog.content)"></p>
-				</div>
 			</md-card>
 
 			<div ng-hide="press.posting">
@@ -39,8 +30,8 @@
 				</div>
 				<h1 ng-hide="press.blogs.length">no blogs to show yet!</h1>
 				<div class="postings" layout="column" ng-repeat="blog in press.blogs | orderBy:'-createdAt'">
-					<h3>{{blog.title}}</h3>
-					<pre>{{blog.content}}</pre>
+					<h3>{{blog.title}}</h3>					
+					<p class="content" ng-bind-html="press.safeHtml(blog.content)"></p>
 					<h3>Posted:{{ blog.createdAt | date:'mediumDate'}}</h3>
 					<div layout="row" layout-align="start center">
 						<md-button class="md-raised noMargin" ng-click="press.delete(blog)">delete</md-button>

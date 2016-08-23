@@ -12,7 +12,6 @@ class Press {
 		this.posting = false;
 		this.blog_id;
 		this.sce = $sce;
-		this.preview = false;
 		this.helpers({
 			blogs(){
 				return Blogs.find();
@@ -42,7 +41,6 @@ class Press {
 	edit(blog){
 		this.posting = true;
 		this.blog_id = blog._id;
-        this.preview = false;
 	}
 
 	update(blog){
@@ -87,12 +85,10 @@ class Press {
 		this.posting = false;
 		this.blog_id = undefined;
 		this.blo = {};
-        this.preview = false;
 	}
 
 	cancel(){
         this.close();
-        this.preview = false;
 	}
 
 	safeHtml(content){
