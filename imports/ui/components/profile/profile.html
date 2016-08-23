@@ -39,8 +39,10 @@
 				<div ng-show="profile.tabOpen('history')">
 					<h2 class="noTitleMargin">Recent Posts</h2>
 					<md-card class="recentPosts" ng-repeat="post in profile.posts">
-						<h2>{{post.title}}</h2>
+						<a ui-sref="posts({post_id:post._id})"><h2>{{post.title}}</h2></a>
+						<p>{{post.date | date:'mediumDate'}}</p>
 						<p>{{post.content}}</p>
+						<p>{{post.comments.length}} comments</p>
 					</md-card>
 				</div>
 
@@ -65,22 +67,6 @@
 							<label>Profession/Occupation</label>
 							<input required ng-model="profile.user.profile.occupation" type="text" name="occupation"/>
 						</md-input-container>
-
-
-						<!-- <md-input-container class="md-block" flex-gt-sm>
-							<form ng-submit="profile.insert()">
-								<label>Keywords</label>
-								<input ng-model="profile.newkeyword" placeholder="Enter a keyword">
-							</form>
-							<md-button class="md-raised md-primary parse" ng-click="profile.crawl(profile.user._id)">Parse Keywords</md-button>
-						</md-input-container>
-
-						<md-chips ng-model="profile.keywords" readonly="profile.readonly" md-on-add="profile.record()" md-transform-chip="null">
-							<md-chip-template>
-								<div class="md-chip-content">{{$chip.keyword}}</div>
-								<md-icon class="md-chip-remove delChip" md-svg-icon="md-close" ng-click="profile.delete($chip)"></md-icon>
-							</md-chip-template>
-						</md-chips> -->
 
 						<md-input-container class="md-block marginTop" flex-gt-sm>
 							<label>Portfolio URL</label>

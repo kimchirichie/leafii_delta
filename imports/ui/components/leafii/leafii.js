@@ -1,4 +1,3 @@
-import angular from "angular";
 import angularMeteor from "angular-meteor";
 import uiRouter from 'angular-ui-router';
 import ngMaterial from 'angular-material';
@@ -46,7 +45,6 @@ const name = "leafii";
 
 export default angular.module(name,[
 	angularMeteor,
-	'angular-meteor',
 	'angular-meteor.auth',
 	ngAnimate,
 	uiRouter,

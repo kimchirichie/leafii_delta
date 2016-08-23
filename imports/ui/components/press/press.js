@@ -90,10 +90,6 @@ class Press {
 
 		this.close();
 	}
-
-	getContent(blog){
-	  return blog.content;
-	}
 }
 
 const name = 'press';
