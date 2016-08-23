@@ -95,6 +95,7 @@ class Press {
         this.preview = false;
 	}
 
+
 	safeHtml(content){
 		if(content) return (this.sce.trustAsHtml(content));
 		return "";

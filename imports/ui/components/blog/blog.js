@@ -10,14 +10,19 @@ class Blog {
 		'ngInject';
 		$reactive(this).attach($scope);
 		this.stateParams = $stateParams;
-		console.log("blog id: ",this.stateParams.blog_id);
 		this.helpers({
 			blogs(){
+				if(this.stateParams.blog_id) return;
 				return Blogs.find();
 			},
 			blog(){
 				if(!this.stateParams.blog_id) return;
-				return Blogs.findOne({_id:this.stateParams.blog_id});
+				var blog = Blogs.findOne({_id:this.stateParams.blog_id});
+				if (blog){
+					DocHead.removeDocHeadAddedTags()
+					DocHead.setTitle("Leafii | " + blog.title);
+				} 
+				return blog;
 			}
 		});
 		Meteor.subscribe("blogs");
