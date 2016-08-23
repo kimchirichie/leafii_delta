@@ -31,9 +31,7 @@
 					<md-button class="md-raised" ng-click="profile.openTab('edit')">edit</md-button>
 					<md-button class="md-raised" ng-click="profile.openTab('password')">Change password</md-button>
 				</div>
-				<p>Name: {{profile.user.profile.firstName}} {{profile.user.profile.lastName}}</p>
-				<p ng-show="profile.user.profile.occupation">Occupation: {{profile.user.profile.occupation}}</p>
-				<p ng-show="profile.user.profile.bio">Bio: {{profile.user.profile.bio}}</p>
+				<p ng-show="profile.user.profile.bio">{{profile.user.profile.bio}}</p>
 			</md-card>
 
 
