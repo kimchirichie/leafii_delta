@@ -102,20 +102,7 @@ Meteor.startup(()=>{
 			return myFuture.wait();
 		},
 
-		addToViews(target_userId, search_Keys, url){
- 			user = "guest";
-			if(Meteor.userId()){
-				user = Meteor.userId();
-			}
-			date = Math.floor(Date.now() / 60000);
-			data = {
-				user_id: user, 
-				target_user_id: target_userId,
-				search_keys: search_Keys, 
-				date: date,
-				url: url
-			};
-			Views.insert(data);
+		addToViews(target_userId){
 			Meteor.users.update(target_userId, {$inc: {"profile.views": 1}}, false, false);
 		},
 

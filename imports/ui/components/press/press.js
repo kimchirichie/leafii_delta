@@ -6,11 +6,12 @@ import template from './press.html';
 import { Blogs } from '../../../api/blogs/index';
 
 class Press {
-	constructor($scope, $reactive){
+	constructor($scope, $reactive, $sce){
 		'ngInject';
 		$reactive(this).attach($scope);
 		this.posting = false;
 		this.blog_id;
+		this.sce = $sce;
 		this.helpers({
 			blogs(){
 				return Blogs.find();
@@ -87,9 +88,14 @@ class Press {
 	}
 
 	cancel(){
-
-		this.close();
+        this.close();
 	}
+
+	safeHtml(content){
+		if(content) return (this.sce.trustAsHtml(content));
+		return "";
+	}
+
 }
 
 const name = 'press';

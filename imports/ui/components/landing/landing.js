@@ -2,6 +2,7 @@ import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
 import utilsPagination from 'angular-utils-pagination';
+import { Logs } from '../../../api/logs/index';
 
 import template from './landing.html';
 import { Views } from '../../../api/views/index';
@@ -30,6 +31,7 @@ class Landing {
 			}
 		}.bind(this));
 		Meteor.subscribe("allUsers");
+    	Meteor.subscribe("logs");
 	}
 
 	liked(user){
@@ -37,8 +39,10 @@ class Landing {
 	}
 
 	viewLog(user){	
-		var searchKey = 'Browse';
-		Meteor.call('addToViews', user._id, searchKey, user.profile.url);
+		var viewer = 'guest';
+		if(Meteor.userId()) viewer = Meteor.userId();
+		Logs.insert({type: 'view', createdAt: new Date(), details: {viewer_user_id: viewer, target_user_id: user._id, search_keys: 'Browse', url: user.profile.url}});
+		Meteor.call('addToViews',user._id);
 	}
 
 	absolutify(url){

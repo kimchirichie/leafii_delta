@@ -1,6 +1,7 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import { Session } from 'meteor/session'
+import { Logs } from '../../../api/logs/index';
 
 // import { Accounts } from 'meteor/accounts-base';
 import template from './header.html';
@@ -16,12 +17,16 @@ class Header {
 		this.rootScope.query = "";
 		this.rootScope.results = [];
 		this.rootScope.searching = false;
+    	Meteor.subscribe("logs");
 	}
 
 	search(){
 		this.rootScope.results = [];
 		this.rootScope.searching = true;
 		Fetcher.retrieve("results", "search", this.rootScope.query);
+		var user = 'guest';
+		if(Meteor.userId()) user = Meteor.userId();
+		Logs.insert({type: 'search', createdAt: new Date(), details: {searcher_user_id: user, search_keys: this.rootScope.query}});
 		this.state.go('search');
 	}
 

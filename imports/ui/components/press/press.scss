@@ -24,6 +24,12 @@
 			font-family: raleway;
 		}
 
+		.content {
+			max-height: 110px;
+			overflow: hidden;
+			display: block;
+		}
+
 	}
 
 	md-card {
