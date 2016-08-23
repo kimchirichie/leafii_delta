@@ -102,10 +102,6 @@ class Press {
 	          Bert.alert('Blog deleted','success', 'growl-top-right');
 	    }.bind(this));
 	}
-
-	getContent(blog){
-	  return blog.content;
-	}
 }
 
 const name = 'press';
