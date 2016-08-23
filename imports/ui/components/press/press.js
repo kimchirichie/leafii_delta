@@ -95,7 +95,6 @@ class Press {
 		if(content) return (this.sce.trustAsHtml(content));
 		return "";
 	}
-
 }
 
 const name = 'press';
