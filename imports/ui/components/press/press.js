@@ -107,7 +107,7 @@ export default angular.module(name, [
 	angularMeteor,
 	'ngSanitize',
 	uiRouter,
-	'textAngular'
+	'textAngular',
 ]).component(name, {
 	template,
 	controllerAs: name,
