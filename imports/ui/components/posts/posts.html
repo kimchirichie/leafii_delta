@@ -7,7 +7,7 @@
 
 		<div class="comment" layout="column" layout-align="start start" ng-repeat="comment in post.comments | orderBy: '-date'">
 										
-			<div ng-show="!editComment">
+			<div>
 				<div layout="row" layout-align="start center">
 						<img class="profileIcon" ng-src="images/defaultProfilePic.png"/>
 						<b>{{comment.deleted ? "[deleted]" : comment.name}}</b>
@@ -36,7 +36,7 @@
 				</div>
 			</form>
 		</div>
-		
+
 	</div>
 
 	<div ng-show="posts.tabOpen('browse')">
