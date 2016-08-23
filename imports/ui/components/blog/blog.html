@@ -1,4 +1,4 @@
-<div class="blog">
+<div id="blog">
 	<div class="intro">
 		<h1>Leafii Press</h1>
 	</div>
@@ -20,9 +20,7 @@
 						<h1>{{blog.title}}</h1>
 					</a>
 					<h4>Posted:{{blog.createdAt | date:'mediumDate'}}</h4>
-					<div class="blogText">
-						<p ng-bind-html="blog.content"></p>
-					</div>
+					<p class="blogContent" ng-bind-html="blog.blog.content)"></p>
 				<a ui-sref=blog({blog_id:blog._id})>
 					<p>Read More </p>
 				</a>
