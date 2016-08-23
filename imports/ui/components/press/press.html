@@ -15,9 +15,9 @@
 						</md-input-container>			
 					
 						<text-angular ng-model="press.blog.content"></text-angular>
-						
+
 					</div>
-					<md-button class="md-raised" type="submit">Save</md-button>
+					<md-button class="md-raised save" type="submit">Save</md-button>
 					<md-button class="md-raised" ng-click="press.cancel()">cancel</md-button>
 				</form>
 			</md-card>
@@ -33,7 +33,7 @@
 					<pre>{{blog.content}}</pre>
 					<h3>Posted:{{ blog.createdAt | date:'mediumDate'}}</h3>
 					<div layout="row" layout-align="start center">
-						<md-button class="md-raised noMargin" ng-click="press.delete(blog)">delete</md-button>
+						<md-button class="md-raised del" ng-click="press.delete(blog)">delete</md-button>
 						<md-button class="md-raised" ng-click="press.edit(blog)">edit</md-button>
 					</div>
 				</div>

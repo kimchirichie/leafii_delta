@@ -2,6 +2,16 @@
 
 	background: #dcdcdc;
 
+	.save {
+		background: $leafii-theme;
+		margin: 0;
+	}
+
+	.del {
+		background: $delete;
+		margin: 0;
+	}
+
 	.blogs {
 		width: 80%;
 		padding: 50px;
