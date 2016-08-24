@@ -4,9 +4,8 @@
 	<h1>Leafii Press</h1>
 </div>
 
-<div id="blog" layout="column" layout-align="start center">
-	<div flex="50">
-
+<div id="blog" layout="row" layout-align="center start">
+	<div layout="column" flex="80">
 		<div ng-hide="blog.blogReady">
 			<div class="loadingData" layout="row" layout-xs="column" layout-align="center center">
 				<h1>Loading blog.....</h1>
@@ -14,9 +13,7 @@
 			</div>
 		</div>
 
-
 		<div ng-show="blog.blogReady">
-
 			<a ng-show="blog.stateParams.blog_id" ui-sref="blog({blog_id:''})">
 				<p>Return To Blogs</p>
 			</a>
