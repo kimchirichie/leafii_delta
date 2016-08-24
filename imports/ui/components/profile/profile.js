@@ -81,7 +81,7 @@ class Profile {
 		var url = user.profile.url;
 		var location = user.profile.location;
 
-		if(!(firstName && lastName && occupation && url && location)){
+		if(!(firstName && lastName && occupation && location)){
 			Bert.alert('Profile Error: Please fill in the required fields', 'danger', 'growl-top-right');
 		} else {
 			Bert.alert('Profile Updated', 'success', 'growl-top-right');

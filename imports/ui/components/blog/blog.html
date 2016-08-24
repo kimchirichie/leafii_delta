@@ -17,16 +17,14 @@
 	</div>
 	<div ng-if="!blog.stateParams.blog_id" layout="column" layout-align="center center">
 		<div class="blogPosts" layout="column" layout-align="center start" ng-repeat="blog in blog.blogs | orderBy:'-createdAt'">
-				<div class="blogContents" layout="column">
-					<a ui-sref=blog({blog_id:blog._id})>
-						<h1>{{blog.title}}</h1>
-					</a>
-					<h4>Posted:{{blog.createdAt | date:'mediumDate'}}</h4>
-					<p class="blogContent" ng-bind-html="blog.blog.content)"></p>
-				<a ui-sref=blog({blog_id:blog._id})>
-					<p>Read More </p>
-				</a>
-				</div>
+			<a ui-sref=blog({blog_id:blog._id})>
+				<h1>{{blog.title}}</h1>
+			</a>
+			<h4>Posted:{{blog.createdAt | date:'mediumDate'}}</h4>
+			<p class="blogContent" ng-bind-html="blog.content"></p>
+			<a ui-sref=blog({blog_id:blog._id})>
+				<p>Read More </p>
+			</a>	
 		</div>
 	</div>
 </div>
