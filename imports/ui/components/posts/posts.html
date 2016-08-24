@@ -16,7 +16,9 @@
 						<p class="noMargin"><i class="zmdi zmdi-account-circle"></i> {{posts.post.name}} &nbsp</p>
 						<span>posted {{posts.getTimeElapsed(posts.post.date,false)}}</span>
 					</div>
-					<md-button class="md-primary md-raised showPage" ng-click="posts.showurl($event, posts.absolutify(posts.post.url))">Show</md-button>
+					<div>
+						<md-button class="md-primary md-raised showPage" ng-click="posts.showurl($event, posts.absolutify(posts.post.url))">Show</md-button>
+					</div>
 				</div>
 			</div>
 			<!-- Comments -->
@@ -26,7 +28,7 @@
 									
 					<div ng-show="!editComment">
 						<div layout="row" layout-align="start center">
-							<img class="profileIcon" ng-src="images/defaultProfilePic.png"/>
+							<img class="profileIcon" ng-src="/images/defaultProfilePic.png"/>
 							<b>{{comment.deleted ? "[deleted]" : comment.name}}</b>
 							<p>{{comment.deleted ? "[deleted]" : comment.comment}}</p>
 						</div>
@@ -46,7 +48,7 @@
 					<form ng-show="editComment" class="full-width" ng-submit="posts.editComment(comment.date, posts.post._id, comment.comment);editComment=false" layout="column">
 						<div layout="column" layout-align="start start" class="postComment">
 							<div layout="row" class="full-width">
-								<img class="profileIcon" ng-src="images/defaultProfilePic.png"/>
+								<img class="profileIcon" ng-src="/images/defaultProfilePic.png"/>
 								<input required ng-model="comment.comment" type="text" name="comment"/>
 							</div>
 							<p class="cancelEdit" ng-click="posts.editComment(comment.date, posts.post._id, posts.temp_comment);editComment=false;posts.hideNewComment=false">Cancel</p>
@@ -57,7 +59,7 @@
 				<!-- Create New Comment -->
 				<form ng-submit="posts.createComment(posts.post._id)" layout="row" class="postComment" ng-show="!posts.hideNewComment">
 
-					<img class="profileIcon" ng-src="images/defaultProfilePic.png"/>
+					<img class="profileIcon" ng-src="/images/defaultProfilePic.png"/>
 					<div layout="row" class="full-width">
 						<input required placeholder="write a comment..." ng-model="posts.newComment" type="text" name="comment">
 					</div>
@@ -116,7 +118,9 @@
 								<p class="noMargin"><i class="zmdi zmdi-account-circle"></i> {{post.name}} &nbsp</p>
 								<span>posted {{posts.getTimeElapsed(post.date,false)}}</span>
 							</div>
-							<md-button class="md-primary md-raised showPage" ng-click="posts.showurl($event, posts.absolutify(post.url))">Show</md-button>
+							<div>
+								<md-button class="md-primary md-raised showPage" ng-click="posts.showurl($event, posts.absolutify(post.url))">Show</md-button>
+							</div>
 						</div>
 
 						<div flex="5" layout="row" layout-xs="column" layout-sm="column" layout-align="space-around center" class="editIcons" ng-show="posts.rootScope.currentUser._id == post.poster_user_id && !postEdit">
