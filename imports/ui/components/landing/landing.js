@@ -19,6 +19,10 @@ class Landing {
 		this.helpers({
 			users(){
 				return Meteor.users.find( {"profile.url" : {$exists : true} } );
+			},
+
+			latest(){
+				return Logs.find({},{$sort:{"createdAt":-1}});
 			}
 		});
 
