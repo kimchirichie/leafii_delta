@@ -32,7 +32,7 @@ class Press {
 		if(blog._id){
 			this.update(blog);
 		} else {
-			Blogs.insert({title:blog.title, content:blog.content, createdAt: new Date()});
+			Blogs.insert({title:blog.title, content:blog.content, author_id:Meteor.userId(), createdAt: new Date()});
 			Bert.alert("Blog published","success", "growl-top-right");
 			this.close();
 		}

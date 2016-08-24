@@ -61,8 +61,8 @@
 		</div>
 
 		<div class="filterBar" layout="row" layout-align="center center" layout-xs="column">
-			<span ng-class="{lightUp: posts.onfilter == 'latest'}" ng-click="cardFilter = '-date'; posts.onfilter = 'latest'" >Latest</span>
-			<span ng-class="{lightUp: posts.onfilter == 'mostCommented'}" ng-click="cardFilter = '-comments.length';posts.onfilter = 'mostCommented'">Most Commented</span>
+			<span ng-class="{lightUp: posts.cardFilter == '-date'}" ng-click="posts.cardFilter = '-date'" >Latest</span>
+			<span ng-class="{lightUp: posts.cardFilter == 'comments.length'}" ng-click="posts.cardFilter = '-comments.length'">Most Commented</span>
 		</div>
 
 		<div ng-hide="posts.postsReady">
@@ -80,7 +80,7 @@
 		</div>
 
 		<div ng-show="posts.posts.length" layout="column" layout-align="center center">
-			<div class="roastCards" layout="column" layout-align="start center" ng-repeat="post in posts.posts | orderBy: cardFilter">
+			<div class="roastCards" layout="column" layout-align="start center" ng-repeat="post in posts.posts | orderBy: posts.cardFilter">
 				
 				<md-card class="md-default-theme" ng-init="previewSite = false">
 
