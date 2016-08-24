@@ -12,6 +12,7 @@ class Postings {
 	constructor($scope, $reactive, $state, $sce, $rootScope, $stateParams, $mdDialog){
 		"ngInject";
 		$reactive(this).attach($scope);
+    this.scope = $scope;
 		this.stateParams = $stateParams;
 		this.rootScope = $rootScope;
     this.mdDialog = $mdDialog;
@@ -253,30 +254,46 @@ class Postings {
 			return "Now";
 		}
 	}
+  dialogController($scope) {
+    console.log(this.scope);
+    $scope.hide = function() {
+      this.mdDialog.hide();
+    };
+
+    $scope.cancelDialog = function() {
+      console.log("dialog cancelled");
+      this.mdDialog.cancel();
+    };
+
+    $scope.answer = function(answer) {
+      this.mdDialog.hide(answer);
+    };
+  }
 
   showAdvanced(ev) {
     this.mdDialog.show({
-      controller: function() {
-        console.log(this.currentDialogUrl);
-        this.hide = function() {
-          this.mdDialog.hide();
-        };
-
-        this.cancelDialog = function() {
-          console.log("dialog cancelled");
-          this.mdDialog.cancel();
-        };
-
-        this.answer = function(answer) {
-          this.mdDialog.hide(answer);
-        };
-      }.bind(this),
-      //locals: {url: this.currentDialogUrl},
-      templateUrl:'../portfolio/portfolio',
+      controller: this.dialogController(this.scope),
+      template: 
+      '<md-dialog aria-label="Portfolio" class="portfolio" style="width: 80%; height: 80%;">'+
+      ' <form ng-cloak>'+
+      '    <md-toolbar>'+
+      '     <div class="md-toolbar-tools">'+
+      '       <h2>'+this.currentDialogUrl+'</h2>'+
+      '       <md-button class="md-icon-button" ng-click="cancelDialog()">'+
+      '        <i class="zmdi zmdi-close zmdi-hc-lg" aria-label="Close dialog"></i>'+
+      '       </md-button>'+
+      '     </div>'+
+      '    </md-toolbar>'+
+      '    <md-dialog-content style="width: 80%; height: 100%; margin: 0; padding: 0;">'+
+      '     <div class="md-dialog-content" style="width: 100%; height: 100%; margin: 0; padding: 0;">'+
+      '       <iframe class="animated fadeIn" ng-src="'+this.currentDialogUrl+'" style="width: 100%; height: 100%; margin: 0; padding: 0"></iframe>'+
+      '     </div>'+
+      '    </md-dialog-content>'+
+      ' </form>'+
+      '</md-dialog>',
       parent: angular.element(document.body),
       targetEvent: ev,
-      clickOutsideToClose:true,
-      fullscreen: true // Only for -xs, -sm breakpoints.
+      clickOutsideToClose:true
     })
     .then(function(answer) {
       // this.status = 'You said the information was "' + answer + '".';
