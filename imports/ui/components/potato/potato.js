@@ -16,7 +16,7 @@ class Potato {
 		this.wait = false;
 		this.helpers({
 			users(){
-				return Meteor.users.find({});
+				return Meteor.users.find({"profile.firstName": this.getReactively('query')});
 			}
 		});
 		Meteor.subscribe("potato");
