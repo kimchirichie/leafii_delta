@@ -4,6 +4,7 @@ import uiRouter from 'angular-ui-router';
  
 import { Accounts } from 'meteor/accounts-base';
 import template from './posts.html';
+import frame from './frame.html';
 import { Posts } from '../../../api/posts/index';
 import { name as PortfolioPreview } from '../portfolio/portfolio';
 
@@ -14,8 +15,8 @@ class Postings {
 		$reactive(this).attach($scope);
 		this.stateParams = $stateParams;
 		this.rootScope = $rootScope;
-    this.mdDialog = $mdDialog;
-    this.currentDialogUrl = "";
+		this.mdDialog = $mdDialog;
+/*	    this.currentDialogUrl = "";*/
 		this.state = $state;
 		this.sce = $sce;
 		this.submitPost = false;
@@ -38,9 +39,9 @@ class Postings {
 					DocHead.removeDocHeadAddedTags()
 					DocHead.setTitle("Leafii | " + post.title);
 				} 
-        else{
-          this.state.go('error', {reason: "Post doesn't exist"});
-        }
+		else{
+		  this.state.go('error', {reason: "Post doesn't exist"});
+		}
 				return post;
 			}
 		});
@@ -254,37 +255,46 @@ class Postings {
 		}
 	}
 
-  showAdvanced(ev) {
-    this.mdDialog.show({
-      controller: function() {
-        console.log(this.currentDialogUrl);
-        this.hide = function() {
-          this.mdDialog.hide();
-        };
-
-        this.cancelDialog = function() {
-          console.log("dialog cancelled");
-          this.mdDialog.cancel();
-        };
-
-        this.answer = function(answer) {
-          this.mdDialog.hide(answer);
-        };
-      }.bind(this),
-      //locals: {url: this.currentDialogUrl},
-      templateUrl:'../portfolio/portfolio',
-      parent: angular.element(document.body),
-      targetEvent: ev,
-      clickOutsideToClose:true,
-      fullscreen: true // Only for -xs, -sm breakpoints.
-    })
-    .then(function(answer) {
-      // this.status = 'You said the information was "' + answer + '".';
-    }, function() {
-      // this.status = 'You cancelled the dialog.';
-    });
-  };
+	showurl(ev, url) {
+		this.mdDialog.show({
+	        controller: DialogController,
+	        controllerAs: 'frame',
+	        template: frame,
+	        parent: angular.element(document.body),
+	        targetEvent: ev,
+	        clickOutsideToClose:true,
+	        fullscreen: true,
+	        bindToController: true,
+	        resolve:{
+	      		url: function(){
+	      			return url;
+	        	}
+	        }
+	    }).then(function(answer) {
+	      // $scope.status = 
+	      console.log('You said the information was "' + answer + '".');
+	    }, function() {
+	      // $scope.status = 'You cancelled the dialog.';
+	      console.log('You cancelled the dialog.');
+	    });
+	}
 }
+
+function DialogController($reactive, $scope, $mdDialog, url) {
+	"ngInject";
+	$reactive(this).attach($scope);
+	console.log('inside dialog controller: ', url);
+	this.hide = function() {
+		$mdDialog.hide();
+	};
+	this.cancel = function() {
+		$mdDialog.cancel();
+	};
+	this.answer = function(answer) {
+		$mdDialog.hide(answer);
+	};
+}
+
 
 const name = 'posts';
 

@@ -1,7 +1,7 @@
 <title>Post & Roast - Leafii</title>
 <div id="roast">
-	<div class="singlePostBox" layout="column" layout-align="center center">
-		<div ng-show="posts.tabOpen('single')" layout="column" class="singlePost">
+	<div ng-show="posts.tabOpen('single')" class="singlePostBox" layout="column" layout-align="center center">
+		<div layout="column" class="singlePost">
 				<h1>{{posts.post.title}}</h1>
 				<p>{{posts.post.content}}</p>
 			
@@ -53,6 +53,8 @@
 			</div>
 		</div>
 	</div>
+
+
 	<div ng-show="posts.tabOpen('browse')">
 		<div class="intro">
 			<h1 class="animated fadeIn">Welcome to the Roast Page</h1>
@@ -100,7 +102,7 @@
 								<p class="noMargin"><i class="zmdi zmdi-account-circle"></i> {{post.name}} &nbsp</p>
 								<span>posted {{posts.getTimeElapsed(post.date,false)}}</span>
 							</div>
-							<md-button class="md-primary md-raised showPage" ng-click="posts.currentDialogUrl=post.url;posts.showAdvanced($event)">Show</md-button>
+							<md-button class="md-primary md-raised showPage" ng-click="posts.showurl($event, post.url)">Show</md-button>
 							<h3 ng-click="previewSite=!previewSite"><i class="zmdi zmdi-caret-down zmdi-hc-lg"></i> show</h3>
 						</div>
 
