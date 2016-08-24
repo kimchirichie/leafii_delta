@@ -15,7 +15,7 @@ class Landing {
 		this.scope = $scope;
 		this.state = $state;
 		this.rootScope = $rootScope;
-		this.onfilter = 'recent';
+		this.onfilter = 'view';
 		this.horizontal = false;
 		this.currentUser = Meteor.userId();
 		this.helpers({
