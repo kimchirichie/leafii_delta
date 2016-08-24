@@ -1,10 +1,24 @@
 <title>Post & Roast - Leafii</title>
 <div id="roast">
-	<div class="singlePostBox" layout="column" layout-align="center center">
-		<div ng-show="posts.tabOpen('single')" layout="column" class="singlePost">
-				<h1>{{posts.post.title}}</h1>
-				<p>{{posts.post.content}}</p>
-			
+	<div ng-show="posts.tabOpen('single')" class="singlePostBox" layout="column" layout-align="center center">
+		<div layout="column" class="singlePost">
+			<div layout="row">
+				<div flex="5" ng-show="!postEdit" layout="column" class="upPost">
+					<i class="zmdi zmdi-star-circle zmdi-hc-2x" ng-click="posts.upvotePost(posts.post._id)" ng-class="{upvoted : posts.upvotedCheck(posts.post.upvotes, posts.rootScope.currentUser._id)}"></i>
+					<p>{{posts.post.upvotes.length}}</p>
+					<i class="zmdi zmdi-comment-text zmdi-hc-2x"></i>
+					<p>{{posts.post.comments.length}}</p>
+				</div>
+				<div flex="90" class="postInfo" layout="column">
+					<h1>{{posts.post.title}}</h1>
+					<p>{{posts.post.content}}</p>
+					<div layout="row" layout-xs="column">
+						<p class="noMargin"><i class="zmdi zmdi-account-circle"></i> {{posts.post.name}} &nbsp</p>
+						<span>posted {{posts.getTimeElapsed(posts.post.date,false)}}</span>
+					</div>
+					<md-button class="md-primary md-raised showPage" ng-click="posts.showurl($event, posts.absolutify(posts.post.url))">Show</md-button>
+				</div>
+			</div>
 			<!-- Comments -->
 			<div class="comments" layout="column" ng-init="editComment=false;createComment=true">
 				
@@ -53,6 +67,8 @@
 			</div>
 		</div>
 	</div>
+
+
 	<div ng-show="posts.tabOpen('browse')">
 		<div class="intro">
 			<h1 class="animated fadeIn">Welcome to the Roast Page</h1>
@@ -61,8 +77,8 @@
 		</div>
 
 		<div class="filterBar" layout="row" layout-align="center center" layout-xs="column">
-			<span ng-class="{lightUp: posts.onfilter == 'latest'}" ng-click="cardFilter = '-date'; posts.onfilter = 'latest'" >Latest</span>
-			<span ng-class="{lightUp: posts.onfilter == 'mostCommented'}" ng-click="cardFilter = '-comments.length';posts.onfilter = 'mostCommented'">Most Commented</span>
+			<span ng-class="{lightUp: posts.cardFilter == '-date'}" ng-click="posts.cardFilter = '-date'" >Latest</span>
+			<span ng-class="{lightUp: posts.cardFilter == 'comments.length'}" ng-click="posts.cardFilter = '-comments.length'">Most Commented</span>
 		</div>
 
 		<div ng-hide="posts.postsReady">
@@ -80,14 +96,14 @@
 		</div>
 
 		<div ng-show="posts.posts.length" layout="column" layout-align="center center">
-			<div class="roastCards" layout="column" layout-align="start center" ng-repeat="post in posts.posts | orderBy: cardFilter">
+			<div class="roastCards" layout="column" layout-align="start center" ng-repeat="post in posts.posts | orderBy: posts.cardFilter">
 				
 				<md-card class="md-default-theme" ng-init="previewSite = false">
 
 					<md-card-content flex ng-show="!postEdit" layout="row" layout-align="start start">
 
-						<div flex="5" ng-show="!postEdit" layout="column" class="upPost">
-							<i class="zmdi zmdi-star-circle zmdi-hc-2x" ng-click="posts.upvotePost(post._id)" ng-class="{upvoted : posts.upvotedCheck(post.upvotes, posts.rootScope.currentUser._id)}"></i>
+						<div flex="5" ng-show="!postEdit" layout="column" class="postData">
+							<i class="zmdi zmdi-star zmdi-hc-2x" ng-class="{upvoted : posts.upvotedCheck(post.upvotes, posts.rootScope.currentUser._id)}"></i>
 							<p>{{post.upvotes.length}}</p>
 							<i class="zmdi zmdi-comment-text zmdi-hc-2x"></i>
 							<p>{{post.comments.length}}</p>
@@ -100,8 +116,7 @@
 								<p class="noMargin"><i class="zmdi zmdi-account-circle"></i> {{post.name}} &nbsp</p>
 								<span>posted {{posts.getTimeElapsed(post.date,false)}}</span>
 							</div>
-							<md-button class="md-primary md-raised showPage" ng-click="posts.currentDialogUrl=post.url;posts.showAdvanced($event)">Show</md-button>
-							<h3 ng-click="previewSite=!previewSite"><i class="zmdi zmdi-caret-down zmdi-hc-lg"></i> show</h3>
+							<md-button class="md-primary md-raised showPage" ng-click="posts.showurl($event, posts.absolutify(post.url))">Show</md-button>
 						</div>
 
 						<div flex="5" layout="row" layout-xs="column" layout-sm="column" layout-align="space-around center" class="editIcons" ng-show="posts.rootScope.currentUser._id == post.poster_user_id && !postEdit">
@@ -130,9 +145,6 @@
 						<md-button class="md-raised md-primary" type="submit">Update</md-button>
 					</div>
 				</form>
-				
-				<!-- preview website -->
-				<iframe class="animated fadeIn" ng-show="previewSite" ng-src="{{posts.absolutify(post.url)}}"></iframe>
 			</div>
 		</div>
 	</div>

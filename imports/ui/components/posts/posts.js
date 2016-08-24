@@ -4,19 +4,17 @@ import uiRouter from 'angular-ui-router';
  
 import { Accounts } from 'meteor/accounts-base';
 import template from './posts.html';
+import frame from './frame.html';
 import { Posts } from '../../../api/posts/index';
-import { name as PortfolioPreview } from '../portfolio/portfolio';
 
 class Postings {
 
 	constructor($scope, $reactive, $state, $sce, $rootScope, $stateParams, $mdDialog){
 		"ngInject";
 		$reactive(this).attach($scope);
-    this.scope = $scope;
 		this.stateParams = $stateParams;
 		this.rootScope = $rootScope;
-    this.mdDialog = $mdDialog;
-    this.currentDialogUrl = "";
+		this.mdDialog = $mdDialog;
 		this.state = $state;
 		this.sce = $sce;
 		this.submitPost = false;
@@ -39,9 +37,9 @@ class Postings {
 					DocHead.removeDocHeadAddedTags()
 					DocHead.setTitle("Leafii | " + post.title);
 				} 
-        else{
-          this.state.go('error', {reason: "Post doesn't exist"});
-        }
+		else{
+		  this.state.go('error', {reason: "Post doesn't exist"});
+		}
 				return post;
 			}
 		});
@@ -199,6 +197,7 @@ class Postings {
 	// }
 
 	upvotedCheck(upvotes, id){
+    if(!upvotes) return false;
 		for(var i = 0; i < upvotes.length; i++){
 			if(upvotes[i].user == id){
 				return true;
@@ -254,54 +253,47 @@ class Postings {
 			return "Now";
 		}
 	}
-  dialogController($scope) {
-    console.log(this.scope);
-    $scope.hide = function() {
-      this.mdDialog.hide();
-    };
 
-    $scope.cancelDialog = function() {
-      console.log("dialog cancelled");
-      this.mdDialog.cancel();
-    };
-
-    $scope.answer = function(answer) {
-      this.mdDialog.hide(answer);
-    };
-  }
-
-  showAdvanced(ev) {
-    this.mdDialog.show({
-      controller: this.dialogController(this.scope),
-      template: 
-      '<md-dialog aria-label="Portfolio" class="portfolio" style="width: 80%; height: 80%;">'+
-      ' <form ng-cloak>'+
-      '    <md-toolbar>'+
-      '     <div class="md-toolbar-tools">'+
-      '       <h2>'+this.currentDialogUrl+'</h2>'+
-      '       <md-button class="md-icon-button" ng-click="cancelDialog()">'+
-      '        <i class="zmdi zmdi-close zmdi-hc-lg" aria-label="Close dialog"></i>'+
-      '       </md-button>'+
-      '     </div>'+
-      '    </md-toolbar>'+
-      '    <md-dialog-content style="width: 80%; height: 100%; margin: 0; padding: 0;">'+
-      '     <div class="md-dialog-content" style="width: 100%; height: 100%; margin: 0; padding: 0;">'+
-      '       <iframe class="animated fadeIn" ng-src="'+this.currentDialogUrl+'" style="width: 100%; height: 100%; margin: 0; padding: 0"></iframe>'+
-      '     </div>'+
-      '    </md-dialog-content>'+
-      ' </form>'+
-      '</md-dialog>',
-      parent: angular.element(document.body),
-      targetEvent: ev,
-      clickOutsideToClose:true
-    })
-    .then(function(answer) {
-      // this.status = 'You said the information was "' + answer + '".';
-    }, function() {
-      // this.status = 'You cancelled the dialog.';
-    });
-  };
+	showurl(ev, url) {
+		this.mdDialog.show({
+	        controller: DialogController,
+	        controllerAs: 'frame',
+	        template: frame,
+	        parent: angular.element(document.body),
+	        targetEvent: ev,
+	        clickOutsideToClose:true,
+	        fullscreen: true,
+	        bindToController: true,
+	        resolve:{
+	      		url: function(){
+	      			return url;
+	        	}
+	        }
+	    }).then(function(answer) {
+	      // $scope.status = 
+	      console.log('You said the information was "' + answer + '".');
+	    }, function() {
+	      // $scope.status = 'You cancelled the dialog.';
+	      console.log('You cancelled the dialog.');
+	    });
+	}
 }
+
+function DialogController($reactive, $scope, $mdDialog, url) {
+	"ngInject";
+	$reactive(this).attach($scope);
+	console.log('inside dialog controller: ', url);
+	$scope.hide = function() {
+		$mdDialog.hide();
+	};
+	$scope.cancel = function() {
+		$mdDialog.cancel();
+	};
+	$scope.answer = function(answer) {
+		$mdDialog.hide(answer);
+	};
+}
+
 
 const name = 'posts';
 
