@@ -142,38 +142,39 @@ To parse the keywords out of the database, use [leafii_crawler][https://github.c
 
 First install nginx from your package manager.
 
+```
+$ sudo apt-get install nginx
+```
+
 Next install the ssh cert. manager, acme.sh:
 
 ```sh
 $ curl https://get.acme.sh | sudo sh
 ```
 
-Before the next step we have to shut down meteor to free the 3000 port and we have to run the following
-lines and also add them to ~/.bash_profile to be able to use acme.sh with the server's public ip:
+Before the next step, shut down meteor to free port 3000. Then add these to ~/.bash_profile to use acme.sh with the server's public ip:
 
 ```sh
-$ sudo iptables -t nat -A OUTPUT -d your.public.ip.address -j DNAT --to-destination 127.0.0.1
-
-$ sudo iptables -t nat -A INPUT -s 127.0.0.1 -j SNAT --to-source your.public.ip.address
+# in ~/.bash_profile
+iptables -t nat -A OUTPUT -d your.public.ip.address -j DNAT --to-destination 127.0.0.1
+iptables -t nat -A INPUT -s 127.0.0.1 -j SNAT --to-source your.public.ip.address
 ```
 
-When finished request the certificates for your domain:
+When finished, request the certificates for the domain:
 
 ```sh
 $ sudo acme.sh  --issue  -d leafii.com  --standalone --httpport 3000
 ```
 
-Next create or select a directory where you want to store the certificates for nginx,
-then set up acme.sh to move and handle the certificates in that directory and reload nginx when needed:
+Next create or select a directory where you want to store the certificates for nginx. Then, set up acme.sh to move and handle the certificates in that directory and reload nginx when needed:
 
 ```sh
 $ acme.sh --installcert -d aa.com --certpath /path/to/cert/dir --keypath /path/to/cert/dir --capath /path/to/cert/dir --fullchainpath /path/to/cert/dir --reloadcmd  "sudo nginx -s reload"
 ```
 
-After this is done, copy the nginx.conf file from this repository to /etc/nginx/ and edit
-the domains or ports as needed inside the file.
+After this is done, copy the nginx.conf file from this repository to /etc/nginx/ and edit the domains/ports as needed.
 
-Last step is to start the nginx server:
+Lastly, start the nginx server:
 
 ```sh
 $ sudo nginx
@@ -182,4 +183,5 @@ $ sudo nginx
 License
 ----
 MIT
+
 **We are an open source startup helping the community of website owners connect. Please don't harm us!**

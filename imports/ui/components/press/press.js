@@ -90,12 +90,10 @@ class Press {
 	cancel(){
         this.close();
 	}
-
 	safeHtml(content){
 		if(content) return (this.sce.trustAsHtml(content));
 		return "";
 	}
-
 }
 
 const name = 'press';

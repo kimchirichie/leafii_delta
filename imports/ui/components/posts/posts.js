@@ -34,6 +34,9 @@ class Postings {
 					DocHead.removeDocHeadAddedTags()
 					DocHead.setTitle("Leafii | " + post.title);
 				} 
+        else{
+          this.state.go('error', {reason: "Post doesn't exist"});
+        }
 				return post;
 			}
 		});
@@ -94,7 +97,7 @@ class Postings {
 		if(Meteor.userId()){
 			user = Meteor.user();
 			date = new Date();
-			Posts.update({_id: postId}, {$addToSet: {comments: {commenter_user_id: user._id, name: user.profile.firstName, comment: this.newComment, createdAt: date, last_edit: 0, upvotes: []}}}, false, false);
+			Posts.update({_id: postId}, {$addToSet: {comments: {commenter_user_id: user._id, name: user.profile.firstName, comment: this.newComment, date: date, last_edit: 0, upvotes: []}}}, false, false);
 			this.newComment = '';
 		} else {
 			Bert.alert("Please login to comment", 'danger', 'growl-top-right');
@@ -138,7 +141,7 @@ class Postings {
 				user = Meteor.user();
 				date = Date.now();
 				Posts.insert({poster_user_id: user._id, title: this.post.title, tags: [], content: this.post.content, url: user.profile.url, name: user.profile.firstName, comments: [], date: date, last_edit: 0, upvotes: [], deleted: false});
-				this.cancelNewPost();
+				this.cancel();
 			}
 			
 		}

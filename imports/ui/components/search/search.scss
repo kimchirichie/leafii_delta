@@ -4,19 +4,36 @@
 	background: #dcdcdc;
 
 	.cardInfoSmall {
+		
+		width:100%;
+
 		a {
 			margin: 0;
 			display: table !important;
 		}
 	}
 
-	.noResults {
-		margin: 15%;
-		text-align: center;
+	.chips {
+		overflow-x: auto;
+		overflow-y: hidden;
+	}
+
+	.keywordTitle {
+		margin:0;
+		margin-top:10px;
+	}
+
+	.name {
+		margin:0;
+		margin-top: 10px;
 	}
 
 	.grid {
 		width: 300px;
+	}
+
+	.noResults {
+		padding: 15%;
 	}
 
 	.upLike {

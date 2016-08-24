@@ -1,6 +1,5 @@
 import { Meteor } from 'meteor/meteor';
 import { Session } from 'meteor/session'
-import { Views } from '../imports/api/views/index';
 import { Profile_likes } from '../imports/api/profile_likes/index';
 import { Posts } from '../imports/api/posts/index';
 import { Keywords } from '../imports/api/keywords/index';
@@ -8,7 +7,6 @@ import { Words } from '../imports/api/count/index';
 
 Meteor.startup(()=>{
 
-	// var domain = 'support@leafii.com';
 	var email = process.env.EMAIL;
 	var password = process.env.PASSWORD;	
 	process.env.MAIL_URL = 'smtp://' + email + ':' + password + '@smtp.gmail.com:465/';
@@ -109,15 +107,12 @@ Meteor.startup(()=>{
 		likeProfile(liked_userId, url){
 			if(Meteor.userId()){
 				user = Meteor.userId();
-				//console.log(Profile_likes.find({clicker_user_id: user, liked_user_id: liked_userId}).count());
-				//console.log(user+" ; "+liked_userId);
 				if(Profile_likes.find({clicker_user_id: user, liked_user_id: liked_userId}).count())
 				{
 					data = {
 						clicker_user_id: user, 
 						liked_user_id: liked_userId,
 					};
-					//console.log("Delete like");
 					Profile_likes.remove(data);
 					Meteor.users.update({_id:liked_userId}, {$pull: {"profile.likes": user}}, false, false);
 				}
@@ -130,7 +125,6 @@ Meteor.startup(()=>{
 						date: date,
 						url: url
 					};
-					//console.log("Add like");
 					Profile_likes.insert(data);
 					Meteor.users.update({_id:liked_userId}, {$addToSet: {"profile.likes": user}}, false, false);
 				}
@@ -181,7 +175,6 @@ Meteor.startup(()=>{
 			if (!searchString.length) return [];
 
 			var ranks = {};
-			// var points = 0;
 			var queries = searchString.split(" ");
 
 			for (i in queries){

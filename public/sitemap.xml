@@ -17,7 +17,7 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>http://leafii.com/profiles</loc>
+    <loc>http://leafii.com/profile/</loc>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -27,11 +27,6 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>http://leafii.com/team</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-    <url>
     <loc>http://leafii.com/feedback</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -48,6 +43,21 @@
   </url>
   <url>
     <loc>http://leafii.com/welcome</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://leafii.com/posts/</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://leafii.com/blog/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://leafii.com/error</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
