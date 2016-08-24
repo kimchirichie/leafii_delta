@@ -72,10 +72,20 @@
 		}
 	}
 
+	.commentPadding {
+		padding: 10px;
+	}
+	
 	.profileIcon {
 		height: 40px;
 		width: 40px;		
 		border-radius: 50% !important;
+	}
+
+	.profileIconSquare {
+		height: 40px;
+		width: 40px;
+		padding-right: 0px;		
 	}
 
 	.postComment {

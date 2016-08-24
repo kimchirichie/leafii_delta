@@ -59,8 +59,8 @@
 				<!-- Create New Comment -->
 				<form ng-submit="posts.createComment(posts.post._id)" layout="row" class="postComment" ng-show="!posts.hideNewComment">
 
-					<img class="profileIcon" ng-src="/images/defaultProfilePic.png"/>
-					<div layout="row" class="full-width">
+					<img class="commentPadding profileIconSquare" ng-src="/images/defaultProfilePic.png"/>
+					<div layout="row" class="full-width commentPadding">
 						<input required placeholder="write a comment..." ng-model="posts.newComment" type="text" name="comment">
 					</div>
 					
