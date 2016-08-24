@@ -29,6 +29,7 @@
 				<image-uploader files="profile.user.images"></image-uploader>
 				<img ng-hide="profile.imgHide" ng-src="{{profile.user.profile.image ? profile.secureProtocol(profile.user.profile.image) : '/images/defaultProfilePic.png'}}"/>
 				<md-progress-circular ng-if="profile.progress" md-mode='indeterminate' md-diameter="100px"></md-progress-circular>
+				<a ng-href="{{profile.absolutify(profile.user.profile.url)}}" target="_blank"><h2>{{profile.user.profile.url}}</h2></a>
 				<div class="tabBtns" layout="row" layout-align="space-around center">
 					<md-button class="md-raised" ng-click="profile.openTab('edit')">edit</md-button>
 					<md-button class="md-raised" ng-click="profile.openTab('password')">Change password</md-button>

@@ -5,7 +5,6 @@ import utilsPagination from 'angular-utils-pagination';
 import { Logs } from '../../../api/logs/index';
 
 import template from './landing.html';
-import { Views } from '../../../api/views/index';
 
 
 class Landing {
@@ -15,9 +14,8 @@ class Landing {
 		this.scope = $scope;
 		this.state = $state;
 		this.rootScope = $rootScope;
-		this.onfilter = 'view';
 		this.horizontal = false;
-		this.currentUser = Meteor.userId();
+		this.cardFilter = '-profile.views';
 		this.helpers({
 			users(){
 				return Meteor.users.find( {"profile.url" : {$exists : true} } );
