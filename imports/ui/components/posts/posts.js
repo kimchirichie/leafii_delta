@@ -5,14 +5,17 @@ import uiRouter from 'angular-ui-router';
 import { Accounts } from 'meteor/accounts-base';
 import template from './posts.html';
 import { Posts } from '../../../api/posts/index';
+import { name as PortfolioPreview } from '../portfolio/portfolio';
 
 class Postings {
 
-	constructor($scope, $reactive, $state, $sce, $rootScope, $stateParams){
+	constructor($scope, $reactive, $state, $sce, $rootScope, $stateParams, $mdDialog){
 		"ngInject";
 		$reactive(this).attach($scope);
 		this.stateParams = $stateParams;
 		this.rootScope = $rootScope;
+    this.mdDialog = $mdDialog;
+    this.currentDialogUrl = "";
 		this.state = $state;
 		this.sce = $sce;
 		this.submitPost = false;
@@ -21,6 +24,7 @@ class Postings {
 		this.tab = (this.stateParams.post_id ? 'single' : 'browse');
 		this.cardFilter = '-date';
 		this.onfilter = 'latest';
+
 		this.helpers({
 			posts(){
 				if(this.stateParams.post_id) return;
@@ -250,6 +254,36 @@ class Postings {
 		}
 	}
 
+  showAdvanced(ev) {
+    this.mdDialog.show({
+      controller: function() {
+        console.log(this.currentDialogUrl);
+        this.hide = function() {
+          this.mdDialog.hide();
+        };
+
+        this.cancelDialog = function() {
+          console.log("dialog cancelled");
+          this.mdDialog.cancel();
+        };
+
+        this.answer = function(answer) {
+          this.mdDialog.hide(answer);
+        };
+      }.bind(this),
+      //locals: {url: this.currentDialogUrl},
+      templateUrl:'../portfolio/portfolio',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose:true,
+      fullscreen: true // Only for -xs, -sm breakpoints.
+    })
+    .then(function(answer) {
+      // this.status = 'You said the information was "' + answer + '".';
+    }, function() {
+      // this.status = 'You cancelled the dialog.';
+    });
+  };
 }
 
 const name = 'posts';
