@@ -1,14 +1,15 @@
+<title>Leafii - Showcase & Discover Indie Websites</title>
+
 <div id="landing">
-	<title>Leafii - Showcase & Discover Indie Websites</title>
 	<div class="intro">
 		<h1 class="animated fadeIn">Showcase & Discover Indie Websites</h1>
 		<md-button ng-click="landing.state.go('signup')" class="md-raised signup">Submit my website</md-button>
 	</div>
 
 	<div class="filterBar" layout="row" layout-align="center center" layout-xs="column">
-		<span ng-class="{lightUp: landing.onfilter == 'recent'}" ng-click="cardFilter = '-createdAt'; landing.onfilter = 'recent'">Most Recent</span>
-		<span ng-class="{lightUp: landing.onfilter == 'view'}" ng-click="cardFilter = '-profile.views'; landing.onfilter = 'view'">Most Viewed</span>
-		<span ng-class="{lightUp: landing.onfilter == 'like'}" ng-click="cardFilter = '-profile.likes.length'; landing.onfilter = 'like'">Most Liked</span>
+		<span ng-class="{lightUp: landing.cardFilter == '-createdAt'}" ng-click="landing.cardFilter = '-createdAt'">Most Recent</span>
+		<span ng-class="{lightUp: landing.cardFilter == '-profile.views'}" ng-click="landing.cardFilter = '-profile.views'">Most Viewed</span>
+		<span ng-class="{lightUp: landing.cardFilter == '-profile.likes.length'}" ng-click="landing.cardFilter = '-profile.likes.length'">Most Liked</span>
 	</div>
 
 	<div ng-show="landing.users.length <= 1">
@@ -18,13 +19,13 @@
 		</div>
 	</div>
 
-	<div ng-show="landing.users.length > 1" class="board" ng-init="cardFilter = '-createdAt'">
+	<div ng-show="landing.users.length > 1" class="board">
 
 
 		<!-- Grid View Mode -->
 		<div layout="row" layout-align="center center" layout-wrap>
 
-	        <md-card ng-show="!landing.horizontal" class="md-default-theme candidates grid" layout="column" layout-align="center center" ng-repeat="user in landing.users | orderBy: cardFilter">
+	        <md-card ng-show="!landing.horizontal" class="md-default-theme candidates grid" layout="column" layout-align="center center" ng-repeat="user in landing.users | orderBy: landing.cardFilter">
 				<md-tooltip md-direction="top">{{landing.absolutify(user.profile.url)}}</md-tooltip>
 				<!-- <p class="forHire" ng-show="{{user.profile.available}}"><i class="zmdi zmdi-circle"></i> Available</p>
 				<p class="noHire" ng-show="{{!user.profile.available}}"><i class="zmdi zmdi-circle"></i> Unavailable</p> -->

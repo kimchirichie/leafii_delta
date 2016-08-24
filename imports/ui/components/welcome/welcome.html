@@ -1,7 +1,9 @@
+<title>Welcome - Leafii</title>
+
 <div id="welcome" layout="column" layout-align="center center">
   <div class="note">
     <h1>Thank you for signing up</h1>
-    <h4>Please verify your email</h4>
+    <h4 ng-hide="welcome.rootScope.currentUser.emails[0].verified">Please verify your email</h4>
     <md-button ui-sref="profile" class="md-raised md-primary profile">Go to my profile</md-button>
   </div>
 </div>

@@ -7,7 +7,6 @@ import template from './profile.html';
 import { Accounts } from 'meteor/accounts-base';
 import { Keywords } from '../../../api/profile/index';
 import { Posts } from '../../../api/posts/index';
-import { Views } from '../../../api/views/index';
 
 import { name as Uploader } from '../uploader/uploader';
 
@@ -59,11 +58,6 @@ class Profile {
 
 	}
 
-	testing(){
-		console.log(this.posts);
-		console.log(this.comments);
-	}
-
 	loading(){
 		return this.userReady && this.keywordsReady && this.postsReady;
 	}
@@ -93,6 +87,10 @@ class Profile {
 			Bert.alert('Profile Updated', 'success', 'growl-top-right');
 			Meteor.users.update(Meteor.userId(), {$set: {profile: user.profile}}, false, false);
 		}
+	}
+
+	absolutify(url){
+		return 'http://' + url.replace(/https:|http:|\/\//gi, "");
 	}
 
 	// delete(keyword) {
