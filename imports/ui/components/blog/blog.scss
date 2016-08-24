@@ -3,16 +3,19 @@
   .blogPosts {
   	width: 90%;
   	background: #dcdcdc;
-  	padding: 30px;
   	margin: 20px;
+    padding: 10px;
+
+    pre {
+      font-family: raleway;
+    }
+
+    .blogContent {
+          max-height: 275px;
+          overflow: hidden;
+          display: block;
+        }
   }
-
-  .blogContent {
-        max-height: 300px;
-        overflow: hidden;
-        display: block;
-      }
-
   h1 {
   	margin: 2px;
   }
