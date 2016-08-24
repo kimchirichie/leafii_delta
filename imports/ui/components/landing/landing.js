@@ -3,6 +3,7 @@ import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
 import utilsPagination from 'angular-utils-pagination';
 import { Logs } from '../../../api/logs/index';
+import { Posts } from '../../../api/posts/index';
 
 import template from './landing.html';
 
@@ -18,12 +19,22 @@ class Landing {
 		this.cardFilter = '-profile.views';
 		this.helpers({
 			users(){
-				return Meteor.users.find( {"profile.url" : {$exists : true} } );
+				return Meteor.users.find({"profile.url":{$exists:true}});
 			},
 
-			latest(){
-				return Logs.find({},{$sort:{"createdAt":-1}});
+			latestView(){
+				return Logs.find({type:"view"});
+			},
+
+			lastSearch(){
+				return Logs.find({type:"search"});
+			},
+
+			latestPost(){
+				return Posts.find({});
 			}
+
+
 		});
 
 		angular.element($window).bind("resize", function(){
@@ -33,7 +44,9 @@ class Landing {
 			}
 		}.bind(this));
 		Meteor.subscribe("allUsers");
-    	Meteor.subscribe("logs");
+    	Meteor.subscribe("latest_view");
+    	Meteor.subscribe("latest_search");
+    	Meteor.subscribe("latest_post");
 	}
 
 	liked(user){
@@ -41,8 +54,7 @@ class Landing {
 	}
 
 	viewLog(user){	
-		var viewer = 'guest';
-		if(Meteor.userId()) viewer = Meteor.userId();
+		var viewer = Meteor.userId() || 'guest';
 		Logs.insert({type: 'view', createdAt: new Date(), details: {viewer_user_id: viewer, target_user_id: user._id, search_keys: 'Browse', url: user.profile.url}});
 		Meteor.call('addToViews',user._id);
 	}

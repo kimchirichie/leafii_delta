@@ -19,15 +19,25 @@
 		</div>
 	</div>
 
+	<div>
+		<md-card class="md-default-theme candidates grid" layout="column" layout-align="center center">
+				<p><i class="zmdi zmdi-calendar"></i>{{landing.latestView[0].createdAt}}</p>
+				<p>{{landing.latestView[0].details.url}}</p>
+		</md-card>
+		<md-card class="md-default-theme candidates grid" layout="column" layout-align="center center">
+				<p>{{landing.latestPost[0].title}}</p>
+				<p>{{landing.latestPost[0].content}}</p>
+		</md-card>
+		<md-card class="md-default-theme candidates grid" layout="column" layout-align="center center">
+				<p>{{landing.lastSearch[0].details.search_keys}}</p>
+		</md-card>
+	</div>
+
 	<div ng-show="landing.users.length > 1" class="board">
 
 
 		<!-- Grid View Mode -->
 		<div layout="row" layout-align="center center" layout-wrap>
-			<md-card class="md-default-theme candidates grid" layout="column" layout-align="center center" ng-repeat="log in landing.latest | limitTo: 1">
-					<p><i class="zmdi zmdi-calendar"></i>{{log.createdAt}}</p>
-					<p>{{log.details.url}}</p>
-			</md-card>
 	        <md-card ng-show="!landing.horizontal" class="md-default-theme candidates grid" layout="column" layout-align="center center" ng-repeat="user in landing.users | orderBy: landing.cardFilter">
 				<md-tooltip md-direction="top">{{landing.absolutify(user.profile.url)}}</md-tooltip>
 				<!-- <p class="forHire" ng-show="{{user.profile.available}}"><i class="zmdi zmdi-circle"></i> Available</p>
