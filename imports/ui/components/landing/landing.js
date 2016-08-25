@@ -21,7 +21,12 @@ class Landing {
 			users(){
 				return Meteor.users.find({"profile.url":{$exists:true}});
 			},
-
+			user(){
+				return Meteor.users.find({"_id": this.getReactively('latestView[0].details.target_user_id')});
+			},
+			postUser(){
+				return Meteor.users.find({"_id": this.getReactively('latestPost[0].poster_user_id')});
+			},
 			latestView(){
 				return Logs.find({type:"view"});
 			},
@@ -69,6 +74,10 @@ class Landing {
 		}else{
 			return "";
 		}
+	}
+
+	test(){
+		console.log(this.scope);
 	}
 }
 
