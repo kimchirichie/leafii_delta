@@ -55,7 +55,8 @@ class Potato {
 				"profile.lastName": user.profile.lastName,
 				"emails[0].address":user.emails[0].address,
 				"profile.occupation": user.profile.occupation,
-				"profile.available": user.profile.available
+				"profile.available": user.profile.available,
+				"profile.image": user.profile.image
 
 			}
 		});
