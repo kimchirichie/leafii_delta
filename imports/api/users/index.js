@@ -7,7 +7,7 @@ if (Meteor.isServer) {
 
 	Meteor.publish('potato', function(searchString){
 		const user = Meteor.users.findOne(this.userId);
-		if(user.role != "admin") return this.ready();
+		if(!user || user.role != "admin") return this.ready();
 
 		const selector = {};
 		if (typeof searchString === 'string' && searchString.length) {

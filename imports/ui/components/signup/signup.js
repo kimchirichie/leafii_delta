@@ -21,10 +21,6 @@ class Signup {
 		
 	}
 
-	test(user){
-		console.log(user.profile.location.formatted_address);
-	}
-
 	facebook(){
 		Meteor.loginWithFacebook({requestPermissions: ['user_friends', 'public_profile', 'email']}, function(err){
 			if (err) {
@@ -58,8 +54,7 @@ class Signup {
 			if(error) {
 				Bert.alert(error.reason, 'danger', 'growl-top-right');
 				this.timeout(function(){this.wait = false;}.bind(this), 1300);
-			} 
-			else {
+			} else {
 				Meteor.call('sendVerificationLink', function(error, response){
 					
 					if(error){
@@ -115,4 +110,3 @@ function config($stateProvider) {
 			}
 		});
 };
-//window.prerenderReady = true;

@@ -13,15 +13,72 @@
 		</div>
 
 		<md-card class="card" ng-repeat="user in potato.users">
-			<div class="userName" ng-hide="potato.showing(user)" ng-click="potato.display(user)">
-				<b>{{user.profile.firstName}} {{user.profile.lastName}}</b>
-				<p style="color:red">{{potato.loccheck(user)}}</p>
+			<div class="userName" layout="row" layout-align="start center">
+				<h3 ng-click="potato.display(user)" flex="95">{{user.profile.firstName}} {{user.profile.lastName}}</h3>
+				<div class="close" ng-class="{hidden : !potato.showing(user)}" flex>
+					<i class="zmdi zmdi-close zmdi-hc-lg" ng-click="potato.close(user)" ></i>
+				</div>
 			</div>
 
-			<md-card-content layout="column" layout-align="start center" ng-show="potato.showing(user) && !potato.editing(user)">
-				<div class="close" layout="row" layout-align="end center">
-					<i class="zmdi zmdi-close zmdi-hc-lg" ng-click="potato.close(user)"></i>
+			<div class="editUser" ng-if="potato.editing(user)">
+				<div layout="column">
+
+
+					<p>User id: {{user._id}}</p>
+					<form class="editables">
+						<md-input-container class="md-block" flex-gt-sm>
+							<label>URL: </label>
+							<input type="text" name="url" ng-model="user.profile.url"/>
+						</md-input-container>
+
+						<md-input-container class="md-block" flex-gt-sm>
+							<label>First Name: </label>
+							<input type="text" name="firstName" ng-model="user.profile.firstName"/>
+						</md-input-container>
+
+						<md-input-container class="md-block" flex-gt-sm>
+							<label>Last Name: </label>
+							<input type="text" name="lastName" ng-model="user.profile.lastName"/>
+						</md-input-container>
+
+						<md-input-container class="md-block" flex-gt-sm>
+							<label>Email: </label>
+							<input type="email" name="address" ng-model="user.emails[0].address"/>
+						</md-input-container>
+
+						<md-input-container class="md-block" flex-gt-sm>
+							<label>Occupation: </label>
+							<input type="text" name="occupation" ng-model="user.profile.occupation"/>
+						</md-input-container>
+
+						<md-input-container class="md-block" flex-gt-sm>
+							<label>Image URL: </label>
+							<input type="text" name="image" ng-model="user.profile.image"/>
+						</md-input-container>
+
+						<md-input-container class="md-block" flex-gt-sm>
+							<label>Location</label>
+							<input type="text" ng-model="user.profile.location" g-places-autocomplete/>
+						</md-input-container>
+
+					</form>
+
+					<md-switch ng-model="user.profile.available">Available</md-switch>
+
+
+					<p>Page Views: {{user.profile.views}}</p>
+					<p>Likes: {{user.profile.likes.length}}</p>
 				</div>
+
+				<div layout="row" layout-align="end center">
+					<md-button class="md-raised" ng-click="potato.delete(user)">delete</md-button>
+					<md-button class="md-raised" ng-click="potato.cancel(user)">cancel</md-button>
+					<md-button class="md-raised" ng-click="potato.save(user)">save</md-button>
+				</div>
+			</div>
+
+			<md-card-content layout="column" layout-align="start start" ng-if="potato.showing(user) && !potato.editing(user)">
+
 
 				<div class="userInfo" layout="row" layout-align="space-between center">
 
@@ -37,6 +94,7 @@
 						<p>Page Views: {{user.profile.views}}</p>
 						<p>Photo: {{user.profile.image || "not uploaded"}}</p>
 						<p>Likes: {{user.profile.likes.length}}</p>
+						<p>Location: {{user.profile.location}}</p>
 					</div>
 
 					<div layout="column" layout-align="center end">
@@ -49,56 +107,6 @@
 
 			</md-card-content>
 
-			<div class="editUser" ng-show="potato.editing(user)">
-				<div layout="column">
-					<div class="close" layout="row" layout-align="end center">
-						<i class="zmdi zmdi-close zmdi-hc-lg" ng-click="potato.close(user)"></i>
-					</div>
-
-					<p>User id: {{user._id}}</p>
-					<div class="editables">
-						<md-input-container class="md-block" flex-gt-sm>
-							<label>URL: </label>
-							<input type="text" ng-model="user.profile.url"/>
-						</md-input-container>
-
-						<md-input-container class="md-block" flex-gt-sm>
-							<label>First Name: </label>
-							<input type="text" ng-model="user.profile.firstName"/>
-						</md-input-container>
-						<md-input-container class="md-block" flex-gt-sm>
-							<label>Last Name: </label>
-							<input type="text" ng-model="user.profile.lastName"/>
-						</md-input-container>
-
-						<md-input-container class="md-block" flex-gt-sm>
-							<label>Email: </label>
-							<input type="email" ng-model="user.emails[0].address"/>
-						</md-input-container>
-
-						<md-input-container class="md-block" flex-gt-sm>
-							<label>Occupation: </label>
-							<input type="text" ng-model="user.profile.occupation"/>
-						</md-input-container>
-						<md-input-container class="md-block" flex-gt-sm>
-							<label>Image URL: </label>
-							<input type="text" ng-model="user.profile.image"/>
-						</md-input-container>
-					</div>
-
-					<md-switch ng-model="user.profile.available">Available</md-switch>
-
-
-					<p>Page Views: {{user.profile.views}}</p>
-					<p>Likes: {{user.profile.likes.length}}</p>
-				</div>
-
-				<div layout="row" layout-align="end center">
-					<md-button class="md-raised" ng-click="potato.delete(user)">delete</md-button>
-					<md-button class="md-raised" ng-click="potato.cancel(user)">cancel</md-button>
-					<md-button class="md-raised" ng-click="potato.save(user)">save</md-button>
-				</div>
-			</div>
 		</md-card>
 	</div>
 </div>

@@ -23,14 +23,13 @@ class Potato {
 		Meteor.subscribe("potato", () =>[this.getReactively('query')]);
 	}
 
-	loccheck(user){
-		console.log(user);
-		if (user.profile.location && user.profile.location.formatted_address) {
-			user.profile.location = user.profile.location.formatted_address;
-			this.save(user);
-			return "fix required. so fixed";
-		}
-	}
+	// loccheck(user){
+	// 	if (user.profile.location && user.profile.location.formatted_address) {
+	// 		user.profile.location = user.profile.location.formatted_address;
+	// 		this.save(user);
+	// 		return "fix required. so fixed";
+	// 	}
+	// }
 
 	display(user){
 		user.showing = true;
@@ -58,6 +57,9 @@ class Potato {
 	}
 
 	save(user){
+		if(user.profile.location && user.profile.location.formatted_address){
+			user.profile.location = user.profile.location.formatted_address;
+		}
 		Meteor.users.update({_id:user._id}, {
 			$set: {
 				"profile.url":user.profile.url,
@@ -67,7 +69,7 @@ class Potato {
 				"profile.occupation": user.profile.occupation,
 				"profile.available": user.profile.available,
 				"profile.image": user.profile.image,
-				"profile.location": user.profile.location
+				"profile.location" : user.profile.location
 			}
 		});
 		user.editing = false;
@@ -158,7 +160,8 @@ const name = 'potato';
 
 export default angular.module(name, [
 	angularMeteor,
-	uiRouter
+	uiRouter,
+	'google.places'
 ]).component(name, {
 	template,
 	controllerAs: name,

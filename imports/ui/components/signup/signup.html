@@ -21,7 +21,7 @@
 		
 		<md-input-container class="md-block" flex-gt-sm>
 			<label>Location</label>
-			<input required ng-model="signup.user.profile.location" g-places-autocomplete type="text" name="location"/>
+			<input required ng-model="signup.user.profile.location" g-places-autocomplete type="text"/>
 		</md-input-container>
 
 		<md-input-container class="md-block" flex-gt-sm>
@@ -48,6 +48,7 @@
 			<label>Portfolio URL</label>
 			<input ng-model="signup.user.profile.url" placeholder="http://richardsin.com" type="url" name="url"/>
 		</md-input-container>
+
 		<div class="full-width"  layout="column" layout-align="center center">
 			<md-button class="md-raised full-width md-primary  signUpBtn" ng-show="!signup.wait" type="submit">Sign Up</md-button>
 			<md-progress-circular ng-show="signup.wait" md-mode='indeterminate' md-diameter="40px"></md-progress-circular>

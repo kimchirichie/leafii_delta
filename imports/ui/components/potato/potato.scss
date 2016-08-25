@@ -22,8 +22,16 @@
 
 	.userName {
 		cursor: pointer;
-		outline: 0;
-		padding: 30px;
+		padding: 0 30px;
+
+		h3 {
+			display: inline-block;
+			outline: 0;
+		}
+
+		.hidden {
+			visibility: hidden;
+		}
 	}
 
 	.close {
