@@ -32,6 +32,9 @@ Meteor.startup(()=>{
 			}
 		},
 		verifyUser(user){
+			//for admin console. sendVerificationLink sends to logged in. this sends to whoever is passed in. this is gross programming. do not replicate such practice.
+			let currentUser = Meteor.user();
+			if(!currentUser || currentUser.role != 'admin') return false;
 			return Accounts.sendVerificationEmail(user._id);
 		},
 

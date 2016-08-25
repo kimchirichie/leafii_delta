@@ -83,30 +83,21 @@ class Profile {
 
 		if(!(firstName && lastName && occupation && location)){
 			Bert.alert('Profile Error: Please fill in the required fields', 'danger', 'growl-top-right');
-		} else {
-			Bert.alert('Profile Updated', 'success', 'growl-top-right');
-			Meteor.users.update(Meteor.userId(), {$set: {profile: user.profile}}, false, false);
-		}
+			return;
+		} 
+
+		Meteor.users.update(this.user_id, {$set: {profile: user.profile}}, {upsert: false, multi:false}, function(error, result){
+			if(error){
+				Bert.alert(error.reason, 'danger', 'growl-top-right');
+			} else {
+				Bert.alert('Profile Updated', 'success', 'growl-top-right');
+			}
+		});
 	}
 
 	absolutify(url){
 		return 'http://' + url.replace(/https:|http:|\/\//gi, "");
 	}
-
-	// delete(keyword) {
-	// 	Keywords.remove(keyword._id);
-	// }
-
-	// insert(){
-	// 	data = {
-	// 		url: this.rootScope.currentUser.profile.url, 
-	// 		type: "self",
-	// 		user_id: this.rootScope.currentUser._id, 
-	// 		keyword: this.newkeyword
-	// 	};
-	// 	Keywords.insert(data);
-	// 	this.newkeyword = undefined;
-	// }
 
 	crawl(user_id){
 		confirmed = swal({
@@ -121,9 +112,9 @@ class Profile {
 			},function(){
 				Meteor.call('startCrawl', user_id, function (err, res) {
 				  if (err) {
-					Bert.alert('Keywords Update Failed', 'danger');
+					Bert.alert('Keywords Update Failed', 'danger','growl-top-right');
 				  } else {
-					Bert.alert('Keywords Updated','success')
+					Bert.alert('Keywords Updated','success','growl-top-right');
 				  }
 				});
 			})

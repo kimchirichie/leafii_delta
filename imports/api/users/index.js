@@ -16,18 +16,16 @@ if (Meteor.isServer) {
 
 	Meteor.users.allow({
 		insert(userId, doc) {
-			const user = Meteor.users.findOne({_id: userId});
-			//console.log(user);
-			return user.role == "admin";
+			return true;
 		},
 		update(userId, doc, fields, modifier){
+			if(!userId) return false;
+			if(fields.indexOf("role") > -1) return false;
 			const user = Meteor.users.findOne({_id: userId});
-			//console.log(user);
-			return user.role == "admin";	
+			return doc._id == userId || user.role == "admin";
 		},
 		remove(userId, doc){
 			const user = Meteor.users.findOne({_id: userId});
-			//console.log(user.profile);
 			return user.role == "admin";
 		}
 	});

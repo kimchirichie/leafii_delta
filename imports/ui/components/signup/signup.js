@@ -21,6 +21,10 @@ class Signup {
 		
 	}
 
+	test(user){
+		console.log(user.profile.location.formatted_address);
+	}
+
 	facebook(){
 		Meteor.loginWithFacebook({requestPermissions: ['user_friends', 'public_profile', 'email']}, function(err){
 			if (err) {
@@ -40,6 +44,7 @@ class Signup {
 		user.profile.available = false;
 		user.profile.views = 0;
 		user.profile.likes = [];
+		user.profile.location = user.profile.location.formatted_address;
 
 		if (this.confirm !== user.password){
 			Bert.alert('Your password does not match', 'danger', 'growl-top-right');
