@@ -1,58 +1,71 @@
-.top{
-	border-bottom: thin solid #d3d3d3;
-}
-
 #toolbar{
 
-	.signup {
-		background-color: $leafii-theme;
-	}
+	border-bottom: thin solid #d3d3d3;
 
-	width:80%;
+	.top{
 
-	.logo {
-		height: 100%;
-		padding: 5px;
-	}
-
-	.search-top-field {
-		
-		color: black;
-
-		input {
-			padding: 5px;
-			font-size: 17px;
-			font-family: raleway;
-			width: 300px;
+		.signup {
+			background-color: $leafii-theme;
 		}
-	}
 
+		.posts {
 
-	.header {
-		padding:0%;
-		position: absolute;
-		background: white !important;
-	}
-
-	.pages{
-
-		a:first-child {
-			&:hover {
-				color: #ea3354;
-			}
+			background-color: #ea3354;
 		}
-		
-		a {
-			margin: 10px;
-			font-size: 15px;
-			cursor: pointer;
-			font-weight: bold;
+
+		.btn {
+			margin: 0;
 			color: black;
+			font-weight: bold;
+		}
+
+
+		width:80%;
+
+		.logo {
+			height: 100%;
+			padding: 5px;
+		}
+
+		.search-top-field {
 			
-			&:hover {
-				color: #069e7e;
+			color: black;
+
+			input {
+				padding: 5px;
+				font-size: 17px;
+				font-family: raleway;
+				width: 300px;
 			}
 		}
 
+
+		.header {
+			padding:0%;
+			position: absolute;
+			background: white !important;
+		}
+
+		.pages{
+
+			a:first-child {
+				&:hover {
+					color: #ea3354;
+				}
+			}
+			
+			a {
+				margin: 10px;
+				font-size: 15px;
+				cursor: pointer;
+				font-weight: bold;
+				color: black;
+				
+				&:hover {
+					color: #069e7e;
+				}
+			}
+
+		}
 	}
 }

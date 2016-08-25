@@ -1,5 +1,5 @@
-<div class="top" layout="column" layout-align="start center">
-	<md-toolbar id="toolbar">
+<div id="toolbar" layout="column" layout-align="start center">
+	<md-toolbar class="top">
 		<div class="header md-toolbar-tools">
 			<a class="logo clickable" ng-click="header.gohome()"><img class="logo" src="/images/leafii.svg" alt="Leafii"/></a>
 			<div layout="row" layout-align="start center" class="search-top-field">
@@ -10,12 +10,11 @@
 
 			<span flex></span>
 			<div class="pages" layout="row">
-				<md-button ng-hide="header.rootScope.currentUser" ng-click="header.state.go('signup')" class="md-raised signup">Submit my website</md-button>
-				<a ui-sref="posts">Roasts</a>
-				<a ng-hide="header.rootScope.currentUser" ui-sref="signin">Login</a>
-				<a ng-hide="header.rootScope.currentUser" ui-sref="signup">Sign Up</a>
-				<a ng-show="header.rootScope.currentUser" ui-sref="profile">Profile</a>
-				<a ng-show="header.rootScope.currentUser" ng-click="header.logout()">Logout</a>
+				<md-button ui-sref="signup" class="md-raised signup btn" ng-hide="header.rootScope.currentUser" >Submit my website</md-button>
+				<md-button ui-sref="posts" class="md-raised posts btn">Roasts</md-button>
+				<md-button ui-sref="signin" class="md-raised btn" ng-hide="header.rootScope.currentUser">Login</md-button>
+				<md-button ui-sref="profile" class="md-raised btn" ng-show="header.rootScope.currentUser">Profile</md-button>
+				<md-button ng-click="header.logout()" class="md-raised btn" ng-show="header.rootScope.currentUser">Sign out</md-button>
 			</div>
 		</div>
 	</md-toolbar>
