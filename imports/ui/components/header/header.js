@@ -18,6 +18,10 @@ class Header {
 		this.rootScope.results = [];
 		this.rootScope.searching = false;
     	Meteor.subscribe("logs");
+    	this.rootScope.$on("search",function(event,data){
+    		this.rootScope.query = data;
+    		this.search();
+    	}.bind(this))
 	}
 
 	search(){

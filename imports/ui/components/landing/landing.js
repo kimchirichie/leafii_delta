@@ -76,8 +76,8 @@ class Landing {
 		}
 	}
 
-	test(){
-		console.log(this.scope);
+	search(term){
+		this.rootScope.$emit("search",term)
 	}
 }
 
