@@ -60,7 +60,7 @@ class Landing {
 
 	viewLog(user){	
 		var viewer = Meteor.userId() || 'guest';
-		Logs.insert({type: 'view', createdAt: new Date(), details: {viewer_user_id: viewer, target_user_id: user._id, search_keys: 'Browse', url: user.profile.url}});
+		Logs.insert({type: 'view', createdAt: new Date(), details: {viewer_user_id: viewer, target_user_id: user._id, type: 'browse', url: user.profile.url}});
 		Meteor.call('addToViews',user._id);
 	}
 

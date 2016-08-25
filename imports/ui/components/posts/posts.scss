@@ -79,6 +79,7 @@
 	.profileIcon {
 		height: 40px;
 		width: 40px;		
+		vertical-align: middle;
 		border-radius: 50% !important;
 	}
 
@@ -305,3 +306,21 @@
 
 }
 
+#portfolio {
+
+	md-toolbar {
+		background-color: $leafii-theme;
+	}
+
+	.toolbarButtoon:hover {
+		color: $delete
+	}
+
+	.portfolioLink {
+		font-family: raleway;
+		text-transform: none;
+    	font-size: 1.5em;
+	    font-weight: bold;
+	    overflow: hidden;
+	}
+}

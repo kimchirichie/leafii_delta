@@ -75,6 +75,14 @@ $ sudo iptables -t nat -A OUTPUT -d 208.75.74.227 -j DNAT --to-destination 10.1.
 $ sudo iptables -t nat -A INPUT -s 10.1.56.6 -j SNAT --to-source 208.75.74.227
 ```
 
+### Thumbnail handling
+
+Install GraphicsMagick to resize the uploaded images with the following command:
+
+```sh
+$ sudo apt-get install graphicsmagick
+```
+
 ### Running prerenderer for google crawlers
 
 Add these lines to ~/.bash_profile with the desired port and url:

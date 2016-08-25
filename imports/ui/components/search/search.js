@@ -26,7 +26,7 @@ class Search {
 	viewLog(user){
 		var viewer = 'guest';
 		if(Meteor.userId()) viewer = Meteor.userId();
-		Logs.insert({type: 'view', createdAt: new Date(), details: {viewer_user_id: viewer, target_user_id: user._id, search_keys: this.rootScope.query, url: user.profile.url}});
+		Logs.insert({type: 'view', createdAt: new Date(), details: {viewer_user_id: viewer, target_user_id: user._id, type: this.rootScope.query, url: user.profile.url}});
 		Meteor.call('addToViews',user._id);
 	}
 

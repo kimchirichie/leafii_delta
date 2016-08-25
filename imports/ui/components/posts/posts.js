@@ -6,6 +6,7 @@ import { Accounts } from 'meteor/accounts-base';
 import template from './posts.html';
 import frame from './frame.html';
 import { Posts } from '../../../api/posts/index';
+import { Logs } from '../../../api/logs/index';
 
 class Postings {
 
@@ -44,6 +45,7 @@ class Postings {
 			}
 		});
 		Meteor.subscribe("posts");
+    Meteor.subscribe("logs");
 	}
 
 	openTab(tab){
@@ -84,7 +86,7 @@ class Postings {
 	}
 
 	absolutify(url){
-		return this.sce.trustAsResourceUrl('http://' + url.replace(/https:|http:|\/\//gi, ""));
+		return this.sce.trustAsResourceUrl('https://' + url.replace(/https:|http:|\/\//gi, ""));
 	}
 
 	cancel(){
@@ -254,7 +256,7 @@ class Postings {
 		}
 	}
 
-	showurl(ev, url) {
+	showurl(ev, url, name) {
 		this.mdDialog.show({
 	        controller: DialogController,
 	        controllerAs: 'frame',
@@ -267,7 +269,10 @@ class Postings {
 	        resolve:{
 	      		url: function(){
 	      			return url;
-	        	}
+	        	},
+            name: function(){
+              return name;
+            }
 	        }
 	    }).then(function(answer) {
 	      // $scope.status = 
@@ -277,12 +282,27 @@ class Postings {
 	      console.log('You cancelled the dialog.');
 	    });
 	}
+
+  viewLog(post){  
+    var viewer = Meteor.userId() || 'guest';
+    Logs.insert({type: 'view', createdAt: new Date(), details: {viewer_user_id: viewer, target_user_id: post.poster_user_id, type: 'posts', url: post.url}});
+    Meteor.call('addToViews',post.poster_user_id);
+  }
+
+  getThumbUrl(id) {
+  	var user = Meteor.users.find({_id: id}).fetch()[0];
+  	if(user) return user.profile.thumbnail;
+  }
+
+  getMyThumbUrl() {
+  	if(Meteor.userId()) return Meteor.user().profile.thumbnail;
+  }
 }
 
-function DialogController($reactive, $scope, $mdDialog, url) {
+function DialogController($reactive, $scope, $mdDialog, url, name) {
 	"ngInject";
 	$reactive(this).attach($scope);
-	console.log('inside dialog controller: ', url);
+	//console.log('inside dialog controller: ', url);
 	$scope.hide = function() {
 		$mdDialog.hide();
 	};
