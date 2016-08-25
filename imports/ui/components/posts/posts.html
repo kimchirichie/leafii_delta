@@ -17,7 +17,7 @@
 						<span>posted {{posts.getTimeElapsed(posts.post.date,false)}}</span>
 					</div>
 					<div>
-						<md-button class="md-primary md-raised showPage" ng-click="posts.showurl($event, posts.absolutify(posts.post.url))">Show</md-button>
+						<md-button class="md-primary md-raised showPage" ng-click="posts.showurl($event, posts.absolutify(posts.post.url, posts.post.name));posts.viewLog(posts.post)">Show</md-button>
 					</div>
 				</div>
 			</div>
@@ -119,7 +119,7 @@
 								<span>posted {{posts.getTimeElapsed(post.date,false)}}</span>
 							</div>
 							<div>
-								<md-button class="md-primary md-raised showPage" ng-click="posts.showurl($event, posts.absolutify(post.url))">Show</md-button>
+								<md-button class="md-primary md-raised showPage" ng-click="posts.showurl($event, posts.absolutify(post.url), post.name); posts.viewLog(post)">Show</md-button>
 							</div>
 						</div>
 

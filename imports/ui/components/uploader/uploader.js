@@ -44,7 +44,9 @@ class ImageUploader {
 	save() {
 
 		upload(this.myCroppedImage, this.currentFile.name, this.$bindToContext((file) => {
-				Meteor.users.update(Meteor.userId(), {$set: {"profile.image": file.url}}, false, false);
+				secureUrl = 'https://' + file.url.replace(/https:|http:|\/\//gi, "");
+				secureUrl = secureUrl.replace(/:3000/gi, "");
+				Meteor.users.update(Meteor.userId(), {$set: {"profile.image": secureUrl}}, false, false);
 				this.uploaded.push(file);
 				this.reset();
 				this.rootScope.$broadcast('editDone');
