@@ -26,12 +26,9 @@ class Potato {
 	loccheck(user){
 		console.log(user);
 		if (user.profile.location && user.profile.location.formatted_address) {
-			// user.profile.location = user.profile.location.formatted_address;
-			// this.save(user);
-			return "fix required";
-
-		} else {
-			return "nothing wrong";
+			user.profile.location = user.profile.location.formatted_address;
+			this.save(user);
+			return "fix required. so fixed";
 		}
 	}
 
