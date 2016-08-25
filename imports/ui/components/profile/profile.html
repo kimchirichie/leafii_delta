@@ -38,21 +38,8 @@
 
 
 			<div class="profileInfo" flex-gt-md="70" flex="100">
-
-				<div ng-show="profile.tabOpen('history')">
-					<h2 class="noTitleMargin">Recent Posts</h2>
-					<h3 ng-show="!profile.posts.length">No posts</h3>
-					<md-card class="recentPosts" ng-repeat="post in profile.posts">
-						<a ui-sref="posts({post_id:post._id})"><h2>{{post.title}}</h2></a>
-						<p>{{post.date | date:'mediumDate'}}</p>
-						<p>{{post.content}}</p>
-						<p>{{post.comments.length}} comments</p>
-					</md-card>
-				</div>
-
-				<div class="userProfile" ng-show="profile.tabOpen('edit')">
+				<div class="userProfile" ng-if="profile.tabOpen('edit')">
 					<ng-form>
-						
 						<md-button class="verifyBtn md-raised full-width" ng-hide="profile.user.emails[0].verified" ng-click="profile.verify()">verify email</md-button>
 
 						<div class="name full-width" layout="row">
@@ -96,7 +83,18 @@
 					</ng-form>
 				</div>
 
-				<div class="userProfile" ng-show="profile.tabOpen('password')">
+				<div ng-if="profile.tabOpen('history')">
+					<h2 class="noTitleMargin">Recent Posts</h2>
+					<h3 ng-show="!profile.posts.length">No posts</h3>
+					<md-card class="recentPosts" ng-repeat="post in profile.posts">
+						<a ui-sref="posts({post_id:post._id})"><h2>{{post.title}}</h2></a>
+						<p>{{post.date | date:'mediumDate'}}</p>
+						<p>{{post.content}}</p>
+						<p>{{post.comments.length}} comments</p>
+					</md-card>
+				</div>
+
+				<div class="userProfile" ng-if="profile.tabOpen('password')">
 					<form class="changePass" ng-submit="profile.changePassword()"> 
 						<md-input-container class="md-block" flex-gt-sm>
 							<label>Old Password</label>

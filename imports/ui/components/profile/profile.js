@@ -79,7 +79,7 @@ class Profile {
 		var lastName = user.profile.lastName;
 		var occupation = user.profile.occupation;
 		var url = user.profile.url;
-		var location = user.profile.location;
+		var location = user.profile.location.formatted_address || user.profile.location;
 
 		if(!(firstName && lastName && occupation && location)){
 			Bert.alert('Profile Error: Please fill in the required fields', 'danger', 'growl-top-right');
@@ -96,7 +96,8 @@ class Profile {
 	}
 
 	absolutify(url){
-		return 'http://' + url.replace(/https:|http:|\/\//gi, "");
+		if(!url) return "";
+		return "http://" + url.replace(/https:|http:|\/\//gi, "");
 	}
 
 	crawl(user_id){
