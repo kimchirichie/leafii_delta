@@ -144,7 +144,7 @@ $ meteor mongo
 
 ### Calculating the keywords
 
-To parse the keywords out of the database, use [leafii_crawler][https://github.com/sinr0202/leafii_crawler]
+To parse the keywords out of the database, use [leafii_crawler](https://github.com/sinr0202/leafii_crawler)
 
 ### Setting up the ssh tunnel server
 
