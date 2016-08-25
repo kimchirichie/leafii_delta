@@ -13,8 +13,7 @@
 					<h1>{{posts.post.title}}</h1>
 					<p>{{posts.post.content}}</p>
 					<div layout="row" layout-xs="column">
-						<p class="noMargin"><i class="zmdi zmdi-account-circle"></i> {{posts.post.name}} &nbsp</p>
-						<span>posted {{posts.getTimeElapsed(posts.post.date,false)}}</span>
+						<p><img class="profileIcon" ng-src="{{posts.getThumbUrl(posts.post.poster_user_id) ? posts.getThumbUrl(posts.post.poster_user_id) : '/images/defaultProfilePic.png'}}"/>posted {{posts.getTimeElapsed(posts.post.date,false)}}</p>
 					</div>
 					<div>
 						<md-button class="md-primary md-raised showPage" ng-click="posts.showurl($event, posts.absolutify(posts.post.url, posts.post.name));posts.viewLog(posts.post)">Show</md-button>
@@ -28,7 +27,7 @@
 									
 					<div ng-show="!editComment">
 						<div layout="row" layout-align="start center">
-							<img class="profileIcon" ng-src="/images/defaultProfilePic.png"/>
+							<img class="profileIcon" ng-src="{{posts.getThumbUrl(comment.commenter_user_id) ? posts.getThumbUrl(comment.commenter_user_id) : '/images/defaultProfilePic.png'}}"/>
 							<b>{{comment.deleted ? "[deleted]" : comment.name}}</b>
 							<p>{{comment.deleted ? "[deleted]" : comment.comment}}</p>
 						</div>
@@ -48,7 +47,7 @@
 					<form ng-show="editComment" class="full-width" ng-submit="posts.editComment(comment.date, posts.post._id, comment.comment);editComment=false" layout="column">
 						<div layout="column" layout-align="start start" class="postComment">
 							<div layout="row" class="full-width">
-								<img class="profileIcon" ng-src="/images/defaultProfilePic.png"/>
+								<img class="profileIcon" ng-src="{{posts.getMyThumbUrl() ? posts.getMyThumbUrl() : '/images/defaultProfilePic.png'}}"/>
 								<input required ng-model="comment.comment" type="text" name="comment"/>
 							</div>
 							<p class="cancelEdit" ng-click="posts.editComment(comment.date, posts.post._id, posts.temp_comment);editComment=false;posts.hideNewComment=false">Cancel</p>
@@ -115,8 +114,7 @@
 							<a ui-sref="posts({post_id:post._id})"><h2>{{post.title}}</h2></a>
 							<p>{{post.content}}</p>
 							<div layout="row" layout-xs="column">
-								<p class="noMargin"><i class="zmdi zmdi-account-circle"></i> {{post.name}} &nbsp</p>
-								<span>posted {{posts.getTimeElapsed(post.date,false)}}</span>
+						<p><img class="profileIcon" ng-src="{{posts.getThumbUrl(post.poster_user_id) ? posts.getThumbUrl(post.poster_user_id) : '/images/defaultProfilePic.png'}}"/>posted {{posts.getTimeElapsed(post.date,false)}}</p>
 							</div>
 							<div>
 								<md-button class="md-primary md-raised showPage" ng-click="posts.showurl($event, posts.absolutify(post.url), post.name); posts.viewLog(post)">Show</md-button>

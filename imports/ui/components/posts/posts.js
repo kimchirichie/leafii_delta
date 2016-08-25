@@ -288,6 +288,15 @@ class Postings {
     Logs.insert({type: 'view', createdAt: new Date(), details: {viewer_user_id: viewer, target_user_id: post.poster_user_id, type: 'posts', url: post.url}});
     Meteor.call('addToViews',post.poster_user_id);
   }
+
+  getThumbUrl(id) {
+  	var user = Meteor.users.find({_id: id}).fetch()[0];
+  	if(user) return user.profile.thumbnail;
+  }
+
+  getMyThumbUrl() {
+  	if(Meteor.userId()) return Meteor.user().profile.thumbnail;
+  }
 }
 
 function DialogController($reactive, $scope, $mdDialog, url, name) {

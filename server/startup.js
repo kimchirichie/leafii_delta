@@ -4,6 +4,7 @@ import { Profile_likes } from '../imports/api/profile_likes/index';
 import { Posts } from '../imports/api/posts/index';
 import { Keywords } from '../imports/api/keywords/index';
 import { Words } from '../imports/api/count/index';
+import { Thumbs } from '../imports/api/images/index';
 
 Meteor.startup(()=>{
 
@@ -242,6 +243,13 @@ Meteor.startup(()=>{
 				console.log("Profile Already Updated")
 			}
 			console.log(Meteor.user());
+		},
+
+		saveThumb(originalId) {
+			var image = Thumbs.find({originalId: originalId}).fetch()[0];
+			var secureUrl = "https://" + this.connection.httpHeaders.host + "/ufs/thumbs/" + image._id + "/" + image.name
+			secureUrl = secureUrl.replace(/:3000/gi, "");
+			Meteor.users.update(Meteor.userId(), {$set: {"profile.thumbnail": secureUrl}}, false, false);
 		}
 	});
 });

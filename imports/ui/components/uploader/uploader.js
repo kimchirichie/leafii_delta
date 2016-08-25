@@ -47,6 +47,7 @@ class ImageUploader {
 				secureUrl = 'https://' + file.url.replace(/https:|http:|\/\//gi, "");
 				secureUrl = secureUrl.replace(/:3000/gi, "");
 				Meteor.users.update(Meteor.userId(), {$set: {"profile.image": secureUrl}}, false, false);
+				Meteor.call('saveThumb', file._id);
 				this.uploaded.push(file);
 				this.reset();
 				this.rootScope.$broadcast('editDone');
