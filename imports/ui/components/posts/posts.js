@@ -6,7 +6,6 @@ import { Accounts } from 'meteor/accounts-base';
 import template from './posts.html';
 import frame from './frame.html';
 import { Posts } from '../../../api/posts/index';
-import { name as PortfolioPreview } from '../portfolio/portfolio';
 
 class Postings {
 
@@ -16,7 +15,6 @@ class Postings {
 		this.stateParams = $stateParams;
 		this.rootScope = $rootScope;
 		this.mdDialog = $mdDialog;
-/*	    this.currentDialogUrl = "";*/
 		this.state = $state;
 		this.sce = $sce;
 		this.submitPost = false;
@@ -199,6 +197,7 @@ class Postings {
 	// }
 
 	upvotedCheck(upvotes, id){
+    if(!upvotes) return false;
 		for(var i = 0; i < upvotes.length; i++){
 			if(upvotes[i].user == id){
 				return true;
@@ -284,13 +283,13 @@ function DialogController($reactive, $scope, $mdDialog, url) {
 	"ngInject";
 	$reactive(this).attach($scope);
 	console.log('inside dialog controller: ', url);
-	this.hide = function() {
+	$scope.hide = function() {
 		$mdDialog.hide();
 	};
-	this.cancel = function() {
+	$scope.cancel = function() {
 		$mdDialog.cancel();
 	};
-	this.answer = function(answer) {
+	$scope.answer = function(answer) {
 		$mdDialog.hide(answer);
 	};
 }

@@ -1,1 +1,18 @@
-<p>{{frame.url}}</p>
+<md-dialog aria-label='Portfolio' id='portfolio' flex="80" style='height: 80%'>
+ <form ng-cloak flex>
+   <md-toolbar>
+     <div class='md-toolbar-tools'>
+       <h2>Portfolio</h2>
+       <span flex></span>
+       <md-button class='md-icon-button' ng-click='cancel()'>
+        <i class='zmdi zmdi-close zmdi-hc-lg' aria-label='Close dialog'></i>
+       </md-button>
+     </div>
+    </md-toolbar>
+    <md-dialog-content flex style="position: relative">
+     <div class='md-dialog-content' flex style="padding: 0">
+       <iframe class='animated fadeIn' ng-src='{{frame.url}}' flex style="position: absolute; border: none; width: 100%; height: 100%;"></iframe>
+     </div>
+    </md-dialog-content>
+ </form>
+</md-dialog>
