@@ -74,8 +74,8 @@ class Landing {
 		return 'https://' + url.replace(/https:|http:|\/\//gi, "");
 	}
 
-	test(){
-		console.log(this.scope);
+	search(term){
+		this.rootScope.$emit("search",term)
 	}
 }
 

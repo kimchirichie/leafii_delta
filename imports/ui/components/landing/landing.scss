@@ -143,6 +143,12 @@ md-card-title {
 	border-radius: 50% !important;
 }
 
+.recentPic{
+	width:60px;
+	height:60px;
+	border-radius: 50% !important;
+}
+
 .footer {
   width: 100%;
   height: 100px;
@@ -191,6 +197,8 @@ md-card-title {
 		padding: 15px;
 
 		.viewed {
+			margin-left: 5px;
+			
 			&:hover {
 			color: $leafii-theme;
 			}
