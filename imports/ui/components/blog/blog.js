@@ -16,17 +16,14 @@ class Blog {
 				this.blogReady = true;
 				var blog = Blogs.findOne({_id:this.stateParams.blog_id});
 				if(blog){
-					console.log('single');
 					DocHead.removeDocHeadAddedTags();
 					DocHead.setTitle((blog.title || "Blog") + " - Leafii");
 					return [blog];
 
 				} else {
 					if (this.stateParams.blog_id){
-						console.log('no such blog');
 						return;
 					} else {
-						console.log('many blogs')
 						return Blogs.find();
 					}
 				}

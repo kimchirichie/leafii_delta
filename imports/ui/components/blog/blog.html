@@ -5,7 +5,7 @@
 </div>
 
 <div id="blog" layout="row" layout-align="center start">
-	<div layout="column" flex="80">
+	<div layout="column" flex="50">
 		<div ng-hide="blog.blogReady">
 			<div class="loadingData" layout="row" layout-xs="column" layout-align="center center">
 				<h1>Loading blog.....</h1>
@@ -24,7 +24,7 @@
 				<a ui-sref=blog({blog_id:article._id})><h1>{{article.title}}</h1></a>
 				<h4>{{article.author.firstName}} {{article.author. lastName}} || {{article.createdAt | date:'mediumDate'}}</h4>
 				<p ng-bind-html="article.content"></p>
-				<hr ng-show="$index < blog.blogs.length - 1">
+				<hr flex="80" ng-show="$index < blog.blogs.length - 1">
 			</div>
 		</div>
 	</div>

@@ -65,15 +65,13 @@ class Landing {
 	}
 
 	absolutify(url){
-		return 'http://' + url.replace(/https:|http:|\/\//gi, "");
+		if(!url) return "";
+		return "http://" + url.replace(/https:|http:|\/\//gi, "");
 	}
 
 	secureProtocol(url){
-		if(url){
-			return 'https://' + url.replace(/https:|http:|\/\//gi, "");
-		}else{
-			return "";
-		}
+		if(!url) return "";
+		return 'https://' + url.replace(/https:|http:|\/\//gi, "");
 	}
 
 	test(){

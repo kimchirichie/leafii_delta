@@ -10,6 +10,7 @@
 
 			<span flex></span>
 			<div class="pages" layout="row">
+				<md-button ng-hide="header.rootScope.currentUser" ng-click="header.state.go('signup')" class="md-raised signup">Submit my website</md-button>
 				<a ui-sref="posts">Roasts</a>
 				<a ng-hide="header.rootScope.currentUser" ui-sref="signin">Login</a>
 				<a ng-hide="header.rootScope.currentUser" ui-sref="signup">Sign Up</a>
