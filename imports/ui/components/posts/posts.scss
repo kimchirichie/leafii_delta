@@ -4,8 +4,6 @@
 	
 	padding-bottom: 50px;
 	background: #dcdcdc;
-	a { text-decoration: none; color:black; }
- 	a:visited { text-decoration: none; color:black; }
 
 	.submitPost {
 		background: white;
@@ -29,6 +27,21 @@
 			margin: 5px 0 10px 0;
 		}
 	}
+
+	.postData {
+		text-align: center;
+
+		i:first-child {
+			outline: 0;
+			cursor: pointer;
+		}
+
+		p {
+			text-align: center;
+			margin: 5px 0 10px 0;
+		}
+	}
+
 
 	.lightUp {
 		outline: 0;
@@ -59,10 +72,20 @@
 		}
 	}
 
+	.commentPadding {
+		padding: 10px;
+	}
+	
 	.profileIcon {
 		height: 40px;
 		width: 40px;		
 		border-radius: 50% !important;
+	}
+
+	.profileIconSquare {
+		height: 40px;
+		width: 40px;
+		padding-right: 0px;		
 	}
 
 	.postComment {

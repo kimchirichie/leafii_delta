@@ -10,19 +10,26 @@ class Blog {
 		'ngInject';
 		$reactive(this).attach($scope);
 		this.stateParams = $stateParams;
+		this.blogReady = false;
 		this.helpers({
 			blogs(){
-				if(this.stateParams.blog_id) return;
-				return Blogs.find();
-			},
-			blog(){
-				if(!this.stateParams.blog_id) return;
+				this.blogReady = true;
 				var blog = Blogs.findOne({_id:this.stateParams.blog_id});
-				if (blog){
-					DocHead.removeDocHeadAddedTags()
-					DocHead.setTitle("Leafii | " + blog.title);
-				} 
-				return blog;
+				if(blog){
+					console.log('single');
+					DocHead.removeDocHeadAddedTags();
+					DocHead.setTitle((blog.title || "Blog") + " - Leafii");
+					return [blog];
+
+				} else {
+					if (this.stateParams.blog_id){
+						console.log('no such blog');
+						return;
+					} else {
+						console.log('many blogs')
+						return Blogs.find();
+					}
+				}
 			}
 		});
 		Meteor.subscribe("blogs");

@@ -6,7 +6,7 @@
 		<div class="adminSearch" layout="row" layout-align="space-between center">
 			<form layout="row" ng-submit="header.search()">
 				<md-input-container class="md-block" flex-gt-sm>
-		    		<input placeholder="Search" class="search-top" ng-model="test">
+		    		<input placeholder="Search" class="search-top" ng-model="potato.query">
 				</md-input-container>
 			</form>
 			<md-button class="md-raised" ng-click="potato.reparse_all()">reparse all users</md-button>
@@ -31,9 +31,10 @@
 						<p>Last Name: {{user.profile.lastName}}</p>
 						<p>Email: {{user.emails[0].address}}</p>
 						<p>Verified: {{user.emails[0].verified}}</p>
-						<p>Occupation: {{user.profile.occupation}}</p>
+						<p>Occupation: {{user.profile.occupation || "not entered"}}</p>
 						<p>Available: {{user.profile.available}}</p>
 						<p>Page Views: {{user.profile.views}}</p>
+						<p>Photo: {{user.profile.image || "not uploaded"}}</p>
 						<p>Likes: {{user.profile.likes.length}}</p>
 					</div>
 

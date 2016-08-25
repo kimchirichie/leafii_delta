@@ -32,8 +32,18 @@ class Press {
 		if(blog._id){
 			this.update(blog);
 		} else {
-			Blogs.insert({title:blog.title, content:blog.content, createdAt: new Date()});
-			Bert.alert("Blog published","success", "growl-top-right");
+			var user = Meteor.user();
+			Blogs.insert({
+				title:blog.title,
+				content:blog.content,
+				author:{
+					user_id: user._id,
+					firstName: user.profile.firstName,
+					lastName: user.profile.lastName
+				},
+				createdAt: new Date()});
+			Bert.alert("Blog published",
+				"success", "growl-top-right");
 			this.close();
 		}
 	}

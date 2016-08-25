@@ -7,6 +7,10 @@ if (Meteor.isServer) {
 	Meteor.publish('posts', function(){
 		return Posts.find({});
 	});
+
+	Meteor.publish('latest_post',function(){
+		return Posts.find({$query:{},$orderby:{date:-1}},{limit:1});
+	});
 }
 
 Posts.allow({
