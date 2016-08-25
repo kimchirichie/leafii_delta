@@ -14,12 +14,25 @@ class Potato {
 		this.editing;
 		this.state = $state;
 		this.wait = false;
+		this.query = "";
 		this.helpers({
 			users(){
-				return Meteor.users.find({"profile.firstName": this.getReactively('query')});
+				return Meteor.users.find();
 			}
 		});
-		Meteor.subscribe("potato");
+		Meteor.subscribe("potato", () =>[this.getReactively('query')]);
+	}
+
+	loccheck(user){
+		console.log(user);
+		if (user.profile.location && user.profile.location.formatted_address) {
+			// user.profile.location = user.profile.location.formatted_address;
+			// this.save(user);
+			return "fix required";
+
+		} else {
+			return "nothing wrong";
+		}
 	}
 
 	display(user){
@@ -56,8 +69,8 @@ class Potato {
 				"emails[0].address":user.emails[0].address,
 				"profile.occupation": user.profile.occupation,
 				"profile.available": user.profile.available,
-				"profile.image": user.profile.image
-
+				"profile.image": user.profile.image,
+				"profile.location": user.profile.location
 			}
 		});
 		user.editing = false;
@@ -83,40 +96,39 @@ class Potato {
 	}
 
 	send_reset(email){
+		this.wait = true;
 
-    this.wait = true;
+		Accounts.forgotPassword({email: email}, function(error){
 
-    Accounts.forgotPassword({email: email}, function(error){
+		  if(error){
+			Bert.alert(error.reason, 'danger', 'growl-top-right');
+			this.timeout(function(){this.wait = false;}.bind(this), 1300);
+		  }
+		  else {
+			Bert.alert('Email Sent! Please check your email to reset password', 'success', 'growl-top-right');
+			this.timeout(function(){this.wait = false;}.bind(this), 1300);
+			this.email = '';
+		  }
 
-      if(error){
-        Bert.alert(error.reason, 'danger', 'growl-top-right');
-        this.timeout(function(){this.wait = false;}.bind(this), 1300);
-      }
-      else {
-        Bert.alert('Email Sent! Please check your email to reset password', 'success', 'growl-top-right');
-        this.timeout(function(){this.wait = false;}.bind(this), 1300);
-        this.email = '';
-      }
+		}.bind(this));
+	}
 
-    }.bind(this));
-  	}
-
-  	reparse_user(user_id){
+	reparse_user(user_id){
 		confirmed = swal({
-  		title: "Are you sure?",
-  		text: "It will delete all the previous keywords & re-parse the user's website.",
-  		type: "warning",
-  		// #DD6B55
-  		showCancelButton: true,
-  		confirmButtonColor: "#3edeaa",
- 		confirmButtonText: "Yes, re-parse it!",
-  		closeOnConfirm: true
+		title: "Are you sure?",
+		text: "It will delete all the previous keywords & re-parse the user's website.",
+		type: "warning",
+		// #DD6B55
+		showCancelButton: true,
+		confirmButtonColor: "#3edeaa",
+		confirmButtonText: "Yes, re-parse it!",
+		closeOnConfirm: true
 		},function(){
 			Meteor.call('startCrawl', user_id, function (err, res) {
 			  if (err) {
-			    Bert.alert('Keywords Update Failed', 'danger');
+				Bert.alert('Keywords Update Failed', 'danger');
 			  } else {
-			    Bert.alert('Keywords Updated','success')
+				Bert.alert('Keywords Updated','success')
 			  }
 			});
 		})
@@ -124,20 +136,20 @@ class Potato {
 
 	reparse_all(){
 		confirmed = swal({
-  		title: "Are you sure?",
-  		text: "It will delete all the previous keywords & re-parse all users' website.",
-  		type: "warning",
-  		// #DD6B55
-  		showCancelButton: true,
-  		confirmButtonColor: "#3edeaa",
- 		confirmButtonText: "Yes, re-parse it!",
-  		closeOnConfirm: true
-  		},function(){
+		title: "Are you sure?",
+		text: "It will delete all the previous keywords & re-parse all users' website.",
+		type: "warning",
+		// #DD6B55
+		showCancelButton: true,
+		confirmButtonColor: "#3edeaa",
+		confirmButtonText: "Yes, re-parse it!",
+		closeOnConfirm: true
+		},function(){
 			Meteor.call('allCrawl', function (err, res) {
 			  if (err) {
-			  	Bert.alert('Keywords Update Failed', 'danger');
+				Bert.alert('Keywords Update Failed', 'danger');
 			  } else {
-			    Bert.alert('Keywords Updated','success')
+				Bert.alert('Keywords Updated','success')
 			  }
 			});
 		})

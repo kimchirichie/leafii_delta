@@ -15,6 +15,7 @@
 		<md-card class="card" ng-repeat="user in potato.users">
 			<div class="userName" ng-hide="potato.showing(user)" ng-click="potato.display(user)">
 				<b>{{user.profile.firstName}} {{user.profile.lastName}}</b>
+				<p style="color:red">{{potato.loccheck(user)}}</p>
 			</div>
 
 			<md-card-content layout="column" layout-align="start center" ng-show="potato.showing(user) && !potato.editing(user)">
@@ -35,7 +36,7 @@
 						<p>Available: {{user.profile.available}}</p>
 						<p>Page Views: {{user.profile.views}}</p>
 						<p>Photo: {{user.profile.image || "not uploaded"}}</p>
-						<p>Likes: {{user.profile.likes.length}}</p>
+						<p>Likes: {{user.profile.likes.length}}</p>z
 					</div>
 
 					<div layout="column" layout-align="center end">

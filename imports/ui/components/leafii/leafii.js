@@ -35,7 +35,7 @@ class Leafii{
 		$reactive(this).attach($scope);
 
 		$rootScope.$on('$stateChangeError', function(e, toState, toParams, fromState, fromParams, error){
-			console.log('stat change error detected!', error);
+			console.log('state change error detected!', error);
 			$state.go('error', {reason: error});
 		});
 	}

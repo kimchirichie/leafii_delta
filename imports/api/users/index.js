@@ -5,13 +5,18 @@ if (Meteor.isServer) {
 		return Meteor.users.find({},{fields: {profile:1, createdAt: 1, role: 1}});
 	});
 
-	Meteor.publish('potato', function(){
+	Meteor.publish('potato', function(searchString){
 		const user = Meteor.users.findOne(this.userId);
-		if(user.role == "admin"){
-			return Meteor.users.find({});
-		} else {
-			return this.ready();
+		if(user.role != "admin") return this.ready();
+
+		const selector = {};
+		if (typeof searchString === 'string' && searchString.length) {
+			selector.profile.firstName = {
+				$regex: `.*${searchString}.*`,
+				$options : 'i'
+			};
 		}
+		return Meteor.users.find(selector);
 	});
 
 	Meteor.users.allow({
