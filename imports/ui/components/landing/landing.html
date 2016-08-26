@@ -8,7 +8,7 @@
 		<div layout="row" layout-xs="column" layout-sm="column" layout-align="center center">
 			
 			<a ng-click="landing.viewLog(user)" href="{{landing.absolutify(landing.user[0].profile.url)}}" target="_blank">
-				<md-card class="md-default-theme candidates recentGrid" layout="row" layout-align="start start">
+				<md-card class="md-default-theme candidates recentGrid" layout="row" layout-align="center center">
 					<div layout-align="center center">
 						<img class="recentPic" ng-src="{{landing.user[0].profile.image ? landing.secureProtocol(landing.user[0].profile.image) : 'images/defaultProfilePic.png'}}"/>
 					</div>
@@ -20,7 +20,7 @@
 			</a>
 
 			
-			<a ng-click="landing.search(landing.lastSearch[0].details.search_keys)" class="viewed">
+			<a ng-click="landing.search(landing.lastSearch[0].details.search_keys)">
 				<md-card class="md-default-theme candidates recentGrid" layout="column" layout-align="center center">
 					<h2>Recently Searched</h2>
 					<p>{{landing.lastSearch[0].details.search_keys ? landing.lastSearch[0].details.search_keys: '' | limitTo: 28 }}{{landing.lastSearch[0].details.search_keys.length > 28 ? '...' : ''}}</p>
@@ -30,7 +30,7 @@
 
 			<a  ui-sref="posts({post_id:landing.latestPost[0]._id})">
 				<div>
-					<md-card class="md-default-theme recentGrid" layout="row" layout-align="start center">
+					<md-card class="md-default-theme recentGrid" layout="row" layout-align="center center">
 						<img class="recentPic" ng-src="{{landing.postUser[0].profile.image ? landing.secureProtocol(landing.postUser[0].profile.image) : 'images/defaultProfilePic.png'}}"/>
 						<div class="postContent viewed" layout="column" layout-align="center center">
 							<h2>Recently Posted</h2>

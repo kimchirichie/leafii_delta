@@ -193,15 +193,17 @@ md-card-title {
 	.recentGrid {
 		width: 300px;
 		height: 70px;
-		padding: 15px;
+		padding: 15px;	
+		cursor: pointer;
+		
+		&:hover {
+			color: $leafii-theme;
+		}
 
 		.viewed {
-			margin-left: 5px;
-			
-			&:hover {
-			color: $leafii-theme;
-			}
+			margin-left: 10px;
 		}
+
 	}
 
 	a { 

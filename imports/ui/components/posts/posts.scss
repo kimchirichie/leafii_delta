@@ -230,13 +230,13 @@
 	}
 
 	.comments {
-		width: 100%;
+		width: 80%;
+		box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 
 		.comment {
-			padding: 20px;
-			border: thin solid #f3f0f0;
+			padding: 10px;
 			background: #f0f8ff;
-			box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+			border-top: thin solid grey;
 
 			b {
 				margin-left: 10px;
@@ -264,10 +264,6 @@
 					&:hover {
 						color: $leafii-theme;
 					}
-				}
-
-				.time {
-					margin-top: 10px;
 				}
 
 			}
