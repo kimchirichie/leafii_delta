@@ -1,5 +1,73 @@
 <title>Post & Roast - Leafii</title>
 <div id="roast">
+	<div ng-show="posts.tabOpen('single')" class="singlePostBox" layout="column" layout-align="center center">
+		<div layout="column" class="singlePost">
+			<div layout="row">
+				<div flex="5" ng-show="!postEdit" layout="column" class="upPost">
+					<i class="zmdi zmdi-star-circle zmdi-hc-2x" ng-click="posts.upvotePost(posts.post._id)" ng-class="{upvoted : posts.upvotedCheck(posts.post.upvotes, posts.rootScope.currentUser._id)}"></i>
+					<p>{{posts.post.upvotes.length}}</p>
+					<i class="zmdi zmdi-comment-text zmdi-hc-2x"></i>
+					<p>{{posts.post.comments.length}}</p>
+				</div>
+				<div flex="90" class="postInfo" layout="column">
+					<h1>{{posts.post.title}}</h1>
+					<p>{{posts.post.content}}</p>
+					<div layout="row" layout-xs="column">
+						<p><img class="profileIcon" ng-src="{{posts.getThumbUrl(posts.post.poster_user_id) ? posts.getThumbUrl(posts.post.poster_user_id) : '/images/defaultProfilePic.png'}}"/>posted {{posts.getTimeElapsed(posts.post.date,false)}}</p>
+					</div>
+					<div>
+						<md-button class="md-primary md-raised showPage" ng-click="posts.showurl($event, posts.absolutify(posts.post.url), posts.post.name);posts.viewLog(posts.post)">Show</md-button>
+					</div>
+				</div>
+			</div>
+			<!-- Comments -->
+			<div class="comments" layout="column" ng-init="editComment=false;createComment=true">
+				
+				<div class="comment" layout="column" layout-align="start start" ng-repeat="comment in posts.post.comments | orderBy: '+date'">
+									
+					<div ng-show="!editComment">
+						<div layout="row" layout-align="start center">
+							<img class="profileIcon" ng-src="{{posts.getThumbUrl(comment.commenter_user_id) ? posts.getThumbUrl(comment.commenter_user_id) : '/images/defaultProfilePic.png'}}"/>
+							<b>{{comment.deleted ? "[deleted]" : comment.name}}</b>
+							<p>{{comment.deleted ? "[deleted]" : comment.comment}}</p>
+						</div>
+						<div class="commentTime" layout="row" ng-show="!comment.deleted">
+							<p><i class="zmdi zmdi-thumb-up" ng-click="posts.upvoteComment(posts.post._id, comment.commenter_user_id, comment.date)" ng-class="{upvoted : posts.upvotedCheck(comment.upvotes, posts.rootScope.currentUser._id)}"></i> &nbsp {{comment.upvotes.length}}</p>
+						</div>
+						<div class="commentTime" layout="row">
+							<p class="time">{{posts.getTimeElapsed(comment.date,false)}}</p>
+						</div>
+						<div layout="row" layout-align="space-between center" class="changeComment" ng-show="posts.rootScope.currentUser._id == comment.commenter_user_id && !comment.deleted">
+							<i class="zmdi zmdi-edit edit" ng-click="editComment=true;posts.hideNewComment=true;posts.editUserComment(comment.comment)"></i>
+							<i class="zmdi zmdi-delete del" ng-click="posts.deleteComment(comment.date, posts.post._id);posts.hideNewComment=false"></i>
+						</div>
+					</div>
+
+					<!-- Edit Comment -->
+					<form ng-show="editComment" class="full-width" ng-submit="posts.editComment(comment.date, posts.post._id, comment.comment);editComment=false" layout="column">
+						<div layout="column" layout-align="start start" class="postComment">
+							<div layout="row" class="full-width">
+								<img class="profileIcon" ng-src="{{posts.getMyThumbUrl() ? posts.getMyThumbUrl() : '/images/defaultProfilePic.png'}}"/>
+								<input required ng-model="comment.comment" type="text" name="comment"/>
+							</div>
+							<p class="cancelEdit" ng-click="posts.editComment(comment.date, posts.post._id, posts.temp_comment);editComment=false;posts.hideNewComment=false">Cancel</p>
+						</div>
+					</form>
+				</div>
+
+				<!-- Create New Comment -->
+				<form ng-submit="posts.createComment(posts.post._id)" layout="row" class="postComment" ng-show="!posts.hideNewComment">
+
+					<img class="commentPadding profileIconSquare" ng-src="/images/defaultProfilePic.png"/>
+					<div layout="row" class="full-width commentPadding">
+						<input required placeholder="write a comment..." ng-model="posts.newComment" type="text" name="comment">
+					</div>
+					
+				</form>
+
+			</div>
+		</div>
+	</div>
 
 	<div ng-show="posts.tabOpen('browse')">
 		<div class="intro">
@@ -78,75 +146,6 @@
 						<md-button class="md-raised md-primary" type="submit">Update</md-button>
 					</div>
 				</form>
-			</div>
-		</div>
-	</div>
-
-	<div ng-show="posts.tabOpen('single')" class="singlePostBox" layout="column" layout-align="center center">
-		<div layout="column" class="singlePost">
-			<div layout="row">
-				<div flex="5" ng-show="!postEdit" layout="column" class="upPost">
-					<i class="zmdi zmdi-star-circle zmdi-hc-2x" ng-click="posts.upvotePost(posts.post._id)" ng-class="{upvoted : posts.upvotedCheck(posts.post.upvotes, posts.rootScope.currentUser._id)}"></i>
-					<p>{{posts.post.upvotes.length}}</p>
-					<i class="zmdi zmdi-comment-text zmdi-hc-2x"></i>
-					<p>{{posts.post.comments.length}}</p>
-				</div>
-				<div flex="90" class="postInfo" layout="column">
-					<h1>{{posts.post.title}}</h1>
-					<p>{{posts.post.content}}</p>
-					<div layout="row" layout-xs="column">
-						<p><img class="profileIcon" ng-src="{{posts.getThumbUrl(posts.post.poster_user_id) ? posts.getThumbUrl(posts.post.poster_user_id) : '/images/defaultProfilePic.png'}}"/>posted {{posts.getTimeElapsed(posts.post.date,false)}}</p>
-					</div>
-					<div>
-						<md-button class="md-primary md-raised showPage" ng-click="posts.showurl($event, posts.absolutify(posts.post.url, posts.post.name));posts.viewLog(posts.post)">Show</md-button>
-					</div>
-				</div>
-			</div>
-			<!-- Comments -->
-			<div class="comments" layout="column" ng-init="editComment=false;createComment=true">
-				
-				<div class="comment" layout="column" layout-align="start start" ng-repeat="comment in posts.post.comments | orderBy: '+date'">
-									
-					<div ng-show="!editComment">
-						<div layout="row" layout-align="start center">
-							<img class="profileIcon" ng-src="{{posts.getThumbUrl(comment.commenter_user_id) ? posts.getThumbUrl(comment.commenter_user_id) : '/images/defaultProfilePic.png'}}"/>
-							<b>{{comment.deleted ? "[deleted]" : comment.name}}</b>
-							<p>{{comment.deleted ? "[deleted]" : comment.comment}}</p>
-						</div>
-						<div class="commentTime" layout="row" ng-show="!comment.deleted">
-							<p><i class="zmdi zmdi-thumb-up" ng-click="posts.upvoteComment(posts.post._id, comment.commenter_user_id, comment.date)" ng-class="{upvoted : posts.upvotedCheck(comment.upvotes, posts.rootScope.currentUser._id)}"></i> &nbsp {{comment.upvotes.length}}</p>
-						</div>
-						<div class="commentTime" layout="row">
-							<p class="time">{{posts.getTimeElapsed(comment.date,false)}}</p>
-						</div>
-						<div layout="row" layout-align="space-between center" class="changeComment" ng-show="posts.rootScope.currentUser._id == comment.commenter_user_id && !comment.deleted">
-							<i class="zmdi zmdi-edit edit" ng-click="editComment=true;posts.hideNewComment=true;posts.editUserComment(comment.comment)"></i>
-							<i class="zmdi zmdi-delete del" ng-click="posts.deleteComment(comment.date, posts.post._id);posts.hideNewComment=false"></i>
-						</div>
-					</div>
-
-					<!-- Edit Comment -->
-					<form ng-show="editComment" class="full-width" ng-submit="posts.editComment(comment.date, posts.post._id, comment.comment);editComment=false" layout="column">
-						<div layout="column" layout-align="start start" class="postComment">
-							<div layout="row" class="full-width">
-								<img class="profileIcon" ng-src="{{posts.getMyThumbUrl() ? posts.getMyThumbUrl() : '/images/defaultProfilePic.png'}}"/>
-								<input required ng-model="comment.comment" type="text" name="comment"/>
-							</div>
-							<p class="cancelEdit" ng-click="posts.editComment(comment.date, posts.post._id, posts.temp_comment);editComment=false;posts.hideNewComment=false">Cancel</p>
-						</div>
-					</form>
-				</div>
-
-				<!-- Create New Comment -->
-				<form ng-submit="posts.createComment(posts.post._id)" layout="row" class="postComment" ng-show="!posts.hideNewComment">
-
-					<img class="commentPadding profileIconSquare" ng-src="/images/defaultProfilePic.png"/>
-					<div layout="row" class="full-width commentPadding">
-						<input required placeholder="write a comment..." ng-model="posts.newComment" type="text" name="comment">
-					</div>
-					
-				</form>
-
 			</div>
 		</div>
 	</div>
