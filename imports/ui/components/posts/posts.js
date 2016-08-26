@@ -86,7 +86,11 @@ class Postings {
 	}
 
 	absolutify(url){
-		return this.sce.trustAsResourceUrl('https://' + url.replace(/https:|http:|\/\//gi, ""));
+		if(url){
+			if(url.substring(0,7) == "http://" || url.substring(0,8) == "https://") return this.sce.trustAsResourceUrl(url);
+			return this.sce.trustAsResourceUrl('http://' + url.replace(/https:|http:|\/\//gi, ""));
+		}
+		return "";
 	}
 
 	cancel(){
