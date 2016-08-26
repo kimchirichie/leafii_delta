@@ -1,20 +1,20 @@
-<md-dialog aria-label='Portfolio' id='portfolio' flex="80" style='height: 80%'>
+<md-dialog aria-label="Portfolio" id="portfolio" flex="80">
 	<form ng-cloak flex>
 		<md-toolbar>
-   			<div class='md-toolbar-tools' flex>
-    			<md-button class='toolbarButtoon' ui-sref='landing' layout='row'>
-       				<i class='zmdi zmdi-account-circle zmdi-hc-lg' aria-label='Go to profile'></i>
-       				<h2 class='portfolioLink' style="padding-left: 25px;">Portfolio of {{frame.name}}</h2>
+   			<div class="md-toolbar-tools" flex>
+    			<md-button class="toolbarButtoon" ui-sref="landing" layout="row">
+       				<i class="zmdi zmdi-account-circle zmdi-hc-lg" aria-label="Go to profile"></i>
+       				<h2 class="portfolioLink">Portfolio of {{frame.name}}</h2>
        			</md-button>
        			<span flex></span>
-       			<md-button class='md-icon-button toolbarButtoon' ng-click='cancel()'>
-        			<i class='zmdi zmdi-close zmdi-hc-lg' aria-label='Close dialog'></i>
+       			<md-button class="md-icon-button toolbarButtoon" ng-click="cancel()">
+        			<i class="zmdi zmdi-close zmdi-hc-lg" aria-label="Close dialog"></i>
        			</md-button>
      		</div>
     	</md-toolbar>
-    	<md-dialog-content flex style="position: relative">
-     		<div class='md-dialog-content' flex style="padding: 0">
-       			<iframe class='animated fadeIn' ng-src='{{frame.url}}' flex style="position: absolute; border: none; width: 100%; height: 100%;"></iframe>
+    	<md-dialog-content flex>
+     		<div>
+       			<iframe class="animated fadeIn" ng-src="{{frame.url}}" flex></iframe>
      		</div>
     	</md-dialog-content>
  	</form>

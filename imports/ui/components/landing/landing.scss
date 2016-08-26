@@ -181,7 +181,6 @@ md-card-title {
 
 .recent {
 	background: #27272b;
-	height: 90px;
 
 	h2 {
 		margin: 2px;
@@ -205,8 +204,15 @@ md-card-title {
 		}
 	}
 
-	a { text-decoration: none; color:black; }
-	a:visited { text-decoration: none; color:black; }
+	a { 
+		text-decoration: none; 
+		color:black; 
+
+		&:visited { 
+			text-decoration: none; 
+			color:black; 
+		}
+	}
 	
 }
 

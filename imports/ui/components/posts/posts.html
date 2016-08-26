@@ -45,9 +45,9 @@
 							<a ui-sref="posts({post_id:post._id})"><h2>{{post.title}}</h2></a>
 							<p>{{post.content}}</p>
 							<div layout="row" layout-xs="column">
-						<p><img class="profileIcon" ng-src="{{posts.getThumbUrl(post.poster_user_id) ? posts.getThumbUrl(post.poster_user_id) : '/images/defaultProfilePic.png'}}"/>posted {{posts.getTimeElapsed(post.date,false)}}</p>
+								<p><img class="profileIcon" ng-src="{{posts.getThumbUrl(post.poster_user_id) ? posts.getThumbUrl(post.poster_user_id) : '/images/defaultProfilePic.png'}}"/>posted {{posts.getTimeElapsed(post.date,false)}}</p>
 							</div>
-							<div>
+							<div>	
 								<md-button class="md-primary md-raised showPage" ng-click="posts.showurl($event, posts.absolutify(post.url), post.name); posts.viewLog(post)">Show</md-button>
 							</div>
 						</div>
