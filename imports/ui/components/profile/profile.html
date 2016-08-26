@@ -29,7 +29,7 @@
 				<image-uploader files="profile.user.images"></image-uploader>
 				<img ng-hide="profile.imgHide" ng-src="{{profile.user.profile.image ? profile.secureProtocol(profile.user.profile.image) : '/images/defaultProfilePic.png'}}"/>
 				<md-progress-circular ng-if="profile.progress" md-mode='indeterminate' md-diameter="100px"></md-progress-circular>
-				<a ng-href="{{profile.absolutify(profile.user.profile.url)}}" target="_blank"><h2>{{profile.user.profile.url}}</h2></a>
+				<a ng-click="profile.viewLog(profile.user)" ng-href="{{profile.absolutify(profile.user.profile.url)}}" target="_blank"><h2>{{profile.user.profile.url}}</h2></a>
 				<p ng-show="profile.user.profile.bio">{{profile.user.profile.bio}}</p>
 				<div ng-show="profile.rootScope.currentUser._id == profile.user_id" class="tabBtns" layout="row" layout-align="space-around center">
 					<md-button class="md-raised" ng-click="profile.openTab('edit')">edit</md-button>

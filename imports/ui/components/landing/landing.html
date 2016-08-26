@@ -68,7 +68,7 @@
 				</a> 
 	          <md-card-content>
            		<div class="cardInfo" layout="column">
-					<a ng-click="landing.viewLog(user)" href="{{landing.absolutify(user.profile.url)}}" target="_blank">{{user.profile.occupation ? user.profile.occupation: 'Not specified' | limitTo: 17 }}{{user.profile.occupation.length > 17 ? '...' : ''}}</a>
+					<a ui-sref="profile({user_id:user._id})">{{user.profile.occupation ? user.profile.occupation: 'Not specified' | limitTo: 17 }}{{user.profile.occupation.length > 17 ? '...' : ''}}</a>
 					<div layout="row" layout-align="space-around center">
 						<span><i class="zmdi zmdi-eye"></i> {{user.profile.views}}</span>
 				        <md-button class="md-fab md-mini fav" ng-click="landing.liked(user)" ng-show="landing.rootScope.currentUser" aria-label="like"><i ng-class="{upvoted : user.profile.likes.includes(landing.rootScope.currentUser._id)}" class="zmdi zmdi-star"></i></md-button>

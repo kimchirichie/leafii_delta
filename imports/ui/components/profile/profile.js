@@ -7,6 +7,7 @@ import template from './profile.html';
 import { Accounts } from 'meteor/accounts-base';
 import { Keywords } from '../../../api/profile/index';
 import { Posts } from '../../../api/posts/index';
+import { Logs } from '../../../api/logs/index';
 
 import { name as Uploader } from '../uploader/uploader';
 
@@ -93,6 +94,12 @@ class Profile {
 				Bert.alert('Profile Updated', 'success', 'growl-top-right');
 			}
 		});
+	}
+
+	viewLog(user){	
+		var viewer = Meteor.userId() || 'guest';
+		Logs.insert({type: 'view', createdAt: new Date(), details: {viewer_user_id: viewer, target_user_id: user._id, type: 'browse', url: user.profile.url}});
+		Meteor.call('addToViews',user._id);
 	}
 
 	absolutify(url){

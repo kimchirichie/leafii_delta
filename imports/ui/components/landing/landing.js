@@ -19,7 +19,7 @@ class Landing {
 		this.cardFilter = '-profile.views';
 		this.helpers({
 			users(){
-				return Meteor.users.find({"profile.url":{$exists:true}});
+				return Meteor.users.find({"profile.url":{$ne : null}});
 			},
 			user(){
 				return Meteor.users.find({"_id": this.getReactively('latestView[0].details.target_user_id')});

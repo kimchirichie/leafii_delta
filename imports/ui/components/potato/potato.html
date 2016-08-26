@@ -92,7 +92,7 @@
 						<p>Occupation: {{user.profile.occupation || "not entered"}}</p>
 						<p>Available: {{user.profile.available}}</p>
 						<p>Page Views: {{user.profile.views}}</p>
-						<p>Photo: {{user.profile.image || "not uploaded"}}</p>
+						<p>Photo: <a ng-href="{{user.profile.image}}">image</a><p>
 						<p>Likes: {{user.profile.likes.length}}</p>
 						<p>Location: {{user.profile.location}}</p>
 					</div>

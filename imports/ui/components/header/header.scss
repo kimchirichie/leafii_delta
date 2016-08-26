@@ -8,6 +8,11 @@
 			background-color: $leafii-theme;
 		}
 
+		.signout {
+			height:0;
+			margin:10px !important;
+		}
+
 		.posts {
 
 			background-color: #ea3354;
@@ -19,12 +24,11 @@
 			font-weight: bold;
 		}
 
-
 		width:80%;
 
 		.logo {
 			height: 100%;
-			padding: 5px;
+			padding: 5px 10px 5px 0;
 		}
 
 		.search-top-field {
