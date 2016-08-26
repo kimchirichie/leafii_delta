@@ -17,10 +17,39 @@ class Potato {
 		this.query = "";
 		this.helpers({
 			users(){
-				return Meteor.users.find();
+				var searchString = this.getReactively('query');
+				const selector = {};
+				if (typeof searchString === 'string' && searchString.length) {
+					selector["$or"] = [];
+					selector["$or"].push({
+						"profile.firstName" : {
+							$regex: `.*${searchString}.*`,
+							$options : 'i'
+						}
+					});
+					selector["$or"].push({
+						"profile.lastName" : {
+							$regex: `.*${searchString}.*`,
+							$options : 'i'
+						}
+					});
+					selector["$or"].push({
+						"profile.url" : {
+							$regex: `.*${searchString}.*`,
+							$options : 'i'
+						}
+					});
+					selector["$or"].push({
+						"emails.address" : {
+							$regex: `.*${searchString}.*`,
+							$options : 'i'
+						}
+					});
+				}
+				return Meteor.users.find(selector);
 			}
 		});
-		Meteor.subscribe("potato", () =>[this.getReactively('query')]);
+		this.subscribe("users_all");
 	}
 
 	// loccheck(user){
@@ -76,6 +105,7 @@ class Potato {
 	}
 
 	delete(user){
+		if(!confirm('Are you sure you want to delete this user?')) return;
 		Meteor.users.remove(user._id);
 	}
 

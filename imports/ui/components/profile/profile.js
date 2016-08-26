@@ -27,9 +27,6 @@ class Profile {
 		this.imgHide = false;
 		this.progress = false;
 		this.readonly = true;
-
-		this.subscribe('mykeywords');
-		this.subscribe('posts');
 		this.helpers({
 			user(){
 				this.userReady = true;
@@ -57,6 +54,9 @@ class Profile {
 			this.imgHide = false;
 		}.bind(this));
 
+		this.subscribe("users");
+		this.subscribe('mykeywords');
+		this.subscribe('posts');
 	}
 
 	loading(){

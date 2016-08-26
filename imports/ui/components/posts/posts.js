@@ -44,8 +44,9 @@ class Postings {
 				return post;
 			}
 		});
-		Meteor.subscribe("posts");
-    Meteor.subscribe("logs");
+		this.subscribe("users");
+		this.subscribe("posts");
+    	this.subscribe("logs");
 	}
 
 	openTab(tab){

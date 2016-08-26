@@ -63,7 +63,7 @@
 
 					</form>
 
-					<md-switch ng-model="user.profile.available">Available</md-switch>
+					<!-- <md-switch ng-model="user.profile.available">Available</md-switch> -->
 
 
 					<p>Page Views: {{user.profile.views}}</p>
@@ -71,9 +71,9 @@
 				</div>
 
 				<div layout="row" layout-align="end center">
-					<md-button class="md-raised" ng-click="potato.delete(user)">delete</md-button>
+					<md-button class="md-raised md-warn" ng-click="potato.delete(user)">delete</md-button>
 					<md-button class="md-raised" ng-click="potato.cancel(user)">cancel</md-button>
-					<md-button class="md-raised" ng-click="potato.save(user)">save</md-button>
+					<md-button class="md-raised md-primary" ng-click="potato.save(user)">save</md-button>
 				</div>
 			</div>
 
@@ -90,7 +90,6 @@
 						<p>Email: {{user.emails[0].address}}</p>
 						<p>Verified: {{user.emails[0].verified}}</p>
 						<p>Occupation: {{user.profile.occupation || "not entered"}}</p>
-						<p>Available: {{user.profile.available}}</p>
 						<p>Page Views: {{user.profile.views}}</p>
 						<p>Photo: <a ng-href="{{user.profile.image}}">image</a><p>
 						<p>Likes: {{user.profile.likes.length}}</p>
@@ -99,7 +98,7 @@
 
 					<div layout="column" layout-align="center end">
 						<md-button class="md-raised" ng-click="potato.edit(user)">edit</md-button>
-						<md-button class="md-raised" ng-click="potato.send_verification(user)">send verification email</md-button>
+						<md-button class="md-raised" ng-click="potato.send_verification(user)" ng-disabled="user.emails[0].verified">send verification email</md-button>
 						<md-button class="md-raised" ng-click="potato.send_reset(user.emails[0].address)">send reset password email</md-button>
 						<md-button class="md-raised" ng-click="potato.reparse_user(user._id)">reparse user</md-button>
 					</div>

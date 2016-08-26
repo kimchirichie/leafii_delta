@@ -48,10 +48,10 @@ class Landing {
 				this.scope.$digest();
 			}
 		}.bind(this));
-		Meteor.subscribe("allUsers");
-    	Meteor.subscribe("latest_view");
-    	Meteor.subscribe("latest_search");
-    	Meteor.subscribe("latest_post");
+		this.subscribe("users");
+    	this.subscribe("latest_view");
+    	this.subscribe("latest_search");
+    	this.subscribe("latest_post");
 	}
 
 	liked(user){

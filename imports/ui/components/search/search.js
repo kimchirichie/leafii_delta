@@ -19,7 +19,7 @@ class Search {
 				return Fetcher.get("results");
 			}
 		})
-		Meteor.subscribe("allUsers");
+		Meteor.subscribe("users");
     	Meteor.subscribe("logs");
 	}
 
