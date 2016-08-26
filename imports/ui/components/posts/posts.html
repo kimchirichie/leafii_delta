@@ -91,7 +91,7 @@
 					<p>{{posts.post.comments.length}}</p>
 				</div>
 				<div flex="90" class="postInfo" layout="column">
-					<h1>{{posts.post.title}}</h1>
+					<h1 class="noMargin">{{posts.post.title}}</h1>
 					<p>{{posts.post.content}}</p>
 					<div layout="row" layout-xs="column">
 						<p><img class="profileIcon" ng-src="{{posts.getThumbUrl(posts.post.poster_user_id) ? posts.getThumbUrl(posts.post.poster_user_id) : '/images/defaultProfilePic.png'}}"/>posted {{posts.getTimeElapsed(posts.post.date,false)}}</p>
@@ -114,7 +114,7 @@
 						<b>{{comment.deleted ? "[deleted]" : comment.name}}</b>
 						<p>{{comment.deleted ? "[deleted]" : comment.comment}}</p>
 					</div>
-					<div class="commentTime" layout="row" layout-align="space-between center" ng-show="!comment.deleted">
+					<div class="commentTime" layout="row" layout-align="start center" ng-show="!comment.deleted">
 						<p><i class="zmdi zmdi-thumb-up" ng-click="posts.upvoteComment(posts.post._id, comment.commenter_user_id, comment.date)" ng-class="{upvoted : posts.upvotedCheck(comment.upvotes, posts.rootScope.currentUser._id)}"></i> &nbsp {{comment.upvotes.length}} &nbsp</p>
 						<p>&bull;</p>
 						<p>&nbsp {{posts.getTimeElapsed(comment.date,false)}}</p>
@@ -142,7 +142,7 @@
 
 				<img class="commentPadding profileIconSquare" ng-src="/images/defaultProfilePic.png"/>
 				<div layout="row" class="full-width commentPadding">
-					<input required placeholder="write a comment..." ng-model="posts.newComment" type="text" name="comment">
+					<input placeholder="write a comment..." ng-model="posts.newComment" type="text" name="comment">
 				</div>
 				
 			</form>
@@ -155,7 +155,7 @@
 			<h1 class="animated fadeIn">Request a Roast!</h1>
 			<h3>Post your website here to get feedback</h3>
 		</div>
-		<div  layout="column" layout-align="center center">
+		<div layout="column" layout-align="center center">
 			<!-- Create Post -->
 			<form ng-submit="posts.createPost()" class="form submitPost">
 			

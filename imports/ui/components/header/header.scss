@@ -2,6 +2,34 @@
 
 	border-bottom: thin solid #d3d3d3;
 
+	@media(max-width: 815px){
+		.pages {
+			display: none;
+		}
+	}
+
+	.searchBtn {
+		outline: 0;
+	}
+
+	@media(max-width: 520px){
+		.search-top-field{
+			display: none;
+		}
+	}
+
+	@media(min-width: 816px){
+		.hamburger {
+			display: none;
+		}
+	}
+
+	.hamburger {
+		.burger {
+			min-width: 40px;
+		}
+	}
+
 	.top{
 
 		.signup {
@@ -32,6 +60,15 @@
 		.search-top-field {
 			
 			color: black;
+
+			i {
+				cursor: pointer;
+				padding: 10px;
+
+				&:hover {
+					color: $leafii-theme;
+				}
+			}
 
 			input {
 				padding: 5px;
