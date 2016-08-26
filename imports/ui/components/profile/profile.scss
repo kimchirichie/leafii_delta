@@ -176,3 +176,39 @@
 .md-chip-remove:focus{
 	outline:0;
 }
+
+#portfolio {
+
+	height: 80%;
+
+	md-toolbar {
+		background-color: $leafii-theme;
+	}
+
+	md-dialog-content {
+		position: relative;
+
+		div {
+			padding: 0;
+		}
+
+		iframe {
+			position: absolute; 
+			border: none; 
+			width: 100%; 
+		}
+	}
+
+	.toolbarButtoon:hover {
+		color: $delete
+	}
+
+	.portfolioLink {
+		font-family: raleway;
+		padding-left: 25px;
+		text-transform: none;
+    	font-size: 1.5em;
+	    font-weight: bold;
+	    overflow: hidden;
+	}
+}

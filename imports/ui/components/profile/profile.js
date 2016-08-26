@@ -4,6 +4,8 @@ import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
  
 import template from './profile.html';
+import frame from '../posts/frame.html';
+import frameunsec from '../posts/frameunsec.html';
 import { Accounts } from 'meteor/accounts-base';
 import { Keywords } from '../../../api/profile/index';
 import { Posts } from '../../../api/posts/index';
@@ -13,13 +15,15 @@ import { name as Uploader } from '../uploader/uploader';
 
 class Profile {
 
-	constructor($scope, $reactive, $state, $timeout, Upload, $rootScope, $stateParams){
+	constructor($scope, $reactive, $state, $sce, $timeout, Upload, $rootScope, $stateParams, $mdDialog){
 		"ngInject";
 		$reactive(this).attach($scope);
 		this.state = $state;
 		this.rootScope = $rootScope;
 		this.user_id = $stateParams.user_id || Meteor.userId();
 		this.timeout = $timeout;
+		this.sce = $sce;
+		this.mdDialog = $mdDialog;
 		this.tab = 'history';
 		this.userReady = false;
 		this.keywordsReady = false;
@@ -103,8 +107,11 @@ class Profile {
 	}
 
 	absolutify(url){
-		if(!url) return "";
-		return "http://" + url.replace(/https:|http:|\/\//gi, "");
+		if(url){
+			if(url.substring(0,7) == "http://" || url.substring(0,8) == "https://") return this.sce.trustAsResourceUrl(url);
+			return this.sce.trustAsResourceUrl('http://' + url.replace(/https:|http:|\/\//gi, ""));
+		}
+		return "";
 	}
 
 	crawl(user_id){
@@ -166,7 +173,94 @@ class Profile {
 			return "";	
 		}
 	}
+
+	showurl(ev, url, name) {
+		console.log(this.sce.getTrustedResourceUrl(url).substring(0,8));
+		if(this.sce.getTrustedResourceUrl(url).substring(0,8)=="https://") {
+			this.mdDialog.show({
+		        controller: DialogController,
+		        controllerAs: 'frame',
+		        template: frame,
+		        parent: angular.element(document.body),
+		        targetEvent: ev,
+		        clickOutsideToClose:true,
+		        fullscreen: true,
+		        bindToController: true,
+		        resolve:{
+		      		url: function(){
+		      			return url;
+		        	},
+	            	name: function(){
+	              		return name;
+	            	}
+		        }
+		    }).then(function(answer) {
+		      // $scope.status = 
+		      console.log('You said the information was "' + answer + '".');
+		    }, function() {
+		      // $scope.status = 'You cancelled the dialog.';
+		      console.log('You cancelled the dialog.');
+		    });
+		}
+		else
+		{
+			this.mdDialog.show({
+		        controller: DialogController,
+		        controllerAs: 'frameunsec',
+		        template: frameunsec,
+		        parent: angular.element(document.body),
+		        targetEvent: ev,
+		        clickOutsideToClose:true,
+		        fullscreen: true,
+		        bindToController: true,
+		        resolve:{
+		      		url: function(){
+		      			return url;
+		        	},
+		            name: function(){
+		              return name;
+		            }
+		        }
+		    }).then(function(answer) {
+		      // $scope.status = 
+		      console.log('You said the information was "' + answer + '".');
+		    }, function() {
+		      // $scope.status = 'You cancelled the dialog.';
+		      console.log('You cancelled the dialog.');
+		    });
+		}
+	}
+
+	viewLog(post){  
+		var viewer = Meteor.userId() || 'guest';
+		Logs.insert({type: 'view', createdAt: new Date(), details: {viewer_user_id: viewer, target_user_id: post.poster_user_id, type: 'posts', url: post.url}});
+		Meteor.call('addToViews',post.poster_user_id);
+	}
+
+	getThumbUrl(id) {
+		var user = Meteor.users.find({_id: id}).fetch()[0];
+		if(user) return user.profile.thumbnail;
+	}
+
+	getMyThumbUrl() {
+		if(Meteor.userId()) return Meteor.user().profile.thumbnail;
+	}
 };
+
+function DialogController($reactive, $scope, $mdDialog, url, name) {
+	"ngInject";
+	$reactive(this).attach($scope);
+	//console.log('inside dialog controller: ', url);
+	$scope.hide = function() {
+		$mdDialog.hide();
+	};
+	$scope.cancel = function() {
+		$mdDialog.cancel();
+	};
+	$scope.answer = function(answer) {
+		$mdDialog.hide(answer);
+	};
+}
 
 const name = 'profile';
 
