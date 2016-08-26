@@ -15,7 +15,7 @@ import { name as Uploader } from '../uploader/uploader';
 
 class Profile {
 
-	constructor($scope, $reactive, $state, $sce, $timeout, Upload, $rootScope, $stateParams, $mdDialog){
+	constructor($scope, $reactive, $state, $sce, $timeout, Upload, $rootScope, $stateParams, $mdDialog, $timeout){
 		"ngInject";
 		$reactive(this).attach($scope);
 		this.state = $state;
@@ -23,6 +23,7 @@ class Profile {
 		this.user_id = $stateParams.user_id || Meteor.userId();
 		this.timeout = $timeout;
 		this.sce = $sce;
+		this.timeo = $timeout;
 		this.mdDialog = $mdDialog;
 		this.tab = 'history';
 		this.userReady = false;
@@ -231,7 +232,7 @@ class Profile {
 		}
 	}
 
-	viewLog(post){  
+	viewLogPost(post){  
 		var viewer = Meteor.userId() || 'guest';
 		Logs.insert({type: 'view', createdAt: new Date(), details: {viewer_user_id: viewer, target_user_id: post.poster_user_id, type: 'posts', url: post.url}});
 		Meteor.call('addToViews',post.poster_user_id);
@@ -244,6 +245,10 @@ class Profile {
 
 	getMyThumbUrl() {
 		if(Meteor.userId()) return Meteor.user().profile.thumbnail;
+	}
+
+	trigUpload (files){
+		this.timeo(function() {angular.element('.upload').trigger('click');}, 5);
 	}
 };
 
