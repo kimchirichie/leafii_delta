@@ -160,7 +160,7 @@ Meteor.startup(()=>{
 			  user = Meteor.userId();
 
 			  	if(Posts.find({_id: postId, comments: {$elemMatch : {commenter_user_id: commenter, date: timestamp, upvotes: {$elemMatch: {user: user}}}}}).count())
-				{
+				{cons
 			    	Posts.update({_id: postId, "comments.commenter_user_id":commenter, "comments.date": timestamp}, {$pull: {"comments.$.upvotes": {user: user}}}, false, false);
 				}
 				else

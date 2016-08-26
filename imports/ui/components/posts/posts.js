@@ -5,6 +5,7 @@ import uiRouter from 'angular-ui-router';
 import { Accounts } from 'meteor/accounts-base';
 import template from './posts.html';
 import frame from './frame.html';
+import frameunsec from './frameunsec.html';
 import { Posts } from '../../../api/posts/index';
 import { Logs } from '../../../api/logs/index';
 
@@ -151,7 +152,9 @@ class Postings {
 				user = Meteor.user();
 				date = Date.now();
 				Posts.insert({poster_user_id: user._id, title: this.post.title, tags: [], content: this.post.content, url: user.profile.url, name: user.profile.firstName, comments: [], date: date, last_edit: 0, upvotes: [], deleted: false});
-				this.cancel();
+				this.submitPost = false;
+				this.post = {};
+				this.openTab('browse');
 			}
 			
 		}
@@ -262,30 +265,59 @@ class Postings {
 	}
 
 	showurl(ev, url, name) {
-		this.mdDialog.show({
-	        controller: DialogController,
-	        controllerAs: 'frame',
-	        template: frame,
-	        parent: angular.element(document.body),
-	        targetEvent: ev,
-	        clickOutsideToClose:true,
-	        fullscreen: true,
-	        bindToController: true,
-	        resolve:{
-	      		url: function(){
-	      			return url;
-	        	},
-            name: function(){
-              return name;
-            }
-	        }
-	    }).then(function(answer) {
-	      // $scope.status = 
-	      console.log('You said the information was "' + answer + '".');
-	    }, function() {
-	      // $scope.status = 'You cancelled the dialog.';
-	      console.log('You cancelled the dialog.');
-	    });
+		if(this.sce.getTrustedResourceUrl(url).substring(0,8)=="https://") {
+			this.mdDialog.show({
+		        controller: DialogController,
+		        controllerAs: 'frame',
+		        template: frame,
+		        parent: angular.element(document.body),
+		        targetEvent: ev,
+		        clickOutsideToClose:true,
+		        fullscreen: true,
+		        bindToController: true,
+		        resolve:{
+		      		url: function(){
+		      			return url;
+		        	},
+	            	name: function(){
+	              		return name;
+	            	}
+		        }
+		    }).then(function(answer) {
+		      // $scope.status = 
+		      console.log('You said the information was "' + answer + '".');
+		    }, function() {
+		      // $scope.status = 'You cancelled the dialog.';
+		      console.log('You cancelled the dialog.');
+		    });
+		}
+		else
+		{
+			this.mdDialog.show({
+		        controller: DialogController,
+		        controllerAs: 'frameunsec',
+		        template: frameunsec,
+		        parent: angular.element(document.body),
+		        targetEvent: ev,
+		        clickOutsideToClose:true,
+		        fullscreen: true,
+		        bindToController: true,
+		        resolve:{
+		      		url: function(){
+		      			return url;
+		        	},
+		            name: function(){
+		              return name;
+		            }
+		        }
+		    }).then(function(answer) {
+		      // $scope.status = 
+		      console.log('You said the information was "' + answer + '".');
+		    }, function() {
+		      // $scope.status = 'You cancelled the dialog.';
+		      console.log('You cancelled the dialog.');
+		    });
+		}
 	}
 
   viewLog(post){  
