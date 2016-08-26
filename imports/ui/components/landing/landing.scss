@@ -181,7 +181,6 @@ md-card-title {
 
 .recent {
 	background: #27272b;
-	height: 90px;
 
 	h2 {
 		margin: 2px;
@@ -194,19 +193,28 @@ md-card-title {
 	.recentGrid {
 		width: 300px;
 		height: 70px;
-		padding: 15px;
+		padding: 15px;	
+		cursor: pointer;
+		
+		&:hover {
+			color: $leafii-theme;
+		}
 
 		.viewed {
-			margin-left: 5px;
-			
-			&:hover {
-			color: $leafii-theme;
-			}
+			margin-left: 10px;
 		}
+
 	}
 
-	a { text-decoration: none; color:black; }
-	a:visited { text-decoration: none; color:black; }
+	a { 
+		text-decoration: none; 
+		color:black; 
+
+		&:visited { 
+			text-decoration: none; 
+			color:black; 
+		}
+	}
 	
 }
 

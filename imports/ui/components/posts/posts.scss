@@ -79,6 +79,7 @@
 	.profileIcon {
 		height: 40px;
 		width: 40px;		
+		margin-right: 10px;
 		vertical-align: middle;
 		border-radius: 50% !important;
 	}
@@ -229,13 +230,13 @@
 	}
 
 	.comments {
-		width: 100%;
+		width: 80%;
+		box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 
 		.comment {
-			padding: 20px;
-			border: thin solid #f3f0f0;
+			padding: 10px;
 			background: #f0f8ff;
-			box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+			border-top: thin solid grey;
 
 			b {
 				margin-left: 10px;
@@ -263,10 +264,6 @@
 					&:hover {
 						color: $leafii-theme;
 					}
-				}
-
-				.time {
-					margin-top: 10px;
 				}
 
 			}
@@ -308,8 +305,24 @@
 
 #portfolio {
 
+	height: 80%;
+
 	md-toolbar {
 		background-color: $leafii-theme;
+	}
+
+	md-dialog-content {
+		position: relative;
+
+		div {
+			padding: 0;
+		}
+
+		iframe {
+			position: absolute; 
+			border: none; 
+			width: 100%; 
+		}
 	}
 
 	.toolbarButtoon:hover {
@@ -318,6 +331,7 @@
 
 	.portfolioLink {
 		font-family: raleway;
+		padding-left: 25px;
 		text-transform: none;
     	font-size: 1.5em;
 	    font-weight: bold;

@@ -24,8 +24,8 @@
 	</div>
 
 	<div class="profilePanel" layout="column" layout-align="center center">
-		<div class="profileContent" layout="row" layout-xs="column" layout-align="center start" layout-align-xs="center center">
-			<md-card class="profileImg" layout="column" layout-align="center center" flex-gt-md="30" flex="100">
+		<div class="profileContent" layout="row" layout-xs="column" layout-sm="column" layout-align-sm="center center" layout-align="center start" layout-align-xs="center center">
+			<md-card class="profileImg" layout="column" layout-align="center center" flex-gt-md="30" flex="100" flex-md="60" flex-xs="100">
 				<image-uploader files="profile.user.images"></image-uploader>
 				<img ng-hide="profile.imgHide" ng-src="{{profile.user.profile.image ? profile.secureProtocol(profile.user.profile.image) : '/images/defaultProfilePic.png'}}"/>
 				<md-progress-circular ng-if="profile.progress" md-mode='indeterminate' md-diameter="100px"></md-progress-circular>
@@ -74,7 +74,7 @@
 							<textarea rows="10" ng-model="profile.user.profile.bio" type="text" name="Biography"></textarea>
 						</md-input-container>
 						
-						<div layout="row">
+						<div layout="row" layout-xs="column">
 							<md-button class="md-raised" ng-click="profile.openTab('password')">Change password</md-button>
 							<md-button class="md-raised" ng-click="profile.openTab('history')">back</md-button>
 							<md-button class="md-raised md-primary" ng-click="profile.update(profile.user)">Update</md-button>
@@ -87,7 +87,7 @@
 					<h2 class="noTitleMargin">Recent Posts</h2>
 					<h3 ng-show="!profile.posts.length">No posts</h3>
 					<md-card class="recentPosts" ng-repeat="post in profile.posts">
-						<a ui-sref="posts({post_id:post._id})"><h2>{{post.title}}</h2></a>
+						<a class="postTitle" ui-sref="posts({post_id:post._id})"><h2>{{post.title}}</h2></a>
 						<p>{{post.date | date:'mediumDate'}}</p>
 						<p>{{post.content}}</p>
 						<p>{{post.comments.length}} comments</p>
