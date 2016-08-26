@@ -8,6 +8,10 @@
 		}
 	}
 
+	.searchBtn {
+		outline: 0;
+	}
+
 	@media(max-width: 520px){
 		.search-top-field{
 			display: none;
