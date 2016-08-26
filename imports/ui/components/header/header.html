@@ -6,6 +6,7 @@
 				<form layout="row" ng-submit="header.search()">
 			    	<input id="searchbar" placeholder="Search" class="search-top" ng-model="header.rootScope.query">
 				</form>
+				<i class="zmdi zmdi-search zmdi-hc-lg"></i>
 			</div>
 
 			<span flex></span>
@@ -16,6 +17,12 @@
 				<md-button ui-sref="profile" class="md-raised btn" ng-show="header.rootScope.currentUser">Profile</md-button>
 				<md-button ng-click="header.logout()" class="md-raised signout btn" ng-show="header.rootScope.currentUser">Sign out</md-button>
 			</div>
+
+			<!-- Menu for Mobile -->
+			<div class="hamburger" layout="row">
+				<md-button class="md-raised md-primary burger"><i class="zmdi zmdi-menu"></i></md-button>
+			</div>
+
 		</div>
 	</md-toolbar>
 </div>
