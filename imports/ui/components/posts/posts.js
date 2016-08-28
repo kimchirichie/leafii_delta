@@ -273,9 +273,9 @@ class Postings {
 	      		url: function(){
 	      			return url;
 	        	},
-            name: function(){
-              return name;
-            }
+	            name: function(){
+	              return name;
+	            }
 	        }
 	    }).then(function(answer) {
 	      // $scope.status = 
