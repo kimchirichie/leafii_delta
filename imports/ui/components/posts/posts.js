@@ -47,7 +47,7 @@ class Postings {
 		});
 		this.subscribe("users");
 		this.subscribe("posts");
-    	this.subscribe("logs");
+		this.subscribe("logs");
 	}
 
 	openTab(tab){
@@ -207,7 +207,7 @@ class Postings {
 	// }
 
 	upvotedCheck(upvotes, id){
-    if(!upvotes) return false;
+	if(!upvotes) return false;
 		for(var i = 0; i < upvotes.length; i++){
 			if(upvotes[i].user == id){
 				return true;
@@ -267,72 +267,72 @@ class Postings {
 	showurl(ev, url, name) {
 		if(this.sce.getTrustedResourceUrl(url).substring(0,8)=="https://") {
 			this.mdDialog.show({
-		        controller: DialogController,
-		        controllerAs: 'frame',
-		        template: frame,
-		        parent: angular.element(document.body),
-		        targetEvent: ev,
-		        clickOutsideToClose:true,
-		        fullscreen: true,
-		        bindToController: true,
-		        resolve:{
-		      		url: function(){
-		      			return url;
-		        	},
-	            	name: function(){
-	              		return name;
-	            	}
-		        }
-		    }).then(function(answer) {
-		      // $scope.status = 
-		      console.log('You said the information was "' + answer + '".');
-		    }, function() {
-		      // $scope.status = 'You cancelled the dialog.';
-		      console.log('You cancelled the dialog.');
-		    });
+				controller: DialogController,
+				controllerAs: 'frame',
+				template: frame,
+				parent: angular.element(document.body),
+				targetEvent: ev,
+				clickOutsideToClose:true,
+				fullscreen: true,
+				bindToController: true,
+				resolve:{
+					url: function(){
+						return url;
+					},
+					name: function(){
+						return name;
+					}
+				}
+			}).then(function(answer) {
+			  // $scope.status = 
+			  console.log('You said the information was "' + answer + '".');
+			}, function() {
+			  // $scope.status = 'You cancelled the dialog.';
+			  console.log('You cancelled the dialog.');
+			});
 		}
 		else
 		{
 			this.mdDialog.show({
-		        controller: DialogController,
-		        controllerAs: 'frameunsec',
-		        template: frameunsec,
-		        parent: angular.element(document.body),
-		        targetEvent: ev,
-		        clickOutsideToClose:true,
-		        fullscreen: true,
-		        bindToController: true,
-		        resolve:{
-		      		url: function(){
-		      			return url;
-		        	},
-		            name: function(){
-		              return name;
-		            }
-		        }
-		    }).then(function(answer) {
-		      // $scope.status = 
-		      console.log('You said the information was "' + answer + '".');
-		    }, function() {
-		      // $scope.status = 'You cancelled the dialog.';
-		      console.log('You cancelled the dialog.');
-		    });
+				controller: DialogController,
+				controllerAs: 'frameunsec',
+				template: frameunsec,
+				parent: angular.element(document.body),
+				targetEvent: ev,
+				clickOutsideToClose:true,
+				fullscreen: true,
+				bindToController: true,
+				resolve:{
+					url: function(){
+						return url;
+					},
+					name: function(){
+					  return name;
+					}
+				}
+			}).then(function(answer) {
+			  // $scope.status = 
+			  console.log('You said the information was "' + answer + '".');
+			}, function() {
+			  // $scope.status = 'You cancelled the dialog.';
+			  console.log('You cancelled the dialog.');
+			});
 		}
 	}
 
   viewLog(post){  
-    var viewer = Meteor.userId() || 'guest';
-    Logs.insert({type: 'view', createdAt: new Date(), details: {viewer_user_id: viewer, target_user_id: post.poster_user_id, type: 'posts', url: post.url}});
-    Meteor.call('addToViews',post.poster_user_id);
+	var viewer = Meteor.userId() || 'guest';
+	Logs.insert({type: 'view', createdAt: new Date(), details: {viewer_user_id: viewer, target_user_id: post.poster_user_id, type: 'posts', url: post.url}});
+	Meteor.call('addToViews',post.poster_user_id);
   }
 
   getThumbUrl(id) {
-  	var user = Meteor.users.find({_id: id}).fetch()[0];
-  	if(user) return user.profile.thumbnail;
+	var user = Meteor.users.find({_id: id}).fetch()[0];
+	if(user) return user.profile.thumbnail;
   }
 
   getMyThumbUrl() {
-  	if(Meteor.userId()) return Meteor.user().profile.thumbnail;
+	if(Meteor.userId()) return Meteor.user().profile.thumbnail;
   }
 }
 

@@ -108,3 +108,37 @@
 		}
 	}
 }
+
+#Menu {
+
+
+	.nav {
+		width: 80%;
+
+		a {
+			margin-top: 20px;
+		}
+
+		button {
+			margin-top: 20px;
+		}
+	}
+
+	.signup {
+		background-color: $leafii-theme;
+	}
+
+	.signout {
+		height:0;
+	}
+
+	.posts {
+
+		background-color: #ea3354;
+	}
+
+	.btn {
+		color: black;
+		font-weight: bold;
+	}
+}
