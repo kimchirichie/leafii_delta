@@ -12,7 +12,7 @@
 			<span flex></span>
 			<div class="pages" layout="row">
 				<md-button ui-sref="signup" class="md-raised signup btn" ng-hide="header.rootScope.currentUser" >Submit my website</md-button>
-				<md-button ui-sref="posts" class="md-raised posts btn">Roasts</md-button>
+				<md-button ui-sref="posts({post_id:''})" class="md-raised posts btn">Roasts</md-button>
 				<md-button ui-sref="signin" class="md-raised btn" ng-hide="header.rootScope.currentUser">Sign in</md-button>
 				<md-button ui-sref="profile" class="md-raised btn" ng-show="header.rootScope.currentUser">Profile</md-button>
 				<md-button ng-click="header.logout()" class="md-raised signout btn" ng-show="header.rootScope.currentUser">Sign out</md-button>

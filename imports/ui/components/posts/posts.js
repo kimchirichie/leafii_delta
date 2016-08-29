@@ -38,10 +38,9 @@ class Postings {
 				if (post){
 					DocHead.removeDocHeadAddedTags()
 					DocHead.setTitle("Leafii | " + post.title);
-				} 
-		else{
-		  this.state.go('error', {reason: "Post doesn't exist"});
-		}
+				// } else {
+		  			// this.state.go('error', {reason: "Post doesn't exist"});
+				}
 				return post;
 			}
 		});
@@ -51,7 +50,11 @@ class Postings {
 	}
 
 	openTab(tab){
-		this.tab = tab;
+		if(tab=='submit'&&!Meteor.userId()){
+			this.state.go('signin');
+			return;
+		}
+		this.tab = tab;		
 	}
 
 	tabOpen(tab){
@@ -69,17 +72,12 @@ class Postings {
 
 	upvotePost(postId) {
 		if(Meteor.userId()){
-			if(Meteor.userId()){
-				user = Meteor.userId();
-				if(Posts.find({_id: postId, "upvotes.user": user}).count())
-				{
-					Posts.update({_id:postId}, {$pull: {upvotes: {user: user}}}, false, false);
-				}
-				else
-				{
-					date = Math.floor(Date.now() / 60000);
-					Posts.update({_id:postId}, {$addToSet: {upvotes: {user: user, date: date}}}, false, false);
-				}
+			var user = Meteor.userId();
+			if(Posts.find({_id: postId, "upvotes.user": user}).count()){
+				Posts.update({_id:postId}, {$pull: {upvotes: {user: user}}}, false, false);
+			} else {
+				date = Math.floor(Date.now() / 60000);
+				Posts.update({_id:postId}, {$addToSet: {upvotes: {user: user, date: date}}}, false, false);
 			}
 		} else {
 			Bert.alert('You need to be signed in to like posts', 'danger', 'growl-top-right');
@@ -111,6 +109,7 @@ class Postings {
 			Posts.update({_id: postId}, {$addToSet: {comments: {commenter_user_id: user._id, name: user.profile.firstName, comment: this.newComment, date: date, last_edit: 0, upvotes: []}}}, false, false);
 			this.newComment = '';
 		} else {
+			// this.rootScope.returnto = 
 			Bert.alert("Please login to comment", 'danger', 'growl-top-right');
 			this.state.go('signin');
 		}
@@ -170,12 +169,9 @@ class Postings {
 	}
 
 	updatePost(postID, title, content) {
-
-		if(Meteor.userId()){
-			user = Meteor.userId();
-			date = Math.floor(Date.now() / 60000);
-			Posts.update({_id: postID}, {$set:{title: title, tags: [], content: content, last_edit: date}}, false, false); 
-		}
+		date = Math.floor(Date.now() / 60000);
+		Posts.update({_id: postID}, {$set:{title: title, tags: [], content: content, last_edit: date}}, false, false);
+		this.openTab('browse');
 	}
 
 	deletePost(postID) {

@@ -3,8 +3,8 @@
 	<div ng-show="posts.tabOpen('browse')">
 		<div class="intro">
 			<h1 class="animated fadeIn">Welcome to the Roast Page</h1>
-			<h3>Post your website here to get feedbacks and critiques</h3>
-			<md-button ng-show="posts.rootScope.currentUser" ng-click="posts.openTab('submit')" class="md-raised createPost">Roast Me</md-button>
+			<h3>Post your website here to get community feedback & critique</h3>
+			<md-button ng-click="posts.openTab('submit')" class="md-raised createPost">Roast Me</md-button>
 		</div>
 
 		<div class="filterBar" layout="row" layout-align="center center" layout-xs="column">
@@ -29,11 +29,11 @@
 		<div ng-show="posts.posts.length" layout="column" layout-align="center center">
 			<div class="roastCards" layout="column" layout-align="start center" ng-repeat="post in posts.posts | orderBy: posts.cardFilter">
 				
-				<md-card class="md-default-theme" ng-init="previewSite = false">
+				<md-card ng-hide="postEdit" class="md-default-theme">
 
-					<md-card-content flex ng-show="!postEdit" layout="row" layout-align="start start">
+					<md-card-content flex layout="row" layout-align="start start">
 
-						<div flex="5" ng-show="!postEdit" layout="column" class="postData">
+						<div flex="5" layout="column" class="postData">
 							<i class="zmdi zmdi-star zmdi-hc-2x" ng-class="{upvoted : posts.upvotedCheck(post.upvotes, posts.rootScope.currentUser._id)}"></i>
 							<p>{{post.upvotes.length}}</p>
 							<i class="zmdi zmdi-comment-text zmdi-hc-2x"></i>
@@ -42,16 +42,15 @@
 
 						<div flex="90" class="postInfo" layout="column">
 							<a ui-sref="posts({post_id:post._id})"><h2>{{post.title}}</h2></a>
-							<p>{{post.content}}</p>
 							<div layout="row" layout-xs="column">
 								<p><img class="profileIcon" ng-src="{{posts.getThumbUrl(post.poster_user_id) ? posts.getThumbUrl(post.poster_user_id) : '/images/defaultProfilePic.png'}}"/>posted {{posts.getTimeElapsed(post.date,false)}}</p>
 							</div>
+							<p>{{post.content}}</p>
 							<div>	
-								<md-button class="md-primary md-raised showPage" ng-click="posts.showurl($event, posts.absolutify(post.url), post.name); posts.viewLog(post)">Show</md-button>
+								<md-button class="md-primary md-raised showPage" ng-click="posts.showurl($event, posts.absolutify(post.url), post.name); posts.viewLog(post)">Preview website</md-button>
 							</div>
 						</div>
-
-						<div flex="5" layout="row" layout-xs="column" layout-sm="column" layout-align="space-around center" class="editIcons" ng-show="posts.rootScope.currentUser._id == post.poster_user_id && !postEdit">
+						<div flex="5" layout="row" layout-xs="column" layout-sm="column" layout-align="space-around center" class="editIcons" ng-show="posts.rootScope.currentUser._id == post.poster_user_id">
 							<i ng-click="postEdit = true; posts.editPost(post.title, post.content)" class="zmdi zmdi-edit zmdi-hc-lg edit"></i>
 							<i ng-click="posts.deletePost(post._id)" class="zmdi zmdi-delete zmdi-hc-lg del"></i>
 						</div>
@@ -83,9 +82,9 @@
 
 	<div ng-show="posts.tabOpen('single')" class="singlePostBox" layout="column" layout-align="center center">
 		<div class="header">
-			<h1>Feedback & Critiques</h1>
+			<h1>Submit your personal website & get feedback</h1>
 		</div>
-		<div layout="column" class="singlePost">
+		<div ng-show="posts.post" layout="column" class="singlePost">
 			<div layout="row">
 				<div flex="5" ng-show="!postEdit" layout="column" class="upPost">
 					<i class="zmdi zmdi-star-circle zmdi-hc-2x" ng-click="posts.upvotePost(posts.post._id)" ng-class="{upvoted : posts.upvotedCheck(posts.post.upvotes, posts.rootScope.currentUser._id)}"></i>
@@ -95,26 +94,32 @@
 				</div>
 				<div flex="90" class="postInfo" layout="column">
 					<h1 class="noMargin">{{posts.post.title}}</h1>
-					<p>{{posts.post.content}}</p>
 					<div layout="row" layout-xs="column">
 						<p><img class="profileIcon" ng-src="{{posts.getThumbUrl(posts.post.poster_user_id) ? posts.getThumbUrl(posts.post.poster_user_id) : '/images/defaultProfilePic.png'}}"/>posted {{posts.getTimeElapsed(posts.post.date,false)}}</p>
 					</div>
+					<p>{{posts.post.content}}</p>
 					<div>
-						<md-button class="md-primary md-raised showPage" ng-click="posts.showurl($event, posts.absolutify(posts.post.url), posts.post.name);posts.viewLog(posts.post)">Show</md-button>
+						<md-button class="md-primary md-raised showPage" ng-click="posts.showurl($event, posts.absolutify(posts.post.url), posts.post.name);posts.viewLog(posts.post)">Preview website</md-button>
 					</div>
 				</div>
 			</div>
 		</div>
 
 		<!-- Comments -->
-		<div class="comments" layout="column" ng-init="editComment=false;createComment=true">
+		<div ng-show="posts.post" class="comments" layout="column" ng-init="editComment=false;createComment=true">
 			
+			<div ng-hide="posts.post.comments.length">
+				<div layout="row" layout-xs="column" layout-align="center center">
+					<h1>Be the first to comment</h1>
+				</div>
+			</div>
+
 			<div class="comment" layout="column" layout-align="start start" ng-repeat="comment in posts.post.comments | orderBy: '+date'">
 								
 				<div ng-show="!editComment">
 					<div layout="row" layout-align="start center">
 						<img class="profileIcon" ng-src="{{posts.getThumbUrl(comment.commenter_user_id) ? posts.getThumbUrl(comment.commenter_user_id) : '/images/defaultProfilePic.png'}}"/>
-						<b>{{comment.deleted ? "[deleted]" : comment.name}}</b>
+						<b>{{comment.name}}</b>
 						<p>{{comment.deleted ? "[deleted]" : comment.comment}}</p>
 					</div>
 					<div class="commentTime" layout="row" layout-align="start center" ng-show="!comment.deleted">
@@ -150,6 +155,9 @@
 				
 			</form>
 
+		</div>
+		<div ng-hide="posts.post">
+			<p>Post does not exist</p>
 		</div>
 	</div>
 

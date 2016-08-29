@@ -43,7 +43,7 @@ class Profile {
 			},
 			posts(){
 				this.postsReady = true;
-				return Posts.find({poster_user_id: this.user_id});
+				return Posts.find({poster_user_id: this.user_id, deleted: false});
 			},
 		});
 

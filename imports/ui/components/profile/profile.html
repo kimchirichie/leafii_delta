@@ -27,14 +27,18 @@
 		<div class="profileContent" layout="row" layout-xs="column" layout-sm="column" layout-align-sm="center center" layout-align="center start" layout-align-xs="center center">
 			<md-card class="profileImg" layout="column" layout-align="center center" flex-gt-md="30" flex="100" flex-md="60" flex-xs="100">
 				<image-uploader files="profile.user.images"></image-uploader>
-				<a ng-hide="profile.imgHide" href="" ng-click="profile.trigUpload($files);profile.test()" >
+				<a ng-hide="profile.imgHide || (profile.rootScope.currentUser._id != profile.user_id)" href="" ng-click="profile.trigUpload($files);profile.test()" >
 					<div class="imageContainer">
-						<img class="profileImage" ng-src="{{profile.user.profile.image ? profile.secureProtocol(profile.user.profile.image) : '/images/defaultProfilePic.png'}}"/>
+						<img class="profileImage blur" ng-src="{{profile.user.profile.image ? profile.secureProtocol(profile.user.profile.image) : '/images/defaultProfilePic.png'}}"/>
 						<div class="overlay" layout="row" layout-align="center center">
 							<i class="zmdi zmdi-camera"></i>
 						</div>
 					</div>
 				</a>
+				<div class="imageContainer">
+					<img class="profileImage" ng-src="{{profile.user.profile.image ? profile.secureProtocol(profile.user.profile.image) : '/images/defaultProfilePic.png'}}"/>
+				</div>
+
 				<md-progress-circular ng-if="profile.progress" md-mode='indeterminate' md-diameter="100px"></md-progress-circular>
 				<a ng-click="profile.viewLog(profile.user)" ng-href="{{profile.absolutify(profile.user.profile.url)}}" target="_blank"><h2>{{profile.user.profile.url}}</h2></a>
 				<p ng-show="profile.user.profile.bio">{{profile.user.profile.bio}}</p>
