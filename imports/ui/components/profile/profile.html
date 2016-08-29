@@ -35,7 +35,7 @@
 						</div>
 					</div>
 				</a>
-				<div class="imageContainer">
+				<div ng-hide="profile.rootScope.currentUser._id == profile.user_id" class="imageContainer">
 					<img class="profileImage" ng-src="{{profile.user.profile.image ? profile.secureProtocol(profile.user.profile.image) : '/images/defaultProfilePic.png'}}"/>
 				</div>
 
