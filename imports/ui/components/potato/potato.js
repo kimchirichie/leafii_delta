@@ -52,13 +52,13 @@ class Potato {
 		this.subscribe("users_all");
 	}
 
-	// loccheck(user){
-	// 	if (user.profile.location && user.profile.location.formatted_address) {
-	// 		user.profile.location = user.profile.location.formatted_address;
-	// 		this.save(user);
-	// 		return "fix required. so fixed";
-	// 	}
-	// }
+	loccheck(user){
+		if (user.profile.location && user.profile.location.formatted_address) {
+			user.profile.location = user.profile.location.formatted_address;
+			this.save(user);
+			return "fix required. so fixed";
+		}
+	}
 
 	display(user){
 		user.showing = true;
