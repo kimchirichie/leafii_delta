@@ -95,7 +95,13 @@
 				<div flex="90" class="postInfo" layout="column">
 					<h1 class="noMargin">{{posts.post.title}}</h1>
 					<div layout="row" layout-xs="column">
-						<p><img class="profileIcon" ng-src="{{posts.getThumbUrl(posts.post.poster_user_id) ? posts.getThumbUrl(posts.post.poster_user_id) : '/images/defaultProfilePic.png'}}"/>posted {{posts.getTimeElapsed(posts.post.date,false)}}</p>
+						<p>
+							<a ui-sref="profile({user_id:posts.post.poster_user_id})">
+								<img class="profileIcon" ng-src="{{posts.getThumbUrl(posts.post.poster_user_id) ? posts.getThumbUrl(posts.post.poster_user_id) : '/images/defaultProfilePic.png'}}"/>
+								<b>{{posts.post.name}}</b>
+							</a>
+							posted {{posts.getTimeElapsed(posts.post.date,false)}}
+						</p>
 					</div>
 					<p>{{posts.post.content}}</p>
 					<div>
@@ -119,7 +125,7 @@
 				<div ng-show="!editComment">
 					<div layout="row" layout-align="start center">
 						<img class="profileIcon" ng-src="{{posts.getThumbUrl(comment.commenter_user_id) ? posts.getThumbUrl(comment.commenter_user_id) : '/images/defaultProfilePic.png'}}"/>
-						<b>{{comment.name}}</b>
+						<a ui-sref="profile({user_id:comment.commenter_user_id})"><b>{{comment.name}}</b></a>
 						<p>{{comment.deleted ? "[deleted]" : comment.comment}}</p>
 					</div>
 					<div class="commentTime" layout="row" layout-align="start center" ng-show="!comment.deleted">
