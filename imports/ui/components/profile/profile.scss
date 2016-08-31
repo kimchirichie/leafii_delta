@@ -101,6 +101,18 @@
 	}
 }
 
+@media(max-width: 600px){
+
+	.profileContent {
+		width: 100% !important;
+
+		md-card {
+			width: 100% !important;
+		}
+
+	}
+}
+
 .profileContent {
 	width: 75%;
 
