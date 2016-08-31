@@ -25,7 +25,7 @@
 
 	<div class="profilePanel" layout="column" layout-align="center center">
 		<div class="profileContent" layout="row" layout-xs="column" layout-sm="column" layout-align-sm="center center" layout-align="center start" layout-align-xs="center center">
-			<md-card class="profileImg" layout="column" layout-align="center center" flex-gt-md="30" flex="100" flex-md="60" flex-xs="100">
+			<div class="profileImg" layout="column" layout-align="center center" flex-gt-md="30" flex="100" flex-md="60" flex-xs="100">
 				<image-uploader files="profile.user.images"></image-uploader>
 				<a ng-hide="profile.imgHide || (profile.rootScope.currentUser._id != profile.user_id)" href="" ng-click="profile.trigUpload($files);profile.test()" >
 					<div class="imageContainer">
@@ -45,7 +45,7 @@
 				<div ng-show="profile.rootScope.currentUser._id == profile.user_id" class="tabBtns" layout="row" layout-align="space-around center">
 					<md-button class="md-raised" ng-click="profile.openTab('edit')">edit</md-button>
 				</div>
-			</md-card>
+			</div>
 
 
 			<div class="profileInfo" flex-gt-md="70" flex="100">

@@ -108,11 +108,11 @@
 		<!-- Comments -->
 		<div ng-show="posts.post" class="comments" layout="column" ng-init="editComment=false;createComment=true">
 			
-			<div ng-hide="posts.post.comments.length">
+			<!-- <div ng-hide="posts.post.comments.length">
 				<div layout="row" layout-xs="column" layout-align="center center">
 					<h1>Be the first to comment</h1>
 				</div>
-			</div>
+			</div> -->
 
 			<div class="comment" layout="column" layout-align="start start" ng-repeat="comment in posts.post.comments | orderBy: '+date'">
 								
