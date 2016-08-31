@@ -9,7 +9,7 @@
 
 		<div class="filterBar" layout="row" layout-align="center center" layout-xs="column">
 			<span ng-class="{lightUp: posts.cardFilter == '-date'}" ng-click="posts.cardFilter = '-date'" >Latest</span>
-			<span ng-class="{lightUp: posts.cardFilter == 'comments.length'}" ng-click="posts.cardFilter = '-comments.length'">Most Commented</span>
+			<span ng-class="{lightUp: posts.cardFilter == '-comments.length'}" ng-click="posts.cardFilter = '-comments.length'">Most Commented</span>
 		</div>
 
 		<div ng-hide="posts.postsReady">
@@ -43,7 +43,13 @@
 						<div flex="90" class="postInfo" layout="column">
 							<a ui-sref="posts({post_id:post._id})"><h2>{{post.title}}</h2></a>
 							<div layout="row" layout-xs="column">
-								<p><img class="profileIcon" ng-src="{{posts.getThumbUrl(post.poster_user_id) ? posts.getThumbUrl(post.poster_user_id) : '/images/defaultProfilePic.png'}}"/>posted {{posts.getTimeElapsed(post.date,false)}}</p>
+								<p>
+									<a ui-sref="profile({user_id:posts.post.poster_user_id})">
+										<img class="profileIcon" ng-src="{{posts.getThumbUrl(posts.post.poster_user_id) ? posts.getThumbUrl(posts.post.poster_user_id) : '/images/defaultProfilePic.png'}}"/>
+										<b>{{post.name}}</b>
+									</a>
+									posted {{posts.getTimeElapsed(post.date,false)}}
+								</p>
 							</div>
 							<p>{{post.content}}</p>
 							<div>	
@@ -87,7 +93,7 @@
 		<div ng-show="posts.post" layout="column" class="singlePost">
 			<div layout="row">
 				<div flex="5" ng-show="!postEdit" layout="column" class="upPost">
-					<i class="zmdi zmdi-star-circle zmdi-hc-2x" ng-click="posts.upvotePost(posts.post._id)" ng-class="{upvoted : posts.upvotedCheck(posts.post.upvotes, posts.rootScope.currentUser._id)}"></i>
+					<i class="zmdi zmdi-star zmdi-hc-2x" ng-click="posts.upvotePost(posts.post._id)" ng-class="{upvoted : posts.upvotedCheck(posts.post.upvotes, posts.rootScope.currentUser._id)}"></i>
 					<p>{{posts.post.upvotes.length}}</p>
 					<i class="zmdi zmdi-comment-text zmdi-hc-2x"></i>
 					<p>{{posts.post.comments.length}}</p>
