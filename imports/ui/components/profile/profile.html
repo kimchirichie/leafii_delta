@@ -40,7 +40,7 @@
 				</div>
 
 				<md-progress-circular ng-if="profile.progress" md-mode='indeterminate' md-diameter="100px"></md-progress-circular>
-				<a ng-click="profile.viewLog(profile.user)" ng-href="{{profile.absolutify(profile.user.profile.url)}}" target="_blank"><md-button class="md-raised md-primary marginBot">View</md-button></a>
+				<a ng-click="profile.viewLog(profile.user)" ng-href="{{profile.absolutify(profile.user.profile.url)}}" target="_blank" class="marginBot"><md-button class="md-raised md-primary">View</md-button></a>
 				<p ng-show="profile.user.profile.bio">{{profile.user.profile.bio}}</p>
 				<div ng-show="profile.rootScope.currentUser._id == profile.user_id" class="tabBtns" layout="row" layout-align="space-around center">
 					<md-button class="md-raised" ng-click="profile.openTab('edit')">edit</md-button>
