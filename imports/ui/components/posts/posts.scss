@@ -121,6 +121,10 @@
 		color: black;
 		font-weight: bold;
 		background: #ea3354;
+
+		&:hover {
+			background: white;
+		}
 	}
 
 	.editIcons {

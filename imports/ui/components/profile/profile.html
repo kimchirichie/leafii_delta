@@ -8,7 +8,7 @@
 
 <div ng-show="profile.user" id="profile">
 	<div id="header">
-		<h1>{{profile.user.profile.firstName}} {{profile.user.profile.lastName}} | {{profile.user.profile.occupation}}</h1>
+		<h1>{{profile.user.profile.firstName}} {{profile.user.profile.lastName}} | {{profile.user.profile.occupation ? profile.user.profile.occupation : 'Not Specified'}}</h1>
 		<div class="status" layout="row" layout-align="space-around center">
 			<div layout="row" layout="center center">
 				<i class="zmdi zmdi-eye zmdi-hc-2x">
@@ -40,7 +40,7 @@
 				</div>
 
 				<md-progress-circular ng-if="profile.progress" md-mode='indeterminate' md-diameter="100px"></md-progress-circular>
-				<a ng-click="profile.viewLog(profile.user)" ng-href="{{profile.absolutify(profile.user.profile.url)}}" target="_blank"><h2>{{profile.user.profile.url}}</h2></a>
+				<a ng-click="profile.viewLog(profile.user)" ng-href="{{profile.absolutify(profile.user.profile.url)}}" target="_blank"><md-button class="md-raised md-primary marginBot">View</md-button></a>
 				<p ng-show="profile.user.profile.bio">{{profile.user.profile.bio}}</p>
 				<div ng-show="profile.rootScope.currentUser._id == profile.user_id" class="tabBtns" layout="row" layout-align="space-around center">
 					<md-button class="md-raised" ng-click="profile.openTab('edit')">edit</md-button>
@@ -102,9 +102,9 @@
 						<p>{{post.date | date:'mediumDate'}}</p>
 						<p>{{post.content}}</p>
 						<p>{{post.comments.length}} comments</p>
-						<div>	
+						<!-- <div>	
 							<md-button class="md-primary md-raised showPage" ng-click="profile.showurl($event, profile.absolutify(post.url), post.name); posts.viewLogPost(post)">Show</md-button>
-						</div>
+						</div> -->
 					</md-card>
 				</div>
 

@@ -89,7 +89,13 @@
 
 			a:first-child {
 				&:hover {
-					color: #ea3354;
+					background: white;
+				}
+			}
+
+			a:nth-child(2){
+				&:hover {
+					background: white;
 				}
 			}
 			
@@ -101,8 +107,12 @@
 				color: black;
 				
 				&:hover {
-					color: #069e7e;
+					background: $leafii-theme;
 				}
+			}
+
+			.signout:hover {
+				background: $leafii-theme;
 			}
 
 		}
