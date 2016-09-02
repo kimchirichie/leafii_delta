@@ -40,8 +40,8 @@
 				</div>
 
 				<md-progress-circular ng-if="profile.progress" md-mode='indeterminate' md-diameter="100px"></md-progress-circular>
-				<a ng-click="profile.viewLog(profile.user)" ng-href="{{profile.absolutify(profile.user.profile.url)}}" target="_blank" class="marginBot"><md-button class="md-raised md-primary">View</md-button></a>
 				<p ng-show="profile.user.profile.bio">{{profile.user.profile.bio}}</p>
+				<a ng-click="profile.viewLog(profile.user)" ng-href="{{profile.absolutify(profile.user.profile.url)}}" target="_blank" class="marginBot"><md-button class="md-raised md-primary">View</md-button></a>
 				<div ng-show="profile.rootScope.currentUser._id == profile.user_id" class="tabBtns" layout="row" layout-align="space-around center">
 					<md-button class="md-raised" ng-click="profile.openTab('edit')">edit</md-button>
 				</div>
@@ -76,7 +76,7 @@
 						</md-input-container>
 
 						<md-input-container class="md-block" flex-gt-sm>
-							<label>Location</label>
+							<label>City</label>
 							<input required ng-model="profile.user.profile.location" g-places-autocomplete type="text" name="location" />
 						</md-input-container>
 
