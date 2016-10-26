@@ -189,7 +189,8 @@ $ acme.sh --installcert -d aa.com --certpath /path/to/cert/dir --keypath /path/t
 An Example:
 
 ```sh
-./acme.sh --installcert -d leafii.com --certpath /home/ubuntu/.acme.sh/leafii.com/leafii.com.cer --keypath /home/ubuntu/.acme.sh/leafii.com/leafii.com.cer --capath /home/ubuntu/.acme.sh/leafii.com/leafii.com.cer --fullchainpath /home/ubuntu/.acme.sh/leafii.com/leafii.com.cer --reloadcmd  "sudo nginx -s reload"
+$ pwd ## /home/ubuntu/.acme.sh
+$ ./acme.sh --installcert -d leafii.com --certpath /home/ubuntu/.acme.sh/leafii.com/leafii.com.cer --keypath /home/ubuntu/.acme.sh/leafii.com/leafii.com.cer --capath /home/ubuntu/.acme.sh/leafii.com/leafii.com.cer --fullchainpath /home/ubuntu/.acme.sh/leafii.com/leafii.com.cer --reloadcmd  "sudo nginx -s reload"
 ```
 
 After this is done, copy the nginx.conf file from this repository to /etc/nginx/ and edit the domains/ports as needed.
