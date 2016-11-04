@@ -25,7 +25,7 @@ class Profile {
 		this.sce = $sce;
 		this.timeo = $timeout;
 		this.mdDialog = $mdDialog;
-		this.tab = 'history';
+		this.tab = 'edit';
 		this.userReady = false;
 		this.keywordsReady = false;
 		this.postsReady = false;

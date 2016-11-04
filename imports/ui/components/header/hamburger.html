@@ -12,7 +12,6 @@
     	<md-dialog-content layout="column" layout-align="start center" flex>
      		<div layout="column" class="nav">
           <md-button ui-sref="signup" ng-click="hide()" class="md-raised signup btn" ng-hide="rootScope.currentUser">Submit my website</md-button>
-          <md-button ui-sref="posts({post_id:''})" ng-click="hide()" class="md-raised posts btn">Roasts</md-button>
           <md-button ui-sref="signin" ng-click="hide()" class="md-raised btn" ng-hide="rootScope.currentUser">Sign in</md-button>
           <md-button ui-sref="profile" ng-click="hide()" class="md-raised btn" ng-show="rootScope.currentUser">Profile</md-button>
           <md-button ng-click="logout(); hide()" class="md-raised signout btn" ng-show="rootScope.currentUser">Sign out</md-button>
