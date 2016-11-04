@@ -48,6 +48,20 @@ You can check on the server output even after launching the instance in the back
 ```sh
 $ tail -f nohup.out
 ```
+### Did your server reboot?
+
+If the server reboot, your volume is probably unmounted. To mount:
+
+```sh
+$ sudo mount /dev/vdc /media/volume1/
+```
+
+nginx is probably also down. start nginx:
+
+```sh
+$ sudo nginx
+```
+proceed to launch the http server as previous section. It may take a minute or two for https to function properly.
 
 ### Enviornment Variables
 
