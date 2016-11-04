@@ -42,9 +42,6 @@
 				<md-progress-circular ng-if="profile.progress" md-mode='indeterminate' md-diameter="100px"></md-progress-circular>
 				<p ng-show="profile.user.profile.bio">{{profile.user.profile.bio}}</p>
 				<a ng-click="profile.viewLog(profile.user)" ng-href="{{profile.absolutify(profile.user.profile.url)}}" target="_blank" class="marginBot"><md-button class="md-raised md-primary">View</md-button></a>
-				<div ng-show="profile.rootScope.currentUser._id == profile.user_id" class="tabBtns" layout="row" layout-align="space-around center">
-					<md-button class="md-raised" ng-click="profile.openTab('edit')">edit</md-button>
-				</div>
 			</md-card>
 
 
@@ -87,25 +84,11 @@
 						
 						<div layout="row" layout-xs="column">
 							<md-button class="md-raised" ng-click="profile.openTab('password')">Change password</md-button>
-							<md-button class="md-raised" ng-click="profile.openTab('history')">back</md-button>
+							<md-button class="md-raised" ng-click="profile.openTab('edit')">back</md-button>
 							<md-button class="md-raised md-primary" ng-click="profile.update(profile.user)">Update</md-button>
 						</div>
 
 					</ng-form>
-				</div>
-
-				<div ng-if="profile.tabOpen('history')">
-					<h2 class="noTitleMargin">Recent Posts</h2>
-					<h3 ng-show="!profile.posts.length">No posts</h3>
-					<md-card class="recentPosts" ng-repeat="post in profile.posts">
-						<a class="postTitle" ui-sref="posts({post_id:post._id})"><h2>{{post.title}}</h2></a>
-						<p>{{post.date | date:'mediumDate'}}</p>
-						<p>{{post.content}}</p>
-						<p>{{post.comments.length}} comments</p>
-						<!-- <div>	
-							<md-button class="md-primary md-raised showPage" ng-click="profile.showurl($event, profile.absolutify(post.url), post.name); posts.viewLogPost(post)">Show</md-button>
-						</div> -->
-					</md-card>
 				</div>
 
 				<div class="userProfile" ng-if="profile.tabOpen('password')">
@@ -124,7 +107,7 @@
 						</md-input-container>
 						
 						<div layout="row">
-							<md-button class="md-raised" ng-click="profile.openTab('history')">back</md-button>
+							<md-button class="md-raised" ng-click="profile.openTab('edit')">back</md-button>
 							<md-button class="md-raised md-primary" type="submit">Change Password</md-button>
 						</div>
 					</form>
