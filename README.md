@@ -168,10 +168,16 @@ iptables -t nat -A OUTPUT -d your.public.ip.address -j DNAT --to-destination 127
 iptables -t nat -A INPUT -s 127.0.0.1 -j SNAT --to-source your.public.ip.address
 ```
 
-When finished, request the certificates for the domain:
+When finished, request the certificates for the domain & remember port 3000 needs to be free before:
 
 ```sh
 $ sudo acme.sh  --issue  -d leafii.com  --standalone --httpport 3000
+```
+
+Remember to start the nginx server before:
+
+```sh
+$ sudo nginx
 ```
 
 Next create or select a directory where you want to store the certificates for nginx. Then, set up acme.sh to move and handle the certificates in that directory and reload nginx when needed:
@@ -180,13 +186,14 @@ Next create or select a directory where you want to store the certificates for n
 $ acme.sh --installcert -d aa.com --certpath /path/to/cert/dir --keypath /path/to/cert/dir --capath /path/to/cert/dir --fullchainpath /path/to/cert/dir --reloadcmd  "sudo nginx -s reload"
 ```
 
-After this is done, copy the nginx.conf file from this repository to /etc/nginx/ and edit the domains/ports as needed.
-
-Lastly, start the nginx server:
+An Example:
 
 ```sh
-$ sudo nginx
+$ pwd ## /home/ubuntu/.acme.sh
+$ ./acme.sh --installcert -d leafii.com --certpath /home/ubuntu/.acme.sh/leafii.com/leafii.com.cer --keypath /home/ubuntu/.acme.sh/leafii.com/leafii.com.cer --capath /home/ubuntu/.acme.sh/leafii.com/leafii.com.cer --fullchainpath /home/ubuntu/.acme.sh/leafii.com/leafii.com.cer --reloadcmd  "sudo nginx -s reload"
 ```
+
+After this is done, copy the nginx.conf file from this repository to /etc/nginx/ and edit the domains/ports as needed.
 
 License
 ----
