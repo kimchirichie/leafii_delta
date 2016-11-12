@@ -66,7 +66,8 @@ proceed to launch the http server as previous section. It may take a minute or t
 ### Enviornment Variables
 
 To securely operate the server, we need environment variables:
-```
+
+```sh
 export NODE_ENV=production
 export ROOT_URL=http://leafii.com
 export EMAIL=support@leafii.com
@@ -75,6 +76,15 @@ export LC_ALL=C     #for mongodb
 export PRERENDER_SERVICE_URL=http://leafii.com:3005/
 export PORT=3005    #for prerenderer
 export CRAWLERSRC='/media/volume1/leafii_crawler/'
+```
+
+### Alias
+
+For convenience:
+
+```sh
+alias ll='ls -la'
+alias acme.sh='/home/ubuntu/.acme.sh/acme.sh'
 ```
 
 ### IP rerouting for Leafolio
@@ -206,7 +216,12 @@ $ acme.sh --installcert -d aa.com --certpath /path/to/cert/dir --keypath /path/t
 An Example:
 
 ```sh
-$ ./acme.sh --installcert -d leafii.com --certpath /home/ubuntu/.acme.sh/leafii.com/leafii.com.cer --keypath /home/ubuntu/.acme.sh/leafii.com/leafii.com.cer --capath /home/ubuntu/.acme.sh/leafii.com/leafii.com.cer --fullchainpath /home/ubuntu/.acme.sh/leafii.com/leafii.com.cer --reloadcmd  "sudo nginx -s reload"
+$ ./acme.sh --installcert -d leafii.com
+  --certpath /home/ubuntu/.acme.sh/leafii.com/leafii.com.cer
+  --keypath /home/ubuntu/.acme.sh/leafii.com/leafii.com.cer
+  --capath /home/ubuntu/.acme.sh/leafii.com/leafii.com.cer
+  --fullchainpath /home/ubuntu/.acme.sh/leafii.com/leafii.com.cer
+  --reloadcmd  "sudo nginx -s reload"
 ```
 
 After this is done, copy the nginx.conf file from this repository to /etc/nginx/ and edit the domains/ports as needed.
