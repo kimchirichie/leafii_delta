@@ -160,7 +160,7 @@ $ meteor mongo
 
 To parse the keywords out of the database, use [leafii_crawler](https://github.com/sinr0202/leafii_crawler)
 
-### Setting up the ssh tunnel server
+### Setting up SSL
 
 First install nginx from your package manager.
 
@@ -182,10 +182,13 @@ iptables -t nat -A OUTPUT -d your.public.ip.address -j DNAT --to-destination 127
 iptables -t nat -A INPUT -s 127.0.0.1 -j SNAT --to-source your.public.ip.address
 ```
 
-When finished, request the certificates for the domain & remember port 3000 needs to be free before:
+### Setting up certificate for SSL
+
+When finished setting up SSL, request the certificates for the domain & remember port 3000 needs to be free before:
 
 ```sh
-$ sudo acme.sh  --issue  -d leafii.com  --standalone --httpport 3000
+$ pwd ## /home/ubuntu/.acme.sh
+$ sudo ./acme.sh  --issue  -d leafii.com  --standalone --httpport 3000 ## may need option --force 
 ```
 
 Remember to start the nginx server before:
@@ -203,7 +206,6 @@ $ acme.sh --installcert -d aa.com --certpath /path/to/cert/dir --keypath /path/t
 An Example:
 
 ```sh
-$ pwd ## /home/ubuntu/.acme.sh
 $ ./acme.sh --installcert -d leafii.com --certpath /home/ubuntu/.acme.sh/leafii.com/leafii.com.cer --keypath /home/ubuntu/.acme.sh/leafii.com/leafii.com.cer --capath /home/ubuntu/.acme.sh/leafii.com/leafii.com.cer --fullchainpath /home/ubuntu/.acme.sh/leafii.com/leafii.com.cer --reloadcmd  "sudo nginx -s reload"
 ```
 
