@@ -15,8 +15,7 @@ class Landing {
 		this.scope = $scope;
 		this.state = $state;
 		this.rootScope = $rootScope;
-		this.horizontal = false;
-		this.cardFilter = '-profile.views';
+		this.cardFilter = '-profile.occupation';
 		this.helpers({
 			users(){
 				return Meteor.users.find({"profile.url":{$ne : null}});
@@ -24,34 +23,18 @@ class Landing {
 			user(){
 				return Meteor.users.find({"_id": this.getReactively('latestView[0].details.target_user_id')});
 			},
-			postUser(){
-				return Meteor.users.find({"_id": this.getReactively('latestPost[0].poster_user_id')});
-			},
 			latestView(){
 				return Logs.find({type:"view"});
 			},
-
 			lastSearch(){
 				return Logs.find({type:"search"});
 			},
-
-			latestPost(){
-				return Posts.find({});
-			}
-
-
 		});
 
-		angular.element($window).bind("resize", function(){
-			if($window.innerWidth < 600){
-				this.horizontal = false;
-				this.scope.$digest();
-			}
-		}.bind(this));
+		console.log(this.users);
 		this.subscribe("users");
     	this.subscribe("latest_view");
     	this.subscribe("latest_search");
-    	this.subscribe("latest_post");
 	}
 
 	liked(user){
